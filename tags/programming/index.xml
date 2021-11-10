@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>programming - Tag - YakuShou's NOTEBOOK</title><link>https://yakushou.life/tags/programming/</link><description>programming - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 10 Nov 2021 18:24:37 +0800</lastBuildDate><atom:link href="https://yakushou.life/tags/programming/" rel="self" type="application/rss+xml"/><item><title>SOLID - Single Responsibility Principle</title><link>https://yakushou.life/posts/solid-single-responsibility-principle/</link><pubDate>Wed, 10 Nov 2021 18:24:37 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/solid-single-responsibility-principle/</guid><description>SOLID 是軟體開發的準則
+分別代表
+Single Responsibility Principle (SRP - 單一職責原則) Open-Closed Principle (OCP - 開放封閉原則) Liskov Substitution Principle (LSP - Liskov替換原則) Interface Segregation Principle (ISP - 介面隔離原則) Dependency Inversion Principle (DIP - 依賴反轉原則) 本篇是簡單整理 SRP 的內容
+SRP 的定義是單一職責，類別內只做單一的事情
+即如果有要改動這個類別的話，只會有一個原因
+不會有多數需求要修改到這個類別
+舉例來說 一個 Journey 類別，裡面可以 新增/移除 複數個觀光景點
+則這個類別的職責就是只要負責記錄觀光景點就好
+假設今天需要一個功能是產生報表
+或許直接加方法在這個類別可以簡單的實作
+但卻破壞了 SRP 原則，這個時候就應該要把產生報表的行為移到另一個類別來負責
+引入的參數可以是這個 Journey 物件
+讓這個 Journey 類別只負責記錄觀光景點，不多做不相干的事情
+參考資料 SOLID 之 單一職責原則（Single responsibility principle）</description></item></channel></rss>
