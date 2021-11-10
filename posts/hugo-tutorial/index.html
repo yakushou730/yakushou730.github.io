@@ -1,0 +1,283 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>Hugo Tutorial - YakuShou's BLOG</title><meta name=Description content><meta property="og:title" content="Hugo Tutorial">
+<meta property="og:description" content="以下為使用 Hugo 架部落格，並架在 github page 上
+  我的電腦是使用 macOS，會需要透過 homebrew 來安裝需要用到的套件
+ git: 檔案版本控管 gvm: golang 的版本控管，用來安裝 golang hugo: hugo cli 用來下對應的 hugo 指令    使用 hugo 指令初始化一個新的網站 hugo-blog
+並且初始化 git
+  $ hugo new site hugo-blog $ cd hugo-blog $ git init 搭配 DoIt 主題作為顯示，以 submodule 加入至主題  $ git submodule add https://github.com/HEIGE-PCloud/DoIt.git themes/DoIt 再來是設置 config.toml 以下是 範例，參考用  baseURL = &#34;http://example.org/&#34; # [en, zh-cn, fr, .">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/hugo-tutorial/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-11-10T10:48:27+08:00">
+<meta property="article:modified_time" content="2021-11-10T10:48:27+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Hugo Tutorial">
+<meta name=twitter:description content="以下為使用 Hugo 架部落格，並架在 github page 上
+  我的電腦是使用 macOS，會需要透過 homebrew 來安裝需要用到的套件
+ git: 檔案版本控管 gvm: golang 的版本控管，用來安裝 golang hugo: hugo cli 用來下對應的 hugo 指令    使用 hugo 指令初始化一個新的網站 hugo-blog
+並且初始化 git
+  $ hugo new site hugo-blog $ cd hugo-blog $ git init 搭配 DoIt 主題作為顯示，以 submodule 加入至主題  $ git submodule add https://github.com/HEIGE-PCloud/DoIt.git themes/DoIt 再來是設置 config.toml 以下是 範例，參考用  baseURL = &#34;http://example.org/&#34; # [en, zh-cn, fr, .">
+<meta name=application-name content="YakuShou's BLOG">
+<meta name=apple-mobile-web-app-title content="YakuShou's BLOG">
+<meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=http://example.org/posts/hugo-tutorial/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Hugo Tutorial","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/hugo-tutorial\/"},"genre":"posts","wordcount":453,"url":"http:\/\/example.org\/posts\/hugo-tutorial\/","datePublished":"2021-11-10T10:48:27+08:00","dateModified":"2021-11-10T10:48:27+08:00","publisher":{"@type":"Organization","name":"Author"},"author":{"@type":"Person","name":"Author"},"description":""}</script></head>
+<body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's BLOG">YakuShou's BLOG</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><a class=menu-item href=/categories/> Categories </a><span class="menu-item delimiter"></span><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's BLOG">YakuShou's BLOG</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a class=menu-item href=/categories/ title>Categories</a><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>Contents</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Hugo Tutorial</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><i class="author fas fa-user-circle fa-fw"></i><a href=/ title=Author rel=author class=author>Author</a>
+</span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-10>2021-11-10</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-10>2021-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;453 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div>
+</div><div class=content id=content><p>以下為使用 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer">Hugo</a> 架部落格，並架在 <a href=https://pages.github.com/ target=_blank rel="noopener noreffer">github page</a> 上</p>
+<ol>
+<li>
+<p>我的電腦是使用 macOS，會需要透過 <a href=https://brew.sh/index_zh-tw target=_blank rel="noopener noreffer">homebrew</a> 來安裝需要用到的套件</p>
+<ul>
+<li>git: 檔案版本控管</li>
+<li>gvm: golang 的版本控管，用來安裝 golang</li>
+<li>hugo: hugo cli 用來下對應的 hugo 指令</li>
+</ul>
+</li>
+<li>
+<p>使用 hugo 指令初始化一個新的網站 hugo-blog</p>
+<p>並且初始化 git</p>
+</li>
+</ol>
+<pre tabindex=0><code>$ hugo new site hugo-blog
+$ cd hugo-blog
+$ git init
+</code></pre><ol start=3>
+<li>搭配 <a href=https://themes.gohugo.io/themes/doit/ target=_blank rel="noopener noreffer">DoIt</a> 主題作為顯示，以 submodule 加入至主題</li>
+</ol>
+<pre tabindex=0><code>$ git submodule add https://github.com/HEIGE-PCloud/DoIt.git themes/DoIt
+</code></pre><ol start=4>
+<li>再來是設置 <code>config.toml</code> 以下是 <a href=https://hugodoit.pages.dev/theme-documentation-basics/#basic-configuration target=_blank rel="noopener noreffer">範例</a>，參考用</li>
+</ol>
+<pre tabindex=0><code>baseURL = &quot;http://example.org/&quot;
+# [en, zh-cn, fr, ...] determines default content language
+defaultContentLanguage = &quot;en&quot;
+# language code
+languageCode = &quot;en&quot;
+title = &quot;My New Hugo Site&quot;
+
+# Change the default theme to be use when building the site with Hugo
+theme = &quot;DoIt&quot;
+
+[params]
+  # DoIt theme version
+  version = &quot;0.2.X&quot;
+
+[menu]
+  [[menu.main]]
+    identifier = &quot;posts&quot;
+    # you can add extra information before the name (HTML format is supported), such as icons
+    pre = &quot;&quot;
+    # you can add extra information after the name (HTML format is supported), such as icons
+    post = &quot;&quot;
+    name = &quot;Posts&quot;
+    url = &quot;/posts/&quot;
+    # title will be shown when you hover on this menu link
+    title = &quot;&quot;
+    weight = 1
+  [[menu.main]]
+    identifier = &quot;tags&quot;
+    pre = &quot;&quot;
+    post = &quot;&quot;
+    name = &quot;Tags&quot;
+    url = &quot;/tags/&quot;
+    title = &quot;&quot;
+    weight = 2
+  [[menu.main]]
+    identifier = &quot;categories&quot;
+    pre = &quot;&quot;
+    post = &quot;&quot;
+    name = &quot;Categories&quot;
+    url = &quot;/categories/&quot;
+    title = &quot;&quot;
+    weight = 3
+
+# Markup related configuration in Hugo
+[markup]
+  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
+</code></pre><ol start=5>
+<li>
+<p>都設定好後 可以用 hugo 指令起看看伺服器</p>
+<p>可以在 <a href=http://localhost:1313/ target=_blank rel="noopener noreffer">本機端</a> 看到網頁</p>
+<p>到目前為止本機端就先告一段落了</p>
+</li>
+</ol>
+<pre tabindex=0><code>$ hugo serve
+</code></pre><ol start=6>
+<li>
+<p>因為要使用 github pages 的關係，先建立一個個人的 repository</p>
+<p>名稱需要是固定格式，而我的是 yakushou730.github.io</p>
+</li>
+<li>
+<p>建立的 repo 用法</p>
+<p>branch main 是用作主要推 code 的分支，透過設定 github action 把網頁內容推到 gh-pages 分支上</p>
+</li>
+</ol>
+<pre tabindex=0><code>$ git add .
+$ git commit -m &quot;init blog (main)&quot;
+$ git remote add origin https://github.com/yakushou730/yakushou730.github.io.git
+$ git push -u origin main
+
+$ git checkout -b gh-pages
+$ git rm -rf .
+$ echo &quot;gh-pages&quot; &gt; &quot;README.md&quot;
+$ git add .
+$ git commit -m &quot;init gh-pages branch&quot;
+$ git push -u origin gh-pages
+
+git checkout main
+</code></pre><ol start=8>
+<li>
+<p>上面的指令打完後，這個專案就有了 main 和 gh-pages 兩支分支</p>
+<p>接著要設定 github actions 做到自動化部署</p>
+</li>
+<li>
+<p>到 <a href=https://github.com/settings/tokens/new target=_blank rel="noopener noreffer">個人存取token頁面</a> 建立新的 access token</p>
+<p>要給 github action 存取專案用的</p>
+<p>把 repo 和 workflow 打勾以後點擊 generate token</p>
+<p>token 等等要用到，可以先複製起來</p>
+</li>
+<li>
+<p>點擊專案的 Settings > Secretes > New repository secret</p>
+<p>用剛剛的 token 建立一組 secret，name 命名為 <code>HUGO_DEPLOY_TOKEN</code></p>
+</li>
+<li>
+<p>再來是設定 github actions，點擊 actions 的 tab</p>
+<p>參考 <a href=https://github.com/peaceiris/actions-hugo target=_blank rel="noopener noreffer">actions-hugo</a></p>
+<p>去設定要跑的flow</p>
+</li>
+</ol>
+<pre tabindex=0><code>name: github-deploy-flow
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  
+          fetch-depth: 0   
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.89.2'
+          extended: true  
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.HUGO_DEPLOY_TOKEN }}
+          PUBLISH_BRANCH: gh-pages 
+          PUBLISH_DIR: ./public    
+          commit_message: ${{ github.event.head_commit.message }}
+</code></pre><p>接著按下 Start commit 儲存 workflow 的設定文件</p>
+<p>可以等待部署看看，若成功的話會打綠勾勾</p>
+<ol start=12>
+<li>
+<p>到 Repository > Settings 的 github pages 區塊</p>
+<p>把 branch 換成 gh-pages 就可以了</p>
+</li>
+</ol>
+</div>
+<div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>Updated on 2021-11-10</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{}}</script></div>
+</body>
+</html>
