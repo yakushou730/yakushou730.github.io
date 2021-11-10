@@ -1,8 +1,8 @@
 ---
-title: "Hugo 的基本建立教學"
+title: "Hugo 基本建立教學"
 authors: [yakushou730]
 date: 2021-11-10T10:48:27+08:00
-description: "Hugo 的基本建立教學"
+description: "Hugo 基本建立教學"
 tags: ["hugo"]
 draft: false
 ---
