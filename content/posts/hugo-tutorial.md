@@ -1,8 +1,12 @@
 ---
-title: "Hugo Tutorial"
+title: "Hugo 的基本建立教學"
+authors: [yakushou730]
 date: 2021-11-10T10:48:27+08:00
+description: "Hugo 的基本建立教學"
+tags: ["hugo"]
 draft: false
 ---
+## 流程
 
 以下為使用 [Hugo](https://gohugo.io/) 架部落格，並架在 [github page](https://pages.github.com/) 上
 
@@ -169,3 +173,8 @@ jobs:
 12. 到 Repository > Settings 的 github pages 區塊
 
     把 branch 換成 gh-pages 就可以了
+
+
+## 參考網站:
+- [如何將Hugo部落格部署到Github上?](https://yurepo.tw/2021/03/%E5%A6%82%E4%BD%95%E5%B0%87hugo%E9%83%A8%E8%90%BD%E6%A0%BC%E9%83%A8%E7%BD%B2%E5%88%B0github%E4%B8%8A/)
+- [DoIt Site](https://hugodoit.pages.dev/theme-documentation-basics/)
