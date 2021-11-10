@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's BLOG</title><link>http://example.org/</link><description>YakuShou's BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 10 Nov 2021 12:39:12 +0800</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml"/><item><title>English Dictionary</title><link>http://example.org/posts/en-dictionary/</link><pubDate>Wed, 10 Nov 2021 12:39:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>http://example.org/posts/en-dictionary/</guid><description>underscore 底線符號 _
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://yakushou730.github.io/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 10 Nov 2021 12:39:12 +0800</lastBuildDate><atom:link href="https://yakushou730.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>English Dictionary</title><link>https://yakushou730.github.io/posts/en-dictionary/</link><pubDate>Wed, 10 Nov 2021 12:39:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou730.github.io/posts/en-dictionary/</guid><description>underscore 底線符號 _
 asterisk 星星符號 *
 hash mark 井字號 #
 plus 加號 +
@@ -6,7 +6,7 @@ hyphen 減號 -
 periods 點 .
 backtick 上方小頓號 `
 ampersand 和的符號 &amp;amp;
-angle bracket 尖的括號 &amp;lt; 或 &amp;gt;</description></item><item><title>Markdown 基本教學</title><link>http://example.org/posts/markdown-tutorial/</link><pubDate>Wed, 10 Nov 2021 12:34:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>http://example.org/posts/markdown-tutorial/</guid><description>斜體字 用底線 (underscore) 把要轉斜體字的字串夾起來 _TARGET_
+angle bracket 尖的括號 &amp;lt; 或 &amp;gt;</description></item><item><title>Markdown 基本教學</title><link>https://yakushou730.github.io/posts/markdown-tutorial/</link><pubDate>Wed, 10 Nov 2021 12:34:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou730.github.io/posts/markdown-tutorial/</guid><description>斜體字 用底線 (underscore) 把要轉斜體字的字串夾起來 _TARGET_
 結果: TARGET
 粗體字 用兩個星星符號 (asterisk) 把要轉斜體字的字串夾起來 **TARGET**
 結果: TARGET
@@ -16,7 +16,7 @@ angle bracket 尖的括號 &amp;lt; 或 &amp;gt;</description></item><item><titl
 TARGET ====== TARGET ------ TARGET TARGET 連結 連結的格式為中括號內放文字，小括號內放連結 [TARGET DESCRIPTION](TARGET LINK)
 結果: TARGET DESCRIPTION
 無序條列 利用 + 或 - 或 * 來做無序條列
-- TARGET1 - TARGET2 second line - TARGET3 TARGET1</description></item><item><title>Hugo 基本建立教學</title><link>http://example.org/posts/hugo-tutorial/</link><pubDate>Wed, 10 Nov 2021 10:48:27 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>http://example.org/posts/hugo-tutorial/</guid><description>流程 以下為使用 Hugo 架部落格，並架在 github page 上
+- TARGET1 - TARGET2 second line - TARGET3 TARGET1</description></item><item><title>Hugo 基本建立教學</title><link>https://yakushou730.github.io/posts/hugo-tutorial/</link><pubDate>Wed, 10 Nov 2021 10:48:27 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou730.github.io/posts/hugo-tutorial/</guid><description>流程 以下為使用 Hugo 架部落格，並架在 github page 上
 我的電腦是使用 macOS，會需要透過 homebrew 來安裝需要用到的套件
 git: 檔案版本控管 gvm: golang 的版本控管，用來安裝 golang hugo: hugo cli 用來下對應的 hugo 指令 使用 hugo 指令初始化一個新的網站 hugo-blog
 並且初始化 git
