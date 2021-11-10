@@ -1,9 +1,9 @@
-baseURL = "http://example.org/"
+baseURL = "https://yakushou730.github.io/"
 # [en, zh-cn, fr, ...] determines default content language
 defaultContentLanguage = "en"
 # language code
 languageCode = "en"
-title = "YakuShou's BLOG"
+title = "YakuShou's NOTEBOOK"
 
 # Change the default theme to be use when building the site with Hugo
 theme = "DoIt"
@@ -32,14 +32,6 @@ theme = "DoIt"
     url = "/tags/"
     title = ""
     weight = 2
-  [[menu.main]]
-    identifier = "categories"
-    pre = ""
-    post = ""
-    name = "Categories"
-    url = "/categories/"
-    title = ""
-    weight = 3
 
 # Markup related configuration in Hugo
 [markup]
