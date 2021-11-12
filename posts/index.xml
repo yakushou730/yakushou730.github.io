@@ -1,4 +1,25 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - YakuShou's NOTEBOOK</title><link>https://yakushou.life/posts/</link><description>All Posts | YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 10 Nov 2021 18:24:37 +0800</lastBuildDate><atom:link href="https://yakushou.life/posts/" rel="self" type="application/rss+xml"/><item><title>SOLID - Single Responsibility Principle</title><link>https://yakushou.life/posts/solid-single-responsibility-principle/</link><pubDate>Wed, 10 Nov 2021 18:24:37 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/solid-single-responsibility-principle/</guid><description>SOLID 是軟體開發的準則
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - YakuShou's NOTEBOOK</title><link>https://yakushou.life/posts/</link><description>All Posts | YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 12 Nov 2021 21:12:14 +0800</lastBuildDate><atom:link href="https://yakushou.life/posts/" rel="self" type="application/rss+xml"/><item><title>Engineering Site</title><link>https://yakushou.life/posts/site/engineering-site/</link><pubDate>Fri, 12 Nov 2021 21:12:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/engineering-site/</guid><description>The Airbnb Tech Blog
+Uber Engineering Blog
+Slack Engineering Blog
+Line Engineering Blog
+The Netflix Tech Blog
+Twitter Engineering
+Criteo R&amp;amp;D Blog
+Facebook Engineering
+Spotify R&amp;amp;D Engineering
+Shopify Engineering
+Linkedin Engineering Blog
+Pinterest Engineering
+Dropbox Tech
+Instagram Engineering
+Discord Engineering Blog
+RIOT GAMES TECHBLOG
+Salesforce Engineering
+Datadog Engineering</description></item><item><title>Useful Golang Site</title><link>https://yakushou.life/posts/programming/useful-golang-site/</link><pubDate>Fri, 12 Nov 2021 15:46:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/useful-golang-site/</guid><description></description></item><item><title>英文: 形容詞</title><link>https://yakushou.life/posts/dictionary/en-adj-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:09:15 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-adj-dictionary/</guid><description>A aesthetic 美感的，藝術的
+D dissatisfactory 不滿意的
+G granular 顆粒組成的
+I idiomatic 符合慣例的
+M malicious 惡意的</description></item><item><title>英文: 動詞</title><link>https://yakushou.life/posts/dictionary/en-verb-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:09:10 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-verb-dictionary/</guid><description>H hinge 給&amp;hellip;安裝鉸鏈</description></item><item><title>英文: 名詞</title><link>https://yakushou.life/posts/dictionary/en-noun-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:09:03 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-noun-dictionary/</guid><description>英文: 名詞</description></item><item><title>英文: 副詞</title><link>https://yakushou.life/posts/dictionary/en-adv-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:03:48 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-adv-dictionary/</guid><description>D drastically 大大地，徹底的</description></item><item><title>SOLID - Single Responsibility Principle</title><link>https://yakushou.life/posts/programming/solid-single-responsibility-principle/</link><pubDate>Wed, 10 Nov 2021 18:24:37 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/solid-single-responsibility-principle/</guid><description>SOLID 是軟體開發的準則
 分別代表
 Single Responsibility Principle (SRP - 單一職責原則) Open-Closed Principle (OCP - 開放封閉原則) Liskov Substitution Principle (LSP - Liskov替換原則) Interface Segregation Principle (ISP - 介面隔離原則) Dependency Inversion Principle (DIP - 依賴反轉原則) 本篇是簡單整理 SRP 的內容
 SRP 的定義是單一職責，類別內只做單一的事情
@@ -11,15 +32,15 @@ SRP 的定義是單一職責，類別內只做單一的事情
 但卻破壞了 SRP 原則，這個時候就應該要把產生報表的行為移到另一個類別來負責
 引入的參數可以是這個 Journey 物件
 讓這個 Journey 類別只負責記錄觀光景點，不多做不相干的事情
-參考資料 SOLID 之 單一職責原則（Single responsibility principle）</description></item><item><title>English Dictionary</title><link>https://yakushou.life/posts/en-dictionary/</link><pubDate>Wed, 10 Nov 2021 12:39:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/en-dictionary/</guid><description>underscore 底線符號 _
+參考資料 SOLID 之 單一職責原則（Single responsibility principle）</description></item><item><title>英文: 技術專有名稱</title><link>https://yakushou.life/posts/dictionary/en-tech-dictionary/</link><pubDate>Wed, 10 Nov 2021 12:39:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-tech-dictionary/</guid><description>A ampersand 和的符號 &amp;amp;
+angle bracket 尖的括號 &amp;lt; 或 &amp;gt;
 asterisk 星星符號 *
-hash mark 井字號 #
-plus 加號 +
+B backtick 上方小頓號 `
+H hash mark 井字號 #
 hyphen 減號 -
-periods 點 .
-backtick 上方小頓號 `
-ampersand 和的符號 &amp;amp;
-angle bracket 尖的括號 &amp;lt; 或 &amp;gt;</description></item><item><title>Markdown 基本教學</title><link>https://yakushou.life/posts/markdown-tutorial/</link><pubDate>Wed, 10 Nov 2021 12:34:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/markdown-tutorial/</guid><description>斜體字 用底線 (underscore) 把要轉斜體字的字串夾起來 _TARGET_
+P periods 點 .
+plus 加號 +
+U underscore 底線符號 _</description></item><item><title>Markdown 基本教學</title><link>https://yakushou.life/posts/programming/markdown-tutorial/</link><pubDate>Wed, 10 Nov 2021 12:34:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/markdown-tutorial/</guid><description>斜體字 用底線 (underscore) 把要轉斜體字的字串夾起來 _TARGET_
 結果: TARGET
 粗體字 用兩個星星符號 (asterisk) 把要轉斜體字的字串夾起來 **TARGET**
 結果: TARGET
@@ -29,7 +50,7 @@ angle bracket 尖的括號 &amp;lt; 或 &amp;gt;</description></item><item><titl
 TARGET ====== TARGET ------ TARGET TARGET 連結 連結的格式為中括號內放文字，小括號內放連結 [TARGET DESCRIPTION](TARGET LINK)
 結果: TARGET DESCRIPTION
 無序條列 利用 + 或 - 或 * 來做無序條列
-- TARGET1 - TARGET2 second line - TARGET3 TARGET1</description></item><item><title>Hugo 基本建立教學</title><link>https://yakushou.life/posts/hugo-tutorial/</link><pubDate>Wed, 10 Nov 2021 10:48:27 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/hugo-tutorial/</guid><description>流程 以下為使用 Hugo 架部落格，並架在 github page 上
+- TARGET1 - TARGET2 second line - TARGET3 TARGET1</description></item><item><title>Hugo 基本建立教學</title><link>https://yakushou.life/posts/programming/hugo-tutorial/</link><pubDate>Wed, 10 Nov 2021 10:48:27 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/hugo-tutorial/</guid><description>流程 以下為使用 Hugo 架部落格，並架在 github page 上
 我的電腦是使用 macOS，會需要透過 homebrew 來安裝需要用到的套件
 git: 檔案版本控管 gvm: golang 的版本控管，用來安裝 golang hugo: hugo cli 用來下對應的 hugo 指令 使用 hugo 指令初始化一個新的網站 hugo-blog
 並且初始化 git
