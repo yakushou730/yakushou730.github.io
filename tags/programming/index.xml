@@ -1,4 +1,19 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>programming - Tag - YakuShou's NOTEBOOK</title><link>https://yakushou.life/tags/programming/</link><description>programming - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 12 Nov 2021 21:12:14 +0800</lastBuildDate><atom:link href="https://yakushou.life/tags/programming/" rel="self" type="application/rss+xml"/><item><title>Engineering Site</title><link>https://yakushou.life/posts/site/engineering-site/</link><pubDate>Fri, 12 Nov 2021 21:12:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/engineering-site/</guid><description>The Airbnb Tech Blog
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>programming - Tag - YakuShou's NOTEBOOK</title><link>https://yakushou.life/tags/programming/</link><description>programming - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 13 Nov 2021 10:59:59 +0800</lastBuildDate><atom:link href="https://yakushou.life/tags/programming/" rel="self" type="application/rss+xml"/><item><title>Useful Vim Site</title><link>https://yakushou.life/posts/site/useful-vim-site/</link><pubDate>Sat, 13 Nov 2021 10:59:59 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/useful-vim-site/</guid><description>Vim script
+Linux Vim 練等攻略
+Learn Vim
+你为了真正做到使用vim提高效率，花了多长时间学习和练习？
+Vim 练级手册</description></item><item><title>Useful Ruby Site</title><link>https://yakushou.life/posts/site/useful-ruby-site/</link><pubDate>Sat, 13 Nov 2021 09:54:20 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/useful-ruby-site/</guid><description>Ruby on Rails 實戰聖經
+Ruby Hacking Guide
+Ruby on Rails 教程 | 他山</description></item><item><title>Online Learning Site</title><link>https://yakushou.life/posts/site/online-learning-site/</link><pubDate>Sat, 13 Nov 2021 09:40:04 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/online-learning-site/</guid><description>HiSKIO
+O&amp;rsquo;REILLY
+Calhoun&amp;rsquo;s Golang Course
+Applied Go Courses
+Udemy
+Kode Kloud
+Gumroad
+Medium</description></item><item><title>Useful DevOps Site</title><link>https://yakushou.life/posts/site/useful-devops-site/</link><pubDate>Sat, 13 Nov 2021 09:31:55 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/useful-devops-site/</guid><description>Hwchiu Learning Note</description></item><item><title>General Tech Site</title><link>https://yakushou.life/posts/site/general-tech-site/</link><pubDate>Sat, 13 Nov 2021 09:29:26 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/general-tech-site/</guid><description>gRPC
+Google&amp;rsquo;s Engineering Practices
+Refactoring GURU</description></item><item><title>Engineering Site</title><link>https://yakushou.life/posts/site/engineering-site/</link><pubDate>Fri, 12 Nov 2021 21:12:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/engineering-site/</guid><description>The Airbnb Tech Blog
 Uber Engineering Blog
 Slack Engineering Blog
 Line Engineering Blog
@@ -15,7 +30,36 @@ Instagram Engineering
 Discord Engineering Blog
 RIOT GAMES TECHBLOG
 Salesforce Engineering
-Datadog Engineering</description></item><item><title>Useful Golang Site</title><link>https://yakushou.life/posts/programming/useful-golang-site/</link><pubDate>Fri, 12 Nov 2021 15:46:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/useful-golang-site/</guid><description></description></item><item><title>SOLID - Single Responsibility Principle</title><link>https://yakushou.life/posts/programming/solid-single-responsibility-principle/</link><pubDate>Wed, 10 Nov 2021 18:24:37 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/solid-single-responsibility-principle/</guid><description>SOLID 是軟體開發的準則
+Datadog Engineering</description></item><item><title>Useful Golang Site</title><link>https://yakushou.life/posts/site/useful-golang-site/</link><pubDate>Fri, 12 Nov 2021 15:46:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/useful-golang-site/</guid><description>Golang Developer Roadmap
+Go Patterns
+Code Review Comments
+Go Best Practices
+Golang Open Source Projects
+Calhoun&amp;rsquo;s Golang Blog
+小惡魔 - ApplyBOY
+KKDAI.GITHUB.IO
+Applied Go
+OPENHOME
+Kenny&amp;rsquo;s Blog
+segmentfault Golang 攻略
+ALEX EDWARDS
+PJCHENder
+GO 語言書推薦
+Welcome To Golang By Example
+Go的50度灰：Golang新开发者要注意的陷阱和常见错误
+GoBooks
+Programming Percy
+Three Dots Labs
+Spaceship Go
+Webapps in Go
+Steven Victor
+LeetCode Cookbook
+Go 技巧 101
+Practical Go Lessons
+Learn Go with Tests
+Ompluscator Blog
+鳥窩
+Intermediate Go</description></item><item><title>SOLID - Single Responsibility Principle</title><link>https://yakushou.life/posts/programming/solid-single-responsibility-principle/</link><pubDate>Wed, 10 Nov 2021 18:24:37 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/solid-single-responsibility-principle/</guid><description>SOLID 是軟體開發的準則
 分別代表
 Single Responsibility Principle (SRP - 單一職責原則) Open-Closed Principle (OCP - 開放封閉原則) Liskov Substitution Principle (LSP - Liskov替換原則) Interface Segregation Principle (ISP - 介面隔離原則) Dependency Inversion Principle (DIP - 依賴反轉原則) 本篇是簡單整理 SRP 的內容
 SRP 的定義是單一職責，類別內只做單一的事情

@@ -1,4 +1,19 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://yakushou.life/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 12 Nov 2021 21:12:14 +0800</lastBuildDate><atom:link href="https://yakushou.life/index.xml" rel="self" type="application/rss+xml"/><item><title>Engineering Site</title><link>https://yakushou.life/posts/site/engineering-site/</link><pubDate>Fri, 12 Nov 2021 21:12:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/engineering-site/</guid><description>The Airbnb Tech Blog
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://yakushou.life/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 13 Nov 2021 10:59:59 +0800</lastBuildDate><atom:link href="https://yakushou.life/index.xml" rel="self" type="application/rss+xml"/><item><title>Useful Vim Site</title><link>https://yakushou.life/posts/site/useful-vim-site/</link><pubDate>Sat, 13 Nov 2021 10:59:59 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/useful-vim-site/</guid><description>Vim script
+Linux Vim 練等攻略
+Learn Vim
+你为了真正做到使用vim提高效率，花了多长时间学习和练习？
+Vim 练级手册</description></item><item><title>Useful Ruby Site</title><link>https://yakushou.life/posts/site/useful-ruby-site/</link><pubDate>Sat, 13 Nov 2021 09:54:20 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/useful-ruby-site/</guid><description>Ruby on Rails 實戰聖經
+Ruby Hacking Guide
+Ruby on Rails 教程 | 他山</description></item><item><title>Online Learning Site</title><link>https://yakushou.life/posts/site/online-learning-site/</link><pubDate>Sat, 13 Nov 2021 09:40:04 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/online-learning-site/</guid><description>HiSKIO
+O&amp;rsquo;REILLY
+Calhoun&amp;rsquo;s Golang Course
+Applied Go Courses
+Udemy
+Kode Kloud
+Gumroad
+Medium</description></item><item><title>Useful DevOps Site</title><link>https://yakushou.life/posts/site/useful-devops-site/</link><pubDate>Sat, 13 Nov 2021 09:31:55 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/useful-devops-site/</guid><description>Hwchiu Learning Note</description></item><item><title>General Tech Site</title><link>https://yakushou.life/posts/site/general-tech-site/</link><pubDate>Sat, 13 Nov 2021 09:29:26 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/general-tech-site/</guid><description>gRPC
+Google&amp;rsquo;s Engineering Practices
+Refactoring GURU</description></item><item><title>Engineering Site</title><link>https://yakushou.life/posts/site/engineering-site/</link><pubDate>Fri, 12 Nov 2021 21:12:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/engineering-site/</guid><description>The Airbnb Tech Blog
 Uber Engineering Blog
 Slack Engineering Blog
 Line Engineering Blog
@@ -15,43 +30,40 @@ Instagram Engineering
 Discord Engineering Blog
 RIOT GAMES TECHBLOG
 Salesforce Engineering
-Datadog Engineering</description></item><item><title>Useful Golang Site</title><link>https://yakushou.life/posts/programming/useful-golang-site/</link><pubDate>Fri, 12 Nov 2021 15:46:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/useful-golang-site/</guid><description></description></item><item><title>英文: 形容詞</title><link>https://yakushou.life/posts/dictionary/en-adj-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:09:15 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-adj-dictionary/</guid><description>A aesthetic 美感的，藝術的
+Datadog Engineering</description></item><item><title>Useful Golang Site</title><link>https://yakushou.life/posts/site/useful-golang-site/</link><pubDate>Fri, 12 Nov 2021 15:46:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/useful-golang-site/</guid><description>Golang Developer Roadmap
+Go Patterns
+Code Review Comments
+Go Best Practices
+Golang Open Source Projects
+Calhoun&amp;rsquo;s Golang Blog
+小惡魔 - ApplyBOY
+KKDAI.GITHUB.IO
+Applied Go
+OPENHOME
+Kenny&amp;rsquo;s Blog
+segmentfault Golang 攻略
+ALEX EDWARDS
+PJCHENder
+GO 語言書推薦
+Welcome To Golang By Example
+Go的50度灰：Golang新开发者要注意的陷阱和常见错误
+GoBooks
+Programming Percy
+Three Dots Labs
+Spaceship Go
+Webapps in Go
+Steven Victor
+LeetCode Cookbook
+Go 技巧 101
+Practical Go Lessons
+Learn Go with Tests
+Ompluscator Blog
+鳥窩
+Intermediate Go</description></item><item><title>英文: 形容詞</title><link>https://yakushou.life/posts/dictionary/en-adj-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:09:15 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-adj-dictionary/</guid><description>A aesthetic 美感的，藝術的
 D dissatisfactory 不滿意的
+dogmatic 武斷的，自以為是的
 G granular 顆粒組成的
 I idiomatic 符合慣例的
-M malicious 惡意的</description></item><item><title>英文: 動詞</title><link>https://yakushou.life/posts/dictionary/en-verb-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:09:10 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-verb-dictionary/</guid><description>H hinge 給&amp;hellip;安裝鉸鏈</description></item><item><title>英文: 名詞</title><link>https://yakushou.life/posts/dictionary/en-noun-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:09:03 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-noun-dictionary/</guid><description>英文: 名詞</description></item><item><title>英文: 副詞</title><link>https://yakushou.life/posts/dictionary/en-adv-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:03:48 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-adv-dictionary/</guid><description>D drastically 大大地，徹底的</description></item><item><title>SOLID - Single Responsibility Principle</title><link>https://yakushou.life/posts/programming/solid-single-responsibility-principle/</link><pubDate>Wed, 10 Nov 2021 18:24:37 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/solid-single-responsibility-principle/</guid><description>SOLID 是軟體開發的準則
-分別代表
-Single Responsibility Principle (SRP - 單一職責原則) Open-Closed Principle (OCP - 開放封閉原則) Liskov Substitution Principle (LSP - Liskov替換原則) Interface Segregation Principle (ISP - 介面隔離原則) Dependency Inversion Principle (DIP - 依賴反轉原則) 本篇是簡單整理 SRP 的內容
-SRP 的定義是單一職責，類別內只做單一的事情
-即如果有要改動這個類別的話，只會有一個原因
-不會有多數需求要修改到這個類別
-舉例來說 一個 Journey 類別，裡面可以 新增/移除 複數個觀光景點
-則這個類別的職責就是只要負責記錄觀光景點就好
-假設今天需要一個功能是產生報表
-或許直接加方法在這個類別可以簡單的實作
-但卻破壞了 SRP 原則，這個時候就應該要把產生報表的行為移到另一個類別來負責
-引入的參數可以是這個 Journey 物件
-讓這個 Journey 類別只負責記錄觀光景點，不多做不相干的事情
-參考資料 SOLID 之 單一職責原則（Single responsibility principle）</description></item><item><title>英文: 技術專有名稱</title><link>https://yakushou.life/posts/dictionary/en-tech-dictionary/</link><pubDate>Wed, 10 Nov 2021 12:39:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-tech-dictionary/</guid><description>A ampersand 和的符號 &amp;amp;
-angle bracket 尖的括號 &amp;lt; 或 &amp;gt;
-asterisk 星星符號 *
-B backtick 上方小頓號 `
-H hash mark 井字號 #
-hyphen 減號 -
-P periods 點 .
-plus 加號 +
-U underscore 底線符號 _</description></item><item><title>Markdown 基本教學</title><link>https://yakushou.life/posts/programming/markdown-tutorial/</link><pubDate>Wed, 10 Nov 2021 12:34:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/markdown-tutorial/</guid><description>斜體字 用底線 (underscore) 把要轉斜體字的字串夾起來 _TARGET_
-結果: TARGET
-粗體字 用兩個星星符號 (asterisk) 把要轉斜體字的字串夾起來 **TARGET**
-結果: TARGET
-標題 標題分成六種大小 在標題文字前面加上井字號 (hash mark)
-井字號越少代表越大
-# TARGET ## TARGET ### TARGET #### TARGET ##### TARGET ###### TARGET TARGET TARGET TARGET TARGET TARGET TARGET 或是加上 - 或 = 也可以表示標題
-TARGET ====== TARGET ------ TARGET TARGET 連結 連結的格式為中括號內放文字，小括號內放連結 [TARGET DESCRIPTION](TARGET LINK)
-結果: TARGET DESCRIPTION
-無序條列 利用 + 或 - 或 * 來做無序條列
-- TARGET1 - TARGET2 second line - TARGET3 TARGET1</description></item><item><title>Hugo 基本建立教學</title><link>https://yakushou.life/posts/programming/hugo-tutorial/</link><pubDate>Wed, 10 Nov 2021 10:48:27 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/hugo-tutorial/</guid><description>流程 以下為使用 Hugo 架部落格，並架在 github page 上
-我的電腦是使用 macOS，會需要透過 homebrew 來安裝需要用到的套件
-git: 檔案版本控管 gvm: golang 的版本控管，用來安裝 golang hugo: hugo cli 用來下對應的 hugo 指令 使用 hugo 指令初始化一個新的網站 hugo-blog
-並且初始化 git
-$ hugo new site hugo-blog $ cd hugo-blog $ git init 搭配 DoIt 主題作為顯示，以 submodule 加入至主題 $ git submodule add https://github.com/HEIGE-PCloud/DoIt.git themes/DoIt 再來是設置 config.toml 以下是 範例，參考用 baseURL = &amp;quot;http://example.org/&amp;quot; # [en, zh-cn, fr, .</description></item></channel></rss>
+M malformed 畸形的，變形的
+malicious 惡意的</description></item><item><title>英文: 動詞</title><link>https://yakushou.life/posts/dictionary/en-verb-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:09:10 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-verb-dictionary/</guid><description>H hinge 給&amp;hellip;安裝鉸鏈</description></item><item><title>英文: 名詞</title><link>https://yakushou.life/posts/dictionary/en-noun-dictionary/</link><pubDate>Fri, 12 Nov 2021 15:09:03 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-noun-dictionary/</guid><description>N nuance 細微差別
+T triage 情況鑑別分類</description></item></channel></rss>
