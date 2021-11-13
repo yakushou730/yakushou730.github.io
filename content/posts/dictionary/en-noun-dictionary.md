@@ -7,3 +7,8 @@ tags: ["dictionary"]
 draft: false
 ---
 
+## N
+nuance 細微差別
+
+## T
+triage 情況鑑別分類

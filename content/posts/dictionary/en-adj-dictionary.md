@@ -12,6 +12,8 @@ aesthetic 美感的，藝術的
 ## D
 dissatisfactory 不滿意的
 
+dogmatic 武斷的，自以為是的
+
 ## G
 granular 顆粒組成的
 
@@ -19,4 +21,6 @@ granular 顆粒組成的
 idiomatic 符合慣例的
 
 ## M
+malformed 畸形的，變形的
+
 malicious 惡意的

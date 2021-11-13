@@ -10,4 +10,6 @@ draft: false
 ## D
 drastically 大大地，徹底的
 
+## M
+marginally 稍微地
 
