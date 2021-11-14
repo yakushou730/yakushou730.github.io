@@ -8,7 +8,7 @@ draft: false
 ---
 
 ## C
-caveat (進一步行動前的) 警告，限制條款
+caveat (進一步行動前的) 警告；限制條款
 
 ## D
 denial 否定

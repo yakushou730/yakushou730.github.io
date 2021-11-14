@@ -11,10 +11,10 @@ draft: false
 conceptually 概念上
 
 ## D
-drastically 大大地，徹底的
+drastically 大大地；徹底的
 
 ## I
-indefinitely 不確定地，無限期地
+indefinitely 不確定地；無限期地
 
 ## M
 marginally 稍微地

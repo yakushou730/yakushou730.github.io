@@ -8,31 +8,34 @@ draft: false
 ---
 
 ## B
-bear 忍受，承擔
+bear 忍受；承擔
 
 ## D
-diminish 減少，降低
+diminish 減少；降低
 
-dwell 居住，存在
+dwell 居住；存在
 
 ## F
-facilitate 促進，使便利
+facilitate 促進；使便利
 
 ## H
-hinder 阻礙，妨礙
+hinder 阻礙；妨礙
 
 hinge 給...安裝鉸鏈
 
 ## I
-impose 推行，強制實行
+impose 推行；強制實行
 
 ## M
-mitigate 使緩和，減輕（危害等）
+mitigate 使緩和；減輕（危害等）
+
+## R
+rehash 以新形式表達舊內容；換湯不換藥
 
 ## S
-skim 瀏覽，略過
+skim 瀏覽；略過
 
-swamp 淹沒，充斥
+swamp 淹沒；充斥
 
 ## T
 tweak 稍稍改進

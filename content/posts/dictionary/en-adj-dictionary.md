@@ -7,17 +7,22 @@ tags: ["dictionary"]
 draft: false
 ---
 ## A
-aesthetic 美感的，藝術的
+aesthetic 美感的；藝術的
 
-analogous 類似的，可比擬的
+analogous 類似的；可比擬的
+
+appealing 上訴的；哀求的
 
 ## C
-conservative 保守的，守舊的
+conservative 保守的；守舊的
 
 ## D
 dissatisfactory 不滿意的
 
-dogmatic 武斷的，自以為是的
+dogmatic 武斷的；自以為是的
+
+## E
+erroneous 錯誤的；不正確的
 
 ## G
 granular 顆粒組成的
@@ -28,12 +33,12 @@ idiomatic 符合慣例的
 intricate 精密複雜的
 
 ## M
-malformed 畸形的，變形的
+malformed 畸形的；變形的
 
 malicious 惡意的
 
 ## R
-rudimentary 基本的，初步的
+rudimentary 基本的；初步的
 
 ## T
-tangible 真實的，非想像的
+tangible 真實的；非想像的

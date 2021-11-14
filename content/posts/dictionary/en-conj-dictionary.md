@@ -8,4 +8,4 @@ draft: false
 ---
 
 ## A
-albeit 雖然，儘管
+albeit 雖然；儘管
