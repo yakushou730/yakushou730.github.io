@@ -21,6 +21,9 @@ notation 符號系統；數學符號
 
 nuance 細微差別
 
+## P
+prescription 命令；處方
+
 ## S
 sanity 心智健全的狀態
 
