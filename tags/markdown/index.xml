@@ -1,0 +1,11 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>markdown - Tag - YakuShou's NOTEBOOK</title><link>https://yakushou.life/tags/markdown/</link><description>markdown - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 10 Nov 2021 12:34:12 +0800</lastBuildDate><atom:link href="https://yakushou.life/tags/markdown/" rel="self" type="application/rss+xml"/><item><title>Markdown 基本教學</title><link>https://yakushou.life/posts/programming/markdown-tutorial/</link><pubDate>Wed, 10 Nov 2021 12:34:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/markdown-tutorial/</guid><description>斜體字 用底線 (underscore) 把要轉斜體字的字串夾起來 _TARGET_
+結果: TARGET
+粗體字 用兩個星星符號 (asterisk) 把要轉斜體字的字串夾起來 **TARGET**
+結果: TARGET
+標題 標題分成六種大小 在標題文字前面加上井字號 (hash mark)
+井字號越少代表越大
+# TARGET ## TARGET ### TARGET #### TARGET ##### TARGET ###### TARGET TARGET TARGET TARGET TARGET TARGET TARGET 或是加上 - 或 = 也可以表示標題
+TARGET ====== TARGET ------ TARGET TARGET 連結 連結的格式為中括號內放文字，小括號內放連結 [TARGET DESCRIPTION](TARGET LINK)
+結果: TARGET DESCRIPTION
+無序條列 利用 + 或 - 或 * 來做無序條列
+- TARGET1 - TARGET2 second line - TARGET3 TARGET1</description></item></channel></rss>
