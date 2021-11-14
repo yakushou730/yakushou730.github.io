@@ -17,6 +17,8 @@ denial 否定
 headroom (空間或橋梁的)淨空高度
 
 ## N
+notation 符號系統；數學符號
+
 nuance 細微差別
 
 ## S
