@@ -30,4 +30,5 @@ jobs:
           PUBLISH_BRANCH: gh-pages  # 推送到 gh-pages 分支
           PUBLISH_DIR: ./public     # hugo 生成的目錄
           commit_message: ${{ github.event.head_commit.message }}
+          cname: yakushou.life
 
