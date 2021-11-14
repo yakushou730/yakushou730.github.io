@@ -9,6 +9,11 @@ draft: false
 ## A
 aesthetic 美感的，藝術的
 
+analogous 類似的，可比擬的
+
+## C
+conservative 保守的，守舊的
+
 ## D
 dissatisfactory 不滿意的
 
@@ -20,7 +25,15 @@ granular 顆粒組成的
 ## I
 idiomatic 符合慣例的
 
+intricate 精密複雜的
+
 ## M
 malformed 畸形的，變形的
 
 malicious 惡意的
+
+## R
+rudimentary 基本的，初步的
+
+## T
+tangible 真實的，非想像的
