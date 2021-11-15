@@ -3,7 +3,7 @@ title: "Hugo 基本建立教學"
 authors: [yakushou730]
 date: 2021-11-10T10:48:27+08:00
 description: "Hugo 基本建立教學"
-tags: ["hugo"]
+tags: ["programming","hugo"]
 draft: false
 ---
 ## 流程
@@ -165,6 +165,7 @@ jobs:
           PUBLISH_BRANCH: gh-pages 
           PUBLISH_DIR: ./public    
           commit_message: ${{ github.event.head_commit.message }}
+          cname: yakushou.life
 ``` 
    接著按下 Start commit 儲存 workflow 的設定文件
 
@@ -187,6 +188,10 @@ jobs:
     待 github 驗證完 domain 後把 Enforce HTTPS 打勾即可
 
     > 記得 A Record 要先設定 yakushou.life 轉至 185.199.108.153 (github)
+    
+    上面的動作是手動操作，每次 deploy 都會跑掉不太方便
+
+    所以要放在 workflow 裏面去設定 cname
 
 ## 參考網站:
 - [如何將Hugo部落格部署到Github上?](https://yurepo.tw/2021/03/%E5%A6%82%E4%BD%95%E5%B0%87hugo%E9%83%A8%E8%90%BD%E6%A0%BC%E9%83%A8%E7%BD%B2%E5%88%B0github%E4%B8%8A/)
