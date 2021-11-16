@@ -4,7 +4,7 @@
 short for disk free
 Filesystem: 檔案系統 Size: 總容量 Used: 已用容量 Avail: 剩餘容量 Use%: 已用百分比 Mounted on: 掛載點
 # -h 以容易識別的格式顯示硬碟空間使用量 $ df -h # -T 顯示每個分割區所屬的檔案系統名稱 $ df -T free 顯示記憶體使用情況
-# -m 以 MB 作為單位顯示 $ free -m ]]></description></item><item><title>PostgreSQL</title><link>https://yakushou.life/posts/programming/postgresql/</link><pubDate>Sun, 14 Nov 2021 10:42:24 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/postgresql/</guid><description>介紹 登入機制 peer authentication: 登入過一次後，就不用再驗證，可以直接輸入 psql 進入 cli 模式
+# -m 以 MB 作為單位顯示 $ free -m curl 可以用來做連線資料傳輸]]></description></item><item><title>PostgreSQL</title><link>https://yakushou.life/posts/programming/postgresql/</link><pubDate>Sun, 14 Nov 2021 10:42:24 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/postgresql/</guid><description>介紹 登入機制 peer authentication: 登入過一次後，就不用再驗證，可以直接輸入 psql 進入 cli 模式
 password-based authentication: 要輸入密碼才可以登入的驗證
 指令 Meta command 在 PostgreSQL 的指令，以 \ 為 meta command， 以提供一些有用的操作
 -- see the full list of available meta commands \?-- list all databases \l-- list tables \dt-- list users \du安裝 extension 安裝 citext 的擴充功能

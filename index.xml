@@ -1,10 +1,11 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://yakushou.life/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 14 Nov 2021 19:07:49 +0800</lastBuildDate><atom:link href="https://yakushou.life/index.xml" rel="self" type="application/rss+xml"/><item><title>英文: 片語</title><link>https://yakushou.life/posts/dictionary/en-phrase-dictionary/</link><pubDate>Sun, 14 Nov 2021 19:07:49 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-phrase-dictionary/</guid><description>R rule of thumb 經驗法則</description></item><item><title>Linux Cmd</title><link>https://yakushou.life/posts/programming/linux-cmd/</link><pubDate>Sun, 14 Nov 2021 10:55:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/linux-cmd/</guid><description><![CDATA[find 搜尋檔案
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://yakushou.life/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 15 Nov 2021 21:03:22 +0800</lastBuildDate><atom:link href="https://yakushou.life/index.xml" rel="self" type="application/rss+xml"/><item><title>英文: 俚語</title><link>https://yakushou.life/posts/dictionary/en-slang-dictionary/</link><pubDate>Mon, 15 Nov 2021 21:03:22 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-slang-dictionary/</guid><description>G gotcha （為了嚇人或表示佔了上風時的用語）抓住你了</description></item><item><title>英文: 片語</title><link>https://yakushou.life/posts/dictionary/en-phrase-dictionary/</link><pubDate>Sun, 14 Nov 2021 19:07:49 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/dictionary/en-phrase-dictionary/</guid><description>I in turn 依次，輪流
+R rule of thumb 經驗法則</description></item><item><title>Linux Cmd</title><link>https://yakushou.life/posts/programming/linux-cmd/</link><pubDate>Sun, 14 Nov 2021 10:55:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/linux-cmd/</guid><description><![CDATA[find 搜尋檔案
 # 在 當前資料夾 下對 檔案名稱 *_spec.rb 做搜尋  $ find . -name &#34;*_spec.rb&#34; export 設定環境變數
 # 環境變數 設定資料庫連線 DSN $ export GREENLIGHT_DB_DSN=&#39;postgres://greenlight:@localhost/greenlight?sslmode=disable&#39; # 列出環境變數 $ export -p df 顯示硬碟使用量
 short for disk free
 Filesystem: 檔案系統 Size: 總容量 Used: 已用容量 Avail: 剩餘容量 Use%: 已用百分比 Mounted on: 掛載點
 # -h 以容易識別的格式顯示硬碟空間使用量 $ df -h # -T 顯示每個分割區所屬的檔案系統名稱 $ df -T free 顯示記憶體使用情況
-# -m 以 MB 作為單位顯示 $ free -m ]]></description></item><item><title>PostgreSQL</title><link>https://yakushou.life/posts/programming/postgresql/</link><pubDate>Sun, 14 Nov 2021 10:42:24 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/postgresql/</guid><description>介紹 登入機制 peer authentication: 登入過一次後，就不用再驗證，可以直接輸入 psql 進入 cli 模式
+# -m 以 MB 作為單位顯示 $ free -m curl 可以用來做連線資料傳輸]]></description></item><item><title>PostgreSQL</title><link>https://yakushou.life/posts/programming/postgresql/</link><pubDate>Sun, 14 Nov 2021 10:42:24 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/programming/postgresql/</guid><description>介紹 登入機制 peer authentication: 登入過一次後，就不用再驗證，可以直接輸入 psql 進入 cli 模式
 password-based authentication: 要輸入密碼才可以登入的驗證
 指令 Meta command 在 PostgreSQL 的指令，以 \ 為 meta command， 以提供一些有用的操作
 -- see the full list of available meta commands \?-- list all databases \l-- list tables \dt-- list users \du安裝 extension 安裝 citext 的擴充功能
@@ -27,21 +28,4 @@ Gumroad
 Medium</description></item><item><title>Useful DevOps Site</title><link>https://yakushou.life/posts/site/useful-devops-site/</link><pubDate>Sat, 13 Nov 2021 09:31:55 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/useful-devops-site/</guid><description>Hwchiu Learning Note</description></item><item><title>General Tech Site</title><link>https://yakushou.life/posts/site/general-tech-site/</link><pubDate>Sat, 13 Nov 2021 09:29:26 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/general-tech-site/</guid><description>gRPC
 Google&amp;rsquo;s Engineering Practices
 Refactoring GURU
-TW511教學網</description></item><item><title>Engineering Site</title><link>https://yakushou.life/posts/site/engineering-site/</link><pubDate>Fri, 12 Nov 2021 21:12:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://yakushou.life/posts/site/engineering-site/</guid><description>The Airbnb Tech Blog
-Uber Engineering Blog
-Slack Engineering Blog
-Line Engineering Blog
-The Netflix Tech Blog
-Twitter Engineering
-Criteo R&amp;amp;D Blog
-Facebook Engineering
-Spotify R&amp;amp;D Engineering
-Shopify Engineering
-Linkedin Engineering Blog
-Pinterest Engineering
-Dropbox Tech
-Instagram Engineering
-Discord Engineering Blog
-RIOT GAMES TECHBLOG
-Salesforce Engineering
-Datadog Engineering</description></item></channel></rss>
+TW511教學網</description></item></channel></rss>
