@@ -30,6 +30,10 @@ granular 顆粒組成的
 ## I
 idiomatic 符合慣例的
 
+inbuilt 內在的；固有的
+
+innocuous 無害的
+
 intricate 精密複雜的
 
 ## M
@@ -39,6 +43,11 @@ malicious 惡意的
 
 ## R
 rudimentary 基本的；初步的
+
+## S
+subtle 隱約的；不易察覺的
+
+succinct 簡明的；言簡意賅的
 
 ## T
 tangible 真實的；非想像的

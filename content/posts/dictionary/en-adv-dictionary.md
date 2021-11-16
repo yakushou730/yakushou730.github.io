@@ -13,9 +13,14 @@ conceptually 概念上
 ## D
 drastically 大大地；徹底的
 
+## E
+essentially 本質上；基本上
+
 ## I
 indefinitely 不確定地；無限期地
 
 ## M
 marginally 稍微地
 
+## P
+purposefully 有目的地；有決心地

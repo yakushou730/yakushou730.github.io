@@ -7,5 +7,8 @@ tags: ["dictionary"]
 draft: false
 ---
 
+## I
+in turn 依次，輪流
+
 ## R
 rule of thumb 經驗法則

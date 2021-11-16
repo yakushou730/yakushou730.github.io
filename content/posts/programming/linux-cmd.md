@@ -57,3 +57,27 @@ $ df -T
 # -m 以 MB 作為單位顯示
 $ free -m
 ```
+
+## curl
+可以用來做連線資料傳輸
+
+[the man page](https://curl.se/docs/manpage.html)
+
+```shell
+# -d 傳送 data，系統會用 POST
+$ BODY='{"title":"The Breakfast Club","year":1986, "runtime":"96 mins","genres":["drama"]}'
+$ curl -d "$BODY" localhost:4000/v1/movies
+
+# -i 回傳的時候多顯示 Response header
+$ curl -i localhost:4000/v1/healthcheck 
+
+# -X 指定 http method
+$ BODY='{"title":"Black Panther","year":2018,"runtime":"134 mins","genres":["sci-fi","action","adventure"]}'
+$ curl -X PUT -d "$BODY" localhost:4000/v1/movies/2
+
+# -w 顯示額外資訊
+$ curl -w "\nTime: %{time_total}s \n" localhost:4000/v1/movies/2
+
+# 同時執行多個 request
+$ curl localhost:4000/v1/movies/1 & curl localhost:4000/v1/movies/1 &
+```
