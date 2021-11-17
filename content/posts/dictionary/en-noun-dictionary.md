@@ -22,6 +22,8 @@ groundwork 基礎工作；準備工作
 headroom (空間或橋梁的)淨空高度
 
 ## L
+lexeme 詞素；詞元
+
 lift 搭便車
 
 ## N
@@ -42,6 +44,8 @@ sanity 心智健全的狀態
 
 slang 俚語
 
+stem 主幹
+
 ## T
 throttle 節流閥
 
@@ -49,3 +53,5 @@ triage 情況鑑別分類
 
 ## V
 vein 靜脈；特徵
+
+

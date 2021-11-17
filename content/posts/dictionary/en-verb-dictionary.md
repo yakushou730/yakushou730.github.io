@@ -13,6 +13,11 @@ annotate 給...作註解；給...加評註
 ## B
 bear 忍受；承擔
 
+## C
+concatenate 使連接；把...連成一串
+
+conduct 實施；處理
+
 ## D
 denote 表示；代表
 

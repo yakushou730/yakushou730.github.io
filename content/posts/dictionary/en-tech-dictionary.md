@@ -30,3 +30,6 @@ plus 加號 +
 
 ## U
 underscore 底線符號 _
+
+## W
+wildcard 萬用字元 %

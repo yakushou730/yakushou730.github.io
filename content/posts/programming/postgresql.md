@@ -34,6 +34,9 @@ password-based authentication: 要輸入密碼才可以登入的驗證
 
 -- list users
 \du
+
+-- list of all available configurations
+\dF
 ```
 
 #### 安裝 extension

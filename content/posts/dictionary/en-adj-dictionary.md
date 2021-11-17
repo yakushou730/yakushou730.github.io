@@ -42,6 +42,8 @@ malformed 畸形的；變形的
 malicious 惡意的
 
 ## R
+reductive (尤指過度) 簡化的
+
 rudimentary 基本的；初步的
 
 ## S
