@@ -56,6 +56,20 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/programming/web-development/>Web Development</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://yakushou.life/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-17>2021-11-17</time></span></div><div class=content>web url encoding 在 url 內的 + 代表空白，也可以用 %20 表示 </div><div class=post-footer>
+<a href=/posts/programming/web-development/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/slice/>Slice</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://yakushou.life/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-16>2021-11-16</time></span></div><div class=content>建立空的 Slice var movies []*Movie movie = &Movie{} // 這樣子建立出來的 movies slice 是 nil // 但已經足夠用來做 append // 不需要寫成 movies := []*Movie{} movies = append(movies, movie) </div><div class=post-footer>
+<a href=/posts/golang/slice/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/dictionary/en-slang-dictionary/>英文: 俚語</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://yakushou.life/authors/yakushou730>yakushou730</a></span>
@@ -90,11 +104,10 @@ Filesystem: 檔案系統 Size: 總容量 Used: 已用容量 Avail: 剩餘容量 
 </span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-14>2021-11-14</time></span></div><div class=content>介紹 登入機制 peer authentication: 登入過一次後，就不用再驗證，可以直接輸入 psql 進入 cli 模式
 password-based authentication: 要輸入密碼才可以登入的驗證
 指令 Meta command 在 PostgreSQL 的指令，以 \ 為 meta command， 以提供一些有用的操作
--- see the full list of available meta commands \?-- list all databases \l-- list tables \dt-- list users \du安裝 extension 安裝 citext 的擴充功能
+-- see the full list of available meta commands \?-- list all databases \l-- list tables \dt-- list users \du-- list of all available configurations \dF安裝 extension 安裝 citext 的擴充功能
 CREATEEXTENSIONIFNOTEXISTScitext;建立使用者 建立名為 greenlight 且密碼為 pa55word 的帳號
 CREATEROLEgreenlightWITHLOGINPASSWORD'pa55word';查看使用者 \du使用者登入 登入 greenlight 角色 需要登入密碼的話會跳出輸入提示
-psql --host=localhost --dbname=greenlight --username=greenlight 刪除使用者 在 SHELL 直接輸入指令
-$ dropuser greenlight 顯示當前使用者 SELECTcurrent_user;建立 database 範例: 建立名為 greenlight 的 database</div><div class=post-footer>
+psql --host=localhost --dbname=greenlight --username=greenlight 刪除使用者 在 SHELL 直接輸入指令</div><div class=post-footer>
 <a href=/posts/programming/postgresql/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
@@ -138,23 +151,6 @@ Gumroad
 Medium</div><div class=post-footer>
 <a href=/posts/site/online-learning-site/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/site/useful-devops-site/>Useful DevOps Site</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://yakushou.life/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-13>2021-11-13</time></span></div><div class=content>Hwchiu Learning Note</div><div class=post-footer>
-<a href=/posts/site/useful-devops-site/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/site/general-tech-site/>General Tech Site</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://yakushou.life/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-13>2021-11-13</time></span></div><div class=content>gRPC
-Google&rsquo;s Engineering Practices
-Refactoring GURU
-TW511教學網</div><div class=post-footer>
-<a href=/posts/site/general-tech-site/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>
@@ -162,6 +158,10 @@ TW511教學網</div><div class=post-footer>
 </li><li class=page-item>
 <span class=page-link>
 <a href=/page/2/>2</a>
+</span>
+</li><li class=page-item>
+<span class=page-link>
+<a href=/page/3/>3</a>
 </span>
 </li></ul></div></div>
 </main><footer class=footer>
