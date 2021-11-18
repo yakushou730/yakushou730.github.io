@@ -24,6 +24,9 @@ dogmatic 武斷的；自以為是的
 ## E
 erroneous 錯誤的；不正確的
 
+## F
+fail-safe 萬無一失的，萬全的
+
 ## G
 granular 顆粒組成的
 
