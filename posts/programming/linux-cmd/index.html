@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://yakushou.life/posts/programming/linux-cmd/><link rel=prev href=https://yakushou.life/posts/programming/postgresql/><link rel=next href=https://yakushou.life/posts/dictionary/en-phrase-dictionary/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux Cmd","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yakushou.life\/posts\/programming\/linux-cmd\/"},"genre":"posts","keywords":"programming","wordcount":135,"url":"https:\/\/yakushou.life\/posts\/programming\/linux-cmd\/","datePublished":"2021-11-14T10:55:14+08:00","dateModified":"2021-11-14T10:55:14+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Linux Cmd"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux Cmd","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yakushou.life\/posts\/programming\/linux-cmd\/"},"genre":"posts","keywords":"programming","wordcount":196,"url":"https:\/\/yakushou.life\/posts\/programming\/linux-cmd\/","datePublished":"2021-11-14T10:55:14+08:00","dateModified":"2021-11-14T10:55:14+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Linux Cmd"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://yakushou.life/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;135 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;196 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -75,6 +75,9 @@
 <li><a href=#df>df</a></li>
 <li><a href=#free>free</a></li>
 <li><a href=#curl>curl</a></li>
+<li><a href=#for>for</a></li>
+<li><a href=#pgrep>pgrep</a></li>
+<li><a href=#pkill>pkill</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=find>find</h2>
@@ -125,6 +128,23 @@ $ curl -w <span class=s2>&#34;\nTime: %{time_total}s \n&#34;</span> localhost:40
 
 <span class=c1># 同時執行多個 request</span>
 $ curl localhost:4000/v1/movies/1 <span class=p>&amp;</span> curl localhost:4000/v1/movies/1 <span class=p>&amp;</span>
+
+<span class=c1># 如果有 query params 的話，整段 url 要用雙引號包起來</span>
+$ curl <span class=s2>&#34;localhost:4000/v1/movies?page_size=2&amp;page=2&#34;</span>
+</code></pre></div><h2 id=for>for</h2>
+<p>使用 for loop</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 使用 loop 6次，每次都打 curl</span>
+$ <span class=k>for</span> i in <span class=o>{</span>1..6<span class=o>}</span><span class=p>;</span> <span class=k>do</span> curl http://localhost:4000/v1/healthcheck<span class=p>;</span> <span class=k>done</span>
+</code></pre></div><h2 id=pgrep>pgrep</h2>
+<p>查看正在運行的程序，並列出 PIDs (Process IDs)</p>
+<p><a href=https://linux.die.net/man/1/pgrep target=_blank rel="noopener noreffer">the man page</a></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># -l 表示查詢結果多顯示程序名稱，這邊的 api 是要查詢的程序名稱</span>
+$ pgrep -l api
+</code></pre></div><h2 id=pkill>pkill</h2>
+<p>送出特別的訊號給程序 (預設是SIGTERM)</p>
+<p><a href=https://linux.die.net/man/1/pkill target=_blank rel="noopener noreffer">the man page</a></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 對 api 的程序送出 SIGKILL 訊號</span>
+$ pkill -SIGKILL api
 </code></pre></div></div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
