@@ -80,4 +80,38 @@ $ curl -w "\nTime: %{time_total}s \n" localhost:4000/v1/movies/2
 
 # 同時執行多個 request
 $ curl localhost:4000/v1/movies/1 & curl localhost:4000/v1/movies/1 &
+
+# 如果有 query params 的話，整段 url 要用雙引號包起來
+$ curl "localhost:4000/v1/movies?page_size=2&page=2"
+```
+
+## for
+
+使用 for loop
+
+```shell
+# 使用 loop 6次，每次都打 curl
+$ for i in {1..6}; do curl http://localhost:4000/v1/healthcheck; done
+```
+
+## pgrep
+
+查看正在運行的程序，並列出 PIDs (Process IDs)
+
+[the man page](https://linux.die.net/man/1/pgrep)
+
+```shell
+# -l 表示查詢結果多顯示程序名稱，這邊的 api 是要查詢的程序名稱
+$ pgrep -l api
+```
+
+## pkill
+
+送出特別的訊號給程序 (預設是SIGTERM)
+
+[the man page](https://linux.die.net/man/1/pkill)
+
+```shell
+# 對 api 的程序送出 SIGKILL 訊號
+$ pkill -SIGKILL api
 ```

@@ -22,6 +22,10 @@ dissatisfactory 不滿意的
 dogmatic 武斷的；自以為是的
 
 ## E
+elusive 難以描述 (或找到、達到、記起) 的；困難的
+
+erratic (動作、行爲等) 不規則的，不確定的
+
 erroneous 錯誤的；不正確的
 
 ## F
@@ -37,6 +41,8 @@ inbuilt 內在的；固有的
 
 innocuous 無害的
 
+insidious 暗中為害的；潛伏的
+
 intricate 精密複雜的
 
 ## M
@@ -50,7 +56,11 @@ reductive (尤指過度) 簡化的
 rudimentary 基本的；初步的
 
 ## S
+severe 非常嚴重的；劇烈的
+
 subtle 隱約的；不易察覺的
+
+successive 接連地；連續地
 
 succinct 簡明的；言簡意賅的
 

@@ -42,9 +42,13 @@ refresher (尤指爲練習和提高長期不用的技能而上的) 進修課程
 ## S
 sanity 心智健全的狀態
 
+severity 嚴重
+
 slang 俚語
 
 stem 主幹
+
+strain 壓力；作用力
 
 ## T
 throttle 節流閥

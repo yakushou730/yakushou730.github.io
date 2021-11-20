@@ -38,6 +38,10 @@ hinge 給...安裝鉸鏈
 ## I
 impose 推行；強制實行
 
+intercept 攔截，截住
+
+intermingle 混合；混在一起
+
 ## L
 leverage 借助已有的...實現新 (或更好) 的目標
 
@@ -60,6 +64,9 @@ swamp 淹沒；充斥
 
 ## T
 tweak 稍稍改進
+
+## U
+unwind 解開；鬆開 (捲繞之物)
 
 ## W
 warrant 使有必要
