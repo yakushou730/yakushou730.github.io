@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://yakushou.life/posts/programming/postgresql/><link rel=prev href=https://yakushou.life/posts/dictionary/en-conj-dictionary/><link rel=next href=https://yakushou.life/posts/programming/linux-cmd/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"PostgreSQL","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yakushou.life\/posts\/programming\/postgresql\/"},"genre":"posts","keywords":"programming","wordcount":168,"url":"https:\/\/yakushou.life\/posts\/programming\/postgresql\/","datePublished":"2021-11-14T10:42:24+08:00","dateModified":"2021-11-14T10:42:24+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"PostgreSQL"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"PostgreSQL","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yakushou.life\/posts\/programming\/postgresql\/"},"genre":"posts","keywords":"programming","wordcount":182,"url":"https:\/\/yakushou.life\/posts\/programming\/postgresql\/","datePublished":"2021-11-14T10:42:24+08:00","dateModified":"2021-11-14T10:42:24+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"PostgreSQL"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://yakushou.life/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;168 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;182 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -80,6 +80,8 @@
 <li></li>
 </ul>
 </li>
+<li><a href=#安裝-extension-1>安裝 extension</a></li>
+<li><a href=#變更使用者成為-superuser>變更使用者成為 SUPERUSER</a></li>
 <li><a href=#troubleshooting>Troubleshooting</a></li>
 </ul>
 </nav></div>
@@ -136,6 +138,12 @@
 </code></pre></div><h4 id=查看-table-schema>查看 table schema</h4>
 <p>查看 movies table schema</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=err>\</span><span class=n>d</span><span class=w> </span><span class=n>movies</span><span class=w>
+</span></code></pre></div><h2 id=安裝-extension-1>安裝 extension</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=c1>-- 以安裝 citext 為例
+</span><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=n>EXTENSION</span><span class=w> </span><span class=n>citext</span><span class=p>;</span><span class=w>
+</span></code></pre></div><h2 id=變更使用者成為-superuser>變更使用者成為 SUPERUSER</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=c1>-- 設定 user greenlight 為 SUPERUSER
+</span><span class=c1></span><span class=k>ALTER</span><span class=w> </span><span class=k>USER</span><span class=w> </span><span class=n>greenlight</span><span class=w> </span><span class=k>WITH</span><span class=w> </span><span class=n>SUPERUSER</span><span class=p>;</span><span class=w>
 </span></code></pre></div><h2 id=troubleshooting>Troubleshooting</h2>
 <ol>
 <li>當 postgresql server 開起不了的時候可以下指令看 log</li>
