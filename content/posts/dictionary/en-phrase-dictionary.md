@@ -12,3 +12,6 @@ in turn 依次，輪流
 
 ## R
 rule of thumb 經驗法則
+
+## T
+the nuts and bolts 實質性內容

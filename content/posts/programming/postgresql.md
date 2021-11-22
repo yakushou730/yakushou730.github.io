@@ -117,6 +117,19 @@ $ psql -c "SHOW config_file;"
 \d movies
 ```
 
+## 安裝 extension
+```sql
+-- 以安裝 citext 為例
+CREATE EXTENSION citext;
+```
+
+## 變更使用者成為 SUPERUSER
+
+```sql
+-- 設定 user greenlight 為 SUPERUSER
+ALTER USER greenlight WITH SUPERUSER;
+```
+
 ## Troubleshooting
 1. 當 postgresql server 開起不了的時候可以下指令看 log 
 
@@ -129,3 +142,4 @@ $ tail -n 10 /usr/local/var/log/postgres.log
 2 如何移除 postgresql 並重新透過 brew 安裝
 
 [**How to completely uninstall and reinstall Homebrew Postgres**](https://blog.testdouble.com/posts/2021-01-28-how-to-completely-uninstall-homebrew-postgres/#completely-uninstalling-a-homebrew-installation-of-postgres)
+

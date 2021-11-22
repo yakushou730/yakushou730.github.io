@@ -55,6 +55,8 @@ mutate 轉變
 ## R
 rehash 以新形式表達舊內容；換湯不換藥
 
+relay 傳達，轉發
+
 ## S
 skim 瀏覽；略過
 

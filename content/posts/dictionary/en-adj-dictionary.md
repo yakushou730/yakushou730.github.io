@@ -34,6 +34,9 @@ fail-safe 萬無一失的，萬全的
 ## G
 granular 顆粒組成的
 
+## H
+handy 有用的；方便的
+
 ## I
 idiomatic 符合慣例的
 
