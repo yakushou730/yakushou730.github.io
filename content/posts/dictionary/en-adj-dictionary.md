@@ -53,6 +53,9 @@ malformed 畸形的；變形的
 
 malicious 惡意的
 
+## P
+prohibitive (費用) 高得負擔不起的，(價格等) 使人望之卻步的
+
 ## R
 reductive (尤指過度) 簡化的
 
