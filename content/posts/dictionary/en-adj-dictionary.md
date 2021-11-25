@@ -22,6 +22,8 @@ dissatisfactory 不滿意的
 dogmatic 武斷的；自以為是的
 
 ## E
+easy-peasy 簡單得很；容易極了
+
 elusive 難以描述 (或找到、達到、記起) 的；困難的
 
 erratic (動作、行爲等) 不規則的，不確定的
