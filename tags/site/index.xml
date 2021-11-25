@@ -1,20 +1,20 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>site - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.life/tags/site/</link><description>site - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 13 Nov 2021 10:59:59 +0800</lastBuildDate><atom:link href="https://blog.yakushou.life/tags/site/" rel="self" type="application/rss+xml"/><item><title>Useful Vim Site</title><link>https://blog.yakushou.life/posts/site/useful-vim-site/</link><pubDate>Sat, 13 Nov 2021 10:59:59 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.life/posts/site/useful-vim-site/</guid><description>Vim script
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>site - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/tags/site/</link><description>site - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 13 Nov 2021 10:59:59 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/tags/site/" rel="self" type="application/rss+xml"/><item><title>Useful Vim Site</title><link>https://blog.yakushou.com/posts/site/useful-vim-site/</link><pubDate>Sat, 13 Nov 2021 10:59:59 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/site/useful-vim-site/</guid><description>Vim script
 Linux Vim 練等攻略
 Learn Vim
 你为了真正做到使用vim提高效率，花了多长时间学习和练习？
-Vim 练级手册</description></item><item><title>Useful Ruby Site</title><link>https://blog.yakushou.life/posts/site/useful-ruby-site/</link><pubDate>Sat, 13 Nov 2021 09:54:20 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.life/posts/site/useful-ruby-site/</guid><description>Ruby on Rails 實戰聖經
+Vim 练级手册</description></item><item><title>Useful Ruby Site</title><link>https://blog.yakushou.com/posts/site/useful-ruby-site/</link><pubDate>Sat, 13 Nov 2021 09:54:20 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/site/useful-ruby-site/</guid><description>Ruby on Rails 實戰聖經
 Ruby Hacking Guide
-Ruby on Rails 教程 | 他山</description></item><item><title>Online Learning Site</title><link>https://blog.yakushou.life/posts/site/online-learning-site/</link><pubDate>Sat, 13 Nov 2021 09:40:04 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.life/posts/site/online-learning-site/</guid><description>HiSKIO
+Ruby on Rails 教程 | 他山</description></item><item><title>Online Learning Site</title><link>https://blog.yakushou.com/posts/site/online-learning-site/</link><pubDate>Sat, 13 Nov 2021 09:40:04 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/site/online-learning-site/</guid><description>HiSKIO
 O&amp;rsquo;REILLY
 Calhoun&amp;rsquo;s Golang Course
 Applied Go Courses
 Udemy
 Kode Kloud
 Gumroad
-Medium</description></item><item><title>Useful DevOps Site</title><link>https://blog.yakushou.life/posts/site/useful-devops-site/</link><pubDate>Sat, 13 Nov 2021 09:31:55 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.life/posts/site/useful-devops-site/</guid><description>Hwchiu Learning Note</description></item><item><title>General Tech Site</title><link>https://blog.yakushou.life/posts/site/general-tech-site/</link><pubDate>Sat, 13 Nov 2021 09:29:26 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.life/posts/site/general-tech-site/</guid><description>gRPC
+Medium</description></item><item><title>Useful DevOps Site</title><link>https://blog.yakushou.com/posts/site/useful-devops-site/</link><pubDate>Sat, 13 Nov 2021 09:31:55 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/site/useful-devops-site/</guid><description>Hwchiu Learning Note</description></item><item><title>General Tech Site</title><link>https://blog.yakushou.com/posts/site/general-tech-site/</link><pubDate>Sat, 13 Nov 2021 09:29:26 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/site/general-tech-site/</guid><description>gRPC
 Google&amp;rsquo;s Engineering Practices
 Refactoring GURU
-TW511教學網</description></item><item><title>Engineering Site</title><link>https://blog.yakushou.life/posts/site/engineering-site/</link><pubDate>Fri, 12 Nov 2021 21:12:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.life/posts/site/engineering-site/</guid><description>The Airbnb Tech Blog
+TW511教學網</description></item><item><title>Engineering Site</title><link>https://blog.yakushou.com/posts/site/engineering-site/</link><pubDate>Fri, 12 Nov 2021 21:12:14 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/site/engineering-site/</guid><description>The Airbnb Tech Blog
 Uber Engineering Blog
 Slack Engineering Blog
 Line Engineering Blog
@@ -31,7 +31,7 @@ Instagram Engineering
 Discord Engineering Blog
 RIOT GAMES TECHBLOG
 Salesforce Engineering
-Datadog Engineering</description></item><item><title>Useful Golang Site</title><link>https://blog.yakushou.life/posts/site/useful-golang-site/</link><pubDate>Fri, 12 Nov 2021 15:46:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.life/posts/site/useful-golang-site/</guid><description>Golang Developer Roadmap
+Datadog Engineering</description></item><item><title>Useful Golang Site</title><link>https://blog.yakushou.com/posts/site/useful-golang-site/</link><pubDate>Fri, 12 Nov 2021 15:46:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/site/useful-golang-site/</guid><description>Golang Developer Roadmap
 Go Patterns
 Code Review Comments
 Go Best Practices
