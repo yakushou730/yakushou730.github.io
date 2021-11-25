@@ -177,21 +177,33 @@ jobs:
 
 13. 最後是設定 custom domain
 
-    先前在 AWS 購買了 yakushou.life 的 domain
+    先前在 AWS 購買了 yakushou.com 的 domain
 
     這邊把它套來 github pages
 
     **Settings > Pages**
  
-    custom domain 填入 yakushou.life
+    custom domain 填入 yakushou.com
 
     待 github 驗證完 domain 後把 Enforce HTTPS 打勾即可
 
-    > 記得 A Record 要先設定 yakushou.life 轉至 185.199.108.153 (github)
+    > 記得 A Record 要先設定 yakushou.life 轉至 185.199.108.153 185.199.109.153 185.199.110.153 185.199.111.153 (github)
     
     上面的動作是手動操作，每次 deploy 都會跑掉不太方便
 
     所以要放在 workflow 裏面去設定 cname
+
+14. 如果是要設定 subdomain 的話，如 blog.yakushou.com 
+
+    要設定 DNS 的 cname
+
+    設定 `blog`.yakushou.com 轉到 `yakushou730.github.io`
+
+    然後記得把 workflow 裡面的 cname 也改成 blog.yakushou.com
+
+    重新部署後就會生效了
+
+    > A record 的部分應該還是要設定，只設定 cname 的話可以轉成功，但是 https 的認證檢查會過不了 (待確認)
 
 ## 參考網站:
 - [如何將Hugo部落格部署到Github上?](https://yurepo.tw/2021/03/%E5%A6%82%E4%BD%95%E5%B0%87hugo%E9%83%A8%E8%90%BD%E6%A0%BC%E9%83%A8%E7%BD%B2%E5%88%B0github%E4%B8%8A/)
