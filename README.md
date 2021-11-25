@@ -1,3 +1,3 @@
 This is my site as notebook
 
-[https://yakushou.life](https://yakushou.life)
+[https://blog.yakushou.com](https://blog.yakushou.com)

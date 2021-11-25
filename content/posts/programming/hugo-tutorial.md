@@ -165,7 +165,7 @@ jobs:
           PUBLISH_BRANCH: gh-pages 
           PUBLISH_DIR: ./public    
           commit_message: ${{ github.event.head_commit.message }}
-          cname: yakushou.life
+          cname: yakushou.com
 ``` 
    接著按下 Start commit 儲存 workflow 的設定文件
 
@@ -187,7 +187,7 @@ jobs:
 
     待 github 驗證完 domain 後把 Enforce HTTPS 打勾即可
 
-    > 記得 A Record 要先設定 yakushou.life 轉至 185.199.108.153 185.199.109.153 185.199.110.153 185.199.111.153 (github)
+    > 記得 A Record 要先設定 yakushou.com 轉至 185.199.108.153 185.199.109.153 185.199.110.153 185.199.111.153 (github)
     
     上面的動作是手動操作，每次 deploy 都會跑掉不太方便
 
