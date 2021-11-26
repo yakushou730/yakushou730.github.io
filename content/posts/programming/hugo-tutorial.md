@@ -18,17 +18,17 @@ draft: false
 
    並且初始化 git
 
-```
+```shell
 $ hugo new site hugo-blog
 $ cd hugo-blog
 $ git init
 ```
 3. 搭配 [DoIt](https://themes.gohugo.io/themes/doit/) 主題作為顯示，以 submodule 加入至主題
-```
+```shell
 $ git submodule add https://github.com/HEIGE-PCloud/DoIt.git themes/DoIt
 ```
 4. 再來是設置 `config.toml` 以下是 [範例](https://hugodoit.pages.dev/theme-documentation-basics/#basic-configuration )，參考用
-```
+```yaml
 baseURL = "http://example.org/"
 # [en, zh-cn, fr, ...] determines default content language
 defaultContentLanguage = "en"
@@ -84,7 +84,7 @@ theme = "DoIt"
    可以在 [本機端](http://localhost:1313/) 看到網頁
 
    到目前為止本機端就先告一段落了
-```
+```shell
 $ hugo serve
 ```
 6. 因為要使用 github pages 的關係，先建立一個個人的 repository
@@ -94,7 +94,7 @@ $ hugo serve
 7. 建立的 repo 用法
    
    branch main 是用作主要推 code 的分支，透過設定 github action 把網頁內容推到 gh-pages 分支上
-```
+```shell
 $ git add .
 $ git commit -m "init blog (main)"
 $ git remote add origin https://github.com/yakushou730/yakushou730.github.io.git
@@ -132,7 +132,7 @@ git checkout main
 
     去設定要跑的flow
 
-```
+```yaml
 name: github-deploy-flow
 
 on:
