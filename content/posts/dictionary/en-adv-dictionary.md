@@ -22,5 +22,7 @@ indefinitely 不確定地；無限期地
 ## M
 marginally 稍微地
 
+materially 本質上；重要地
+
 ## P
 purposefully 有目的地；有決心地

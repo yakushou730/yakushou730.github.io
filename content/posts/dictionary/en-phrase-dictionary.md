@@ -7,8 +7,14 @@ tags: ["dictionary"]
 draft: false
 ---
 
+## B
+bear/keep sth in mind 記住
+
 ## I
 in turn 依次，輪流
+
+## P
+piece sth together 拼合；湊集
 
 ## R
 rule of thumb 經驗法則

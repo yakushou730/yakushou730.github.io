@@ -50,10 +50,19 @@ insidious 暗中為害的；潛伏的
 
 intricate 精密複雜的
 
+irrespective 不考慮地，不顧地
+
+## J
+jarring 令人感到不快的；刺激 (神經等) 的
+
 ## M
 malformed 畸形的；變形的
 
 malicious 惡意的
+
+
+## N
+negligible 微不足道的，可忽略的
 
 ## P
 prohibitive (費用) 高得負擔不起的，(價格等) 使人望之卻步的
@@ -73,4 +82,8 @@ successive 接連地；連續地
 succinct 簡明的；言簡意賅的
 
 ## T
+tailored 特製的；(衣服) 腰身合體的
+
 tangible 真實的；非想像的
+
+transient 短暫的，轉瞬即逝的

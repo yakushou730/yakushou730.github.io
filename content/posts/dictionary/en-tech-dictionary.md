@@ -28,6 +28,9 @@ periods 點 .
 
 plus 加號 +
 
+## S
+SMTP 簡單電子郵件傳輸協議 (電腦之間發送電子郵件的一種方式) (Simple Mail Transfer Protocol的縮寫)
+
 ## U
 underscore 底線符號 _
 

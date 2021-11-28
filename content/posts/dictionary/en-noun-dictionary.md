@@ -7,6 +7,9 @@ tags: ["dictionary"]
 draft: false
 ---
 
+## A
+affiliation 從屬關係；聯繫
+
 ## C
 caveat (進一步行動前的) 警告；限制條款
 
@@ -30,6 +33,9 @@ lift 搭便車
 notation 符號系統；數學符號
 
 nuance 細微差別
+
+## O
+obscurity 鮮為人知；默默無聞
 
 ## P
 panther 黑豹

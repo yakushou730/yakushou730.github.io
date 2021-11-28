@@ -14,6 +14,8 @@ annotate 給...作註解；給...加評註
 bear 忍受；承擔
 
 ## C
+compromise 損害
+
 concatenate 使連接；把...連成一串
 
 conduct 實施；處理
