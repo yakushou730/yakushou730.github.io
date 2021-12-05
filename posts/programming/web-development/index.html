@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/web-development/><link rel=prev href=https://blog.yakushou.com/posts/golang/slice/><link rel=next href=https://blog.yakushou.com/posts/golang/signal/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Web Development","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/web-development\/"},"genre":"posts","keywords":"programming","wordcount":27,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/web-development\/","datePublished":"2021-11-17T16:45:33+08:00","dateModified":"2021-11-17T16:45:33+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Web Development"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Web Development","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/web-development\/"},"genre":"posts","keywords":"programming","wordcount":174,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/web-development\/","datePublished":"2021-11-17T16:45:33+08:00","dateModified":"2021-11-17T16:45:33+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Web Development"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-17>2021-11-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-17>2021-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;27 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-17>2021-11-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-17>2021-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;174 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -72,6 +72,7 @@
 <ul>
 <li><a href=#web-url-encoding>web url encoding</a></li>
 <li><a href=#user-enumeration>user enumeration</a></li>
+<li><a href=#cors>CORS</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=web-url-encoding>web url encoding</h2>
@@ -85,6 +86,66 @@
 <p>代表這個使用者的 email 信箱是存在且有註冊過這個網站的</p>
 <p>即使用者的資訊被其他人知曉</p>
 <p>要避免的話，可以統一錯誤訊息或是把錯誤訊息寫得更通用一點</p>
+<h2 id=cors>CORS</h2>
+<p>cross-origin requests</p>
+<p>origin: 如果兩個 URL 的 scheme, host, port 都相同，</p>
+<p>即為相同 origin</p>
+<p>(path 不需要相同)</p>
+<blockquote>
+<p><a href=https://foo.com:443/a/ target=_blank rel="noopener noreffer">https://foo.com:443/a/</a></p>
+<ul>
+<li>https 是 scheme</li>
+<li>foo.com 是 host</li>
+<li>443 是 port</li>
+<li>a 是 path</li>
+</ul>
+</blockquote>
+<ul>
+<li>web browser 預設是禁止的</li>
+<li>網站可以內嵌其他 origin 的資源</li>
+<li>一個網站可以傳送資料給不同的 origin 位址</li>
+<li>但是一個網站不能夠接收來自不同 origin 的資料 (瀏覽器行為)</li>
+<li>可以透過設定 Header 內的 <code>Access-Control</code> 來控制允許或不允洗特定的 cross-origin requests 打我們的 API</li>
+<li>藍覽器以外的工具，如 curl, wget 不會受到影響</li>
+</ul>
+<blockquote>
+<p>如果在 API 的 response header 的 Header 的 <code>Access-Control-Allow-Origin</code> 塞值 <code>*</code></p>
+<p>即表示告訴 接受 response 的 browser 說這個 API 的資料是所有網站都可以拿的</p>
+<p>如果只想給特定的網站拿資料，那就把對應的網址填入 <code>Access-Control-Allow-Origin</code> 的值</p>
+</blockquote>
+<p>Simple 類型的 CORS</p>
+<ul>
+<li>為 HEAD, GET, POST 之一</li>
+<li>Headers 都不為 forbidden headers，或以下 CORS-safe 其中之一
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type</li>
+</ul>
+</li>
+<li>如果有 Content-Type 的話，值要是以下之一
+<ul>
+<li>application/x-www-form-urlencoded</li>
+<li>multipart/form-data</li>
+<li>text/plain</li>
+</ul>
+</li>
+</ul>
+<p>如果不為以上的 Simple 類型，瀏覽器會在真正的 request 之前觸發 preflight request</p>
+<p>用意是決定這個真正的 CORS 是否可以被允許</p>
+<p>Preflight 類型的 request (三要件)</p>
+<ul>
+<li>HTTP method OPTIONS</li>
+<li><code>Origin</code> Header</li>
+<li><code>Access-Control-Request-Method</code> Header</li>
+</ul>
+<p>而系統在收到 preflight request 的時候需要加在 response 的 Header</p>
+<ul>
+<li><code>Access-Control-Allow-Origin</code> 值放 preflight request 的 `Origin</li>
+<li><code>Access-Control-Allow-Methods</code> 列出可以用來給真正 CORS request 的 HTTP methods</li>
+<li><code>Access-Control-Allow-Headers</code> 列出可以被包含在真正 CORS request 的 Headers</li>
+</ul>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>

@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/slice/><link rel=prev href=https://blog.yakushou.com/posts/dictionary/en-slang-dictionary/><link rel=next href=https://blog.yakushou.com/posts/programming/web-development/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Slice","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/slice\/"},"genre":"posts","keywords":"programming, golang","wordcount":26,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/slice\/","datePublished":"2021-11-16T22:59:16+08:00","dateModified":"2021-11-16T22:59:16+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Slice"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Slice","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/slice\/"},"genre":"posts","keywords":"programming, golang","wordcount":48,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/slice\/","datePublished":"2021-11-16T22:59:16+08:00","dateModified":"2021-11-16T22:59:16+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Slice"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-16>2021-11-16</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-16>2021-11-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;26 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-16>2021-11-16</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-16>2021-11-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;48 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -71,6 +71,7 @@
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
 <li><a href=#建立空的-slice>建立空的 Slice</a></li>
+<li><a href=#把-array-轉成-slice>把 array 轉成 slice</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=建立空的-slice>建立空的 Slice</h2>
@@ -80,6 +81,11 @@
 </span><span class=c1>// 但已經足夠用來做 append
 </span><span class=c1>// 不需要寫成 movies := []*Movie{}
 </span><span class=c1></span><span class=nx>movies</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>movies</span><span class=p>,</span> <span class=nx>movie</span><span class=p>)</span>
+</code></pre></div><h2 id=把-array-轉成-slice>把 array 轉成 slice</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// hash 是 [32]byte 的 byte array
+</span><span class=c1></span><span class=nx>hash</span> <span class=o>:=</span> <span class=nx>sha256</span><span class=p>.</span><span class=nf>Sum256</span><span class=p>(</span><span class=nx>info</span><span class=p>)</span>
+<span class=c1>// b.Hash 是 byte slice
+</span><span class=c1></span><span class=nx>b</span><span class=p>.</span><span class=nx>Hash</span> <span class=p>=</span> <span class=nx>hash</span><span class=p>[:]</span>
 </code></pre></div></div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
