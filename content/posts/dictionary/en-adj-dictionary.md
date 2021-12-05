@@ -15,6 +15,9 @@ analogous 類似的；可比擬的
 
 appealing 上訴的；哀求的
 
+## B
+brittle 易碎的，脆的
+
 ## C
 concise 簡潔的；簡明的
 
@@ -23,6 +26,8 @@ conscious 意識到；察覺到
 conservative 保守的；守舊的
 
 ## D
+de facto 事實上的，實際上的
+
 dissatisfactory 不滿意的
 
 dogmatic 武斷的；自以為是的
@@ -68,7 +73,6 @@ malformed 畸形的；變形的
 
 malicious 惡意的
 
-
 ## N
 negligible 微不足道的，可忽略的
 
@@ -76,6 +80,8 @@ negligible 微不足道的，可忽略的
 overarching 首要的；包羅萬象的，支配一切的
 
 ## P
+phoney 虛偽的；假冒的
+
 prohibitive (費用) 高得負擔不起的，(價格等) 使人望之卻步的
 
 ## R
@@ -100,4 +106,6 @@ tangible 真實的；非想像的
 transient 短暫的，轉瞬即逝的
 
 ## W
+wary 謹慎的；小心翼翼的
+
 wilful 故意的；任性的

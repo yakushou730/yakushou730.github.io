@@ -23,6 +23,8 @@ conduct 實施；處理
 ## D
 denote 表示；代表
 
+derive 取得；衍生出
+
 diminish 減少；降低
 
 dump (將記憶體資訊) 轉存
@@ -68,9 +70,13 @@ skim 瀏覽；略過
 
 suffice 足夠；滿足要求
 
+suppress 抑制，忍住
+
 swamp 淹沒；充斥
 
 ## T
+tally 符合，吻合
+
 tweak 稍稍改進
 
 ## U
