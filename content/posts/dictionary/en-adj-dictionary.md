@@ -7,6 +7,8 @@ tags: ["dictionary"]
 draft: false
 ---
 ## A
+deterministic 決定論的
+
 aesthetic 美感的；藝術的
 
 analogous 類似的；可比擬的
@@ -14,6 +16,10 @@ analogous 類似的；可比擬的
 appealing 上訴的；哀求的
 
 ## C
+concise 簡潔的；簡明的
+
+conscious 意識到；察覺到
+
 conservative 保守的；守舊的
 
 ## D
@@ -48,6 +54,8 @@ innocuous 無害的
 
 insidious 暗中為害的；潛伏的
 
+interim 暫時的，過渡時期的
+
 intricate 精密複雜的
 
 irrespective 不考慮地，不顧地
@@ -63,6 +71,9 @@ malicious 惡意的
 
 ## N
 negligible 微不足道的，可忽略的
+
+## O
+overarching 首要的；包羅萬象的，支配一切的
 
 ## P
 prohibitive (費用) 高得負擔不起的，(價格等) 使人望之卻步的
@@ -87,3 +98,6 @@ tailored 特製的；(衣服) 腰身合體的
 tangible 真實的；非想像的
 
 transient 短暫的，轉瞬即逝的
+
+## W
+wilful 故意的；任性的

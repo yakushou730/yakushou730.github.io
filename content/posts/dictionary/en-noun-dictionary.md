@@ -15,14 +15,25 @@ caveat (進一步行動前的) 警告；限制條款
 
 consequence (常指不好或不利的) 結果，後果
 
+constituent 成分；構成部分
+
 ## D
 denial 否定
+
+discrepancy 不一致，出入
 
 ## G
 groundwork 基礎工作；準備工作
 
 ## H
 headroom (空間或橋梁的)淨空高度
+
+hitch 故障；突然停止
+
+hoop 鉤；拴；環；圈；半圈
+
+## I
+integrity 完整
 
 ## L
 lexeme 詞素；詞元
@@ -57,6 +68,8 @@ stem 主幹
 strain 壓力；作用力
 
 ## T
+the gist 要旨，要點；大意
+
 throttle 節流閥
 
 triage 情況鑑別分類

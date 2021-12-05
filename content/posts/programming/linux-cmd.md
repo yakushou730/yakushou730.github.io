@@ -115,3 +115,12 @@ $ pgrep -l api
 # 對 api 的程序送出 SIGKILL 訊號
 $ pkill -SIGKILL api
 ```
+
+## run multiple commands in one line
+
+指令是可以一次下複數個的
+
+```shell
+# 下完 curl 以後馬上關閉名為 api 的 process
+$ curl -d "$BODY" localhost:4000/v1/users & pkill -SIGTERM api &
+```

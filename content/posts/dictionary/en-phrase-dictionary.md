@@ -11,7 +11,12 @@ draft: false
 bear/keep sth in mind 記住
 
 ## I
+in terms of 在...方面；從...方面來說
+
 in turn 依次，輪流
+
+## O
+off the shelf (産品) 現成的，不需訂製的
 
 ## P
 piece sth together 拼合；湊集

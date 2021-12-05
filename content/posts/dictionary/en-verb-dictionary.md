@@ -32,6 +32,8 @@ dwell 居住；存在
 ## F
 facilitate 促進；使便利
 
+forge 偽造；假冒
+
 ## H
 hinder 阻礙；妨礙
 
@@ -39,6 +41,8 @@ hinge 給...安裝鉸鏈
 
 ## I
 impose 推行；強制實行
+
+incorporate 包含；將…包括在內
 
 intercept 攔截，截住
 
@@ -71,6 +75,8 @@ tweak 稍稍改進
 
 ## U
 unwind 解開；鬆開 (捲繞之物)
+
+utilize 使用；利用
 
 ## W
 warrant 使有必要

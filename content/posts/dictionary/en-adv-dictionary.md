@@ -17,6 +17,8 @@ drastically 大大地；徹底的
 essentially 本質上；基本上
 
 ## I
+inadvertently 不慎地；非故意地
+
 indefinitely 不確定地；無限期地
 
 ## M

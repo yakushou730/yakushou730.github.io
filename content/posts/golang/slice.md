@@ -17,3 +17,12 @@ movie = &Movie{}
 // 不需要寫成 movies := []*Movie{}
 movies = append(movies, movie)
 ```
+
+## 把 array 轉成 slice
+
+```go
+// hash 是 [32]byte 的 byte array
+hash := sha256.Sum256(info)
+// b.Hash 是 byte slice
+b.Hash = hash[:]
+```
