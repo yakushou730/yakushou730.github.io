@@ -56,6 +56,14 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/programming/makefile/>Makefile</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-05>2021-12-05</time></span></div><div class=content>範例
+GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?sslmode=disable' ## help: print this help message .PHONY: help help: @echo 'Usage:' @sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' | sed -e 's/^/ /' .PHONY: confirm confirm: @echo 'Are you sure? [y/N] ' && read ans && [ $${ans:-N} = y ] ## run/api: run the cmd/api application .PHONY: run/api run/api: go run ./cmd/api ## db/psql: connect to the database using psql .PHONY: db/psql db/psql: psql ${GREENLIGHT_DB_DSN} ## db/migrations/new name=$1: create a new database migration .</div><div class=post-footer>
+<a href=/posts/programming/makefile/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/programming/script/>script</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -145,19 +153,6 @@ https 是 scheme foo.com 是 host 443 是 port a 是 path web browser 預設是�
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-15>2021-11-15</time></span></div><div class=content>G gotcha （為了嚇人或表示佔了上風時的用語）抓住你了</div><div class=post-footer>
 <a href=/posts/dictionary/en-slang-dictionary/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/dictionary/en-phrase-dictionary/>英文: 片語</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-14>2021-11-14</time></span></div><div class=content>B bear/keep sth in mind 記住
-I in terms of 在&mldr;方面；從&mldr;方面來說
-in turn 依次，輪流
-O off the shelf (産品) 現成的，不需訂製的
-P piece sth together 拼合；湊集
-R rule of thumb 經驗法則
-T the nuts and bolts 實質性內容</div><div class=post-footer>
-<a href=/posts/dictionary/en-phrase-dictionary/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>

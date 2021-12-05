@@ -1,0 +1,163 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>Makefile - YakuShou's NOTEBOOK</title><meta name=Description content="Makefile"><meta property="og:title" content="Makefile">
+<meta property="og:description" content="Makefile">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.yakushou.com/posts/programming/makefile/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-12-05T21:01:05+08:00">
+<meta property="article:modified_time" content="2021-12-05T21:01:05+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Makefile">
+<meta name=twitter:description content="Makefile">
+<meta name=application-name content="YakuShou's NOTEBOOK">
+<meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
+<meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/makefile/><link rel=prev href=https://blog.yakushou.com/posts/programming/script/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Makefile","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/makefile\/"},"genre":"posts","keywords":"programming","wordcount":138,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/makefile\/","datePublished":"2021-12-05T21:01:05+08:00","dateModified":"2021-12-05T21:01:05+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Makefile"}</script></head>
+<body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><span class="menu-item delimiter"></span><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>Contents</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Makefile</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-05>2021-12-05</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-05>2021-12-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;138 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div>
+</div><div class=content id=content><p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-makefile data-lang=makefile><span class=nv>GREENLIGHT_DB_DSN</span><span class=o>=</span><span class=s1>&#39;postgres://greenlight:@localhost/greenlight?sslmode=disable&#39;</span>
+
+<span class=c>## help: print this help message
+</span><span class=c></span><span class=nf>.PHONY</span><span class=o>:</span> <span class=n>help</span>
+<span class=nf>help</span><span class=o>:</span>
+	@echo <span class=s1>&#39;Usage:&#39;</span>
+	@sed -n <span class=s1>&#39;s/^##//p&#39;</span> <span class=si>${</span><span class=nv>MAKEFILE_LIST</span><span class=si>}</span> <span class=p>|</span> column -t -s <span class=s1>&#39;:&#39;</span> <span class=p>|</span> sed -e <span class=s1>&#39;s/^/ /&#39;</span>
+
+<span class=nf>.PHONY</span><span class=o>:</span> <span class=n>confirm</span>
+<span class=nf>confirm</span><span class=o>:</span>
+	@echo <span class=s1>&#39;Are you sure? [y/N] &#39;</span> <span class=o>&amp;&amp;</span> <span class=nb>read</span> ans <span class=o>&amp;&amp;</span> <span class=o>[</span> <span class=nv>$$</span><span class=o>{</span>ans:-N<span class=o>}</span> <span class=o>=</span> y <span class=o>]</span>
+
+<span class=c>## run/api: run the cmd/api application
+</span><span class=c></span><span class=nf>.PHONY</span><span class=o>:</span> <span class=n>run</span>/<span class=n>api</span>
+<span class=nf>run/api</span><span class=o>:</span>
+	go run ./cmd/api
+
+<span class=c>## db/psql: connect to the database using psql
+</span><span class=c></span><span class=nf>.PHONY</span><span class=o>:</span> <span class=n>db</span>/<span class=n>psql</span>
+<span class=nf>db/psql</span><span class=o>:</span>
+	psql <span class=si>${</span><span class=nv>GREENLIGHT_DB_DSN</span><span class=si>}</span>
+
+<span class=c>## db/migrations/new name=$1: create a new database migration
+</span><span class=c></span><span class=nf>.PHONY</span><span class=o>:</span> <span class=n>db</span>/<span class=n>migrations</span>/<span class=n>new</span>
+<span class=nf>db/migrations/new</span><span class=o>:</span>
+	@echo <span class=s1>&#39;Creating migration files for ${name}...&#39;</span>
+	migrate create -seq -ext<span class=o>=</span>.sql -dir<span class=o>=</span>./migrations <span class=si>${</span><span class=nv>name</span><span class=si>}</span>
+
+<span class=c>## db/migrations/up: apply all up database migrations
+</span><span class=c></span><span class=nf>.PHONY</span><span class=o>:</span> <span class=n>db</span>/<span class=n>migrations</span>/<span class=n>up</span>
+<span class=nf>db/migrations/up</span><span class=o>:</span> <span class=n>confirm</span>
+	@echo <span class=s1>&#39;Running up migrations...&#39;</span>
+	migrate -path ./migrations -database <span class=si>${</span><span class=nv>GREENLIGHT_DB_DSN</span><span class=si>}</span> up
+
+</code></pre></div><ul>
+<li>
+<p>@ 前綴可以避免印出那行指令</p>
+</li>
+<li>
+<p>namespace 用 <code>/</code> 來分的話，可以有按 tab 的 autocomplete 可以用</p>
+<p>但這種做法有個問題，因為 makefile 原本的用意是產生檔案</p>
+<p>所以如果碰到對應路徑的檔案已經存在，則會停止執行指令</p>
+</li>
+<li>
+<p>可以用 .PHONY 避免前一點的問題</p>
+</li>
+<li>
+<p>confirm 在這邊的用法是 prerequisite target</p>
+</li>
+<li>
+<p>只輸入 make 的話，預設是執行第一條指令</p>
+</li>
+</ul>
+</div>
+<div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>Updated on 2021-12-05</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/programming/script/ class=prev rel=prev title=script><i class="fas fa-angle-left fa-fw"></i>script</a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{}}</script></div>
+</body>
+</html>
