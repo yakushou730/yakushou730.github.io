@@ -14,6 +14,8 @@ annotate 給...作註解；給...加評註
 bear 忍受；承擔
 
 ## C
+cease 停止，中止
+
 compromise 損害
 
 concatenate 使連接；把...連成一串
@@ -66,6 +68,8 @@ rehash 以新形式表達舊內容；換湯不換藥
 relay 傳達，轉發
 
 ## S
+scramble (急速而艱難地) 移動；爬
+
 skim 瀏覽；略過
 
 suffice 足夠；滿足要求

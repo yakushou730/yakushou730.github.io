@@ -124,3 +124,10 @@ $ pkill -SIGKILL api
 # 下完 curl 以後馬上關閉名為 api 的 process
 $ curl -d "$BODY" localhost:4000/v1/users & pkill -SIGTERM api &
 ```
+
+## w
+
+查看目前登入系統的使用者有哪些人
+
+以及他們正在使用的程式
+

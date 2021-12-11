@@ -55,3 +55,4 @@ db/migrations/up: confirm
 - 可以用 .PHONY 避免前一點的問題
 - confirm 在這邊的用法是 prerequisite target
 - 只輸入 make 的話，預設是執行第一條指令
+- 可以用 include 加入參數檔案

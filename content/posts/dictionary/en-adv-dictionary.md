@@ -26,5 +26,8 @@ marginally 稍微地
 
 materially 本質上；重要地
 
+## O
+onwards (繼續) 向前
+
 ## P
 purposefully 有目的地；有決心地
