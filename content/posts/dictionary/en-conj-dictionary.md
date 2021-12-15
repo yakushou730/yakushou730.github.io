@@ -9,3 +9,6 @@ draft: false
 
 ## A
 albeit 雖然；儘管
+
+## W
+whereas 儘管；但是；卻

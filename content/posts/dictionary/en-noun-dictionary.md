@@ -26,6 +26,8 @@ discrepancy 不一致，出入
 groundwork 基礎工作；準備工作
 
 ## H
+hassle 麻煩，困難
+
 headroom (空間或橋梁的)淨空高度
 
 hitch 故障；突然停止
@@ -54,10 +56,14 @@ panther 黑豹
 prescription 命令；處方
 
 ## R
+reassurance 能消除疑慮的話；安慰，慰藉
+
 refresher (尤指爲練習和提高長期不用的技能而上的) 進修課程
 
 ## S
 sanity 心智健全的狀態
+
+saturation point 達到飽和點
 
 severity 嚴重
 

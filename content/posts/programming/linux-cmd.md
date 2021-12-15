@@ -131,3 +131,59 @@ $ curl -d "$BODY" localhost:4000/v1/users & pkill -SIGTERM api &
 
 以及他們正在使用的程式
 
+## read
+
+read 可以提示使用者輸入字串
+
+並賦值給變數
+
+```shell
+# 將使用者輸入的字串賦值給 PASSWORD
+$ read -p "Enter password for root DB user" PASSWORD
+```
+
+## ssh
+
+透過 ssh 連線到遠端機器
+
+```shell
+# 用 ubuntu 帳號連線至 172.1.1.1
+$ ssh ubuntu@172.1.1.1
+```
+
+ip 和 username 是可以先寫在 ~/.ssh/config 檔案內的
+
+範例:
+```shell
+Host shou_prod
+HostName 172.1.1.1
+User ubuntu
+```
+
+這樣的話可以用以下指令連線到機器
+
+```shell
+$ ssh shou_prod
+```
+
+## ufw
+
+uncomplicated firewall
+
+可以用簡單的指令來操作防火牆
+
+範例
+
+```shell
+# 允許 port 22
+$ ufw allow 22
+# 允許 port 80
+$ ufw allow 80/tcp
+# 允許 port 443
+$ ufw allow 443/tcp
+# 封鎖 port 4000
+$ ufw deny 4000
+```
+
+[man page](http://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html)
+

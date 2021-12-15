@@ -16,6 +16,8 @@ bear 忍受；承擔
 ## C
 cease 停止，中止
 
+commission (正式地) 安排...做
+
 compromise 損害
 
 concatenate 使連接；把...連成一串
@@ -44,6 +46,8 @@ hinder 阻礙；妨礙
 hinge 給...安裝鉸鏈
 
 ## I
+impersonate 假冒，冒充
+
 impose 推行；強制實行
 
 incorporate 包含；將…包括在內

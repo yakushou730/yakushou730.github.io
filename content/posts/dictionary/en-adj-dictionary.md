@@ -41,6 +41,8 @@ erratic (動作、行爲等) 不規則的，不確定的
 
 erroneous 錯誤的；不正確的
 
+extraneous 無直接關係的；無關的
+
 ## F
 fail-safe 萬無一失的，萬全的
 
