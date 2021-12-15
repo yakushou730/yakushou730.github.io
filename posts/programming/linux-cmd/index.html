@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/linux-cmd/><link rel=prev href=https://blog.yakushou.com/posts/programming/postgresql/><link rel=next href=https://blog.yakushou.com/posts/dictionary/en-phrase-dictionary/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux Cmd","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/"},"genre":"posts","keywords":"programming","wordcount":223,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/","datePublished":"2021-11-14T10:55:14+08:00","dateModified":"2021-11-14T10:55:14+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Linux Cmd"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux Cmd","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/"},"genre":"posts","keywords":"programming","wordcount":308,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/","datePublished":"2021-11-14T10:55:14+08:00","dateModified":"2021-11-14T10:55:14+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Linux Cmd"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;223 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;308 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -80,6 +80,9 @@
 <li><a href=#pkill>pkill</a></li>
 <li><a href=#run-multiple-commands-in-one-line>run multiple commands in one line</a></li>
 <li><a href=#w>w</a></li>
+<li><a href=#read>read</a></li>
+<li><a href=#ssh>ssh</a></li>
+<li><a href=#ufw>ufw</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=find>find</h2>
@@ -154,6 +157,35 @@ $ curl -d <span class=s2>&#34;</span><span class=nv>$BODY</span><span class=s2>&
 </code></pre></div><h2 id=w>w</h2>
 <p>查看目前登入系統的使用者有哪些人</p>
 <p>以及他們正在使用的程式</p>
+<h2 id=read>read</h2>
+<p>read 可以提示使用者輸入字串</p>
+<p>並賦值給變數</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 將使用者輸入的字串賦值給 PASSWORD</span>
+$ <span class=nb>read</span> -p <span class=s2>&#34;Enter password for root DB user&#34;</span> PASSWORD
+</code></pre></div><h2 id=ssh>ssh</h2>
+<p>透過 ssh 連線到遠端機器</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 用 ubuntu 帳號連線至 172.1.1.1</span>
+$ ssh ubuntu@172.1.1.1
+</code></pre></div><p>ip 和 username 是可以先寫在 ~/.ssh/config 檔案內的</p>
+<p>範例:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>Host shou_prod
+HostName 172.1.1.1
+User ubuntu
+</code></pre></div><p>這樣的話可以用以下指令連線到機器</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ ssh shou_prod
+</code></pre></div><h2 id=ufw>ufw</h2>
+<p>uncomplicated firewall</p>
+<p>可以用簡單的指令來操作防火牆</p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 允許 port 22</span>
+$ ufw allow <span class=m>22</span>
+<span class=c1># 允許 port 80</span>
+$ ufw allow 80/tcp
+<span class=c1># 允許 port 443</span>
+$ ufw allow 443/tcp
+<span class=c1># 封鎖 port 4000</span>
+$ ufw deny <span class=m>4000</span>
+</code></pre></div><p><a href=http://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html target=_blank rel="noopener noreffer">man page</a></p>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>

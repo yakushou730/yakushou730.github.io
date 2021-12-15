@@ -6,7 +6,18 @@ err := dec.Decode(dst) if err != nil { var syntaxError *json.SyntaxError switch 
 第一個參數是現在拿到的 error 第二個參數是想要比對的特定 error
 比對方式是透過呼叫 Unwrap 逐一拆解來比對是否包含 特定的 error</description></item><item><title>json</title><link>https://blog.yakushou.com/posts/golang/packages/json/</link><pubDate>Tue, 23 Nov 2021 17:08:07 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/json/</guid><description><![CDATA[tag 標記用法 範例 json:&quot;name,omitempty&quot;
 這個欄位名稱為 name，如果欄位內容是空值的話，則欄位會被忽略
-範例 json:&quot;-&quot; 不管欄位名稱是什麼，都會忽略不印出]]></description></item><item><title>golang-migrate</title><link>https://blog.yakushou.com/posts/golang/packages/golang-migrate/</link><pubDate>Sun, 21 Nov 2021 23:36:24 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/golang-migrate/</guid><description>github link
+範例 json:&quot;-&quot; 不管欄位名稱是什麼，都會忽略不印出
+omitempty 這個欄位 如果是結構的話
+無論是否為空值，一定會產生出欄位，值為空
+例如
+s := struct { Foo struct { Bar string `json:&#34;,omitempty&#34;` } `json:&#34;,omitempty&#34;` }{} // encoding result {&#34;Foo&#34;:{}} 解決辦法是透過指標的方式
+例如
+s := struct { Foo *struct { Bar string `json:&#34;,omitempty&#34;` } `json:&#34;,omitempty&#34;` }{} // encoding result {} 此外如果欄位型態是 time.Time 的話
+omitempty 不會運作
+escaped json 編碼的時候如果碰到 &gt; &lt; &amp;
+會轉為逃逸字元
+範例
+s := []string{ &#34;&lt;foo&gt;&#34;, &#34;bar &amp; baz&#34;, } // result [&#34;\u003cfoo\u003e&#34;,&#34;bar \u0026 baz&#34;] 如果要避免的話，要在 json.]]></description></item><item><title>golang-migrate</title><link>https://blog.yakushou.com/posts/golang/packages/golang-migrate/</link><pubDate>Sun, 21 Nov 2021 23:36:24 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/golang-migrate/</guid><description>github link
 以 postgreSQL 為例
 安裝 (用 homebrew) $ brew install golang-migrate 確認版本 $ migrate -version 建立 migration 檔案 # 建立 migration 檔案 $ migrate create -seq -ext=.sql -dir=./migrations create_movies_table -sql : 用數字序列的方式命名 migration 檔案 (如0001, 0002, &amp;hellip;) 預設是用 unix timestamp -ext : 指定 migration 檔案的 extension 名稱 -dir : 表示我們要把 migration 檔案建立在哪個路徑 (若路徑不存在的話會自動建立) create_movies_table 是想要建立的檔案名稱 接著系統會建立兩份 migration 檔案 000001_create_movies_table.down.sql 000001_create_movies_table.up.sql
 之後便可在這兩份檔案寫入對應的 SQL 語法

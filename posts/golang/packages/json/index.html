@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/packages/json/><link rel=prev href=https://blog.yakushou.com/posts/golang/packages/golang-migrate/><link rel=next href=https://blog.yakushou.com/posts/golang/packages/errors/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"json","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/packages\/json\/"},"genre":"posts","keywords":"golang","wordcount":9,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/packages\/json\/","datePublished":"2021-11-23T17:08:07+08:00","dateModified":"2021-11-23T17:08:07+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"json"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"json","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/packages\/json\/"},"genre":"posts","keywords":"golang","wordcount":80,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/packages\/json\/","datePublished":"2021-11-23T17:08:07+08:00","dateModified":"2021-11-23T17:08:07+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"json"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-23>2021-11-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-23>2021-11-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;9 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-23>2021-11-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-23>2021-11-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;80 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -71,6 +71,8 @@
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
 <li><a href=#tag-標記用法>tag 標記用法</a></li>
+<li><a href=#omitempty>omitempty</a></li>
+<li><a href=#escaped>escaped</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=tag-標記用法>tag 標記用法</h2>
@@ -78,6 +80,42 @@
 <p>這個欄位名稱為 name，如果欄位內容是空值的話，則欄位會被忽略</p>
 <p>範例 <code>json:"-"</code>
 不管欄位名稱是什麼，都會忽略不印出</p>
+<h2 id=omitempty>omitempty</h2>
+<p>這個欄位 如果是結構的話</p>
+<p>無論是否為空值，一定會產生出欄位，值為空</p>
+<p>例如</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>s</span> <span class=o>:=</span> <span class=kd>struct</span> <span class=p>{</span>
+	<span class=nx>Foo</span> <span class=kd>struct</span> <span class=p>{</span>
+        <span class=nx>Bar</span> <span class=kt>string</span> <span class=s>`json:&#34;,omitempty&#34;`</span>
+	<span class=p>}</span> <span class=s>`json:&#34;,omitempty&#34;`</span>
+<span class=p>}{}</span>
+
+<span class=c1>// encoding result
+</span><span class=c1></span><span class=p>{</span><span class=s>&#34;Foo&#34;</span><span class=p>:{}}</span>
+</code></pre></div><p>解決辦法是透過指標的方式</p>
+<p>例如</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>s</span> <span class=o>:=</span> <span class=kd>struct</span> <span class=p>{</span>
+    <span class=nx>Foo</span> <span class=o>*</span><span class=kd>struct</span> <span class=p>{</span>
+        <span class=nx>Bar</span> <span class=kt>string</span> <span class=s>`json:&#34;,omitempty&#34;`</span>
+    <span class=p>}</span> <span class=s>`json:&#34;,omitempty&#34;`</span>
+<span class=p>}{}</span>
+
+<span class=c1>// encoding result
+</span><span class=c1></span><span class=p>{}</span>
+</code></pre></div><p>此外如果欄位型態是 <code>time.Time</code> 的話</p>
+<p>omitempty 不會運作</p>
+<h2 id=escaped>escaped</h2>
+<p>json 編碼的時候如果碰到 <code>></code> <code>&lt;</code> <code>&</code></p>
+<p>會轉為逃逸字元</p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>s</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span>
+	<span class=s>&#34;&lt;foo&gt;&#34;</span><span class=p>,</span>
+    <span class=s>&#34;bar &amp; baz&#34;</span><span class=p>,</span>
+<span class=p>}</span>
+
+<span class=c1>// result
+</span><span class=c1></span><span class=p>[</span><span class=s>&#34;\u003cfoo\u003e&#34;</span><span class=p>,</span><span class=s>&#34;bar \u0026 baz&#34;</span><span class=p>]</span>
+</code></pre></div><p>如果要避免的話，要在 <code>json.Encoder</code> 實例使用 <code>SetEscapeHTML(false)</code></p>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
