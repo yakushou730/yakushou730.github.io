@@ -1,0 +1,449 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>managing documents - YakuShou's NOTEBOOK</title><meta name=Description content="managing documents"><meta property="og:title" content="managing documents">
+<meta property="og:description" content="managing documents">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-12-15T22:57:51+08:00">
+<meta property="article:modified_time" content="2021-12-15T22:57:51+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="managing documents">
+<meta name=twitter:description content="managing documents">
+<meta name=application-name content="YakuShou's NOTEBOOK">
+<meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
+<meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/><link rel=prev href=https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/getting-started/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"managing documents","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/udemy\/complete-guide-to-elasticsearch\/managing-documtents\/"},"genre":"posts","keywords":"udemy, elasticsearch","wordcount":891,"url":"https:\/\/blog.yakushou.com\/posts\/udemy\/complete-guide-to-elasticsearch\/managing-documtents\/","datePublished":"2021-12-15T22:57:51+08:00","dateModified":"2021-12-15T22:57:51+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"managing documents"}</script></head>
+<body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><span class="menu-item delimiter"></span><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>Contents</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">managing documents</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-15>2021-12-15</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-15>2021-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;891 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#creating--deleting-indices>Creating & deleting indices</a></li>
+<li><a href=#indexing-documents>Indexing documents</a></li>
+<li><a href=#retrieving-documents-by-id>Retrieving documents by ID</a></li>
+<li><a href=#updating-documents>Updating documents</a></li>
+<li><a href=#scripted-updates>Scripted updates</a></li>
+<li><a href=#upserts>Upserts</a></li>
+<li><a href=#replacing-documents>Replacing documents</a></li>
+<li><a href=#deleting-documents>Deleting documents</a></li>
+<li><a href=#understanding-routing>Understanding routing</a></li>
+<li><a href=#understanding-document-versioning>Understanding document versioning</a></li>
+<li><a href=#optimistic-concurrency-control>Optimistic concurrency control</a></li>
+<li><a href=#update-by-query>Update by query</a></li>
+<li><a href=#delete-by-query>Delete by query</a></li>
+<li><a href=#batch-processing>Batch processing</a></li>
+<li><a href=#importing-data-with-curl>Importing data with cURL</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h2 id=creating--deleting-indices>Creating & deleting indices</h2>
+<p>新增 index</p>
+<p>範例: 新增 products index</p>
+<pre tabindex=0><code>PUT /products
+# 結果
+{
+  &quot;acknowledged&quot; : true,
+  &quot;shards_acknowledged&quot; : true,
+  &quot;index&quot; : &quot;products&quot;
+}
+</code></pre><ul>
+<li>acknowledged: 表示是否有執行成功</li>
+<li>shards_acknowledged: 表示 required shards 是否有在 timeout 前 start up
+<ul>
+<li>default 是指 primary shard</li>
+</ul>
+</li>
+</ul>
+<p>刪除 index</p>
+<p>範例: 刪除 products index</p>
+<pre tabindex=0><code>DELETE /products
+</code></pre><h2 id=indexing-documents>Indexing documents</h2>
+<p>插入資料: index a document</p>
+<pre tabindex=0><code>POST /products/_doc
+{
+  &quot;name&quot;: &quot;Coffee Maker&quot;,
+  &quot;price&quot;: 64,
+  &quot;in_stock&quot;: 10
+}
+
+# result
+{
+  &quot;_index&quot; : &quot;products&quot;,
+  &quot;_type&quot; : &quot;_doc&quot;,
+  &quot;_id&quot; : &quot;ek25vn0BLyjHJvg3PVzk&quot;,
+  &quot;_version&quot; : 1,
+  &quot;result&quot; : &quot;created&quot;,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 2,
+    &quot;successful&quot; : 1,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 0,
+  &quot;_primary_term&quot; : 1
+}
+</code></pre><p>_shards: 表示有多少 shards 成功/失敗 儲存這筆資料
+_id: 表示這筆資料的 identifier (系統自動產生，或者也可以自己指定)</p>
+<p>自己指定 _id 的情境</p>
+<pre tabindex=0><code>PUT /products/_doc/100
+{
+  &quot;name&quot;: &quot;Teaser&quot;,
+  &quot;price&quot;: 49,
+  &quot;in_stock&quot;: 4
+}
+
+# result
+{
+  &quot;_index&quot; : &quot;products&quot;,
+  &quot;_type&quot; : &quot;_doc&quot;,
+  &quot;_id&quot; : &quot;100&quot;,
+  &quot;_version&quot; : 4,
+  &quot;result&quot; : &quot;updated&quot;,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 2,
+    &quot;successful&quot; : 1,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 4,
+  &quot;_primary_term&quot; : 1
+}
+</code></pre><p>表示要建立 _id: 100</p>
+<h2 id=retrieving-documents-by-id>Retrieving documents by ID</h2>
+<pre tabindex=0><code>GET /products/_doc/100
+
+# result
+{
+  &quot;_index&quot; : &quot;products&quot;,
+  &quot;_type&quot; : &quot;_doc&quot;,
+  &quot;_id&quot; : &quot;100&quot;,
+  &quot;_version&quot; : 7,
+  &quot;_seq_no&quot; : 7,
+  &quot;_primary_term&quot; : 1,
+  &quot;found&quot; : true,
+  &quot;_source&quot; : {
+    &quot;name&quot; : &quot;Teaser&quot;,
+    &quot;price&quot; : 49,
+    &quot;in_stock&quot; : 4
+  }
+}
+</code></pre><p>有找到的話 會有 _source 的 key</p>
+<p>且 found 為 true</p>
+<p>沒找到的話會沒有 _source 的 key 且 found 為 false</p>
+<h2 id=updating-documents>Updating documents</h2>
+<pre tabindex=0><code>POST /products/_update/100
+{
+  &quot;doc&quot;: {
+    &quot;in_stock&quot;: 3  
+  }
+}
+
+# result
+{
+  &quot;_index&quot; : &quot;products&quot;,
+  &quot;_type&quot; : &quot;_doc&quot;,
+  &quot;_id&quot; : &quot;100&quot;,
+  &quot;_version&quot; : 8,
+  &quot;result&quot; : &quot;noop&quot;,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 0,
+    &quot;successful&quot; : 0,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 8,
+  &quot;_primary_term&quot; : 1
+}
+</code></pre><p>result key 為 updated 表示有更新</p>
+<p>如果沒更新的話 (例如資料一樣) 那值為 noop</p>
+<ul>
+<li>Elasticsearch documents are immutable</li>
+<li>更新的時候看起來像 update change，但實際上是 replace (整個替換)</li>
+</ul>
+<h2 id=scripted-updates>Scripted updates</h2>
+<p>有點像是寫 script 的概念去更新 _source</p>
+<p>直接指定要操作的欄位並更新</p>
+<pre tabindex=0><code>POST /products/_update/100
+{
+  &quot;script&quot;: {
+    &quot;source&quot;: &quot;ctx._source.in_stock--&quot;
+  }
+}
+
+# result
+{
+  &quot;_index&quot; : &quot;products&quot;,
+  &quot;_type&quot; : &quot;_doc&quot;,
+  &quot;_id&quot; : &quot;100&quot;,
+  &quot;_version&quot; : 11,
+  &quot;result&quot; : &quot;updated&quot;,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 2,
+    &quot;successful&quot; : 1,
+    &quot;failed&quot; : 0
+  },
+  &quot;_seq_no&quot; : 11,
+  &quot;_primary_term&quot; : 1
+}
+
+# 其他範例
+# 可指定 params 並做為參數使用
+POST /products/_update/100
+{
+  &quot;script&quot;: {
+    &quot;source&quot;: &quot;ctx._source.in_stock += params.quantity&quot;,
+    &quot;params&quot;: {
+      &quot;quantity&quot;: 10
+    }
+  }
+}
+</code></pre><p>不管有沒有資料更改，scripted updates 顯示的 result 都會是 updated</p>
+<ul>
+<li>除非特定指定 <code>ctx.op = "noop"</code></li>
+</ul>
+<h2 id=upserts>Upserts</h2>
+<p>意思是如果資料不存在的話就建立</p>
+<p>存在的話就更新</p>
+<pre tabindex=0><code>POST /products/_update/101
+{
+  &quot;script&quot;: {
+    &quot;source&quot;: &quot;ctx._source.in_stock++&quot;
+  },
+  &quot;upsert&quot;: {
+    &quot;name&quot;: &quot;Blender&quot;,
+    &quot;price&quot;: 399,
+    &quot;in_stock&quot;: 5
+  }
+}
+</code></pre><p>第一次的話會建立 upsert block 內的資料</p>
+<p>再執行一次的話 in_stock 會加 1</p>
+<h2 id=replacing-documents>Replacing documents</h2>
+<p>範例:</p>
+<pre tabindex=0><code>PUT /products/_doc/100
+{
+  &quot;name&quot;: &quot;Teaser&quot;,
+  &quot;price&quot;: 49,
+  &quot;in_stock&quot;: 4
+}
+</code></pre><p>不管原本 id 100 的內容是啥</p>
+<p>這個寫法都會強行覆蓋掉</p>
+<h2 id=deleting-documents>Deleting documents</h2>
+<pre tabindex=0><code>DELETE /products/_doc/101
+</code></pre><h2 id=understanding-routing>Understanding routing</h2>
+<p>Routing is the process of resolving a shard for a data</p>
+<p>index 的 shard 不能改變的原因是因為 routing formula</p>
+<h2 id=understanding-document-versioning>Understanding document versioning</h2>
+<ul>
+<li>不是版控，回不到過去資料</li>
+<li><code>_version</code> 欄位</li>
+</ul>
+<h2 id=optimistic-concurrency-control>Optimistic concurrency control</h2>
+<p>在更新欄位時加入 <code>if_primary_term</code> 和 <code>if_seq_no</code> 條件</p>
+<p>這樣可以確保在要更新的時間點，是否當時的版本還是預期的</p>
+<p>如果有其他人更新過，那版本會對不起來，更新失敗</p>
+<h2 id=update-by-query>Update by query</h2>
+<p>使用一次 query 更新多筆 document</p>
+<p>範例: 每個 in_stock 都減 1</p>
+<pre tabindex=0><code>POST /products/_update_by_query
+{
+  &quot;script&quot;: {
+    &quot;source&quot;: &quot;ctx._source.in_stock--&quot;
+  },
+  &quot;query&quot;: {
+    &quot;match_all&quot;: {}
+  }
+}
+
+# result
+{
+  &quot;took&quot; : 6,
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 1,
+    &quot;successful&quot; : 1,
+    &quot;skipped&quot; : 0,
+    &quot;failed&quot; : 0
+  },
+  &quot;hits&quot; : {
+    &quot;total&quot; : {
+      &quot;value&quot; : 2,
+      &quot;relation&quot; : &quot;eq&quot;
+    },
+    &quot;max_score&quot; : 1.0,
+    &quot;hits&quot; : [
+      {
+        &quot;_index&quot; : &quot;products&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;ek25vn0BLyjHJvg3PVzk&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;price&quot; : 64,
+          &quot;name&quot; : &quot;Coffee Maker&quot;,
+          &quot;in_stock&quot; : 8
+        }
+      },
+      {
+        &quot;_index&quot; : &quot;products&quot;,
+        &quot;_type&quot; : &quot;_doc&quot;,
+        &quot;_id&quot; : &quot;100&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;price&quot; : 49,
+          &quot;name&quot; : &quot;Test&quot;,
+          &quot;in_stock&quot; : 2
+        }
+      }
+    ]
+  }
+}
+</code></pre><p>驗證更新</p>
+<pre tabindex=0><code>GET /products/_search
+{
+  &quot;query&quot;: {
+    &quot;match_all&quot;: {}
+  }
+}
+</code></pre><h2 id=delete-by-query>Delete by query</h2>
+<p>依條件刪除資料</p>
+<pre tabindex=0><code>POST /products/_delete_by_query
+{
+  &quot;query&quot;: {
+    &quot;match_all&quot;: {}
+  }
+}
+</code></pre><h2 id=batch-processing>Batch processing</h2>
+<p>一個 query 更新多筆資料 - Bulk API</p>
+<p>支援 index / create / update / delete</p>
+<p>create 和 index 的差異</p>
+<ul>
+<li>create: 若資料已存在會建立失敗</li>
+<li>index: 若資料已存在會 replace，不存在則建立</li>
+</ul>
+<pre tabindex=0><code>POST /_bulk
+{ &quot;index&quot;: { &quot;_index&quot;: &quot;products&quot;, &quot;_id&quot;: 200 }}
+{ &quot;name&quot;: &quot;Espresso Machine&quot;, &quot;price&quot;: 199, &quot;in_stock&quot;: 5 }
+{ &quot;create&quot;: { &quot;_index&quot;: &quot;products&quot;, &quot;_id&quot;: 201 }}
+{ &quot;name&quot;: &quot;Milk Frother&quot;, &quot;price&quot;: 149, &quot;in_stock&quot;: 14 }
+</code></pre><p>驗證都用</p>
+<pre tabindex=0><code>GET /products/_search
+{
+  &quot;query&quot;: {
+    &quot;match_all&quot;: {}
+  }
+}
+</code></pre><p>更新和刪除</p>
+<pre tabindex=0><code>POST /_bulk
+{ &quot;update&quot;: { &quot;_index&quot;: &quot;products&quot;, &quot;_id&quot;: 201 }}
+{ &quot;doc&quot;: { &quot;price&quot;: 129 }}
+{ &quot;delete&quot;: { &quot;_index&quot;: &quot;products&quot;, &quot;_id&quot;: 200 }}
+</code></pre><p>上面那行在 index 相同的情況又可以寫成</p>
+<pre tabindex=0><code>POST /products/_bulk
+{ &quot;update&quot;: { &quot;_id&quot;: 201 }}
+{ &quot;doc&quot;: { &quot;price&quot;: 129 }}
+{ &quot;delete&quot;: { &quot;_id&quot;: 200 }}
+</code></pre><ul>
+<li>bulk API 的 HTTP request Header 要是 <code>Content-Type: application/x-ndjson</code></li>
+<li>每行的結尾都要是 <code>\n</code> 或 <code>\r\n</code></li>
+<li>如果是文字編輯器的話，最後一行要是空行</li>
+<li>一個動作失敗不會影響到其他動作</li>
+<li>透過 <code>items</code> key 來判斷動作是否成功</li>
+<li>支援 optimistic concurrency control</li>
+</ul>
+<h2 id=importing-data-with-curl>Importing data with cURL</h2>
+<p>準備一份 test.json file (最後一行要空白行)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span><span class=nt>&#34;index&#34;</span><span class=p>:{</span><span class=nt>&#34;_id&#34;</span><span class=p>:</span><span class=mi>1</span><span class=p>}}</span>
+<span class=p>{</span><span class=nt>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;Wine - Maipo Valle Cabernet&#34;</span><span class=p>,</span><span class=nt>&#34;price&#34;</span><span class=p>:</span><span class=mi>152</span><span class=p>,</span><span class=nt>&#34;in_stock&#34;</span><span class=p>:</span><span class=mi>38</span><span class=p>,</span><span class=nt>&#34;sold&#34;</span><span class=p>:</span><span class=mi>47</span><span class=p>,</span><span class=nt>&#34;tags&#34;</span><span class=p>:[</span><span class=s2>&#34;Alcohol&#34;</span><span class=p>,</span><span class=s2>&#34;Wine&#34;</span><span class=p>],</span><span class=nt>&#34;description&#34;</span><span class=p>:</span><span class=s2>&#34;Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula.&#34;</span><span class=p>,</span><span class=nt>&#34;is_active&#34;</span><span class=p>:</span><span class=kc>true</span><span class=p>,</span><span class=nt>&#34;created&#34;</span><span class=p>:</span><span class=s2>&#34;2004\/05\/13&#34;</span><span class=p>}</span>
+<span class=p>{</span><span class=nt>&#34;index&#34;</span><span class=p>:{</span><span class=nt>&#34;_id&#34;</span><span class=p>:</span><span class=mi>2</span><span class=p>}}</span>
+<span class=p>{</span><span class=nt>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;Tart Shells - Savory&#34;</span><span class=p>,</span><span class=nt>&#34;price&#34;</span><span class=p>:</span><span class=mi>99</span><span class=p>,</span><span class=nt>&#34;in_stock&#34;</span><span class=p>:</span><span class=mi>10</span><span class=p>,</span><span class=nt>&#34;sold&#34;</span><span class=p>:</span><span class=mi>430</span><span class=p>,</span><span class=nt>&#34;tags&#34;</span><span class=p>:[],</span><span class=nt>&#34;description&#34;</span><span class=p>:</span><span class=s2>&#34;Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.&#34;</span><span class=p>,</span><span class=nt>&#34;is_active&#34;</span><span class=p>:</span><span class=kc>true</span><span class=p>,</span><span class=nt>&#34;created&#34;</span><span class=p>:</span><span class=s2>&#34;2007\/10\/14&#34;</span><span class=p>}</span>
+<span class=p>{</span><span class=nt>&#34;index&#34;</span><span class=p>:{</span><span class=nt>&#34;_id&#34;</span><span class=p>:</span><span class=mi>3</span><span class=p>}}</span>
+
+</code></pre></div><p>指令</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ curl -H <span class=s2>&#34;Content-Type: application/x-ndjson&#34;</span> -X POST http://localhost:9200/products/_bulk --data-binary <span class=s2>&#34;@products-bulk.json&#34;</span> 
+</code></pre></div><p>可以在 Kibana 下指令驗證 shard 的資料變多了</p>
+<pre tabindex=0><code>GET /_cat/shards?v
+</code></pre></div>
+<div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>Updated on 2021-12-15</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/udemy/complete-guide-to-elasticsearch/getting-started/ class=prev rel=prev title="getting started"><i class="fas fa-angle-left fa-fw"></i>getting started</a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{}}</script></div>
+</body>
+</html>

@@ -56,6 +56,18 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/>managing documents</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-15>2021-12-15</time></span></div><div class=content>Creating & deleting indices 新增 index
+範例: 新增 products index
+PUT /products # 結果 { "acknowledged" : true, "shards_acknowledged" : true, "index" : "products" } acknowledged: 表示是否有執行成功 shards_acknowledged: 表示 required shards 是否有在 timeout 前 start up default 是指 primary shard 刪除 index
+範例: 刪除 products index
+DELETE /products Indexing documents 插入資料: index a document
+POST /products/_doc { "name": "Coffee Maker", "price": 64, "in_stock": 10 } # result { "_index" : "products", "_type" : "_doc", "_id" : "ek25vn0BLyjHJvg3PVzk", "_version" : 1, "result" : "created", "_shards" : { "total" : 2, "successful" : 1, "failed" : 0 }, "_seq_no" : 0, "_primary_term" : 1 } _shards: 表示有多少 shards 成功/失敗 儲存這筆資料 _id: 表示這筆資料的 identifier (系統自動產生，或者也可以自己指定)</div><div class=post-footer>
+<a href=/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/udemy/complete-guide-to-elasticsearch/getting-started/>getting started</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -153,24 +165,6 @@ shutdown() shutdown 的關閉流程不會中斷任何作用中的連線
 先關閉所有 open 的 listener 再關閉所有 idle 的 listener 等候作用中連線成為 idle shutdown http.Server 的 Shutdown 會在結束時回傳錯誤碼 (沒錯誤的話回傳 nil)</div><div class=post-footer>
 <a href=/posts/golang/signal/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/web-development/>Web Development</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-17>2021-11-17</time></span></div><div class=content>web url encoding 在 url 內的 + 代表空白，也可以用 %20 表示 user enumeration 一種可能的帳號攻擊行為
-比如說嘗試使用者登入，輸入email 和 密碼
-系統顯示 密碼錯誤 而不是 帳號密碼錯誤 或 找不到此使用者
-代表這個使用者的 email 信箱是存在且有註冊過這個網站的
-即使用者的資訊被其他人知曉
-要避免的話，可以統一錯誤訊息或是把錯誤訊息寫得更通用一點
-CORS cross-origin requests
-origin: 如果兩個 URL 的 scheme, host, port 都相同，
-即為相同 origin
-(path 不需要相同)
-https://foo.com:443/a/
-https 是 scheme foo.com 是 host 443 是 port a 是 path web browser 預設是禁止的 網站可以內嵌其他 origin 的資源 一個網站可以傳送資料給不同的 origin 位址 但是一個網站不能夠接收來自不同 origin 的資料 (瀏覽器行為) 可以透過設定 Header 內的 Access-Control 來控制允許或不允洗特定的 cross-origin requests 打我們的 API 藍覽器以外的工具，如 curl, wget 不會受到影響 如果在 API 的 response header 的 Header 的 Access-Control-Allow-Origin 塞值 *</div><div class=post-footer>
-<a href=/posts/programming/web-development/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>
