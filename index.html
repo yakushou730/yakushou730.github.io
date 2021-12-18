@@ -56,6 +56,13 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/udemy/complete-guide-to-elasticsearch/mapping-and-analysis/>mapping and analysis</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-17>2021-12-17</time></span></div><div class=content>Introduction to analysis _source object 是做 index document 但卻不是用來作為搜尋的內容欄位 分析字串: analyzer character filter tokenizer token filter 舉例 (filter 和 tokenizer 種類繁多，僅舉例簡單情境): 分析 I REALLY like beer! character filter 做成 I REALLY Like beer! Tokenizer 做成 ["I", "REALLY", "Like", "beer"] Token Filter 做成 ["i", "really", "like", "beer"] 儲存的字串會被切成較小的字串儲存 (Tokenizer) Using the Analyze API POST /_analyze { "text": "2 guys walk into a bar, but the third.</div><div class=post-footer>
+<a href=/posts/udemy/complete-guide-to-elasticsearch/mapping-and-analysis/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/>managing documents</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -156,15 +163,6 @@ s := []string{ "&lt;foo>", "bar & baz", } // result ["\u003cfoo\u003e","bar \u00
 執行 migrate (up) $ export GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?</div><div class=post-footer>
 <a href=/posts/golang/packages/golang-migrate/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/signal/>Signal</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-20>2021-11-20</time></span></div><div class=content>Signal 類型 Signal Description Keyboard Shortcut Catchable SIGINT 鍵盤中斷訊號 Ctrl + C true SIGQUIT 鍵盤離開訊號 Ctrl + |true SIGKILL 刪除程序(立即終止) - no SIGTERM 照順序終止程序 - true kill pid 會傳送SIGTERM到程序pid
-shutdown() shutdown 的關閉流程不會中斷任何作用中的連線
-先關閉所有 open 的 listener 再關閉所有 idle 的 listener 等候作用中連線成為 idle shutdown http.Server 的 Shutdown 會在結束時回傳錯誤碼 (沒錯誤的話回傳 nil)</div><div class=post-footer>
-<a href=/posts/golang/signal/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>

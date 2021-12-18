@@ -56,6 +56,15 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/signal/>Signal</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-20>2021-11-20</time></span></div><div class=content>Signal 類型 Signal Description Keyboard Shortcut Catchable SIGINT 鍵盤中斷訊號 Ctrl + C true SIGQUIT 鍵盤離開訊號 Ctrl + |true SIGKILL 刪除程序(立即終止) - no SIGTERM 照順序終止程序 - true kill pid 會傳送SIGTERM到程序pid
+shutdown() shutdown 的關閉流程不會中斷任何作用中的連線
+先關閉所有 open 的 listener 再關閉所有 idle 的 listener 等候作用中連線成為 idle shutdown http.Server 的 Shutdown 會在結束時回傳錯誤碼 (沒錯誤的話回傳 nil)</div><div class=post-footer>
+<a href=/posts/golang/signal/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/programming/web-development/>Web Development</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -154,20 +163,6 @@ Ruby Hacking Guide
 Ruby on Rails 教程 | 他山</div><div class=post-footer>
 <a href=/posts/site/useful-ruby-site/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/ruby/>ruby</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/site/online-learning-site/>Online Learning Site</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-13>2021-11-13</time></span></div><div class=content>HiSKIO
-O&rsquo;REILLY
-Calhoun&rsquo;s Golang Course
-Applied Go Courses
-Udemy
-Kode Kloud
-Gumroad
-Medium</div><div class=post-footer>
-<a href=/posts/site/online-learning-site/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>
