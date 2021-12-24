@@ -121,3 +121,46 @@ POST /_analyze
   "filter": ["lowercase"]
 }
 ```
+## Understanding inverted indices
+
+在做成 tokens 後，資料會存成 inverted index
+
+這樣在查找資料時比較有效率，不同欄位會分開存
+
+好比說 term 會出現在哪些 document
+
+例如:
+
+| TERM | Document #1 | Document #2 | Document #3 |
+|---|---|---|---|
+|2|x||x|
+|a||x|x|
+|round||x||
+|bar|x|x|x|
+|ducks||x||
+
+- one inverted index per text field
+- inverted index 是 Elasticsearch 的其中一種資料結構
+- 其餘的資料結構如用於 numeric values 的 BKD trees
+
+## Introduction to mapping
+- 定義 document 的結構
+  - 很像 RDB 的 schema
+- 2 種基本的 mapping
+  - explicit
+    - 我們自己定義
+  - dynamic
+    - Elasticsearch 替我們生成 field mappings
+
+## Overview of data types
+- data types
+  - object
+    - 用於 JSON object
+    - 可以是巢狀的
+  - nested
+    - 和 object 很像，但支援 object relationships
+    - 在 index arrays of objects 時很有用
+    - 一定要用 nested query
+  - keyword
+    - 給完全匹配的值用
+    - 通常是用做 filtering / aggregations / sorting 
