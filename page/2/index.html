@@ -56,6 +56,17 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/golang-migrate/>golang-migrate</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-21>2021-11-21</time></span></div><div class=content>github link
+以 postgreSQL 為例
+安裝 (用 homebrew) $ brew install golang-migrate 確認版本 $ migrate -version 建立 migration 檔案 # 建立 migration 檔案 $ migrate create -seq -ext=.sql -dir=./migrations create_movies_table -sql : 用數字序列的方式命名 migration 檔案 (如0001, 0002, &mldr;) 預設是用 unix timestamp -ext : 指定 migration 檔案的 extension 名稱 -dir : 表示我們要把 migration 檔案建立在哪個路徑 (若路徑不存在的話會自動建立) create_movies_table 是想要建立的檔案名稱 接著系統會建立兩份 migration 檔案 000001_create_movies_table.down.sql 000001_create_movies_table.up.sql
+之後便可在這兩份檔案寫入對應的 SQL 語法
+執行 migrate (up) $ export GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?</div><div class=post-footer>
+<a href=/posts/golang/packages/golang-migrate/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/signal/>Signal</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -154,15 +165,6 @@ Learn Vim
 Vim 练级手册</div><div class=post-footer>
 <a href=/posts/site/useful-vim-site/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/vim/>vim</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/site/useful-ruby-site/>Useful Ruby Site</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-13>2021-11-13</time></span></div><div class=content>Ruby on Rails 實戰聖經
-Ruby Hacking Guide
-Ruby on Rails 教程 | 他山</div><div class=post-footer>
-<a href=/posts/site/useful-ruby-site/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/ruby/>ruby</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>

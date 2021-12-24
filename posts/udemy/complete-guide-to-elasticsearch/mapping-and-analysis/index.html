@@ -16,9 +16,9 @@
 <meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
 <meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/mapping-and-analysis/><link rel=prev href=https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/mapping-and-analysis/><link rel=prev href=https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/><link rel=next href=https://blog.yakushou.com/posts/k8s/temporary/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"mapping and analysis","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/udemy\/complete-guide-to-elasticsearch\/mapping-and-analysis\/"},"genre":"posts","keywords":"udemy, elasticsearch","wordcount":283,"url":"https:\/\/blog.yakushou.com\/posts\/udemy\/complete-guide-to-elasticsearch\/mapping-and-analysis\/","datePublished":"2021-12-17T01:19:57+08:00","dateModified":"2021-12-17T01:19:57+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"mapping and analysis"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"mapping and analysis","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/udemy\/complete-guide-to-elasticsearch\/mapping-and-analysis\/"},"genre":"posts","keywords":"udemy, elasticsearch","wordcount":389,"url":"https:\/\/blog.yakushou.com\/posts\/udemy\/complete-guide-to-elasticsearch\/mapping-and-analysis\/","datePublished":"2021-12-17T01:19:57+08:00","dateModified":"2021-12-17T01:19:57+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"mapping and analysis"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-17>2021-12-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-17>2021-12-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;283 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-17>2021-12-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-17>2021-12-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;389 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -72,6 +72,9 @@
 <ul>
 <li><a href=#introduction-to-analysis>Introduction to analysis</a></li>
 <li><a href=#using-the-analyze-api>Using the Analyze API</a></li>
+<li><a href=#understanding-inverted-indices>Understanding inverted indices</a></li>
+<li><a href=#introduction-to-mapping>Introduction to mapping</a></li>
+<li><a href=#overview-of-data-types>Overview of data types</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=introduction-to-analysis>Introduction to analysis</h2>
@@ -190,7 +193,107 @@
   &quot;tokenizer&quot;: &quot;standard&quot;,
   &quot;filter&quot;: [&quot;lowercase&quot;]
 }
-</code></pre></div>
+</code></pre><h2 id=understanding-inverted-indices>Understanding inverted indices</h2>
+<p>在做成 tokens 後，資料會存成 inverted index</p>
+<p>這樣在查找資料時比較有效率，不同欄位會分開存</p>
+<p>好比說 term 會出現在哪些 document</p>
+<p>例如:</p>
+<table>
+<thead>
+<tr>
+<th>TERM</th>
+<th>Document #1</th>
+<th>Document #2</th>
+<th>Document #3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>x</td>
+<td></td>
+<td>x</td>
+</tr>
+<tr>
+<td>a</td>
+<td></td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td>round</td>
+<td></td>
+<td>x</td>
+<td></td>
+</tr>
+<tr>
+<td>bar</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td>ducks</td>
+<td></td>
+<td>x</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>one inverted index per text field</li>
+<li>inverted index 是 Elasticsearch 的其中一種資料結構</li>
+<li>其餘的資料結構如用於 numeric values 的 BKD trees</li>
+</ul>
+<h2 id=introduction-to-mapping>Introduction to mapping</h2>
+<ul>
+<li>定義 document 的結構
+<ul>
+<li>很像 RDB 的 schema</li>
+</ul>
+</li>
+<li>2 種基本的 mapping
+<ul>
+<li>explicit
+<ul>
+<li>我們自己定義</li>
+</ul>
+</li>
+<li>dynamic
+<ul>
+<li>Elasticsearch 替我們生成 field mappings</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id=overview-of-data-types>Overview of data types</h2>
+<ul>
+<li>data types
+<ul>
+<li>object
+<ul>
+<li>用於 JSON object</li>
+<li>可以是巢狀的</li>
+</ul>
+</li>
+<li>nested
+<ul>
+<li>和 object 很像，但支援 object relationships</li>
+<li>在 index arrays of objects 時很有用</li>
+<li>一定要用 nested query</li>
+</ul>
+</li>
+<li>keyword
+<ul>
+<li>給完全匹配的值用</li>
+<li>通常是用做 filtering / aggregations / sorting</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
@@ -212,7 +315,8 @@
 <span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/ class=prev rel=prev title="managing documents"><i class="fas fa-angle-left fa-fw"></i>managing documents</a></div>
+<div class=post-nav><a href=/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/ class=prev rel=prev title="managing documents"><i class="fas fa-angle-left fa-fw"></i>managing documents</a>
+<a href=/posts/k8s/temporary/ class=next rel=next title=temporary>temporary<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>
