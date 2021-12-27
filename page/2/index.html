@@ -56,6 +56,26 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/json/>json</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-23>2021-11-23</time></span></div><div class=content>tag 標記用法 範例 json:"name,omitempty"
+這個欄位名稱為 name，如果欄位內容是空值的話，則欄位會被忽略
+範例 json:"-" 不管欄位名稱是什麼，都會忽略不印出
+omitempty 這個欄位 如果是結構的話
+無論是否為空值，一定會產生出欄位，值為空
+例如
+s := struct { Foo struct { Bar string `json:",omitempty"` } `json:",omitempty"` }{} // encoding result {"Foo":{}} 解決辦法是透過指標的方式
+例如
+s := struct { Foo *struct { Bar string `json:",omitempty"` } `json:",omitempty"` }{} // encoding result {} 此外如果欄位型態是 time.Time 的話
+omitempty 不會運作
+escaped json 編碼的時候如果碰到 > &lt; &
+會轉為逃逸字元
+範例
+s := []string{ "&lt;foo>", "bar & baz", } // result ["\u003cfoo\u003e","bar \u0026 baz"] 如果要避免的話，要在 json.</div><div class=post-footer>
+<a href=/posts/golang/packages/json/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/packages/golang-migrate/>golang-migrate</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -154,17 +174,6 @@ psql --host=localhost --dbname=greenlight --username=greenlight 刪除使用者 
 W whereas 儘管；但是；卻</div><div class=post-footer>
 <a href=/posts/dictionary/en-conj-dictionary/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/site/useful-vim-site/>Useful Vim Site</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-13>2021-11-13</time></span></div><div class=content>Vim script
-Linux Vim 練等攻略
-Learn Vim
-你为了真正做到使用vim提高效率，花了多长时间学习和练习？
-Vim 练级手册</div><div class=post-footer>
-<a href=/posts/site/useful-vim-site/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/vim/>vim</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>
