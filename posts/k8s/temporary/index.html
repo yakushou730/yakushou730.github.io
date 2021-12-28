@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/temporary/><link rel=prev href=https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/mapping-and-analysis/><link rel=next href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"temporary","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/temporary\/"},"genre":"posts","keywords":"programming, k8s","wordcount":117,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/temporary\/","datePublished":"2021-12-24T11:28:29+08:00","dateModified":"2021-12-24T11:28:29+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"temporary"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"temporary","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/temporary\/"},"genre":"posts","keywords":"programming, k8s","wordcount":318,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/temporary\/","datePublished":"2021-12-24T11:28:29+08:00","dateModified":"2021-12-24T11:28:29+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"temporary"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;117 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;318 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -75,6 +75,13 @@
 <li><a href=#使用-context>使用 context</a></li>
 <li><a href=#使用-kubectx>使用 kubectx</a></li>
 <li><a href=#進入-pod>進入 pod</a></li>
+<li><a href=#顯示-cluster-資訊>顯示 cluster 資訊</a></li>
+<li><a href=#取得-node-資訊>取得 node 資訊</a></li>
+<li><a href=#查看-k8s-版本資訊>查看 k8s 版本資訊</a></li>
+<li><a href=#查看-node-資訊>查看 node 資訊</a></li>
+<li><a href=#pods>PODs</a></li>
+<li><a href=#replications-controller--replicasets>Replications controller & ReplicaSets</a></li>
+<li><a href=#deployments>Deployments</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=從-aws-eks-下載-k8s-config>從 AWS EKS 下載 k8s config</h2>
@@ -109,7 +116,65 @@ kubectx &lt;<span class=nb>alias</span> context name&gt;
 <p>範例:
 進入 pod 並執行 sh 指令</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>kubectl <span class=nb>exec</span> -it &lt;pod name&gt; -- sh
-</code></pre></div></div>
+</code></pre></div><h2 id=顯示-cluster-資訊>顯示 cluster 資訊</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>kubectl cluster-info
+</code></pre></div><h2 id=取得-node-資訊>取得 node 資訊</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># -o wide 是 output in the plain-text format with any additional information.</span>
+kubectl get nodes -o wide
+</code></pre></div><h2 id=查看-k8s-版本資訊>查看 k8s 版本資訊</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>kubectl version
+</code></pre></div><h2 id=查看-node-資訊>查看 node 資訊</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>kubectl describe nodes &lt;node name&gt;
+</code></pre></div><h2 id=pods>PODs</h2>
+<ul>
+<li>container 不會直接被放到 node 內</li>
+<li>是透過封裝在 pod 裡面才被放到 node</li>
+<li>一個 pod 是一個單一的 application (通常是一對一)
+<ul>
+<li>但還是可以在一個 pod 裡面放多個 container (一起建立/一起銷毀)</li>
+</ul>
+</li>
+<li>pod 是在 k8s 內可以建立的最小單位</li>
+<li>負載量過大的時候會以 pod 為單位創建新的 application</li>
+</ul>
+<p>指令:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 從 dockerhub 拉下 nginx image 並執行成 名為 nginx 的 pod</span>
+kubectl run nginx --image nginx
+<span class=c1># 取得 pods 列表</span>
+kubectl get pods
+<span class=c1># 取得特定 pod 的詳細描述</span>
+kubectl describe pod &lt;pod name&gt;
+<span class=c1># 直接連同 deployment 一起建立</span>
+kubectl create deployment nginx --image<span class=o>=</span>nginx
+<span class=c1># 刪除 pod</span>
+kubectl delete pod &lt;pod name&gt;
+<span class=c1># 透過檔案建立 pod</span>
+kubectl create -f &lt;file name&gt;
+<span class=c1># 透過基本旗標建立 pod yaml</span>
+kubectl run &lt;container name&gt; --image<span class=o>=</span>&lt;image name&gt; --dry-run<span class=o>=</span>client -o yaml &gt; &lt;taget yaml file name&gt; 
+<span class=c1># 套用 yaml 檔案</span>
+kubectl apply -f &lt;file name&gt;
+</code></pre></div><h2 id=replications-controller--replicasets>Replications controller & ReplicaSets</h2>
+<p>讓 pods 可以執行特定數量，如果掛掉的話可以重啟回固定數量</p>
+<p>有點像是把 Pod 包起來的概念，Replication controller 會固定在內部的 pod 數量</p>
+<ul>
+<li>Scaling
+<ul>
+<li>Replication Controller 支援跨 nodes，即可以控管多數個 nodes 總共需要幾個固定數量的 pods</li>
+</ul>
+</li>
+<li>Load Balancing
+<ul>
+<li>Replication Controller 也做 Load balancing，把流量導去不同的 pods</li>
+</ul>
+</li>
+</ul>
+<p>ReplicaSet 要取代舊式的 Replication Controller</p>
+<h2 id=deployments>Deployments</h2>
+<p>把新版本的 image 部署到 node 上</p>
+<p>可以做 rolling update / rollback</p>
+<p>Deployment 可以視為更大的範圍(集合)，包含了 Replica Set 在裡面</p>
+</div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>

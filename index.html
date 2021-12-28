@@ -56,6 +56,34 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/k8s/yaml-files/>YAML Files</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-28>2021-12-28</time></span></div><div class=content>General YAML template 必要的 4 個欄位
+apiVersion:# 要用來建立物件的 k8s API 版本 kind:# 要建立的物件metadata:# 物件的其他資訊，如 name, labels...spec:# 建立物件需要的訊息 apiVersion (string) POD: v1 Service: v1 ReplicaSet: apps/v1 Deployment: apps/v1 kind (string) Pod Service ReplicaSet Deployment metadata (dictionary) name labels labels 下的 key/value 值是可以自訂的 spec (dictionary) POD with YAML pod-definition.yaml
+apiVersion:v1kind:Podmetadata:name:myapp-podlabels:app:myapptype:front-endspec:containers:- name:nginx-containerimage:nginx指令
+# 建立 kubectl create -f pod-definition.yaml # list kubectl get pods kubectl get po Replication Controller with YAML rc-definition.</div><div class=post-footer>
+<a href=/posts/k8s/yaml-files/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/k8s/concepts/>concepts</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-28>2021-12-28</time></span></div><div class=content>概念 Container + Orchestration
+k8s 是一種容器編排技術，用於協調數百個對象的部署和管理 cluster 中的數千個容器
+VM vs Docker VM 是在 原本的 OS 上，再額外起來的完整的虛擬機器，具有完整的虛擬 OS 每個 VM 裡面除了 OS 外還有各自的 libs 和 deps 動輒以 GB 為單位 啟動速度慢 Docker 是基於原本的內核，起起來的 container libs 和 deps 在各自容器內 大約以 MB 為單位 啟動速度快 術語 node (minion) 安裝了 k8s 的機器，container 會起在這上面 cluster 一組複數個 nodes ( 1 個 master / 多個 worker) 會有一台 master node，負責監管和負責流程編排 node 上 的 container components 安裝 k8s 時，會安裝的一些元件 API server 可以作為 k8s 的前端 etcd key-value store 確保 master 間沒有 conflict kubelet 每個 node 都會安裝的 agent 確保 container 可以運作在 node 上 container runtime 用來跑 container 的環境 (ex: Docker) controller orchestration 的大腦，在 nodes / containers 發生故障時發出通知和回應 決定是否建立新的 container scheduler 分配 container 給 nodes master 上 會安裝 kube-apiserver 會安裝 etcd 儲存資訊 會安裝 controller 會安裝 scheduler worker 上 會安裝 kubelet 和 master 溝通 </div><div class=post-footer>
+<a href=/posts/k8s/concepts/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/programming/software/>software</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-27>2021-12-27</time></span></div><div class=content>Declarative vs imperative language Declarative programming (宣告式)
+What 代表為 functional programming (function 之間不會互相共用狀態) 程式碼通常是可以直接看到在做什麼 (重視 what) Imperative programming (命令式)
+how to do 代表為 OOP (狀態互相依賴) 看得見邏輯運算過程 (how to do) </div><div class=post-footer>
+<a href=/posts/programming/software/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/fundamental/>fundamental</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -122,36 +150,6 @@ jvm.options
 GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?sslmode=disable' ## help: print this help message .PHONY: help help: @echo 'Usage:' @sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' | sed -e 's/^/ /' .PHONY: confirm confirm: @echo 'Are you sure? [y/N] ' && read ans && [ $${ans:-N} = y ] ## run/api: run the cmd/api application .PHONY: run/api run/api: go run ./cmd/api ## db/psql: connect to the database using psql .PHONY: db/psql db/psql: psql ${GREENLIGHT_DB_DSN} ## db/migrations/new name=$1: create a new database migration .</div><div class=post-footer>
 <a href=/posts/programming/makefile/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/script/>script</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-29>2021-11-29</time></span></div><div class=content>範例 script.sh
-$ touch script.sh $ chmod +x script.sh 檔案內容
-#!/bin/zsh GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?sslmode=disable' echo ${GREENLIGHT_DB_DSN} 運行 script.sh
-$ ./script.sh Reference 簡明 Linux Shell Script 入門教學</div><div class=post-footer>
-<a href=/posts/programming/script/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/site/useful-design-site/>Useful Design Site</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-26>2021-11-26</time></span></div><div class=content>infograpify</div><div class=post-footer>
-<a href=/posts/site/useful-design-site/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/design/>design</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/packages/errors/>errors</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-23>2021-11-23</time></span></div><div class=content>#As func As(err error, target interface{}) bool
-第一個參數是現在拿到的 error
-會透過呼叫 Unwrap 來比對 err 的第一個錯誤是否和 target 相同 如果對的話，會把 target 設定為 err 並回傳 true 否則回傳 false
-範例
-err := dec.Decode(dst) if err != nil { var syntaxError *json.SyntaxError switch { case errors.As(err, &syntaxError): return fmt.Errorf("body contains badly-formed JSON (at character %d)", syntaxError.Offset) default: return err } } #Is func Is(err error, target error) bool
-第一個參數是現在拿到的 error 第二個參數是想要比對的特定 error
-比對方式是透過呼叫 Unwrap 逐一拆解來比對是否包含 特定的 error</div><div class=post-footer>
-<a href=/posts/golang/packages/errors/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>

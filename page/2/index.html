@@ -56,6 +56,36 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/programming/script/>script</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-29>2021-11-29</time></span></div><div class=content>範例 script.sh
+$ touch script.sh $ chmod +x script.sh 檔案內容
+#!/bin/zsh GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?sslmode=disable' echo ${GREENLIGHT_DB_DSN} 運行 script.sh
+$ ./script.sh Reference 簡明 Linux Shell Script 入門教學</div><div class=post-footer>
+<a href=/posts/programming/script/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/site/useful-design-site/>Useful Design Site</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-26>2021-11-26</time></span></div><div class=content>infograpify</div><div class=post-footer>
+<a href=/posts/site/useful-design-site/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/design/>design</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/errors/>errors</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-23>2021-11-23</time></span></div><div class=content>#As func As(err error, target interface{}) bool
+第一個參數是現在拿到的 error
+會透過呼叫 Unwrap 來比對 err 的第一個錯誤是否和 target 相同 如果對的話，會把 target 設定為 err 並回傳 true 否則回傳 false
+範例
+err := dec.Decode(dst) if err != nil { var syntaxError *json.SyntaxError switch { case errors.As(err, &syntaxError): return fmt.Errorf("body contains badly-formed JSON (at character %d)", syntaxError.Offset) default: return err } } #Is func Is(err error, target error) bool
+第一個參數是現在拿到的 error 第二個參數是想要比對的特定 error
+比對方式是透過呼叫 Unwrap 逐一拆解來比對是否包含 特定的 error</div><div class=post-footer>
+<a href=/posts/golang/packages/errors/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/packages/json/>json</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -139,40 +169,6 @@ P piece sth together 拼合；湊集
 R rule of thumb 經驗法則
 T the nuts and bolts 實質性內容</div><div class=post-footer>
 <a href=/posts/dictionary/en-phrase-dictionary/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/linux-cmd/>Linux Cmd</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-14>2021-11-14</time></span></div><div class=content>find 搜尋檔案
-# 在 當前資料夾 下對 檔案名稱 *_spec.rb 做搜尋 $ find . -name "*_spec.rb" export 設定環境變數
-# 環境變數 設定資料庫連線 DSN $ export GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?sslmode=disable' # 列出環境變數 $ export -p df 顯示硬碟使用量
-short for disk free
-Filesystem: 檔案系統 Size: 總容量 Used: 已用容量 Avail: 剩餘容量 Use%: 已用百分比 Mounted on: 掛載點
-# -h 以容易識別的格式顯示硬碟空間使用量 $ df -h # -T 顯示每個分割區所屬的檔案系統名稱 $ df -T free 顯示記憶體使用情況
-# -m 以 MB 作為單位顯示 $ free -m curl 可以用來做連線資料傳輸</div><div class=post-footer>
-<a href=/posts/programming/linux-cmd/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/postgresql/>PostgreSQL</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-14>2021-11-14</time></span></div><div class=content>介紹 登入機制 peer authentication: 登入過一次後，就不用再驗證，可以直接輸入 psql 進入 cli 模式
-password-based authentication: 要輸入密碼才可以登入的驗證
-指令 Meta command 在 PostgreSQL 的指令，以 \ 為 meta command， 以提供一些有用的操作
--- see the full list of available meta commands \?-- list all databases \l-- list tables \dt-- list users \du-- list of all available configurations \dF安裝 extension 安裝 citext 的擴充功能
-CREATEEXTENSIONIFNOTEXISTScitext;建立使用者 建立名為 greenlight 且密碼為 pa55word 的帳號
-CREATEROLEgreenlightWITHLOGINPASSWORD'pa55word';查看使用者 \du使用者登入 登入 greenlight 角色 需要登入密碼的話會跳出輸入提示
-psql --host=localhost --dbname=greenlight --username=greenlight 刪除使用者 在 SHELL 直接輸入指令</div><div class=post-footer>
-<a href=/posts/programming/postgresql/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/dictionary/en-conj-dictionary/>英文: 連接詞</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-14>2021-11-14</time></span></div><div class=content>A albeit 雖然；儘管
-W whereas 儘管；但是；卻</div><div class=post-footer>
-<a href=/posts/dictionary/en-conj-dictionary/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
