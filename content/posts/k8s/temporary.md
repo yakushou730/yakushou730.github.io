@@ -55,3 +55,74 @@ kubectx <alias context name>
 ```shell
 kubectl exec -it <pod name> -- sh
 ```
+
+## 顯示 cluster 資訊
+```shell
+kubectl cluster-info
+```
+
+## 取得 node 資訊
+```shell
+# -o wide 是 output in the plain-text format with any additional information.
+kubectl get nodes -o wide
+```
+
+## 查看 k8s 版本資訊
+```shell
+kubectl version
+```
+
+## 查看 node 資訊
+```shell
+kubectl describe nodes <node name>
+```
+
+## PODs
+- container 不會直接被放到 node 內
+- 是透過封裝在 pod 裡面才被放到 node
+- 一個 pod 是一個單一的 application (通常是一對一)
+  - 但還是可以在一個 pod 裡面放多個 container (一起建立/一起銷毀)
+- pod 是在 k8s 內可以建立的最小單位
+- 負載量過大的時候會以 pod 為單位創建新的 application
+
+指令:
+```shell
+# 從 dockerhub 拉下 nginx image 並執行成 名為 nginx 的 pod
+kubectl run nginx --image nginx
+# 取得 pods 列表
+kubectl get pods
+# 取得特定 pod 的詳細描述
+kubectl describe pod <pod name>
+# 直接連同 deployment 一起建立
+kubectl create deployment nginx --image=nginx
+# 刪除 pod
+kubectl delete pod <pod name>
+# 透過檔案建立 pod
+kubectl create -f <file name>
+# 透過基本旗標建立 pod yaml
+kubectl run <container name> --image=<image name> --dry-run=client -o yaml > <taget yaml file name> 
+# 套用 yaml 檔案
+kubectl apply -f <file name>
+```
+
+## Replications controller & ReplicaSets
+讓 pods 可以執行特定數量，如果掛掉的話可以重啟回固定數量
+
+有點像是把 Pod 包起來的概念，Replication controller 會固定在內部的 pod 數量
+
+- Scaling
+  - Replication Controller 支援跨 nodes，即可以控管多數個 nodes 總共需要幾個固定數量的 pods
+- Load Balancing
+  - Replication Controller 也做 Load balancing，把流量導去不同的 pods
+
+ReplicaSet 要取代舊式的 Replication Controller
+
+## Deployments
+把新版本的 image 部署到 node 上
+
+可以做 rolling update / rollback
+
+Deployment 可以視為更大的範圍(集合)，包含了 Replica Set 在裡面
+
+
+
