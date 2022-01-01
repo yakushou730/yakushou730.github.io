@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/web-development/><link rel=prev href=https://blog.yakushou.com/posts/golang/slice/><link rel=next href=https://blog.yakushou.com/posts/golang/signal/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Web Development","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/web-development\/"},"genre":"posts","keywords":"programming","wordcount":174,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/web-development\/","datePublished":"2021-11-17T16:45:33+08:00","dateModified":"2021-11-17T16:45:33+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Web Development"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Web Development","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/web-development\/"},"genre":"posts","keywords":"programming","wordcount":201,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/web-development\/","datePublished":"2021-11-17T16:45:33+08:00","dateModified":"2021-11-17T16:45:33+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Web Development"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-17>2021-11-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-17>2021-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;174 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-17>2021-11-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-17>2021-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;201 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -73,6 +73,7 @@
 <li><a href=#web-url-encoding>web url encoding</a></li>
 <li><a href=#user-enumeration>user enumeration</a></li>
 <li><a href=#cors>CORS</a></li>
+<li><a href=#nat-network-address-translation>NAT (Network Address Translation)</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=web-url-encoding>web url encoding</h2>
@@ -146,6 +147,27 @@
 <li><code>Access-Control-Allow-Methods</code> 列出可以用來給真正 CORS request 的 HTTP methods</li>
 <li><code>Access-Control-Allow-Headers</code> 列出可以被包含在真正 CORS request 的 Headers</li>
 </ul>
+<h2 id=nat-network-address-translation>NAT (Network Address Translation)</h2>
+<p>NAT 伺服器 連接外網和內網的中間部分，擔任 IP 轉譯</p>
+<p>將外網進來的封包更改 IP 位址 (才對得到內部的 ip)</p>
+<p>功能:</p>
+<ul>
+<li>封包偽裝 (IP masquerade)
+<ul>
+<li>這樣外部的人就不知道內部 IP 的分配，增加安全性</li>
+</ul>
+</li>
+<li>封包過濾
+<ul>
+<li>可以預先過濾掉哪些封包可以進入</li>
+</ul>
+</li>
+<li>平衡負載
+<ul>
+<li>透過修改進入的 IP 來分配封包到不同的服務，達到負載平衡</li>
+</ul>
+</li>
+</ul>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
@@ -174,7 +196,7 @@
 </article></div>
 </main><footer class=footer>
 <div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
-</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
 </div></footer></div>
 <div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
 <i class="fas fa-arrow-up fa-fw"></i>

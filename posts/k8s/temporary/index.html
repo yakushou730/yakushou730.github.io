@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/temporary/><link rel=prev href=https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/mapping-and-analysis/><link rel=next href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"temporary","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/temporary\/"},"genre":"posts","keywords":"programming, k8s","wordcount":318,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/temporary\/","datePublished":"2021-12-24T11:28:29+08:00","dateModified":"2021-12-24T11:28:29+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"temporary"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"temporary","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/temporary\/"},"genre":"posts","keywords":"programming, k8s","wordcount":593,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/temporary\/","datePublished":"2021-12-24T11:28:29+08:00","dateModified":"2021-12-24T11:28:29+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"temporary"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;318 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;593 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -82,6 +82,9 @@
 <li><a href=#pods>PODs</a></li>
 <li><a href=#replications-controller--replicasets>Replications controller & ReplicaSets</a></li>
 <li><a href=#deployments>Deployments</a></li>
+<li><a href=#deployment-updates-and-rollback>Deployment Updates and Rollback</a></li>
+<li><a href=#network-101>Network 101</a></li>
+<li><a href=#service>Service</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=從-aws-eks-下載-k8s-config>從 AWS EKS 下載 k8s config</h2>
@@ -174,6 +177,112 @@ kubectl apply -f &lt;file name&gt;
 <p>把新版本的 image 部署到 node 上</p>
 <p>可以做 rolling update / rollback</p>
 <p>Deployment 可以視為更大的範圍(集合)，包含了 Replica Set 在裡面</p>
+<h2 id=deployment-updates-and-rollback>Deployment Updates and Rollback</h2>
+<p>建立 deployment 的時候，會觸發 rollout</p>
+<p>一個新的 rollout 會建立一個新的 deployment revision</p>
+<p>(例: 第一次發布為 revision 1，第二次發布為 revision 2)</p>
+<p>revision 可以作為進版或退版的版本</p>
+<p>指令:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 查看特定 deployment 的 rollout 狀態</span>
+kubectl rollout status deployment/&lt;deployment name&gt;
+<span class=c1># 查看特定 deployment 的 rollout 歷史紀錄</span>
+kubectl rollout <span class=nb>history</span> deployment/&lt;deployment name&gt;
+</code></pre></div><ul>
+<li>Deployment strategy
+<ul>
+<li>recreate
+<ul>
+<li>舊版全下 接著新版全上</li>
+<li>會有 downtime</li>
+</ul>
+</li>
+<li>rolling update (default)
+<ul>
+<li>舊的下一個 接著上一個新的</li>
+<li>一個一個更新</li>
+<li>實際是會產生一個新的 ReplicaSet，然後舊的 ReplicaSet下架舊的 Pod，並在新的 ReplicaSet 上架新的 Pod</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 使用新的 yaml 檔案來觸發新的 rollout</span>
+<span class=c1># 且建立新版的 deployment</span>
+kubectl apply -f deployment-definition.yaml
+<span class=c1># 直接變更 image (會導致 yaml 和實際的物件對不起來)</span>
+kubectl get image deployment/&lt;deployment name&gt; &lt;container name&gt;<span class=o>=</span>&lt;new image name&gt;
+<span class=c1># rollback</span>
+kubectl rollout undo deployment/&lt;deployment name&gt;
+<span class=c1># 如果要在 rollout history 顯示 CHANGE-CAUSE 的話，要補 record flag</span>
+kubectl create -f &lt;deployment file name&gt; --record
+</code></pre></div><h2 id=network-101>Network 101</h2>
+<ul>
+<li>每個 Pod 都會被給予一個 IP address
+<ul>
+<li>但是要避免 private IP conflict (要自己另外處理)</li>
+</ul>
+</li>
+<li>k8s 預期我們需要自己完成的項目
+<ul>
+<li>所有的 container / pod 都不透過 NAT 達到互相溝通</li>
+<li>所有的 nodes 也可以和 containers 不透過 NAT 達到互相溝通</li>
+<li>可以使用的 solution 套件
+<ul>
+<li>Cisco ACI network</li>
+<li>Cilium</li>
+<li>Big Cloud Fabric</li>
+<li>Flannel</li>
+<li>VMWare NSX-T</li>
+<li>Calico</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id=service>Service</h2>
+<p>k8s 的 service 用來協調 外部和內部 application 的溝通</p>
+<ul>
+<li>Type
+<ul>
+<li>NoePort</li>
+<li>ClusterIP</li>
+<li>LoadBalancer</li>
+</ul>
+</li>
+</ul>
+<p><strong>NodePort</strong></p>
+<ul>
+<li>意思是在 Node上面開一個 Port，可以從外部對應到內部的 pod</li>
+<li>可以設定 mapping 給 Node port 對 Pod port</li>
+<li>以 service 的觀點來看的對應
+<ul>
+<li>service 就像是一個 node 內的 virtual server，在 cluster 內有他自己的 IP address <code>ClusterIP</code></li>
+<li>Pod 上面預期 request 進入的 port 稱為 <code>TargetPort</code></li>
+<li>Service 上對應給 TargetPort 的 port 稱為 <code>Port</code></li>
+<li>開在 Node 上的 port 稱為 <code>NodePort</code>，有範圍限制，default 為 30000 ~ 32767</li>
+</ul>
+</li>
+<li>在相同的 node 內的相同 pod，因為 label 一樣，所以 service 會隨機導進流量</li>
+<li>不同 node 的話，開的 node port 設定一樣的話，service 仍可以共用</li>
+</ul>
+<p><strong>ClusterIP</strong></p>
+<ul>
+<li>
+<p>在 Cluster 內建立一個 virtual IP，讓內部的 pods 間可以溝通</p>
+</li>
+<li>
+<p>比如說有一個 backend group 裡面都是 backend pod，以及一個 frontend group 裡面都是 frontend pots</p>
+<p>在這兩個 group 之間，需要透過 ClusterIP service 來做通訊</p>
+</li>
+</ul>
+<p><strong>LoadBalancer</strong></p>
+<ul>
+<li>對 application 提供 Load Balancer</li>
+<li>LoadBalancer 是掛在 Cluster 等級，用來接外部的流量要進哪台 Node</li>
+<li>大部分的 Cloud provider 都有提供這功能</li>
+</ul>
+<h1 id=範例>範例</h1>
+<p><img class=lazyload data-src=/k8s/k8s-docker-architecture-sample.jpg data-srcset="/k8s/k8s-docker-architecture-sample.jpg, /k8s/k8s-docker-architecture-sample.jpg 1.5x, /k8s/k8s-docker-architecture-sample.jpg 2x" data-sizes=auto alt=/k8s/k8s-docker-architecture-sample.jpg title=k8s-docker-architecture-sample></p>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
@@ -202,7 +311,7 @@ kubectl apply -f &lt;file name&gt;
 </article></div>
 </main><footer class=footer>
 <div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
-</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
 </div></footer></div>
 <div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
 <i class="fas fa-arrow-up fa-fw"></i>

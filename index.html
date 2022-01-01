@@ -60,9 +60,10 @@
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-28>2021-12-28</time></span></div><div class=content>General YAML template 必要的 4 個欄位
-apiVersion:# 要用來建立物件的 k8s API 版本 kind:# 要建立的物件metadata:# 物件的其他資訊，如 name, labels...spec:# 建立物件需要的訊息 apiVersion (string) POD: v1 Service: v1 ReplicaSet: apps/v1 Deployment: apps/v1 kind (string) Pod Service ReplicaSet Deployment metadata (dictionary) name labels labels 下的 key/value 值是可以自訂的 spec (dictionary) POD with YAML pod-definition.yaml
+apiVersion:# 要用來建立物件的 k8s API 版本 kind:# 要建立的物件metadata:# 物件的其他資訊，如 name, labels...spec:# 建立物件需要的訊息 apiVersion (string) POD: v1 Service: v1 ReplicaSet: apps/v1 Deployment: apps/v1 kind (string) Pod Service ReplicaSet Deployment metadata (dictionary) name labels labels 下的 key/value 值是可以自訂的 spec (dictionary) 指令:
+# 可以看介紹 kubectl explain &lt;k8s kind> POD with YAML pod-definition.yaml
 apiVersion:v1kind:Podmetadata:name:myapp-podlabels:app:myapptype:front-endspec:containers:- name:nginx-containerimage:nginx指令
-# 建立 kubectl create -f pod-definition.yaml # list kubectl get pods kubectl get po Replication Controller with YAML rc-definition.</div><div class=post-footer>
+# 建立 kubectl create -f pod-definition.</div><div class=post-footer>
 <a href=/posts/k8s/yaml-files/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
@@ -169,7 +170,7 @@ GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?sslmode=disable' 
 </li></ul></div></div>
 </main><footer class=footer>
 <div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
-</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2021</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
 </div></footer></div>
 <div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
 <i class="fas fa-arrow-up fa-fw"></i>
