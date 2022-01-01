@@ -32,7 +32,12 @@ spec: # 建立物件需要的訊息
   - labels
     - labels 下的 key/value 值是可以自訂的
 - spec (dictionary)
-- 
+
+指令:
+```shell
+# 可以看介紹
+kubectl explain <k8s kind>
+```
 
 ## POD with YAML
 pod-definition.yaml
@@ -170,9 +175,68 @@ spec:
 kubectl create -f deployment-definition.yaml
 # list
 kubectl get deployments
+kubectl get deploy
 # 因為 deployment 會自動建立 replicaset，所以可以順便看一下
 kubectl get replicaset
 kubectl get pods
 # 列出全部項目
 kubectl get all
+```
+
+## Service with YAML
+service-definition.yaml
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 80
+      nodePort: 30008
+  selector: # 這邊放的是對應的 pod 的 labels
+    app: myapp
+    type: front-end 
+```
+
+指令
+```shell
+# create
+kubectl create -f service-definition.yaml
+# list
+kubectl get services
+kubectl get svc
+```
+
+ClusterIP service 的 YAML
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: back-end
+spec:
+  type: ClusterIP
+  ports:
+    - targetPort: 80 # backend pod 的 port
+      port: 80 # 要進這個 service 的 port
+  selector: # 這邊放的是對應的 pod 的 labels
+    app: myapp
+    type: backend-end 
+```
+
+LoadBalancer service 的 YAML
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service 
+spec:
+  type: LoadBalancer
+  ports:
+    - targetPort: 80 # backend pod 的 port
+      port: 80 # 要進這個 service 的 port
+      nodePort: 30008
 ```

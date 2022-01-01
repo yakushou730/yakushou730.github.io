@@ -124,5 +124,88 @@ ReplicaSet 要取代舊式的 Replication Controller
 
 Deployment 可以視為更大的範圍(集合)，包含了 Replica Set 在裡面
 
+## Deployment Updates and Rollback
+建立 deployment 的時候，會觸發 rollout
+
+一個新的 rollout 會建立一個新的 deployment revision
+
+(例: 第一次發布為 revision 1，第二次發布為 revision 2)
+
+revision 可以作為進版或退版的版本
+
+指令:
+```shell
+# 查看特定 deployment 的 rollout 狀態
+kubectl rollout status deployment/<deployment name>
+# 查看特定 deployment 的 rollout 歷史紀錄
+kubectl rollout history deployment/<deployment name>
+```
+
+- Deployment strategy
+  - recreate
+    - 舊版全下 接著新版全上
+    - 會有 downtime
+  - rolling update (default)
+    - 舊的下一個 接著上一個新的
+    - 一個一個更新
+    - 實際是會產生一個新的 ReplicaSet，然後舊的 ReplicaSet下架舊的 Pod，並在新的 ReplicaSet 上架新的 Pod
+
+```shell
+# 使用新的 yaml 檔案來觸發新的 rollout
+# 且建立新版的 deployment
+kubectl apply -f deployment-definition.yaml
+# 直接變更 image (會導致 yaml 和實際的物件對不起來)
+kubectl get image deployment/<deployment name> <container name>=<new image name>
+# rollback
+kubectl rollout undo deployment/<deployment name>
+# 如果要在 rollout history 顯示 CHANGE-CAUSE 的話，要補 record flag
+kubectl create -f <deployment file name> --record
+```
+
+## Network 101
+- 每個 Pod 都會被給予一個 IP address
+  - 但是要避免 private IP conflict (要自己另外處理)
+- k8s 預期我們需要自己完成的項目
+  - 所有的 container / pod 都不透過 NAT 達到互相溝通
+  - 所有的 nodes 也可以和 containers 不透過 NAT 達到互相溝通
+  - 可以使用的 solution 套件
+    - Cisco ACI network
+    - Cilium
+    - Big Cloud Fabric
+    - Flannel
+    - VMWare NSX-T
+    - Calico
+
+## Service
+k8s 的 service 用來協調 外部和內部 application 的溝通
+
+- Type
+  - NoePort
+  - ClusterIP
+  - LoadBalancer
 
 
+**NodePort**
+- 意思是在 Node上面開一個 Port，可以從外部對應到內部的 pod
+- 可以設定 mapping 給 Node port 對 Pod port
+- 以 service 的觀點來看的對應
+  - service 就像是一個 node 內的 virtual server，在 cluster 內有他自己的 IP address `ClusterIP` 
+  - Pod 上面預期 request 進入的 port 稱為 `TargetPort`
+  - Service 上對應給 TargetPort 的 port 稱為 `Port`
+  - 開在 Node 上的 port 稱為 `NodePort`，有範圍限制，default 為 30000 ~ 32767 
+- 在相同的 node 內的相同 pod，因為 label 一樣，所以 service 會隨機導進流量
+- 不同 node 的話，開的 node port 設定一樣的話，service 仍可以共用
+
+**ClusterIP**
+- 在 Cluster 內建立一個 virtual IP，讓內部的 pods 間可以溝通
+- 比如說有一個 backend group 裡面都是 backend pod，以及一個 frontend group 裡面都是 frontend pots
+
+  在這兩個 group 之間，需要透過 ClusterIP service 來做通訊
+
+**LoadBalancer**
+- 對 application 提供 Load Balancer
+- LoadBalancer 是掛在 Cluster 等級，用來接外部的流量要進哪台 Node
+- 大部分的 Cloud provider 都有提供這功能
+
+# 範例
+![k8s-docker-architecture-sample](/k8s/k8s-docker-architecture-sample.jpg)

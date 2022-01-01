@@ -78,3 +78,16 @@ Preflight 類型的 request (三要件)
 - `Access-Control-Allow-Origin` 值放 preflight request 的 `Origin
 - `Access-Control-Allow-Methods` 列出可以用來給真正 CORS request 的 HTTP methods
 - `Access-Control-Allow-Headers` 列出可以被包含在真正 CORS request 的 Headers
+
+## NAT (Network Address Translation)
+NAT 伺服器 連接外網和內網的中間部分，擔任 IP 轉譯
+
+將外網進來的封包更改 IP 位址 (才對得到內部的 ip)
+
+功能:
+- 封包偽裝 (IP masquerade)
+  - 這樣外部的人就不知道內部 IP 的分配，增加安全性
+- 封包過濾
+  - 可以預先過濾掉哪些封包可以進入
+- 平衡負載
+  - 透過修改進入的 IP 來分配封包到不同的服務，達到負載平衡
