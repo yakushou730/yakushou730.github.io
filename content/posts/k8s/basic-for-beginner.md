@@ -1,8 +1,8 @@
 ---
-title: "temporary"
+title: "basic for beginner"
 authors: [yakushou730]
 date: 2021-12-24T11:28:29+08:00
-description: "temporary"
+description: "basic for beginner"
 tags: ["programming","k8s"]
 draft: false
 ---
@@ -399,3 +399,196 @@ kubectl create -f worker-pod.yaml
 kubectl create -f result-app-pod.yaml
 kubectl create -f result-service.yaml
 ```
+
+## Deploying voting app on K8s with Deployments
+(承上面的範例)
+
+上面的範例可行，但沒辦法 scale
+
+所以這段是要透過 deployment 來做部署
+
+**voting-app-deploy.yaml**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting-app-deploy
+  labels:
+    name: voting-app-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: voting-app-pod
+      app: demo-voting-app
+  template:
+    metadata:
+      name: voting-app-pod
+      labels:
+        name: voting-app-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: voting-app
+          image: kodekloud/examplevotingapp_vote:v1
+          ports:
+            - containerPort: 80
+```
+
+**redis-deploy.yaml**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+  labels:
+    name: redis-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: redis-pod
+      app: demo-voting-app
+  template:
+    metadata:
+      name: redis-pod
+      labels:
+        name: redis-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          ports:
+            - containerPort: 6379
+```
+
+**postgres-deploy.yaml**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deploy
+  labels:
+    name: postgres-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgres-pod
+      app: demo-voting-app
+  template:
+    metadata:
+      name: postgres-pod
+      labels:
+        name: postgres-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+```
+
+**worker-app-deploy.yaml**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-app-deploy
+  labels:
+    name: worker-app-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: worker-app-pod
+      app: demo-voting-app
+  template:
+    metadata:
+      name: worker-app-pod
+      labels:
+        name: worker-app-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: worker-app
+          image: kodekloud/examplevotingapp_worker:v1
+```
+
+**result-app-deploy.yaml**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-app-deploy
+  labels:
+    name: result-app-deploy
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: result-app-pod
+      app: demo-voting-app
+  template:
+    metadata:
+      name: result-app-pod
+      labels:
+        name: result-app-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: result-app
+          image: kodekloud/examplevotingapp_result:v1
+          ports:
+            - containerPort: 80
+```
+
+指令:
+```shell
+kubectl create -f voting-app-deploy.yaml
+kubectl create -f redis-app-deploy.yaml
+kubectl create -f postgres-deploy.yaml
+kubectl create -f result-app-deploy.yaml
+kubectl create -f worker-app-deploy.yaml
+```
+
+## 使用 AWS EKS (Elastic Kubernetes Service)
+需要準備
+- AWS 帳號 (cli 要用的)
+- 安裝 kubectl cli
+- IAM role for Node Group
+- VPC
+- EC2 key pair (for SSH)
+- AWS basics
+
+1. 選擇 EKS 選項
+2. 建立 Cluster
+3. 增加 Node Group (一組 worker nodes)
+4. 在本機設定讓 kubectl 可以操作這個 cluster
+5. 下 aws cli 指令把 cluster 的 kubeconfig 抓下來，即可在本機透過 kubectl 操作
+```shell
+# 下指令把 eks 的 kubeconfig 對應到 local 的 kube 設定
+aws eks --region <region name> update-kubeconfig --name <cluster name>
+# 查看 nodes 資訊
+kubectl get nodes
+# 使用 get svc 上面列的 EXTERNAL-IP 來做連線 (可直接貼到 browser 上)
+kubectl get svc
+```
+
+> 範例中 原本 NodePort service 在上 AWS EKS 以後改成用 LoadBalancer service
+> 
+> 即 EKS 上只有用到 ClusterIP, LoadBalancer 兩種 service
+> 
+> [Reference](https://github.com/kodekloudhub/example-voting-app/tree/master/k8s-specifications)
