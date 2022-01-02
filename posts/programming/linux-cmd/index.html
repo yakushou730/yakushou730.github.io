@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/linux-cmd/><link rel=prev href=https://blog.yakushou.com/posts/programming/postgresql/><link rel=next href=https://blog.yakushou.com/posts/dictionary/en-phrase-dictionary/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux Cmd","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/"},"genre":"posts","keywords":"programming","wordcount":308,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/","datePublished":"2021-11-14T10:55:14+08:00","dateModified":"2021-11-14T10:55:14+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Linux Cmd"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux Cmd","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/"},"genre":"posts","keywords":"programming","wordcount":463,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/","datePublished":"2021-11-14T10:55:14+08:00","dateModified":"2021-11-14T10:55:14+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Linux Cmd"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;308 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;463 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -83,6 +83,22 @@
 <li><a href=#read>read</a></li>
 <li><a href=#ssh>ssh</a></li>
 <li><a href=#ufw>ufw</a></li>
+<li><a href=#echo>echo</a></li>
+<li><a href=#ls>ls</a></li>
+<li><a href=#cd>cd</a></li>
+<li><a href=#pwd>pwd</a></li>
+<li><a href=#mkdir>mkdir</a></li>
+<li><a href=#multiple-commands>multiple commands</a></li>
+<li><a href=#rm>rm</a></li>
+<li><a href=#cp>cp</a></li>
+<li><a href=#touch>touch</a></li>
+<li><a href=#cat>cat</a></li>
+<li><a href=#mv>mv</a></li>
+<li><a href=#whoami>whoami</a></li>
+<li><a href=#id>id</a></li>
+<li><a href=#su>su</a></li>
+<li><a href=#sudo>sudo</a></li>
+<li><a href=#wget>wget</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=find>find</h2>
@@ -136,6 +152,10 @@ $ curl localhost:4000/v1/movies/1 <span class=p>&amp;</span> curl localhost:4000
 
 <span class=c1># 如果有 query params 的話，整段 url 要用雙引號包起來</span>
 $ curl <span class=s2>&#34;localhost:4000/v1/movies?page_size=2&amp;page=2&#34;</span>
+
+<span class=c1># 可以用來下載資料</span>
+<span class=c1># -O flag 是指把 curl 回來的資訊輸出成檔案</span>
+$ curl http://www.some-site.com/some-file.txt -O
 </code></pre></div><h2 id=for>for</h2>
 <p>使用 for loop</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 使用 loop 6次，每次都打 curl</span>
@@ -165,6 +185,8 @@ $ <span class=nb>read</span> -p <span class=s2>&#34;Enter password for root DB u
 </code></pre></div><h2 id=ssh>ssh</h2>
 <p>透過 ssh 連線到遠端機器</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 用 ubuntu 帳號連線至 172.1.1.1</span>
+<span class=c1># ubuntu    -&gt; username</span>
+<span class=c1># 172.1.1.1 -&gt; hostname</span>
 $ ssh ubuntu@172.1.1.1
 </code></pre></div><p>ip 和 username 是可以先寫在 ~/.ssh/config 檔案內的</p>
 <p>範例:</p>
@@ -186,7 +208,68 @@ $ ufw allow 443/tcp
 <span class=c1># 封鎖 port 4000</span>
 $ ufw deny <span class=m>4000</span>
 </code></pre></div><p><a href=http://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html target=_blank rel="noopener noreffer">man page</a></p>
-</div>
+<h2 id=echo>echo</h2>
+<p>印出資訊</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>echo</span> Hi
+</code></pre></div><h2 id=ls>ls</h2>
+<p>列出檔案 / 文件夾</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>ls
+</code></pre></div><h2 id=cd>cd</h2>
+<p>變更當前目錄位置</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>cd</span> &lt;dir&gt;
+</code></pre></div><h2 id=pwd>pwd</h2>
+<p>顯示當前目錄位置</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>pwd</span>
+</code></pre></div><h2 id=mkdir>mkdir</h2>
+<p>建立資料夾</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>mkdir &lt;new directory&gt;
+<span class=c1># -p flag 會把不存在的資料夾一並建出來</span>
+mkdir -p /tmp/asia/india/bangalore
+</code></pre></div><h2 id=multiple-commands>multiple commands</h2>
+<p>一次執行多個指令 (用分號隔開)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>cd</span> &lt;directory&gt;<span class=p>;</span> mkdir &lt;new directory&gt;<span class=p>;</span> <span class=nb>pwd</span> 
+</code></pre></div><h2 id=rm>rm</h2>
+<p>刪除目錄</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># -r flag 是指 recursive，會把目錄底下的東西也全刪了</span>
+rm -r /tmp/my_dir
+</code></pre></div><h2 id=cp>cp</h2>
+<p>複製目錄</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># -r flag 是指 recursive，會把目錄底下的東西也全複製</span>
+cp -r my_dir1 /temp/my_dir1
+<span class=c1># -v flag 會印出做了什麼</span>
+cp -v empty_file.txt empty_dir/
+</code></pre></div><h2 id=touch>touch</h2>
+<p>建立新文件</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>touch new_file.txt
+</code></pre></div><h2 id=cat>cat</h2>
+<p>對文件操作</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 對 new_file.txt 插入文字</span>
+<span class=c1># 用 ctrl+D 可以跳出輸入畫面</span>
+<span class=c1># 其中 &gt; 稱為 redirection symbol</span>
+cat &gt; new_file.txt
+<span class=c1># 印出文件內容</span>
+cat new_file.txt
+</code></pre></div><h2 id=mv>mv</h2>
+<p>move (rename) 檔案</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>mv new_file.txt sample_file.txt
+</code></pre></div><h2 id=whoami>whoami</h2>
+<p>印出當前使用者</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>whoami
+</code></pre></div><h2 id=id>id</h2>
+<p>取得當前使用者的詳細資料</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>id
+</code></pre></div><h2 id=su>su</h2>
+<p>更換使用者 (switch user)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>su &lt;other username&gt;
+</code></pre></div><h2 id=sudo>sudo</h2>
+<p>superuser do</p>
+<p>賦予使用者 root 權限執行指令 (不會切換成 root 使用者)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>sudo &lt;指令&gt;
+</code></pre></div><h2 id=wget>wget</h2>
+<p>下載檔案用的</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># -O flag 是指定輸出名稱</span>
+wget http://www.some-site.com/some-file.tx -O some-file.txt
+</code></pre></div></div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>

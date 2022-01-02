@@ -3,22 +3,22 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
-<title class=pjax-title>software - YakuShou's NOTEBOOK</title><meta name=Description content="software"><meta property="og:title" content="software">
-<meta property="og:description" content="software">
+<title class=pjax-title>basics - YakuShou's NOTEBOOK</title><meta name=Description content="basics"><meta property="og:title" content="basics">
+<meta property="og:description" content="basics">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.yakushou.com/posts/programming/software/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-12-27T18:04:23+08:00">
-<meta property="article:modified_time" content="2021-12-27T18:04:23+08:00">
+<meta property="og:url" content="https://blog.yakushou.com/posts/devops/basics/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-02T09:27:51+08:00">
+<meta property="article:modified_time" content="2022-01-02T09:27:51+08:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="software">
-<meta name=twitter:description content="software">
+<meta name=twitter:title content="basics">
+<meta name=twitter:description content="basics">
 <meta name=application-name content="YakuShou's NOTEBOOK">
 <meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
 <meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/software/><link rel=prev href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=next href=https://blog.yakushou.com/posts/k8s/concepts/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/devops/basics/><link rel=prev href=https://blog.yakushou.com/posts/k8s/yaml-files/><link rel=next href=https://blog.yakushou.com/posts/programming/git/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"software","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/software\/"},"genre":"posts","keywords":"programming","wordcount":145,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/software\/","datePublished":"2021-12-27T18:04:23+08:00","dateModified":"2021-12-27T18:04:23+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"software"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"basics","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/devops\/basics\/"},"genre":"posts","keywords":"programming, devops","wordcount":18,"url":"https:\/\/blog.yakushou.com\/posts\/devops\/basics\/","datePublished":"2022-01-02T09:27:51+08:00","dateModified":"2022-01-02T09:27:51+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"basics"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -57,11 +57,11 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>Contents</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">software</h1><div class=post-meta>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">basics</h1><div class=post-meta>
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;145 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;18 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -70,57 +70,23 @@
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#declarative-vs-imperative-language>Declarative vs imperative language</a></li>
-<li><a href=#repository-pattern>Repository Pattern</a></li>
+<li><a href=#environment-variable>Environment variable</a></li>
+<li><a href=#確認-os-version>確認 OS Version</a></li>
 </ul>
 </nav></div>
-</div><div class=content id=content><h2 id=declarative-vs-imperative-language>Declarative vs imperative language</h2>
-<p>Declarative programming (宣告式)</p>
-<ul>
-<li><strong>What</strong></li>
-<li>代表為 functional programming</li>
-<li>(function 之間不會互相共用狀態)</li>
-<li>程式碼通常是可以直接看到在做什麼 (重視 what)</li>
-</ul>
-<p>Imperative programming (命令式)</p>
-<ul>
-<li><strong>how to do</strong></li>
-<li>代表為 OOP</li>
-<li>(狀態互相依賴)</li>
-<li>看得見邏輯運算過程 (how to do)</li>
-</ul>
-<h2 id=repository-pattern>Repository Pattern</h2>
-<p>Repository Pattern 是在 domain 和 data mapping 的中間層</p>
-<p>透過 collection-like 的 interface 來存取 domain object</p>
-<p>換句話說可以是 application 和 data access logic 的中間層</p>
-<p>好處:</p>
-<ul>
-<li>修改邏輯的時候只要改一個地方</li>
-<li>測試 controller 變簡單了，不用真實存取資料庫資料</li>
-</ul>
-<p>舉例:
-EmployeeController -> Employee Repository -> SQL server Database</p>
-<p>EmployeeController 提供 API action</p>
-<p>Employee Repository 提供存取資料的 interface，如 GetAll(), GetByID(), Insert(), Update(), Delete()</p>
-<p>然後對 Repository 的介面另外實作如何存取 data (可以區分 mysql, postgres&mldr;)</p>
-<p>實作上 domain model 不需要知道 data store 的資訊或 tag，就是個單純有商業邏輯的 entity</p>
-<p>會另外開一個 data transfer object，用來做資料庫對應 entity 的實作，不需要商業邏輯</p>
-<p>範例:</p>
-<p>使用 repository pattern 取得 movie 資料</p>
-<ol>
-<li>有一個 movie model，只用來作為 entity 的資料</li>
-<li>有一個 movieRepository 的 interface，裡面定義了操作資料庫的 method</li>
-<li>實作 mysqlRepository 或 postgresRepository 實例，滿足 movieRepository interface</li>
-<li>server 啟動的時候，設定操作資料庫的 movieRepository 是哪種實例</li>
-<li>handler 內可以對對應的實例可以呼叫 method 來取得資料，並傳回 domain entity</li>
-<li>在 handler 內把傳回的 domain entity 包成 JSON response 傳出</li>
-</ol>
-</div>
+</div><div class=content id=content><h2 id=environment-variable>Environment variable</h2>
+<pre tabindex=0><code>SHELL: 系統使用了哪種 shell
+</code></pre><h2 id=確認-os-version>確認 OS Version</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 印出所有 release 版本</span>
+ls /etc/*release*
+<span class=c1># 印出當前版本細節</span>
+cat /etc/*release*
+</code></pre></div></div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>Updated on 2021-12-27</span>
+<span>Updated on 2022-01-02</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -132,13 +98,13 @@ EmployeeController -> Employee Repository -> SQL server Database</p>
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/posts/golang/fundamental/ class=prev rel=prev title=fundamental><i class="fas fa-angle-left fa-fw"></i>fundamental</a>
-<a href=/posts/k8s/concepts/ class=next rel=next title=concepts>concepts<i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/posts/k8s/yaml-files/ class=prev rel=prev title="YAML Files"><i class="fas fa-angle-left fa-fw"></i>YAML Files</a>
+<a href=/posts/programming/git/ class=next rel=next title=git>git<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>
