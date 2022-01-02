@@ -83,6 +83,10 @@ $ curl localhost:4000/v1/movies/1 & curl localhost:4000/v1/movies/1 &
 
 # 如果有 query params 的話，整段 url 要用雙引號包起來
 $ curl "localhost:4000/v1/movies?page_size=2&page=2"
+
+# 可以用來下載資料
+# -O flag 是指把 curl 回來的資訊輸出成檔案
+$ curl http://www.some-site.com/some-file.txt -O
 ```
 
 ## for
@@ -148,6 +152,8 @@ $ read -p "Enter password for root DB user" PASSWORD
 
 ```shell
 # 用 ubuntu 帳號連線至 172.1.1.1
+# ubuntu    -> username
+# 172.1.1.1 -> hostname
 $ ssh ubuntu@172.1.1.1
 ```
 
@@ -186,4 +192,119 @@ $ ufw deny 4000
 ```
 
 [man page](http://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html)
+
+## echo
+印出資訊
+
+```shell
+echo Hi
+```
+
+## ls
+列出檔案 / 文件夾
+```shell
+ls
+```
+
+## cd
+變更當前目錄位置
+```shell
+cd <dir>
+```
+
+## pwd
+顯示當前目錄位置
+```shell
+pwd
+```
+
+## mkdir
+建立資料夾
+```shell
+mkdir <new directory>
+# -p flag 會把不存在的資料夾一並建出來
+mkdir -p /tmp/asia/india/bangalore
+```
+
+## multiple commands
+一次執行多個指令 (用分號隔開)
+```shell
+cd <directory>; mkdir <new directory>; pwd 
+```
+
+## rm
+刪除目錄
+```shell
+# -r flag 是指 recursive，會把目錄底下的東西也全刪了
+rm -r /tmp/my_dir
+```
+
+## cp
+複製目錄
+```shell
+# -r flag 是指 recursive，會把目錄底下的東西也全複製
+cp -r my_dir1 /temp/my_dir1
+# -v flag 會印出做了什麼
+cp -v empty_file.txt empty_dir/
+```
+
+## touch
+建立新文件
+```shell
+touch new_file.txt
+```
+
+## cat
+對文件操作
+```shell
+# 對 new_file.txt 插入文字
+# 用 ctrl+D 可以跳出輸入畫面
+# 其中 > 稱為 redirection symbol
+cat > new_file.txt
+# 印出文件內容
+cat new_file.txt
+```
+
+## mv
+move (rename) 檔案
+```shell
+mv new_file.txt sample_file.txt
+```
+
+## whoami
+印出當前使用者
+```shell
+whoami
+```
+
+## id
+取得當前使用者的詳細資料
+```shell
+id
+```
+
+## su
+更換使用者 (switch user)
+
+```shell
+su <other username>
+```
+
+## sudo
+superuser do
+
+賦予使用者 root 權限執行指令 (不會切換成 root 使用者)
+```shell
+sudo <指令>
+```
+
+## wget
+下載檔案用的
+```shell
+# -O flag 是指定輸出名稱
+wget http://www.some-site.com/some-file.tx -O some-file.txt
+```
+
+
+
 
