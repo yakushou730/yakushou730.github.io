@@ -3,22 +3,22 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
-<title class=pjax-title>git - YakuShou's NOTEBOOK</title><meta name=Description content="git"><meta property="og:title" content="git">
-<meta property="og:description" content="git">
+<title class=pjax-title>gitops - YakuShou's NOTEBOOK</title><meta name=Description content="gitops"><meta property="og:title" content="gitops">
+<meta property="og:description" content="gitops">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.yakushou.com/posts/programming/git/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-01-02T09:35:24+08:00">
-<meta property="article:modified_time" content="2022-01-02T09:35:24+08:00">
+<meta property="og:url" content="https://blog.yakushou.com/posts/devops/gitops/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-02T22:41:12+08:00">
+<meta property="article:modified_time" content="2022-01-02T22:41:12+08:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="git">
-<meta name=twitter:description content="git">
+<meta name=twitter:title content="gitops">
+<meta name=twitter:description content="gitops">
 <meta name=application-name content="YakuShou's NOTEBOOK">
 <meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
 <meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/git/><link rel=prev href=https://blog.yakushou.com/posts/devops/basics/><link rel=next href=https://blog.yakushou.com/posts/devops/flux/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/devops/gitops/><link rel=prev href=https://blog.yakushou.com/posts/devops/flux/><link rel=next href=https://blog.yakushou.com/posts/k8s/kind/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"git","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/git\/"},"genre":"posts","keywords":"programming, git","wordcount":0,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/git\/","datePublished":"2022-01-02T09:35:24+08:00","dateModified":"2022-01-02T09:35:24+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"git"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"gitops","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/devops\/gitops\/"},"genre":"posts","keywords":"programming, devops","wordcount":106,"url":"https:\/\/blog.yakushou.com\/posts\/devops\/gitops\/","datePublished":"2022-01-02T22:41:12+08:00","dateModified":"2022-01-02T22:41:12+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"gitops"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -57,19 +57,73 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>Contents</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">git</h1><div class=post-meta>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">gitops</h1><div class=post-meta>
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;0 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;0 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;106 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div>
-</div><div class=content id=content></div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#what-is-gitops>What is GitOps</a></li>
+<li><a href=#gitops-flow>GitOps flow</a></li>
+<li><a href=#push-vs-pull-model>Push vs Pull model</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h2 id=what-is-gitops>What is GitOps</h2>
+<p>為了避免手動 deploy 而提出的解決方案</p>
+<p>Infrastructure as Code 提倡後，大家會把 infrastructure 寫成 code 以後管控</p>
+<p>但是針對變更 infrastructure 仍然後是在本機安裝工具後手動變更 (ex: ansible / terraform&mldr;)</p>
+<p>GitOps 提倡一切 (infrastructure/network/policy/configuration/security&mldr;) 都以 YAML 的形式放在 git 上，並且透過 PR 自動更新資源</p>
+<h2 id=gitops-flow>GitOps flow</h2>
+<ol>
+<li>Create Pull/Merge Request
+<ul>
+<li>任何人都可以發 PR，大家可以 review</li>
+</ul>
+</li>
+<li>Run CI pipeline
+<ul>
+<li>驗證 configuration files</li>
+<li>跑自動化測試</li>
+</ul>
+</li>
+<li>Approve Changes
+<ul>
+<li>到這步代表 code 是經過測試以及 well reviewed</li>
+</ul>
+</li>
+<li>Run CD Pipeline
+<ul>
+<li>merge 回 main 以後觸發 CD pipeline</li>
+<li>部署到 aws/k8s&mldr;等等</li>
+</ul>
+</li>
+</ol>
+<p>優點:</p>
+<ul>
+<li>自動程序</li>
+<li>整個環節是透明的</li>
+<li>良好品質</li>
+</ul>
+<h2 id=push-vs-pull-model>Push vs Pull model</h2>
+<p>Push Deployment</p>
+<ul>
+<li>傳統方式，在 CI/CD 過了以後主動去做 deploy</li>
+<li><strong>push</strong> to environment</li>
+</ul>
+<p>Pull Deployment</p>
+<ul>
+<li>在 environment 上面安裝 Agent (ex: k8s cluster)</li>
+<li>Agent 會從 git repository 拉下來做 deploy</li>
+<li>Agent 會比對當前的 actual state 和 git repository 上的 desired state</li>
+</ul>
+</div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
@@ -86,13 +140,13 @@
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/git/>git</a></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/posts/devops/basics/ class=prev rel=prev title=basics><i class="fas fa-angle-left fa-fw"></i>basics</a>
-<a href=/posts/devops/flux/ class=next rel=next title=flux>flux<i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/posts/devops/flux/ class=prev rel=prev title=flux><i class="fas fa-angle-left fa-fw"></i>flux</a>
+<a href=/posts/k8s/kind/ class=next rel=next title=kind>kind<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>
