@@ -52,12 +52,18 @@ k8s 是一種容器編排技術，用於協調數百個對象的部署和管理 
           - apiserver 收到後更新到 etcd
           - node controller 實現管理和監控 node 資訊
         - resourceQuota controller
-          - 用來
+          - 用來管理使用的資源不要超過設定
         - namespace controller
+          - 用戶透過 apiserver 可以建立新的 namespace，存於 etcd
         - service account controller
+          - 確保 default 的 ServiceAccount 在每個 namespace 中都存在
         - token controller
+          - 用來監聽 service account 的建立/刪除 和 監聽 secret 的增加/刪除
         - service controller
+          - 監聽 service 的變化
         - endpoint controller
+          - endpoint 表示了 service 對應的所有 pod 副本的位址
+          - 而 endpoint controller 是負責生成和維護所有 endpoints 的控制器，保證 service 到 pod 的對應總是最新的
       - orchestration 的大腦，在 nodes / containers 發生故障時發出通知和回應
       - 決定是否建立新的 container
     - scheduler
@@ -69,3 +75,38 @@ k8s 是一種容器編排技術，用於協調數百個對象的部署和管理 
   - 會安裝 scheduler
 - worker 上
   - 會安裝 kubelet 和 master 溝通
+
+## k8s component 的 kind 種類
+**ConfigMap**
+
+指 系統相關設定的 key-value pair
+
+讓 app pod 和 設定 分開，達到 decouple
+- pod 需要 configMap 的時候再掛載來用就好
+
+**CronJob**
+
+K8s 的排程
+
+> k8s 中最小單位是 pod
+> 
+> 所以
+> 
+> CronJob 在使用的時候也會產生對應的 pod
+
+**Deployment**
+
+Deployment 負責管理 ReplicaSet 和 Pod 的更新
+
+**Service**
+
+Service 是用來建立一個網路連線可以連到 pod
+
+**Secret**
+
+把敏感資訊以 `非明碼的方式` 放在 k8s 上
+- 資料庫帳密
+- access token
+- ssh key...等等
+
+k8s 可以把 secrets 當作環境變數來使用
