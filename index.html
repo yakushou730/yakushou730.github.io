@@ -56,6 +56,13 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/k8s/helm/>helm</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-06>2022-01-06</time></span></div><div class=content>helm</div><div class=post-footer>
+<a href=/posts/k8s/helm/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/k8s/kind/>kind</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -95,7 +102,9 @@ Flux 提供 GitOps for apps 和 infrastructure Flux 和 Flagger 提供 canaries/
 <a href=/posts/devops/basics/>basics</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-02>2022-01-02</time></span></div><div class=content>Environment variable SHELL: 系統使用了哪種 shell 確認 OS Version # 印出所有 release 版本 ls /etc/*release* # 印出當前版本細節 cat /etc/*release* </div><div class=post-footer>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-02>2022-01-02</time></span></div><div class=content>Environment variable SHELL: 系統使用了哪種 shell 確認 OS Version # 印出所有 release 版本 # * 是指 wildcard ls /etc/*release* # 印出當前版本細節 cat /etc/*release* package managers RPM (Red Hat Package Manager)
+RPM 不管 dependency CentOS Red Hat Enterprise Linux Fedora package 會被包裝成 &lt;檔名>.rpm
+# install package rpm -i telnet.rpm # uninstall package rpm -e telnet.rpm # query package rpm -q telnet.rpm # query all installed package rpm -qa YUM 包裝過 rpm，會順便安裝 dependency</div><div class=post-footer>
 <a href=/posts/devops/basics/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
@@ -115,7 +124,7 @@ apiVersion:v1kind:Podmetadata:name:myapp-podlabels:app:myapptype:front-endspec:c
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-28>2021-12-28</time></span></div><div class=content>概念 Container + Orchestration
 k8s 是一種容器編排技術，用於協調數百個對象的部署和管理 cluster 中的數千個容器
-VM vs Docker VM 是在 原本的 OS 上，再額外起來的完整的虛擬機器，具有完整的虛擬 OS 每個 VM 裡面除了 OS 外還有各自的 libs 和 deps 動輒以 GB 為單位 啟動速度慢 Docker 是基於原本的內核，起起來的 container libs 和 deps 在各自容器內 大約以 MB 為單位 啟動速度快 術語 node (minion) 安裝了 k8s 的機器，container 會起在這上面 cluster 一組複數個 nodes ( 1 個 master / 多個 worker) 會有一台 master node，負責監管和負責流程編排 node 上 的 container components 安裝 k8s 時，會安裝的一些元件 API server 可以作為 k8s 的前端 etcd key-value store 確保 master 間沒有 conflict kubelet 每個 node 都會安裝的 agent 確保 container 可以運作在 node 上 container runtime 用來跑 container 的環境 (ex: Docker) controller orchestration 的大腦，在 nodes / containers 發生故障時發出通知和回應 決定是否建立新的 container scheduler 分配 container 給 nodes master 上 會安裝 kube-apiserver 會安裝 etcd 儲存資訊 會安裝 controller 會安裝 scheduler worker 上 會安裝 kubelet 和 master 溝通 </div><div class=post-footer>
+VM vs Docker VM 是在 原本的 OS 上，再額外起來的完整的虛擬機器，具有完整的虛擬 OS 每個 VM 裡面除了 OS 外還有各自的 libs 和 deps 動輒以 GB 為單位 啟動速度慢 Docker 是基於原本的內核，起起來的 container libs 和 deps 在各自容器內 大約以 MB 為單位 啟動速度快 術語 node (minion) 安裝了 k8s 的機器，container 會起在這上面 cluster 一組複數個 nodes ( 1 個 master / 多個 worker) 會有一台 master node，負責監管和負責流程編排 node 上 的 container components 安裝 k8s 時，會安裝的一些元件 API server 可以作為 k8s 的前端 (系統操作入口) 不管是使用者對 k8s 或是 node 對 master 都是透過 apiserver 溝通 唯一可以和 etcd 溝通的元件，其他元件都必須透過 apiserver 才能訪問集群狀態 以 RESTful interface 提供外部或內部組件使用 etcd key-value store 確保 master 間沒有 conflict kubelet 每個 node 都會安裝的 agent 確保 container 可以運作在 node 上 container runtime 用來跑 container 的環境 (ex: Docker) controller manager 負責 k8s cluster 故障檢測和恢復的自動化，執行多種 controller replication controller 定期關聯 replication controller 和 pod，保證 pod 數量正確 node controller kubelet 啟動的時候會通過 apiserver 註冊自己本身節點的資訊，定時向 apiserver 報告狀態 apiserver 收到後更新到 etcd node controller 實現管理和監控 node 資訊 resourceQuota controller 用來管理使用的資源不要超過設定 namespace controller 用戶透過 apiserver 可以建立新的 namespace，存於 etcd service account controller 確保 default 的 ServiceAccount 在每個 namespace 中都存在 token controller 用來監聽 service account 的建立/刪除 和 監聽 secret 的增加/刪除 service controller 監聽 service 的變化 endpoint controller endpoint 表示了 service 對應的所有 pod 副本的位址 而 endpoint controller 是負責生成和維護所有 endpoints 的控制器，保證 service 到 pod 的對應總是最新的 orchestration 的大腦，在 nodes / containers 發生故障時發出通知和回應 決定是否建立新的 container scheduler 分配 container 給 nodes master 上 會安裝 kube-apiserver 會安裝 etcd 儲存資訊 會安裝 controller 會安裝 scheduler worker 上 會安裝 kubelet 和 master 溝通 k8s component 的 kind 種類 ConfigMap</div><div class=post-footer>
 <a href=/posts/k8s/concepts/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
@@ -141,16 +150,6 @@ how to do 代表為 OOP (狀態互相依賴) 看得見邏輯運算過程 (how to
 在個人的 github settings 建立一個可以拉取 private repo 的 token 把 token 記下以後，在本機操作 git cli 用 copy 下來的 token 取代下列的 GITHUB_TOKEN $ git config --global url."https://${GITHUB_TOKEN}@github.com".insteadOf "https://github.com" </div><div class=post-footer>
 <a href=/posts/golang/fundamental/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/k8s/basic-for-beginner/>basic for beginner</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-24>2021-12-24</time></span></div><div class=content>從 AWS EKS 下載 k8s config 範例:
-aws eks --region ap-southeast-1 update-kubeconfig --name &lt;cluster-name> --kubeconfig &lt;the name that we download to local> 載下來的 kube config 如何載入 載下來的 config 可以放到 ~/.kube 內
-然後在 bash profile 設定環境變數 KUBECONFIG
-# k8s config setting export KUBECONFIG=~/.kube/service-prod-config:\ ~/.kube/service-staging-config 使用 context # 取得 context list kubectl config get-contexts # 使用特定 context kubectl config use-context &lt;context name> # 詢問當前 context kubectl config current-context 使用 kubectx 可快速切換 k8s context 的工具</div><div class=post-footer>
-<a href=/posts/k8s/basic-for-beginner/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>

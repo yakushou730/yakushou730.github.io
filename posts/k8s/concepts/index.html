@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/concepts/><link rel=prev href=https://blog.yakushou.com/posts/programming/software/><link rel=next href=https://blog.yakushou.com/posts/k8s/yaml-files/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"concepts","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/concepts\/"},"genre":"posts","keywords":"programming, k8s","wordcount":129,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/concepts\/","datePublished":"2021-12-28T14:35:13+08:00","dateModified":"2021-12-28T14:35:13+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"concepts"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"concepts","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/concepts\/"},"genre":"posts","keywords":"programming, k8s","wordcount":289,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/concepts\/","datePublished":"2021-12-28T14:35:13+08:00","dateModified":"2021-12-28T14:35:13+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"concepts"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-28>2021-12-28</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-28>2021-12-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;129 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-28>2021-12-28</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-28>2021-12-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;289 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -73,6 +73,7 @@
 <li><a href=#概念>概念</a></li>
 <li><a href=#vm-vs-docker>VM vs Docker</a></li>
 <li><a href=#術語>術語</a></li>
+<li><a href=#k8s-component-的-kind-種類>k8s component 的 kind 種類</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=概念>概念</h2>
@@ -114,7 +115,10 @@
 <ul>
 <li>API server
 <ul>
-<li>可以作為 k8s 的前端</li>
+<li>可以作為 k8s 的前端 (系統操作入口)</li>
+<li>不管是使用者對 k8s 或是 node 對 master 都是透過 apiserver 溝通</li>
+<li>唯一可以和 etcd 溝通的元件，其他元件都必須透過 apiserver 才能訪問集群狀態</li>
+<li>以 RESTful interface 提供外部或內部組件使用</li>
 </ul>
 </li>
 <li>etcd
@@ -134,8 +138,55 @@
 <li>用來跑 container 的環境 (ex: Docker)</li>
 </ul>
 </li>
-<li>controller
+<li>controller manager
 <ul>
+<li>負責 k8s cluster 故障檢測和恢復的自動化，執行多種 controller
+<ul>
+<li>replication controller
+<ul>
+<li>定期關聯 replication controller 和 pod，保證 pod 數量正確</li>
+</ul>
+</li>
+<li>node controller
+<ul>
+<li>kubelet 啟動的時候會通過 apiserver 註冊自己本身節點的資訊，定時向 apiserver 報告狀態</li>
+<li>apiserver 收到後更新到 etcd</li>
+<li>node controller 實現管理和監控 node 資訊</li>
+</ul>
+</li>
+<li>resourceQuota controller
+<ul>
+<li>用來管理使用的資源不要超過設定</li>
+</ul>
+</li>
+<li>namespace controller
+<ul>
+<li>用戶透過 apiserver 可以建立新的 namespace，存於 etcd</li>
+</ul>
+</li>
+<li>service account controller
+<ul>
+<li>確保 default 的 ServiceAccount 在每個 namespace 中都存在</li>
+</ul>
+</li>
+<li>token controller
+<ul>
+<li>用來監聽 service account 的建立/刪除 和 監聽 secret 的增加/刪除</li>
+</ul>
+</li>
+<li>service controller
+<ul>
+<li>監聽 service 的變化</li>
+</ul>
+</li>
+<li>endpoint controller
+<ul>
+<li>endpoint 表示了 service 對應的所有 pod 副本的位址</li>
+<li>而 endpoint controller 是負責生成和維護所有 endpoints 的控制器，保證 service 到 pod 的對應總是最新的</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>orchestration 的大腦，在 nodes / containers 發生故障時發出通知和回應</li>
 <li>決定是否建立新的 container</li>
 </ul>
@@ -163,6 +214,32 @@
 </ul>
 </li>
 </ul>
+<h2 id=k8s-component-的-kind-種類>k8s component 的 kind 種類</h2>
+<p><strong>ConfigMap</strong></p>
+<p>指 系統相關設定的 key-value pair</p>
+<p>讓 app pod 和 設定 分開，達到 decouple</p>
+<ul>
+<li>pod 需要 configMap 的時候再掛載來用就好</li>
+</ul>
+<p><strong>CronJob</strong></p>
+<p>K8s 的排程</p>
+<blockquote>
+<p>k8s 中最小單位是 pod</p>
+<p>所以</p>
+<p>CronJob 在使用的時候也會產生對應的 pod</p>
+</blockquote>
+<p><strong>Deployment</strong></p>
+<p>Deployment 負責管理 ReplicaSet 和 Pod 的更新</p>
+<p><strong>Service</strong></p>
+<p>Service 是用來建立一個網路連線可以連到 pod</p>
+<p><strong>Secret</strong></p>
+<p>把敏感資訊以 <code>非明碼的方式</code> 放在 k8s 上</p>
+<ul>
+<li>資料庫帳密</li>
+<li>access token</li>
+<li>ssh key&mldr;等等</li>
+</ul>
+<p>k8s 可以把 secrets 當作環境變數來使用</p>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
