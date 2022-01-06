@@ -31,7 +31,10 @@ k8s 是一種容器編排技術，用於協調數百個對象的部署和管理 
 - components
   - 安裝 k8s 時，會安裝的一些元件
     - API server
-      - 可以作為 k8s 的前端
+      - 可以作為 k8s 的前端 (系統操作入口)
+      - 不管是使用者對 k8s 或是 node 對 master 都是透過 apiserver 溝通
+      - 唯一可以和 etcd 溝通的元件，其他元件都必須透過 apiserver 才能訪問集群狀態
+      - 以 RESTful interface 提供外部或內部組件使用
     - etcd
       - key-value store
       - 確保 master 間沒有 conflict
@@ -40,7 +43,21 @@ k8s 是一種容器編排技術，用於協調數百個對象的部署和管理 
       - 確保 container 可以運作在 node 上
     - container runtime
       - 用來跑 container 的環境 (ex: Docker)
-    - controller
+    - controller manager
+      - 負責 k8s cluster 故障檢測和恢復的自動化，執行多種 controller 
+        - replication controller
+          - 定期關聯 replication controller 和 pod，保證 pod 數量正確
+        - node controller
+          - kubelet 啟動的時候會通過 apiserver 註冊自己本身節點的資訊，定時向 apiserver 報告狀態
+          - apiserver 收到後更新到 etcd
+          - node controller 實現管理和監控 node 資訊
+        - resourceQuota controller
+          - 用來
+        - namespace controller
+        - service account controller
+        - token controller
+        - service controller
+        - endpoint controller
       - orchestration 的大腦，在 nodes / containers 發生故障時發出通知和回應
       - 決定是否建立新的 container
     - scheduler

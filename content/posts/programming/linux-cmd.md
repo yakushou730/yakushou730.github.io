@@ -302,8 +302,9 @@ sudo <指令>
 下載檔案用的
 ```shell
 # -O flag 是指定輸出名稱
-wget http://www.some-site.com/some-file.tx -O some-file.txt
+wget http://www.some-site.com/some-file.txt -O some-file.txt
 ```
+
 
 
 

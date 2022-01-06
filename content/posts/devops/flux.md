@@ -48,7 +48,7 @@ Flux 是一組 k8s 用的工具，可以 sync 資源設定 (像 git repository)
 
 ## Get Started
 
-準備事項
+準備事項 (記得切換到要用的 k8s cluster)
 ```shell
 export GITHUB_TOKEN=<github token with repo permission>
 export GITHUB_USER=<github username>
@@ -68,11 +68,65 @@ flux bootstrap github \
   --personal
 ```
 
+安裝了什麼可以用指令看一遍
+```shell
+kubectl get all -n flux-system
+# result
+NAME                                           READY   STATUS    RESTARTS   AGE
+pod/helm-controller-779b58df6b-pwhkv           1/1     Running   8          30h
+pod/kustomize-controller-5db6bfc56d-6px6n      1/1     Running   8          30h
+pod/notification-controller-7ccfbfbb98-htjc6   1/1     Running   8          30h
+pod/source-controller-565f8fbbff-9wd77         1/1     Running   9          30h
+
+NAME                              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/notification-controller   ClusterIP   10.96.21.107    <none>        80/TCP    30h
+service/source-controller         ClusterIP   10.96.53.181    <none>        80/TCP    30h
+service/webhook-receiver          ClusterIP   10.96.219.192   <none>        80/TCP    30h
+
+NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/helm-controller           1/1     1            1           30h
+deployment.apps/kustomize-controller      1/1     1            1           30h
+deployment.apps/notification-controller   1/1     1            1           30h
+deployment.apps/source-controller         1/1     1            1           30h
+
+NAME                                                 DESIRED   CURRENT   READY   AGE
+replicaset.apps/helm-controller-779b58df6b           1         1         1       30h
+replicaset.apps/kustomize-controller-5db6bfc56d      1         1         1       30h
+replicaset.apps/notification-controller-7ccfbfbb98   1         1         1       30h
+replicaset.apps/source-controller-565f8fbbff         1         1         1       30h
+```
+
+```shell
+kubectl api-resources | grep flux
+# result
+helmreleases                      hr           helm.toolkit.fluxcd.io/v2beta1           true         HelmRelease
+kustomizations                    ks           kustomize.toolkit.fluxcd.io/v1beta2      true         Kustomization
+alerts                                         notification.toolkit.fluxcd.io/v1beta1   true         Alert
+providers                                      notification.toolkit.fluxcd.io/v1beta1   true         Provider
+receivers                                      notification.toolkit.fluxcd.io/v1beta1   true         Receiver
+buckets                                        source.toolkit.fluxcd.io/v1beta1         true         Bucket
+gitrepositories                   gitrepo      source.toolkit.fluxcd.io/v1beta1         true         GitRepository
+helmcharts                        hc           source.toolkit.fluxcd.io/v1beta1         true         HelmChart
+helmrepositories                  helmrepo     source.toolkit.fluxcd.io/v1beta1         true         HelmRepository
+```
+
+```shell
+kubectl get gitrepositories.source.toolkit.fluxcd.io -n flux-system
+# result
+NAME          URL                                            READY   STATUS                                                              AGE
+flux-system   ssh://git@github.com/yakushou730/fleet-infra   True    Fetched revision: main/f03ba1bebe1ed2d251aaa189efbb6ad3c84a28d9     30h
+
+
+kubectl get kustomizations.kustomize.toolkit.fluxcd.io -n flux-system
+# result
+NAME          READY   STATUS                                                              AGE
+flux-system   True    Applied revision: main/f03ba1bebe1ed2d251aaa189efbb6ad3c84a28d9     30h
+```
+
 執行後的流程
 1. 在個人的 github 上生成一個 fleet-infra 的 repo
-2. 在 repo 內加入了 flux component manifest
-3. 部署 Flux Components 到對應的 k8s cluster
-4. 設定 flux components 組態到 repo/clusters/my-cluster 做追蹤
+2. flux 生成需要用到的 flux component 的 manifest，並推到 repo 內 (repo/clusters/my-cluster) 做追蹤
+3. 依照 manifest 部署 Flux Components 到對應的 k8s cluster，讓 cluster 會去對這個 repo 做 sync
 
 再來的動作
 1. 把該 repo 拉回 local 要操作用的
@@ -100,6 +154,17 @@ spec:
   url: https://github.com/stefanprodan/podinfo
 ```
 3. commit fleet-infra repo 以後推到 github
+```shell
+# 確認 sources git
+flux get sources git
+# result
+NAME       	READY	MESSAGE                                                          	REVISION                                       	SUSPENDED
+flux-system	True 	Fetched revision: main/f03ba1bebe1ed2d251aaa189efbb6ad3c84a28d9  	main/f03ba1bebe1ed2d251aaa189efbb6ad3c84a28d9  	False
+podinfo    	True 	Fetched revision: master/132f4e719209eb10b9485302f8593fc0e680f4fc	master/132f4e719209eb10b9485302f8593fc0e680f4fc	False
+```
+
+
+
 4. 部署 podinfo application，用 flux create 建立 `kustomization` 作為部署
 ```shell
 flux create kustomization podinfo \
@@ -132,3 +197,59 @@ spec:
 
 ![flux-get-started.jpg](/k8s/flux-get-started.jpg)
 
+## 核心概念
+**Sources**
+Source 在 repo 定義了系統和需求的 desired state
+
+Source 會生產出 artifact 給 Flux 組建操作，像是套用給 cluster
+
+Source 的改動會被識別出來，並生產出新的 artifact
+
+所有的 Source 會被 K8s 稱作 Custom Resource
+
+如
+- GitRepository
+- HelmRepository
+- Bucket
+
+> 管資源來源
+> 
+> 建立 GitRepository source 只會讓 flux 從 git repository 追蹤並拉最新的版本下來
+
+**Reconciliation**
+Reconciliation 是用來確保更新 cluster 上面是 desired state
+
+- `HelmRelease` reconciliation
+  - 確保 Helm release 的狀態匹配 
+- `Bucket` reconciliation
+  - 下載封存 Bucket 的內容，紀錄觀察到的版本
+- `Kustomization` reconciliation
+  - 確保 application 部署到 cluster 上的狀態和 git repository (或 S3) 匹配
+
+**Kustomization**
+是一個 custom resource，代表 k8s 資源的 local set
+
+用來讓 Flux 對 Cluster 做 reconcile
+
+即透過 Kustomization 讓 reconcile 可以運作
+
+透過修改 `.spec.interval` 可以調整 reconcile 的間隔
+
+> 管部署
+> 
+> 要有 kustomization 才會真正部署拉下來的 source
+
+**Bootstrap**
+安裝 Flux 元件的程序 (以 GitOps 的方式)
+
+套用 manifest 到 cluster，建立 GitRepository 和 Kustomization 到 Flux 元件
+
+再把 manifest 推到 git repo 
+
+## 特殊名詞
+**RBAC (Role-Base Access Control)**
+
+角色的訪問控制，決定能不能訪問 k8s API
+
+**CRD (Custom Resource Define)**
+自定義資源，讓開發者可以創建自定義的資源對象
