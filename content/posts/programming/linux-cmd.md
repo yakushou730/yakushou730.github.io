@@ -198,6 +198,8 @@ $ ufw deny 4000
 
 ```shell
 echo Hi
+# n flag: do not output the trailing newline
+echo -n hello
 ```
 
 ## ls
@@ -305,6 +307,13 @@ sudo <指令>
 wget http://www.some-site.com/some-file.txt -O some-file.txt
 ```
 
+## man
+查看操作手冊
+
+```shell
+# 查看 echo 的操作手冊
+man echo
+```
 
 
 
