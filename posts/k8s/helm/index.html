@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/helm/><link rel=prev href=https://blog.yakushou.com/posts/k8s/kind/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"helm","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/helm\/"},"genre":"posts","keywords":"programming, k8s","wordcount":0,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/helm\/","datePublished":"2022-01-06T15:51:08+08:00","dateModified":"2022-01-06T15:51:08+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"helm"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"helm","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/helm\/"},"genre":"posts","keywords":"programming, k8s","wordcount":237,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/helm\/","datePublished":"2022-01-06T15:51:08+08:00","dateModified":"2022-01-06T15:51:08+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"helm"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,15 +61,106 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-06>2022-01-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-06>2022-01-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;0 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;0 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-06>2022-01-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-06>2022-01-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;237 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div>
-</div><div class=content id=content></div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#what-is-helm>What is Helm</a></li>
+<li><a href=#helm2-vs-helm3>Helm2 vs Helm3</a></li>
+<li><a href=#helm-components>Helm Components</a></li>
+<li><a href=#helm-charts>Helm charts</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h2 id=what-is-helm>What is Helm</h2>
+<p>一般來說，要 deploy 一個服務，即使是簡單的 app</p>
+<p>也要建立一整套完整的 k8s 元件</p>
+<p>ex: Secret, Deployment, Service, PersistentVolumeClaim&mldr; 等等，需要 apply 一堆 yaml 檔案</p>
+<p>Helm 被稱為 k8s 的 package manager</p>
+<blockquote>
+<p>想像一個遊戲由千百個檔案組成</p>
+<p>我們不需要自己處理那摩多檔案，透過安裝程式的方式</p>
+<p>做到一次安裝一個完整的遊戲，對應的檔案也都被安裝到正確的位置</p>
+<p>而 Helm 就像這樣，一次處理一堆 YAML 檔案和 K8s 物件，來設定 application</p>
+</blockquote>
+<p>Helm 讓我們操作 k8s 的元件就像操作 app 一樣，而不是一堆檔案物件</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 透過 helm 安裝 wordpress</span>
+helm install wordpress
+<span class=c1># 修改完 yaml 檔案套用</span>
+helm upgrade wordpress
+<span class=c1># 可倒退版本</span>
+helm rollback wordpress
+<span class=c1># 移除 wordpress</span>
+helm uninstall wordpress
+<span class=c1># debug 資訊 </span>
+helm --debug
+</code></pre></div><h2 id=helm2-vs-helm3>Helm2 vs Helm3</h2>
+<p>Helm3 多了</p>
+<ul>
+<li>RBAC (Role Based Access Control)</li>
+<li>CRD (Custom Resource Definition)</li>
+<li>提供 snapshot (revision)</li>
+</ul>
+<p>Helm3 移除了 Helm2 用的 Tiller</p>
+<h2 id=helm-components>Helm Components</h2>
+<p>Charts</p>
+<ul>
+<li>一包 files</li>
+<li>包含 Helm 需要的所有 instruction 在 k8s cluster 上建立物件</li>
+<li>套用 Chart 到 cluster 上的時候，會建立 release (每個 release 都代表一次 chart 的安裝)</li>
+<li>像 docker 有 docker hub 一樣，helm 也有對應的 online chart repository
+<ul>
+<li>ArtifaceHUB</li>
+</ul>
+</li>
+<li>為了追蹤 helm 對 k8s cluster 做了什麼變更，Helm 會儲存這些資訊 (as metadata)
+<ul>
+<li>Helm 把這資訊以 k8s secret 的方式存在 k8s cluster</li>
+</ul>
+</li>
+<li>yaml file 裡面可以像填空一樣放 template
+<ul>
+<li>用來填空的資訊放在 values.yaml</li>
+</ul>
+</li>
+<li>我們可以下載到各式各樣的 Helm charts，之後的工作就是透過 values.yaml 填空把 configuration 設定好</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 安裝 chart</span>
+helm install <span class=o>[</span>release name<span class=o>]</span> <span class=o>[</span>chart-name<span class=o>]</span>
+</code></pre></div><h2 id=helm-charts>Helm charts</h2>
+<p>一般的 helm chart 都還會包含的 files</p>
+<ul>
+<li>values.yaml: 用來放要嵌入 template 的資訊</li>
+<li>chart.yaml: 標明這份 chart 本身的資訊
+<ul>
+<li>包含 apiVersion, appVersion, name&mldr;等等</li>
+</ul>
+</li>
+</ul>
+<p>chart.yaml</p>
+<ul>
+<li>apiVersion: 套用的 api 版本 (Helm3 用 v2)</li>
+<li>appVersion: 是指這個 app 要用哪個版本 deploy (ex: wordpress)</li>
+<li>version: 這份 chart 的版本</li>
+<li>name: chart 的名稱</li>
+<li>type:
+<ul>
+<li>application (default): 指是建立作為 deploying application</li>
+<li>library: 指提供 utilities 來幫助 building charts</li>
+</ul>
+</li>
+<li>dependencies: 有相依的套件，同樣以 helm 的方式載入</li>
+<li>keywords: 有點像 tag 的概念，可以被搜尋</li>
+<li>maintainers: 維護者資訊</li>
+<li>home: homepage url</li>
+<li>icon: icon url</li>
+</ul>
+<p><img class=lazyload data-src=/k8s/helm-structure.png data-srcset="/k8s/helm-structure.png, /k8s/helm-structure.png 1.5x, /k8s/helm-structure.png 2x" data-sizes=auto alt=/k8s/helm-structure.png title=helm-structure.png></p>
+</div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>

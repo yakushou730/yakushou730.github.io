@@ -305,7 +305,7 @@ cat /proc/sys/net/ipv4/ip_forward
 <span class=nb>echo</span> <span class=m>1</span> &gt; /proc/sys/net/ipv4/ip_forward
 </code></pre></div><p>因為重啟後 ip_forward 設定就沒了，所以要寫到對應的 file 設定</p>
 <p>檔名 <code>/etc/sysctl.conf</code></p>
-<p>欄位 <code>net.ipv4.ip+forward = 1</code></p>
+<p>欄位 <code>net.ipv4.ip_forward = 1</code></p>
 <p><img class=lazyload data-src=/devops/devops-route-example.png data-srcset="/devops/devops-route-example.png, /devops/devops-route-example.png 1.5x, /devops/devops-route-example.png 2x" data-sizes=auto alt=/devops/devops-route-example.png title=devops/devops-route-example.png></p>
 </div>
 <div class=post-footer id=post-footer>
