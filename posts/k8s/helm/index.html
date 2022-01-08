@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/helm/><link rel=prev href=https://blog.yakushou.com/posts/k8s/kind/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"helm","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/helm\/"},"genre":"posts","keywords":"programming, k8s","wordcount":237,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/helm\/","datePublished":"2022-01-06T15:51:08+08:00","dateModified":"2022-01-06T15:51:08+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"helm"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"helm","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/helm\/"},"genre":"posts","keywords":"programming, k8s","wordcount":1088,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/helm\/","datePublished":"2022-01-06T15:51:08+08:00","dateModified":"2022-01-06T15:51:08+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"helm"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-06>2022-01-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-06>2022-01-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;237 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-06>2022-01-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-06>2022-01-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1088 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -74,6 +74,20 @@
 <li><a href=#helm2-vs-helm3>Helm2 vs Helm3</a></li>
 <li><a href=#helm-components>Helm Components</a></li>
 <li><a href=#helm-charts>Helm charts</a></li>
+<li><a href=#working-with-helm-basics>Working with Helm: basics</a></li>
+<li><a href=#customizing-chart-parameters>Customizing chart parameters</a></li>
+<li><a href=#lifecycle-management-with-helm>Lifecycle management with Helm</a></li>
+<li><a href=#writing-a-helm-chart>Writing a Helm chart</a></li>
+<li><a href=#making-sure-chart-is-working-as-intended>Making sure chart is working as intended</a></li>
+<li><a href=#functions>Functions</a></li>
+<li><a href=#pipelines>Pipelines</a></li>
+<li><a href=#conditions>Conditions</a></li>
+<li><a href=#with-blocks>With Blocks</a></li>
+<li><a href=#ranges>Ranges</a></li>
+<li><a href=#named-templates>Named Templates</a></li>
+<li><a href=#chart-hooks>Chart Hooks</a></li>
+<li><a href=#packaging-and-signing-charts>Packaging and Signing Charts</a></li>
+<li><a href=#uploading-charts>Uploading Charts</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=what-is-helm>What is Helm</h2>
@@ -160,6 +174,312 @@ helm install <span class=o>[</span>release name<span class=o>]</span> <span clas
 <li>icon: icon url</li>
 </ul>
 <p><img class=lazyload data-src=/k8s/helm-structure.png data-srcset="/k8s/helm-structure.png, /k8s/helm-structure.png 1.5x, /k8s/helm-structure.png 2x" data-sizes=auto alt=/k8s/helm-structure.png title=helm-structure.png></p>
+<h2 id=working-with-helm-basics>Working with Helm: basics</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># help</span>
+helm --help
+<span class=c1># repo help (支援 sub command 的 help)</span>
+helm repo --help
+<span class=c1># 在 Artifact Hub 上搜尋 wordpress</span>
+helm search hub wordpress
+<span class=c1># 在 local repo 搜尋已加入的 wordpress</span>
+helm serach repo wordpress
+</code></pre></div><p><code>helm reop</code> 指令是對應 chart repository 的操作</p>
+<ul>
+<li>包含 add, remove, list&mldr;
+<ul>
+<li><code>helm repo list</code> 列出加入的 repo</li>
+<li><code>helm repo update</code> 更新加入的 repo 資訊</li>
+</ul>
+</li>
+</ul>
+<p>範例: 安裝 wordpress
+<a href=https://artifacthub.io/packages/helm/bitnami/wordpress target=_blank rel="noopener noreffer">wordpress in Artiface HUB</a></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 查看 wordpress 的 readme </span>
+<span class=c1># 把 wordpress chart 路徑加入，這樣之後要抓的話就知道路徑</span>
+helm repo add bitnami https://chars/bitnami.com/bitnami
+<span class=c1># 安裝 release 名為 my-release 的版本</span>
+helm install my-release bitnami/wordpress
+<span class=c1># 查看 release</span>
+helm list
+<span class=c1># 移除 release</span>
+helm uninstall my-release
+</code></pre></div><blockquote>
+<p>repo 不代表 application</p>
+<p>application 是在該 repo 下面的應用</p>
+</blockquote>
+<h2 id=customizing-chart-parameters>Customizing chart parameters</h2>
+<p>安裝 chart 的時候如果沒指定參數的話是套用全部的 default value</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 指定參數</span>
+<span class=c1># 會 overwrite values.yaml</span>
+helm install --set <span class=nv>wordpressBlogName</span><span class=o>=</span><span class=s2>&#34;Helm Tutorials&#34;</span> my-release binami/wordpress
+             --set <span class=nv>wordpressEmail</span><span class=o>=</span><span class=s2>&#34;yakushou730@gmail.com&#34;</span>
+<span class=c1># 或是準備好自定義的 custom-values.yaml</span>
+helm install --values custom-values.yaml my-release bitnami/wordpress
+
+<span class=c1># 兩段式 release</span>
+<span class=c1># 1. 先拉 charts 然後更改內容</span>
+<span class=c1># 2. 改完後 release</span>
+helm pull bitnami/wordpress
+<span class=c1># or</span>
+helm pull --untar bitnami/wordpress
+<span class=c1># 拉下來後更改 values.yaml，之後release</span>
+helm install my-release ./wordpress
+
+<span class=c1># 安裝 bitami repo 下的 apache application，release 名為 amaze-surf</span>
+helm install amaze-surf bitnami/apache
+</code></pre></div><h2 id=lifecycle-management-with-helm>Lifecycle management with Helm</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 指定安裝版本</span>
+helm install nginx-release bitnami/nginx --version 7.1.0
+
+<span class=c1># 更新 release 版本</span>
+helm upgrade nginx-release bitnami/nginx
+helm upgrade dazzling-web bitnami/nginx --version <span class=m>9</span>
+<span class=c1># 查看 release 紀錄</span>
+helm <span class=nb>history</span> nginx-release
+<span class=c1># 退回指定的 release 版本 (by 指定 revision)</span>
+helm rollback nginx-release <span class=m>1</span>
+</code></pre></div><h2 id=writing-a-helm-chart>Writing a Helm chart</h2>
+<p>把寫 helm chart 想像成是寫安裝精靈</p>
+<p>也可以做到 在更新某個版本之前 先備份 database (hook)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 建立一個新的 charts 框架</span>
+helm create nginx-chart
+<span class=c1># 如果 templates 裡面的內容用不到的話就拿掉，放上要用的 k8s yaml 檔案</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># 為了讓 chart 可以複用，metadata 的地方名稱可以使用嵌入的</span><span class=w>
+</span><span class=w></span><span class=c># helm install [ReleaseName] ./chartRepo</span><span class=w>
+</span><span class=w></span><span class=nt>name</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Release.Name }}-nginx</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 可組合</span><span class=w>
+</span><span class=w></span><span class=nt>name</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Values.image.repository }}:{{ .Values.image.tag }}</span><span class=w>
+</span></code></pre></div><p>如果需要用到 Chart.yaml 作為嵌入變數的話，可以使用</p>
+<ul>
+<li>Chart.Name</li>
+<li>Chart.ApiVersion</li>
+<li>Chart.Version</li>
+<li>&mldr; 等等等</li>
+</ul>
+<p>或是用到 k8s cluster 本身的資源</p>
+<ul>
+<li>Capabilities.KubeVersion</li>
+<li>Capabilities.ApiVersions</li>
+<li>&mldr; 等等等</li>
+</ul>
+<p>或是用到 Values.yaml 作為嵌入變數</p>
+<ul>
+<li>Values.[自定義欄位 必須是小寫開頭]</li>
+</ul>
+<blockquote>
+<p>變數名稱的重點</p>
+<p>Release / Chart / Capabilities 後面接大寫開頭的欄位 (因為是 builtin 欄位)</p>
+<p>Values 的自定義欄位必須是小寫開頭</p>
+</blockquote>
+<p>完整的 helm chart = template + release details + char details + values.yaml</p>
+<h2 id=making-sure-chart-is-working-as-intended>Making sure chart is working as intended</h2>
+<p>安裝 chart 之前的 3 種驗証方式</p>
+<ul>
+<li>lint: 驗證 yaml 格式正確</li>
+<li>template: 驗證 template 格式正確</li>
+<li>dry run: 驗證 charts 對 k8s 是正確的</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># helm lint</span>
+helm lint ./nginx-chart
+<span class=c1># helm template 可以看組出來的 chart 長怎樣</span>
+helm template ./nginx-chart
+<span class=c1># 可以補上 release name，如果 template 有用到的話才有資訊</span>
+helm template hello-world-1 ./nginx-chart
+<span class=c1># 可以補上 debug flag，印出的錯誤訊息比較完整</span>
+helm template ./nginx-chart --debug
+<span class=c1># --dry-run 可以檢查如果真的要安裝到 k8s 的結果</span>
+helm install hello-world-1 ./nginx-chart --dry-run
+</code></pre></div><h2 id=functions>Functions</h2>
+<p>functions 可以操作資料且不影響 values.yaml 內的資料</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># 假設 .Values.image.repository 是 nginx</span><span class=w>
+</span><span class=w></span><span class=c># upper 是把字串改成大寫</span><span class=w>
+</span><span class=w></span>{{<span class=w> </span><span class=nt>upper .Values.image.repository }} # image</span><span class=p>:</span><span class=w> </span><span class=l>NGINX</span><span class=w>
+</span><span class=w></span><span class=c># quota 是在字串外多加上雙引號</span><span class=w>
+</span><span class=w></span>{{<span class=w> </span><span class=nt>quote .Values.image.repository }} # image</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;nginx&#34;</span><span class=w>
+</span><span class=w></span><span class=c># replace 可以用來取代字元</span><span class=w>
+</span><span class=w></span>{{<span class=w> </span><span class=l>replace &#34;x&#34; &#34;y&#34; .Values.image.repository }}</span><span class=w> </span><span class=c># image: nginy</span><span class=w>
+</span><span class=w></span><span class=c># default 會以第一個參數為預設值，如果第二個參數不存在的話</span><span class=w>
+</span><span class=w></span>{{<span class=w> </span><span class=l>default &#34;nginx&#34; .Values.image.repository }}</span><span class=w>
+</span></code></pre></div><p>functions 的種類繁多，如 string, regex, file path, k8s, &mldr;</p>
+<h2 id=pipelines>Pipelines</h2>
+<p>用 <code>|</code> 來做到管線式的參數轉換</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml>{{<span class=w> </span><span class=nt>upper .Values.image.repository }} # image</span><span class=p>:</span><span class=w> </span><span class=l>NGINX</span><span class=w>
+</span><span class=w></span><span class=c># 同</span><span class=w>
+</span><span class=w></span>{{<span class=w> </span><span class=nt>.Values.image.repository | upper }} # image</span><span class=p>:</span><span class=w> </span><span class=l>NGINX</span><span class=w>
+</span><span class=w></span><span class=c># 也可以一直串下去</span><span class=w>
+</span><span class=w></span>{{<span class=w> </span><span class=nt>.Values.image.repository | upper | quote }} # image</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;NGINX&#34;</span><span class=w>
+</span><span class=w></span><span class=c># 套用 default: 如果 .Values.image.tag 不存在的話，套用 default .Chart.AppVersion</span><span class=w>
+</span><span class=w></span>{{<span class=w> </span><span class=l>.Values.image.tag | default .Chart.AppVersion }}&#34;</span><span class=w>
+</span></code></pre></div><h2 id=conditions>Conditions</h2>
+<p>根據條件決定要不要在 yaml 檔刪除或新增對應的 key-value pair</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># 下面 - 的意思是轉換的時候不要空下這兩行</span><span class=w>
+</span><span class=w></span><span class=c># eq 根據後面的兩個參數決定是 true 或 false</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>if .Values.orgLabel }}</span><span class=w>
+</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>org</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Values.orgLabel }}</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>else if eq .Values.orgLabel &#34;hr&#34; }}</span><span class=w>
+</span><span class=w>  </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>org</span><span class=p>:</span><span class=w> </span><span class=l>human resources</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>else }}</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>end }}</span><span class=w>
+</span></code></pre></div><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>eq</td>
+<td>equal</td>
+</tr>
+<tr>
+<td>ne</td>
+<td>not equal</td>
+</tr>
+<tr>
+<td>lt</td>
+<td>less than</td>
+</tr>
+<tr>
+<td>le</td>
+<td>less than or equal to</td>
+</tr>
+<tr>
+<td>gt</td>
+<td>greater than</td>
+</tr>
+<tr>
+<td>ge</td>
+<td>greater than or equal to</td>
+</tr>
+<tr>
+<td>not</td>
+<td>negative</td>
+</tr>
+<tr>
+<td>empty</td>
+<td>value is empty</td>
+</tr>
+</tbody>
+</table>
+<h2 id=with-blocks>With Blocks</h2>
+<p>重複的 namespace 可以用 with 包成 block</p>
+<p><code>$</code> 代表 root namespace</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>data</span><span class=p>:</span><span class=w>
+</span><span class=w></span>{{- <span class=l>with .Values.app }}</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>with .ui }}</span><span class=w>
+</span><span class=w>  </span><span class=nt>background</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.bg }}</span><span class=w>
+</span><span class=w>  </span><span class=nt>foreground</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.fg }}</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>end }}</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>with .db }}</span><span class=w>
+</span><span class=w>  </span><span class=nt>database</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.name }}</span><span class=w>
+</span><span class=w>  </span><span class=nt>connection</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.conn }}</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>end }}</span><span class=w>
+</span><span class=w>  </span><span class=nt>release</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>$.Release.Name }}</span><span class=w>
+</span><span class=w></span>{{- <span class=l>end }}</span><span class=w>
+</span></code></pre></div><h2 id=ranges>Ranges</h2>
+<p>可以用來設定 array 資料</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># values.yaml</span><span class=w>
+</span><span class=w></span><span class=nt>regions</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>- <span class=l>ohio</span><span class=w>
+</span><span class=w>  </span>- <span class=l>newyork</span><span class=w>
+</span><span class=w>  </span>- <span class=l>otario</span><span class=w>
+</span><span class=w>  </span>- <span class=l>london</span><span class=w>
+</span><span class=w>  </span>- <span class=l>sigapore</span><span class=w>
+</span><span class=w>  
+</span><span class=w></span><span class=c># configmap.yaml</span><span class=w>
+</span><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>regions</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>range .Values.regions }}</span><span class=w>
+</span><span class=w>  </span>- {{<span class=w> </span><span class=l>. | guote }}</span><span class=w> </span><span class=c># 支援 pipeline</span><span class=w>
+</span><span class=w>  </span>{{- <span class=l>end }}</span><span class=w>
+</span></code></pre></div><h2 id=named-templates>Named Templates</h2>
+<p>重複使用相同的 key-value pair</p>
+<p>可以提出為 <code>_helpers.tpl</code></p>
+<p>其中 <code>_</code> 的開頭代表告訴 helm 忽略這個檔案，不要當成 manifest 來用</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># _helpers.tpl</span><span class=w>
+</span><span class=w></span>{{- <span class=l>define &#34;labels&#34; }}</span><span class=w>
+</span><span class=w>  </span><span class=nt>app.kubernetes.io/name</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Release.Name }}</span><span class=w>
+</span><span class=w>  </span><span class=nt>app.kubernetes.io/instance</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Release.Name }}</span><span class=w>
+</span><span class=w></span>{{- <span class=l>end }}</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 在要嵌入的地方放</span><span class=w>
+</span><span class=w></span><span class=c># 後面的小點點很重要，代表 labels 內要參考的 scope 是 current scope</span><span class=w>
+</span><span class=w></span>{{- <span class=l>template &#34;labels&#34; . }}</span><span class=w>
+</span></code></pre></div><blockquote>
+<p>要注意 _helpers.tpl 內的縮排</p>
+<p>要和目標放入的地方縮排一致</p>
+<p>但可能要放入的地方縮排不一致</p>
+<p>所以要另外透過 (pipeline) indent [num] 處理</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># 原本的呼叫方式</span><span class=w>
+</span><span class=w></span>{{- <span class=l>template &#34;labels&#34; . }}</span><span class=w>
+</span><span class=w></span><span class=c># 多 縮排 2 格</span><span class=w>
+</span><span class=w></span>{{- <span class=l>include &#34;labels&#34; . | indent 2 }}</span><span class=w>
+</span><span class=w></span><span class=c># 多 縮排 4 格</span><span class=w>
+</span><span class=w></span>{{- <span class=l>include &#34;labels&#34; . | indent 4 }}</span><span class=w>
+</span></code></pre></div><blockquote>
+<p>template 是 action</p>
+<p>include 是 function，才可以接 pipeline</p>
+</blockquote>
+<h2 id=chart-hooks>Chart Hooks</h2>
+<p>可以設定在套用新的 helm 設定前，觸發 hook</p>
+<p><strong>典型的 workflow</strong></p>
+<p><code>$ helm upgrade</code> -> <code>verify</code> -> <code>render</code> -> <code>upgrade</code></p>
+<p>加入 pre-upgrade 和 post-upgrade 後</p>
+<p><code>$ helm upgrade</code> -> <code>verify</code> -> <code>render</code> -> <code>pre-upgrade</code> -> <code>upgrade</code> -> <code>post-upgrade</code></p>
+<p>其他的如</p>
+<p><code>$ helm install</code> -> <code>verify</code> -> <code>render</code> -> <code>pre-install</code> -> <code>upgrade</code> -> <code>post-install</code></p>
+<p><code>$ helm delete</code> -> <code>verify</code> -> <code>render</code> -> <code>pre-delete</code> -> <code>upgrade</code> -> <code>post-delete</code></p>
+<p><code>$ helm rollback</code> -> <code>verify</code> -> <code>render</code> -> <code>pre-rollback</code> -> <code>upgrade</code> -> <code>post-rollback</code></p>
+<p>重點是可以起一個 pod 或 job 來處理 script 之類在 hook 要做的程序</p>
+<p>其中透過 <code>annotations</code> 標記來讓 helm 忽略這份 manifest 檔案 (不要當成一般的 k8s manifest)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># templates/backup-job.yaml</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Job</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>&#34;helm.sh/hook&#34;: </span><span class=l>pre-upgrade</span><span class=w>
+</span><span class=w>    </span><span class=nt>&#34;helm.sh/hook-weight&#34;: </span><span class=s2>&#34;5&#34;</span><span class=w> </span><span class=c># 設定 pre-upgrade job 的優先權，要是字串格式 </span><span class=w>
+</span><span class=w>    </span><span class=nt>&#34;helm.sh/hook-delete-policy&#34;: </span><span class=l>hook-succeeded</span><span class=w> </span><span class=c># 如果成功執行的話就砍掉這個 job</span><span class=w>
+</span></code></pre></div><p>hood-delete-policy 有三種</p>
+<ul>
+<li>hook-succeeded: 如果執行成功的話就刪除</li>
+<li>hook-failed: 如果執行失敗的話就刪除</li>
+<li>before-hook-creation: default，在新的 hook 開始的時候，刪掉舊的 resource</li>
+</ul>
+<p><img class=lazyload data-src=/k8s/helm-hooks-sample.png data-srcset="/k8s/helm-hooks-sample.png, /k8s/helm-hooks-sample.png 1.5x, /k8s/helm-hooks-sample.png 2x" data-sizes=auto alt=/k8s/helm-hooks-sample.png title=helm-hooks-sample.png></p>
+<h2 id=packaging-and-signing-charts>Packaging and Signing Charts</h2>
+<p>打包上傳 helm charts</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 以上傳 nginx-chart 為例</span>
+helm package ./nginx-chart
+</code></pre></div><p>整包 nginx-chart 會被打包成 nginx-chart-0.1.0.tgz (透過 Chart.yaml 內的版本)</p>
+<blockquote>
+<p>tgz 是指 tar archive compressed with gzip</p>
+</blockquote>
+<p>上傳時要簽名，讓其他使用者知道這包 helm 是合法的</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 產生簽名</span>
+gpg --quick-generate-key <span class=s2>&#34;Yakushou&#34;</span>
+<span class=c1># 如果是 production 要用的 key，盡量使用完整資訊</span>
+gpg --full-generate-key <span class=s2>&#34;YakuShou&#34;</span>
+<span class=c1># 產生舊版格式的金鑰檔案</span>
+gpg --export-secret-keys &gt;~./.gnupg/secring.gpg
+
+<span class=c1># 打包 helm 並附上簽名</span>
+helm package --sign --key <span class=s2>&#34;Yakushou&#34;</span> --keyring ~/.gnupg/secring.gpg ./nginx-chart
+<span class=c1># 列出 gpg key list</span>
+gpg --list-keys
+</code></pre></div><h2 id=uploading-charts>Uploading Charts</h2>
+<p>上傳 helm charts 需要的要件</p>
+<ul>
+<li>打包好的 package (如: nginx-chart-0.1.0.tgz)</li>
+<li>index.yaml</li>
+<li>provenance (如: nginx-chart-0.1.0.tgz.prov)</li>
+</ul>
+<p><img class=lazyload data-src=/k8s/helm-uploading-charts.png data-srcset="/k8s/helm-uploading-charts.png, /k8s/helm-uploading-charts.png 1.5x, /k8s/helm-uploading-charts.png 2x" data-sizes=auto alt=/k8s/helm-uploading-charts.png title=helm-uploading-charts.png></p>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
