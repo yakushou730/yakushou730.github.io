@@ -253,3 +253,18 @@ Reconciliation 是用來確保更新 cluster 上面是 desired state
 
 **CRD (Custom Resource Define)**
 自定義資源，讓開發者可以創建自定義的資源對象
+
+## Kustomization
+Kustomization API 定義了一組 pipeline 用來 fetching, decrypting, building, validating 和 applying k8s manifest
+
+**規格**
+
+kustomization 物件定義了 k8s manifest 的 source (透過 source controller)
+
+> `spec.sourceRef` 就是 reference 到 source controller 管理的一個物件
+> 
+> 當 source 的 revision 改變了，會觸發 event 來讓 kustomize build 和 apply
+> 
+> 支援的 Source type: GitRepository, Bucket
+
+source 裡會包含 kustomization file 的路徑

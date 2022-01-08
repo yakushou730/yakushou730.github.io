@@ -260,7 +260,6 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 
 檔名 `/etc/sysctl.conf`
 
-欄位 `net.ipv4.ip+forward = 1`
-
+欄位 `net.ipv4.ip_forward = 1`
 
 ![devops/devops-route-example.png](/devops/devops-route-example.png)
