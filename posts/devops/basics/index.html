@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/devops/basics/><link rel=prev href=https://blog.yakushou.com/posts/k8s/yaml-files/><link rel=next href=https://blog.yakushou.com/posts/programming/git/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"basics","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/devops\/basics\/"},"genre":"posts","keywords":"programming, devops","wordcount":686,"url":"https:\/\/blog.yakushou.com\/posts\/devops\/basics\/","datePublished":"2022-01-02T09:27:51+08:00","dateModified":"2022-01-02T09:27:51+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"basics"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"basics","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/devops\/basics\/"},"genre":"posts","keywords":"programming, devops","wordcount":1196,"url":"https:\/\/blog.yakushou.com\/posts\/devops\/basics\/","datePublished":"2022-01-02T09:27:51+08:00","dateModified":"2022-01-02T09:27:51+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"basics"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;686 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-02>2022-01-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1196 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -77,6 +77,11 @@
 <li><a href=#virtual-box-networking>Virtual Box networking</a></li>
 <li><a href=#vagrant>Vagrant</a></li>
 <li><a href=#network-basics>Network basics</a></li>
+<li><a href=#dns>DNS</a></li>
+<li><a href=#application-basics>Application Basics</a></li>
+<li><a href=#ips-and-ports>IPs and Ports</a></li>
+<li><a href=#ssl--tls-basics>SSL & TLS Basics</a></li>
+<li><a href=#json-path>JSON path</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=environment-variable>Environment variable</h2>
@@ -307,6 +312,229 @@ cat /proc/sys/net/ipv4/ip_forward
 <p>檔名 <code>/etc/sysctl.conf</code></p>
 <p>欄位 <code>net.ipv4.ip_forward = 1</code></p>
 <p><img class=lazyload data-src=/devops/devops-route-example.png data-srcset="/devops/devops-route-example.png, /devops/devops-route-example.png 1.5x, /devops/devops-route-example.png 2x" data-sizes=auto alt=/devops/devops-route-example.png title=devops/devops-route-example.png></p>
+<h2 id=dns>DNS</h2>
+<p>本機的 IP 對 host 的 mapping 表放在 <code>/etc/hosts</code> 內</p>
+<p>透過設定 <code>/etc/hosts</code> 的設定方式稱為 Name Resolution</p>
+<p>但每台機器都要設定的話，很不彈性，萬一某個 ip 換了很麻煩</p>
+<p>所以把這個對應表拉出去獨立的機器上 就稱為 DNS</p>
+<p>每台機器都知道 DNS 在哪邊，設定在 <code>/etc/resolv.conf</code></p>
+<p>優先權 <code>/etc/hosts</code> > <code>/etc/resolv.conf</code></p>
+<p>但可以在 <code>/etc/nsswitch.conf</code> 設定優先順序</p>
+<p><code>/etc/resolv.conf</code> 上面的 nameserver 不一定涵蓋全部的 domain</p>
+<p>所以可以自己加上 nameserver (認得出這個 domain 的)</p>
+<p>==</p>
+<p><code>www.google.com</code> 拆分</p>
+<ul>
+<li><code>.</code> 是 root</li>
+<li><code>com</code> 是 top level domain</li>
+<li><code>google</code> 是 domain name</li>
+<li><code>www</code> 是 subdomain，其他如 <code>mail</code>, <code>drive</code>, <code>maps</code>, <code>apps</code> &mldr; 等等</li>
+</ul>
+<p>透過 search 方式 mapping 名稱</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># dns</span>
+192.168.1.10 web.mycompany.com
+<span class=c1># 如果不想要用這麼長的名字連線</span>
+<span class=c1># 只想用 web 字串的話</span>
+<span class=c1># 要在 /etc/resolv.confg 另外設定</span>
+search mycompany.com
+<span class=c1># 這樣子ping web 等同於 ping web.mycompany.com</span>
+ping web
+ping web.mycompany.com
+</code></pre></div><p><strong>Record Types</strong></p>
+<ul>
+<li><code>A</code>: ip to host</li>
+<li><code>AAAA</code>: ipv6 to host</li>
+<li><code>CNAME</code>: one name to another name</li>
+</ul>
+<p><strong>nslookup</strong>
+用來測試 dns 解析</p>
+<p>要注意的是這會忽略本機的 hosts 設定</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>nslookup www.google.com
+</code></pre></div><p><strong>dig</strong>
+也是用來測試 dns 解析的</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>dig www.google.com
+</code></pre></div><h2 id=application-basics>Application Basics</h2>
+<p>Language:</p>
+<ul>
+<li>compiled:
+<ul>
+<li>Java, C, C++, &mldr;</li>
+<li><code>Develop Source Code</code> -> <code>Compile</code> -> <code>Run</code></li>
+</ul>
+</li>
+<li>interpreted:
+<ul>
+<li>Python, node, Ruby, &mldr;</li>
+<li><code>Develop Source Code</code> -> <code>Run</code></li>
+</ul>
+</li>
+</ul>
+<h2 id=ips-and-ports>IPs and Ports</h2>
+<p>假設今天有一台電腦 開了兩個 IP 入口對外</p>
+<p>若要開放不指定 IP 的話，就用 <code>0.0.0.0</code></p>
+<p>網路介面 <code>l0</code> 是指 <code>127.0.0.1</code></p>
+<h2 id=ssl--tls-basics>SSL & TLS Basics</h2>
+<p>非對稱金耀 asymmetric encryption</p>
+<ul>
+<li>Private Key</li>
+<li>Public Lock (或可稱 public key)</li>
+</ul>
+<p>以 SSH 為例</p>
+<ul>
+<li>在遠端機器上放入 public lock
+<ul>
+<li>只有有 private key 的人可以連線進入</li>
+<li>放在遠端機器的 ~/.ssh/authorized_keys</li>
+</ul>
+</li>
+</ul>
+<p>以 HTTPS 為例</p>
+<ul>
+<li>遠端機器自己先建立好一組金鑰對 (asymmetric的)
+<ul>
+<li>假設 <code>my-bank.key mybank.pem</code></li>
+<li>使用者只需要 對稱金鑰</li>
+<li>遠端機器 (server) 有 非對稱金鑰</li>
+<li>CA 使用非對稱金鑰</li>
+<li>CA 的 public key 在每個 browder 都有</li>
+</ul>
+<ol>
+<li>遠端機器請求 CA 幫忙驗證自己是合法的 (送出 CSR)</li>
+<li>CA 確認後用 <code>CA 的 private key</code> 簽名</li>
+<li>遠端機器拿到簽名後的 certificate後，設定在機器上 (configuration)</li>
+<li>當使用者要存取遠端機器的網頁時，遠端機器送出 certificate 和 遠端機器的 public lock</li>
+<li>使用者的瀏覽器用 <code>CA public key</code> 解開簽證，確認 <code>遠端機器的 public lock</code> 是合法的</li>
+<li>之後使用者用 <code>遠端機器的 public lock</code> 鎖住 <code>使用者的 key</code> 傳給遠端機器</li>
+<li>如此只有遠端機器可以用 <code>遠端機器的 private key</code> 解開 <code>遠端機器的 public lock</code> 拿到 <code>使用者的 key</code></li>
+<li>之後 遠端機器就用 <code>使用者的 key</code> 鎖住要給使用者的資料傳出去</li>
+<li>使用者可以用 <code>自己的 key</code> 解密得到資料</li>
+<li>使用者都用 <code>自己的 key</code> 加密後傳給 遠端機器</li>
+<li>遠端機器用 <code>使用者的 key</code> 解密</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>這樣在溝通中，使用者的 key 都不會裸露出來</p>
+</blockquote>
+<p>現在的瀏覽器都內建了 驗證 certificate 的機制 (Certificate Authority 組織會把他們的 public key 安裝到瀏覽器上)</p>
+<p>可以知道連線安不安全</p>
+<p>遠端機器如何確認 client 是同一個?</p>
+<ol>
+<li>提出 client 要提供 certificate</li>
+<li>然後 client 就要生成 非對稱金鑰 且也要對 CA 提出 CSR 並拿到 CERT</li>
+<li>client 把自己的金鑰和 CERT 傳給 遠端機器</li>
+</ol>
+<blockquote>
+<p>PKI (Public Key Infrastructure)</p>
+</blockquote>
+<p>非對稱金鑰只能一把加密 另一把解密</p>
+<p>同一把鑰匙不能同時做到加解密</p>
+<blockquote>
+<p>Convention</p>
+<p>Certificate (Public Key) 通常用 *.crt 或 *.pem</p>
+<p>Private Key 通常用 *.key 或 *.key.pem</p>
+</blockquote>
+<h2 id=json-path>JSON path</h2>
+<p>JSON path 是對 JSON 的 query 語法 (dictionary)</p>
+<p>就像 SQL 是對資料庫一樣</p>
+<p>最外層的 <code>{}</code> 是指 root element 用 <code>$</code> 代表</p>
+<p>而 JSON path query 的結果都是在 <code>[]</code> 內，用中括號包起來</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
+  <span class=nt>&#34;car&#34;</span><span class=p>:</span> <span class=p>{</span>
+    <span class=nt>&#34;color&#34;</span><span class=p>:</span> <span class=s2>&#34;blue&#34;</span><span class=p>,</span>
+    <span class=nt>&#34;price&#34;</span><span class=p>:</span> <span class=s2>&#34;$20000&#34;</span>
+  <span class=p>},</span>
+  <span class=nt>&#34;bus&#34;</span><span class=p>:</span> <span class=p>{</span>
+    <span class=nt>&#34;color&#34;</span><span class=p>:</span> <span class=s2>&#34;white&#34;</span><span class=p>,</span>
+    <span class=nt>&#34;price&#34;</span><span class=p>:</span> <span class=s2>&#34;$120000&#34;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Query</strong></p>
+<ul>
+<li>Get car details: <code>$.car</code></li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>[</span>
+  <span class=p>{</span>
+    <span class=nt>&#34;color&#34;</span><span class=p>:</span> <span class=s2>&#34;blue&#34;</span><span class=p>,</span>
+    <span class=nt>&#34;price&#34;</span><span class=p>:</span> <span class=s2>&#34;$20000&#34;</span>
+  <span class=p>}</span>
+<span class=p>]</span>
+</code></pre></div><ul>
+<li>Get bus details: <code>$.bus</code></li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>[</span>
+  <span class=p>{</span>
+    <span class=nt>&#34;color&#34;</span><span class=p>:</span> <span class=s2>&#34;white&#34;</span><span class=p>,</span>
+    <span class=nt>&#34;price&#34;</span><span class=p>:</span> <span class=s2>&#34;$120000&#34;</span>
+  <span class=p>}</span>
+<span class=p>]</span>
+</code></pre></div><ul>
+<li>Get car&rsquo;s color: <code>$.car.color</code></li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>[</span>
+  <span class=s2>&#34;blue&#34;</span>
+<span class=p>]</span>
+</code></pre></div><p>另一個範例 for 陣列</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>[</span>
+  <span class=s2>&#34;car&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;bus&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;truck&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;bike&#34;</span>
+<span class=p>]</span>
+</code></pre></div><ul>
+<li>Get the 1st element</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>$</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+
+<span class=c1>// result
+</span><span class=c1></span><span class=p>[</span>
+  <span class=s2>&#34;car&#34;</span>
+<span class=p>]</span>
+</code></pre></div><ul>
+<li>Get the 4th element</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>$</span><span class=p>[</span><span class=mi>3</span><span class=p>]</span>
+
+<span class=c1>// result
+</span><span class=c1></span><span class=p>[</span>
+  <span class=s2>&#34;bike&#34;</span>
+<span class=p>]</span>
+</code></pre></div><ul>
+<li>Get the 1st and 4th element</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>$</span><span class=p>[</span><span class=mi>0</span><span class=p>,</span><span class=mi>3</span><span class=p>]</span>
+
+<span class=c1>// result
+</span><span class=c1></span><span class=p>[</span>
+  <span class=s2>&#34;car&#34;</span><span class=p>,</span>
+  <span class=s2>&#34;bike&#34;</span>
+<span class=p>]</span>
+</code></pre></div><p>另一個範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>[</span>
+  <span class=mi>12</span><span class=p>,</span>
+  <span class=mi>43</span><span class=p>,</span>
+  <span class=mi>23</span><span class=p>,</span>
+  <span class=mi>12</span><span class=p>,</span>
+  <span class=mi>56</span>
+<span class=p>]</span>
+<span class=c1>// 要找出大於 40 的
+</span><span class=c1></span><span class=err>$</span><span class=p>[</span> <span class=err>?</span> <span class=err>(</span> <span class=err>@</span> <span class=err>&gt;</span> <span class=mi>40</span> <span class=err>)</span> <span class=p>]</span>
+
+<span class=c1>// 結果
+</span><span class=c1></span><span class=p>[</span>
+  <span class=mi>43</span><span class=p>,</span>
+  <span class=mi>56</span>
+<span class=p>]</span>
+</code></pre></div><p><code>@</code> 是指 item in loop</p>
+<ul>
+<li><code>@ == 40</code></li>
+<li><code>@ in [40,43,45]</code></li>
+<li><code>@ != 40</code></li>
+<li><code>@ nin [40,43,45]</code></li>
+</ul>
+<p>複雜的 query 例子</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>$.car.wheels</span><span class=p>[</span><span class=err>?(@.location</span> <span class=err>==</span> <span class=s2>&#34;rear-right&#34;</span><span class=p>]</span><span class=err>.model</span>
+</code></pre></div><p><a href=https://jsonpath.com/ target=_blank rel="noopener noreffer">JSONPath playground</a></p>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
