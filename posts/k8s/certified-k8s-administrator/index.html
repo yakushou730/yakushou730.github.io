@@ -1,0 +1,204 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>Certified K8s Administrator - YakuShou's NOTEBOOK</title><meta name=Description content="Certified K8s Administrator"><meta property="og:title" content="Certified K8s Administrator">
+<meta property="og:description" content="Certified K8s Administrator">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-09T21:07:35+08:00">
+<meta property="article:modified_time" content="2022-01-09T21:07:35+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Certified K8s Administrator">
+<meta name=twitter:description content="Certified K8s Administrator">
+<meta name=application-name content="YakuShou's NOTEBOOK">
+<meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
+<meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/><link rel=prev href=https://blog.yakushou.com/posts/k8s/helm/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Certified K8s Administrator","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/"},"genre":"posts","keywords":"programming, k8s","wordcount":258,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/","datePublished":"2022-01-09T21:07:35+08:00","dateModified":"2022-01-09T21:07:35+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Certified K8s Administrator"}</script></head>
+<body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><span class="menu-item delimiter"></span><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>Contents</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Certified K8s Administrator</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;258 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#core-concepts>Core Concepts</a></li>
+<li><a href=#etcd>ETCD</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h2 id=core-concepts>Core Concepts</h2>
+<blockquote>
+<p>k8s 的目的是要以自動化的形式管理 container 形式的 app</p>
+<p>讓使用者可以簡單的部署，並讓各服務的溝通可以簡單化</p>
+</blockquote>
+<p>解說:</p>
+<p>假設現在有兩艘船，cargo ship 和 control ship</p>
+<ul>
+<li>Cargo Ship
+<ul>
+<li>負責實際運載 container 的工作</li>
+<li>每艘船的船長，負責管理船上的 activities，負責接收當 master 需要裝載 container 時的資訊，
+並回報給 master 這艘船的狀態和 container 的狀態</li>
+</ul>
+</li>
+<li>Control Ship
+<ul>
+<li>負責監測和管理 cargo ships</li>
+<li>透過 control plane 元件負責管理 cargo ship 的大小事</li>
+<li>ETCD: 每天都有很多 container 要被載到 cargo ships 上，所以需要紀錄不同的船上有哪個 container，包含載入的時間
+而這些是以 key-value 的形式被保存的</li>
+<li>kube-scheduler: 當 cargo ship 來的時候，要負責判斷並把對應的 container 奘載給他</li>
+<li>Controller manager:
+<ul>
+<li>指派特殊工作，例: operation team 要處理交通控制，或是 container 壞掉的時候，怎麼樣建立一個可以用的 container</li>
+<li>service office 用來讓各部門溝通，或是讓不同的船之間溝通</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最高部門: kube-apiserver，各部門之間管理的最高層級，負責 Cluster 的工作協調</li>
+</ul>
+<p>對應到 k8s 的名詞</p>
+<ul>
+<li>Worker Nodes: host Application as Containers
+<ul>
+<li>Container Runtime Engine: 讓 node 可以處理 container</li>
+<li>kubelet: 船長的角色，是一個裝在 node 上的 agent，接收來自 kube-apiserver 的指令，在 node 上 deploy 或 destroy container</li>
+<li>kube-proxy: 讓 nodes 之間可以知道要溝通的服務在哪邊 (web container 對應 db container)</li>
+</ul>
+</li>
+<li>Master: Manage, Plan, Schedule, Monitor Nodes
+<ul>
+<li>ETCD Cluster: 一個 key-value 的資料庫</li>
+<li>kube-scheduler: 負責把 container 起在對應的 node 上
+<ul>
+<li>可能包含的條件有 resource requirements for nodes capacity, policies, &mldr;etc</li>
+</ul>
+</li>
+<li>Controller manager
+<ul>
+<li>Node-Controller: 處理新增/刪除 node，以及處理出問題的 node</li>
+<li>Replication-Controller: 確保期望的 container 數量都是對的</li>
+</ul>
+</li>
+<li>kube-apiserver: 管理 cluster 的最高層級，提供 k8s API 來讓使用者操作
+定時監控 kubelet 上 node 和 container 的狀態報告</li>
+</ul>
+</li>
+</ul>
+<h2 id=etcd>ETCD</h2>
+<blockquote>
+<p>ETCD is a distributed reliable key-value store that is simple, secure & fast</p>
+</blockquote>
+<p>default port: 2379</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 安裝完後執行 binary 檔案</span>
+./etcd
+<span class=c1># 設定 key-value</span>
+./etcdctl <span class=nb>set</span> key1 value1
+<span class=c1># 取得 value</span>
+./etcdctl get key1 <span class=c1># 得到 value1</span>
+<span class=c1># help</span>
+./etcdctl
+</code></pre></div><p>所有 k8s 上要紀錄的資料都會更新在 etcd datastore 上，然後才會在 cluster 上生效</p>
+<p>不同的安裝方式</p>
+<ol>
+<li>自己獨立安裝的，把 binary 檔案設定成 service 並執行
+<ul>
+<li>需要注意的欄位 <code>--advertise-client-urls https://${INTERNAL_IP}:2379</code>，這是要設定在 apiserver 上的 url</li>
+</ul>
+</li>
+<li>透過 kubeadm 安裝的
+<ul>
+<li>會把 etcd 做成 pod 安裝在 cluster 上 kube-system 的 namespace 中</li>
+<li>所以可以進到 pod 裡面並操作 key-value store</li>
+<li>多 cluster 的情況，要注意的欄位是 <code>--initial-cluster controller-0=https://${CONTROLLER0_IP}:2380,controller-1=https://${CONTROLLER1_IP}:2380</code></li>
+</ul>
+</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>kubectl <span class=nb>exec</span> etcd-master -n kube-system etcdctl get / --prefix -keys-only
+</code></pre></div></div>
+<div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>Updated on 2022-01-09</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/k8s/helm/ class=prev rel=prev title=helm><i class="fas fa-angle-left fa-fw"></i>helm</a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{}}</script></div>
+</body>
+</html>
