@@ -315,6 +315,37 @@ wget http://www.some-site.com/some-file.txt -O some-file.txt
 man echo
 ```
 
+## &
+讓指令可以在 background 執行
 
+```shell
+sh my_script.sh &
+```
 
+## jq
+可以更好識別 json 的印出指令
 
+```shell
+# 如果要全部顯示就用 .
+# 如果是要搜尋特定節點，比如說 "script"，就用 .scripts
+jq . employee.json
+```
+
+## sed
+stream editor，即指串流編輯
+
+```shell
+# 把 8080 字串改成 9090
+# s 是指取代
+# g 是指 global，或是換成數字，就會變成只改第幾個匹配的項目
+# i flag 是指修改檔案
+sed -i 's/8080/9090/g'
+```
+
+## nohup
+當 linux 使用者登出時，不要關閉 app
+
+```shell
+# 在背景執行 python app.py，且不會受到使用者登出影響
+nohup python app.py &
+```

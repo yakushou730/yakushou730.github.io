@@ -263,3 +263,257 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 欄位 `net.ipv4.ip_forward = 1`
 
 ![devops/devops-route-example.png](/devops/devops-route-example.png)
+
+## DNS
+本機的 IP 對 host 的 mapping 表放在 `/etc/hosts` 內
+
+透過設定 `/etc/hosts` 的設定方式稱為 Name Resolution
+
+但每台機器都要設定的話，很不彈性，萬一某個 ip 換了很麻煩
+
+所以把這個對應表拉出去獨立的機器上 就稱為 DNS
+
+每台機器都知道 DNS 在哪邊，設定在 `/etc/resolv.conf` 
+
+優先權 `/etc/hosts` > `/etc/resolv.conf`
+
+但可以在 `/etc/nsswitch.conf` 設定優先順序
+
+`/etc/resolv.conf` 上面的 nameserver 不一定涵蓋全部的 domain
+
+所以可以自己加上 nameserver (認得出這個 domain 的)
+
+==
+
+`www.google.com` 拆分
+- `.` 是 root
+- `com` 是 top level domain
+- `google` 是 domain name
+- `www` 是 subdomain，其他如 `mail`, `drive`, `maps`, `apps` ... 等等
+
+透過 search 方式 mapping 名稱
+```shell
+# dns
+192.168.1.10 web.mycompany.com
+# 如果不想要用這麼長的名字連線
+# 只想用 web 字串的話
+# 要在 /etc/resolv.confg 另外設定
+search mycompany.com
+# 這樣子ping web 等同於 ping web.mycompany.com
+ping web
+ping web.mycompany.com
+```
+
+**Record Types**
+- `A`: ip to host
+- `AAAA`: ipv6 to host
+- `CNAME`: one name to another name
+
+**nslookup**
+用來測試 dns 解析
+
+要注意的是這會忽略本機的 hosts 設定
+
+```shell
+nslookup www.google.com
+```
+
+**dig**
+也是用來測試 dns 解析的
+
+```shell
+dig www.google.com
+```
+
+## Application Basics
+Language:
+- compiled:
+  - Java, C, C++, ...
+  - `Develop Source Code` -> `Compile` -> `Run`
+- interpreted:
+  - Python, node, Ruby, ...
+  - `Develop Source Code` -> `Run`
+
+## IPs and Ports
+假設今天有一台電腦 開了兩個 IP 入口對外
+
+若要開放不指定 IP 的話，就用 `0.0.0.0`
+
+網路介面 `l0` 是指 `127.0.0.1`
+
+## SSL & TLS Basics
+非對稱金耀 asymmetric encryption
+- Private Key
+- Public Lock (或可稱 public key)
+
+以 SSH 為例
+- 在遠端機器上放入 public lock
+  - 只有有 private key 的人可以連線進入
+  - 放在遠端機器的 ~/.ssh/authorized_keys
+
+以 HTTPS 為例
+- 遠端機器自己先建立好一組金鑰對 (asymmetric的)
+  - 假設 `my-bank.key mybank.pem`
+  - 使用者只需要 對稱金鑰
+  - 遠端機器 (server) 有 非對稱金鑰 
+  - CA 使用非對稱金鑰
+  - CA 的 public key 在每個 browder 都有
+  1. 遠端機器請求 CA 幫忙驗證自己是合法的 (送出 CSR)
+  2. CA 確認後用 `CA 的 private key` 簽名
+  3. 遠端機器拿到簽名後的 certificate後，設定在機器上 (configuration)
+  4. 當使用者要存取遠端機器的網頁時，遠端機器送出 certificate 和 遠端機器的 public lock
+  5. 使用者的瀏覽器用 `CA public key` 解開簽證，確認 `遠端機器的 public lock` 是合法的
+  6. 之後使用者用 `遠端機器的 public lock` 鎖住 `使用者的 key` 傳給遠端機器
+  7. 如此只有遠端機器可以用 `遠端機器的 private key` 解開 `遠端機器的 public lock` 拿到 `使用者的 key`
+  8. 之後 遠端機器就用 `使用者的 key` 鎖住要給使用者的資料傳出去
+  9. 使用者可以用 `自己的 key` 解密得到資料
+  10. 使用者都用 `自己的 key` 加密後傳給 遠端機器
+  11. 遠端機器用 `使用者的 key` 解密
+
+> 這樣在溝通中，使用者的 key 都不會裸露出來
+
+現在的瀏覽器都內建了 驗證 certificate 的機制 (Certificate Authority 組織會把他們的 public key 安裝到瀏覽器上)
+
+可以知道連線安不安全
+
+遠端機器如何確認 client 是同一個?
+1. 提出 client 要提供 certificate
+2. 然後 client 就要生成 非對稱金鑰 且也要對 CA 提出 CSR 並拿到 CERT
+3. client 把自己的金鑰和 CERT 傳給 遠端機器 
+
+> PKI (Public Key Infrastructure)
+
+非對稱金鑰只能一把加密 另一把解密
+
+同一把鑰匙不能同時做到加解密
+
+> Convention
+> 
+> Certificate (Public Key) 通常用 *.crt 或 *.pem
+> 
+> Private Key 通常用 *.key 或 *.key.pem 
+
+## JSON path
+JSON path 是對 JSON 的 query 語法 (dictionary)
+
+就像 SQL 是對資料庫一樣
+
+最外層的 `{}` 是指 root element 用 `$` 代表
+
+而 JSON path query 的結果都是在 `[]` 內，用中括號包起來
+
+```json
+{
+  "car": {
+    "color": "blue",
+    "price": "$20000"
+  },
+  "bus": {
+    "color": "white",
+    "price": "$120000"
+  }
+}
+```
+
+**Query**
+
+- Get car details: `$.car`
+```json
+[
+  {
+    "color": "blue",
+    "price": "$20000"
+  }
+]
+```
+
+- Get bus details: `$.bus`
+```json
+[
+  {
+    "color": "white",
+    "price": "$120000"
+  }
+]
+```
+- Get car's color: `$.car.color`
+```json
+[
+  "blue"
+]
+```
+
+另一個範例 for 陣列
+```json
+[
+  "car",
+  "bus",
+  "truck",
+  "bike"
+]
+```
+
+- Get the 1st element
+```json
+$[0]
+
+// result
+[
+  "car"
+]
+```
+
+- Get the 4th element
+```json
+$[3]
+
+// result
+[
+  "bike"
+]
+```
+
+- Get the 1st and 4th element
+```json
+$[0,3]
+
+// result
+[
+  "car",
+  "bike"
+]
+```
+
+
+另一個範例
+```json
+[
+  12,
+  43,
+  23,
+  12,
+  56
+]
+// 要找出大於 40 的
+$[ ? ( @ > 40 ) ]
+
+// 結果
+[
+  43,
+  56
+]
+```
+
+`@` 是指 item in loop
+
+- `@ == 40`
+- `@ in [40,43,45]`
+- `@ != 40`
+- `@ nin [40,43,45]`
+
+複雜的 query 例子
+```json
+$.car.wheels[?(@.location == "rear-right"].model
+```
+
+[JSONPath playground](https://jsonpath.com/)
