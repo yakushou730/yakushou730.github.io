@@ -77,3 +77,79 @@ default port: 2379
 kubectl exec etcd-master -n kube-system etcdctl get / --prefix -keys-only
 ```
 
+## Kube API Server
+當執行 `kubectl` 的時候，就是在發 API 給 kube-apiserver
+
+1. 以 `kubectl get pods` 為例
+
+kube-apiserver 會先做 authenticate 和 validate，再去 ETCD 拿 pods 資料回給 使用者
+
+2. 以建立 pods 為例
+
+kube-apiserver 做完 authenticate 和 validate 以後，會先建立一個 pod (還不在任何 node 上)
+
+先更新到 ETCD 上，再回應 使用者 `Pod created!`
+
+接著 scheduler 持續監控 apiserver，發現了這個沒有在 node 上的 pod
+
+scheduler 識別出正確的 node 來放這個新的 pod，並通知 apiserver
+
+apiserver 再把這資訊寫進 ETCD 並且把資訊傳給對應 worker node 的 kubelet
+
+收到資訊的 node 就建立這個 pod 出來 (透過 Container Runtime Enginer 部署 image)
+
+完成後 kubelet 把資訊回傳給 kube-apiserver，apiserver 再把資訊寫進 ETCD
+
+> 可以注意到幾乎全部的溝通都要通過 apiserver
+
+整合剛剛的步驟
+1. Authenticate User
+2. Validate Request
+3. Retrieve data
+4. Update ETCD
+5. Scheduler
+6. Kubelet
+
+## Kube Controller Manager
+Controller manager 管理了許多 k8s 不同的 controller
+
+Controller 可以負責的任務
+- 當有新船抵達或是有船離開，監控並做出必要的動作
+- 管理船上的 container
+
+簡化:
+1. 狀態監控 (Watch status)
+2. 情況補救 (Remediate situation)
+
+> k8s 中，controller 是一個程序 會持續監控系統中的 component 狀態
+> 
+> 並做出處置讓整個系統可以處在 desired state
+
+Node Controller
+- 監控 node 狀態，以及做出處置讓 application 可以持續運作
+- 中間要透過 apiserver
+- node controller 每 5秒 確認一次 node 的狀態
+- 如果 node controller 超過 40秒 讀不到 node 的 heartbeat，那該 node 會被標為 unreachable
+- 如果標為 unreachable 超過 5分鐘，就註銷那個 node 上面的 pod，並移去其他健康的 node (如果那個 pod 是在 replicaset 之中的話)
+
+Replication Controller
+- 監控 replicaset 狀態，並確保預期的 pod 數量正常的，如果有 pod 掛了就建立新的
+
+> 一堆 controller 組合起來，就像 k8s 的大腦，整個包起來就是 kube-controller-manager
+
+## kube scheduler
+負責決定 哪個 pod 要去哪個 node，但不是 scheduler 操作把 pod 放去哪 (這是 kubelet 的工作)
+
+> kubelet 會負責建立 pod
+
+為什麼需要 scheduler ?
+- 因為每個 container 的大小或需要的環境都不太一樣，所以需要特別處理來讓生產效益最高
+
+scheduler 的決定流程
+1. 先看 container 的環境需求，首先 filter nodes，讓不滿條件的 node 先排除
+   - 比如說 CUP, memory 不滿足...等等
+2. 再做 rank nodes，會有一個 priority function 來對每個 node 做評分
+
+
+
+
