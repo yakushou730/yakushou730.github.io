@@ -16,9 +16,9 @@
 <meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
 <meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/><link rel=prev href=https://blog.yakushou.com/posts/k8s/helm/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/><link rel=prev href=https://blog.yakushou.com/posts/k8s/helm/><link rel=next href=https://blog.yakushou.com/posts/programming/tools/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Certified K8s Administrator","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/"},"genre":"posts","keywords":"programming, k8s","wordcount":258,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/","datePublished":"2022-01-09T21:07:35+08:00","dateModified":"2022-01-09T21:07:35+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Certified K8s Administrator"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Certified K8s Administrator","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/"},"genre":"posts","keywords":"programming, k8s","wordcount":482,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/","datePublished":"2022-01-09T21:07:35+08:00","dateModified":"2022-01-09T21:07:35+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Certified K8s Administrator"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;258 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;482 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -72,6 +72,9 @@
 <ul>
 <li><a href=#core-concepts>Core Concepts</a></li>
 <li><a href=#etcd>ETCD</a></li>
+<li><a href=#kube-api-server>Kube API Server</a></li>
+<li><a href=#kube-controller-manager>Kube Controller Manager</a></li>
+<li><a href=#kube-scheduler>kube scheduler</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=core-concepts>Core Concepts</h2>
@@ -164,7 +167,84 @@
 </li>
 </ol>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>kubectl <span class=nb>exec</span> etcd-master -n kube-system etcdctl get / --prefix -keys-only
-</code></pre></div></div>
+</code></pre></div><h2 id=kube-api-server>Kube API Server</h2>
+<p>當執行 <code>kubectl</code> 的時候，就是在發 API 給 kube-apiserver</p>
+<ol>
+<li>以 <code>kubectl get pods</code> 為例</li>
+</ol>
+<p>kube-apiserver 會先做 authenticate 和 validate，再去 ETCD 拿 pods 資料回給 使用者</p>
+<ol start=2>
+<li>以建立 pods 為例</li>
+</ol>
+<p>kube-apiserver 做完 authenticate 和 validate 以後，會先建立一個 pod (還不在任何 node 上)</p>
+<p>先更新到 ETCD 上，再回應 使用者 <code>Pod created!</code></p>
+<p>接著 scheduler 持續監控 apiserver，發現了這個沒有在 node 上的 pod</p>
+<p>scheduler 識別出正確的 node 來放這個新的 pod，並通知 apiserver</p>
+<p>apiserver 再把這資訊寫進 ETCD 並且把資訊傳給對應 worker node 的 kubelet</p>
+<p>收到資訊的 node 就建立這個 pod 出來 (透過 Container Runtime Enginer 部署 image)</p>
+<p>完成後 kubelet 把資訊回傳給 kube-apiserver，apiserver 再把資訊寫進 ETCD</p>
+<blockquote>
+<p>可以注意到幾乎全部的溝通都要通過 apiserver</p>
+</blockquote>
+<p>整合剛剛的步驟</p>
+<ol>
+<li>Authenticate User</li>
+<li>Validate Request</li>
+<li>Retrieve data</li>
+<li>Update ETCD</li>
+<li>Scheduler</li>
+<li>Kubelet</li>
+</ol>
+<h2 id=kube-controller-manager>Kube Controller Manager</h2>
+<p>Controller manager 管理了許多 k8s 不同的 controller</p>
+<p>Controller 可以負責的任務</p>
+<ul>
+<li>當有新船抵達或是有船離開，監控並做出必要的動作</li>
+<li>管理船上的 container</li>
+</ul>
+<p>簡化:</p>
+<ol>
+<li>狀態監控 (Watch status)</li>
+<li>情況補救 (Remediate situation)</li>
+</ol>
+<blockquote>
+<p>k8s 中，controller 是一個程序 會持續監控系統中的 component 狀態</p>
+<p>並做出處置讓整個系統可以處在 desired state</p>
+</blockquote>
+<p>Node Controller</p>
+<ul>
+<li>監控 node 狀態，以及做出處置讓 application 可以持續運作</li>
+<li>中間要透過 apiserver</li>
+<li>node controller 每 5秒 確認一次 node 的狀態</li>
+<li>如果 node controller 超過 40秒 讀不到 node 的 heartbeat，那該 node 會被標為 unreachable</li>
+<li>如果標為 unreachable 超過 5分鐘，就註銷那個 node 上面的 pod，並移去其他健康的 node (如果那個 pod 是在 replicaset 之中的話)</li>
+</ul>
+<p>Replication Controller</p>
+<ul>
+<li>監控 replicaset 狀態，並確保預期的 pod 數量正常的，如果有 pod 掛了就建立新的</li>
+</ul>
+<blockquote>
+<p>一堆 controller 組合起來，就像 k8s 的大腦，整個包起來就是 kube-controller-manager</p>
+</blockquote>
+<h2 id=kube-scheduler>kube scheduler</h2>
+<p>負責決定 哪個 pod 要去哪個 node，但不是 scheduler 操作把 pod 放去哪 (這是 kubelet 的工作)</p>
+<blockquote>
+<p>kubelet 會負責建立 pod</p>
+</blockquote>
+<p>為什麼需要 scheduler ?</p>
+<ul>
+<li>因為每個 container 的大小或需要的環境都不太一樣，所以需要特別處理來讓生產效益最高</li>
+</ul>
+<p>scheduler 的決定流程</p>
+<ol>
+<li>先看 container 的環境需求，首先 filter nodes，讓不滿條件的 node 先排除
+<ul>
+<li>比如說 CUP, memory 不滿足&mldr;等等</li>
+</ul>
+</li>
+<li>再做 rank nodes，會有一個 priority function 來對每個 node 做評分</li>
+</ol>
+</div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
@@ -186,7 +266,8 @@
 <span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/posts/k8s/helm/ class=prev rel=prev title=helm><i class="fas fa-angle-left fa-fw"></i>helm</a></div>
+<div class=post-nav><a href=/posts/k8s/helm/ class=prev rel=prev title=helm><i class="fas fa-angle-left fa-fw"></i>helm</a>
+<a href=/posts/programming/tools/ class=next rel=next title=tools>tools<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

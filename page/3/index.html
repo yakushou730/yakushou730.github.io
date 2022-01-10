@@ -56,6 +56,19 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/errors/>errors</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-23>2021-11-23</time></span></div><div class=content>#As func As(err error, target interface{}) bool
+第一個參數是現在拿到的 error
+會透過呼叫 Unwrap 來比對 err 的第一個錯誤是否和 target 相同 如果對的話，會把 target 設定為 err 並回傳 true 否則回傳 false
+範例
+err := dec.Decode(dst) if err != nil { var syntaxError *json.SyntaxError switch { case errors.As(err, &syntaxError): return fmt.Errorf("body contains badly-formed JSON (at character %d)", syntaxError.Offset) default: return err } } #Is func Is(err error, target error) bool
+第一個參數是現在拿到的 error 第二個參數是想要比對的特定 error
+比對方式是透過呼叫 Unwrap 逐一拆解來比對是否包含 特定的 error</div><div class=post-footer>
+<a href=/posts/golang/packages/errors/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/packages/json/>json</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -166,14 +179,6 @@ CREATEROLEgreenlightWITHLOGINPASSWORD'pa55word';查看使用者 \du使用者登�
 psql --host=localhost --dbname=greenlight --username=greenlight 刪除使用者 在 SHELL 直接輸入指令</div><div class=post-footer>
 <a href=/posts/programming/postgresql/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/dictionary/en-conj-dictionary/>英文: 連接詞</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-14>2021-11-14</time></span></div><div class=content>A albeit 雖然；儘管
-W whereas 儘管；但是；卻</div><div class=post-footer>
-<a href=/posts/dictionary/en-conj-dictionary/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>
