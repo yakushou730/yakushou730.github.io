@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/><link rel=prev href=https://blog.yakushou.com/posts/k8s/helm/><link rel=next href=https://blog.yakushou.com/posts/programming/tools/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Certified K8s Administrator","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/"},"genre":"posts","keywords":"programming, k8s","wordcount":482,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/","datePublished":"2022-01-09T21:07:35+08:00","dateModified":"2022-01-09T21:07:35+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Certified K8s Administrator"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Certified K8s Administrator","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/"},"genre":"posts","keywords":"programming, k8s","wordcount":640,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/","datePublished":"2022-01-09T21:07:35+08:00","dateModified":"2022-01-09T21:07:35+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Certified K8s Administrator"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;482 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;640 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -75,6 +75,9 @@
 <li><a href=#kube-api-server>Kube API Server</a></li>
 <li><a href=#kube-controller-manager>Kube Controller Manager</a></li>
 <li><a href=#kube-scheduler>kube scheduler</a></li>
+<li><a href=#kubelet>Kubelet</a></li>
+<li><a href=#kube-proxy>Kube Proxy</a></li>
+<li><a href=#namespace>Namespace</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=core-concepts>Core Concepts</h2>
@@ -244,7 +247,62 @@
 </li>
 <li>再做 rank nodes，會有一個 priority function 來對每個 node 做評分</li>
 </ol>
-</div>
+<h2 id=kubelet>Kubelet</h2>
+<p>kubelet 是 worker node 上面的船長，負責和 apiserver 溝通</p>
+<p>負責 container 的裝載，並回報給 master</p>
+<p>負責</p>
+<ol>
+<li>Register Node (to cluster)</li>
+<li>Create Pod</li>
+<li>Monitor Nodes & Pods</li>
+</ol>
+<h2 id=kube-proxy>Kube Proxy</h2>
+<p>Pod Network 讓 cluster 內的 pod 可以互相溝通</p>
+<p>先前學過的 相互溝通可以透過 Service object</p>
+<p>network 不是實體，所以不會建立 pod，而是紀錄在 memory 裡面</p>
+<p>kube-proxy 是一個 process，在每個 node 上執行</p>
+<p>每當有新的 service 被發現，就會在每個 node 上建立對應的 rules 來導流量給這些 service 到 pod</p>
+<ul>
+<li>IP table</li>
+</ul>
+<h2 id=namespace>Namespace</h2>
+<p>k8s 常用的 namespace</p>
+<ul>
+<li>default</li>
+<li>kube-system</li>
+<li>kube-public</li>
+</ul>
+<p>namespace 是可以有 policy 權限控管的</p>
+<p>也可以對 namespace 做資源上的限制</p>
+<p>舉例:
+namespace: default</p>
+<ul>
+<li>web-pod</li>
+<li>db-service</li>
+<li>web-deployment
+namespace: dev</li>
+<li>db-service</li>
+<li>web-pod</li>
+</ul>
+<p>如果 default 內的 web-pod 要對同 namespace 的 db-service 存取，使用 <code>mysql.connect("db-service")</code></p>
+<p>如果 default 內的 web-pod 要對 dev namespace 的 db-service 存取，使用 <code>mysql.connect("db-service.dev.svc.cluster.local")</code></p>
+<ul>
+<li><code>cluster.local</code> 是 default domain name for k8s</li>
+<li><code>svc</code> 是 subdomain for service</li>
+<li><code>dev</code> 是 namespace</li>
+<li><code>db-service</code> 是 service name</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 列出 namespace default 的 pods</span>
+kubectl get pods
+<span class=c1># 列出指定 namespace 的 pods</span>
+kubectl get pods --namespace<span class=o>=</span>kube-system
+<span class=c1># 建立 pod 到指定的 namespace</span>
+kubectl create -f pod-definition.yaml --namespace<span class=o>=</span>dev
+</code></pre></div><p>在 pod-definition.yaml 裡面指定 namespace</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># 假設指定 namespace dev</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>dev</span><span class=w>
+</span></code></pre></div></div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
