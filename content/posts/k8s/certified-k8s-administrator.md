@@ -150,6 +150,69 @@ scheduler 的決定流程
    - 比如說 CUP, memory 不滿足...等等
 2. 再做 rank nodes，會有一個 priority function 來對每個 node 做評分
 
+## Kubelet
+kubelet 是 worker node 上面的船長，負責和 apiserver 溝通
 
+負責 container 的裝載，並回報給 master
+
+負責
+1. Register Node (to cluster)
+2. Create Pod
+3. Monitor Nodes & Pods
+
+## Kube Proxy
+Pod Network 讓 cluster 內的 pod 可以互相溝通
+
+先前學過的 相互溝通可以透過 Service object
+
+network 不是實體，所以不會建立 pod，而是紀錄在 memory 裡面
+
+kube-proxy 是一個 process，在每個 node 上執行
+
+每當有新的 service 被發現，就會在每個 node 上建立對應的 rules 來導流量給這些 service 到 pod
+- IP table
+
+## Namespace
+k8s 常用的 namespace
+- default
+- kube-system
+- kube-public
+
+namespace 是可以有 policy 權限控管的
+
+也可以對 namespace 做資源上的限制
+
+舉例:
+namespace: default
+  - web-pod
+  - db-service
+  - web-deployment
+namespace: dev
+  - db-service
+  - web-pod
+ 
+如果 default 內的 web-pod 要對同 namespace 的 db-service 存取，使用 `mysql.connect("db-service")`
+
+如果 default 內的 web-pod 要對 dev namespace 的 db-service 存取，使用 `mysql.connect("db-service.dev.svc.cluster.local")`
+- `cluster.local` 是 default domain name for k8s
+- `svc` 是 subdomain for service
+- `dev` 是 namespace
+- `db-service` 是 service name
+
+```shell
+# 列出 namespace default 的 pods
+kubectl get pods
+# 列出指定 namespace 的 pods
+kubectl get pods --namespace=kube-system
+# 建立 pod 到指定的 namespace
+kubectl create -f pod-definition.yaml --namespace=dev
+```
+
+在 pod-definition.yaml 裡面指定 namespace
+```yaml
+# 假設指定 namespace dev
+metadata:
+  namespace: dev
+```
 
 

@@ -240,3 +240,52 @@ spec:
       port: 80 # 要進這個 service 的 port
       nodePort: 30008
 ```
+
+## Namespace
+建立 namespace-dev.yml
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+```
+
+`kubectl create -f namespace-dev.yml`
+
+或是直接透過指令建立
+```shell
+# 建立 dev 的 namespace
+kubectl create namespace dev
+```
+
+切換 namespace
+```shell
+kubectl config set-context $(kubectl config current-context) --namespace=<target namspace>
+```
+
+```shell
+# 列出所有 namespace 下的 pod
+kubectl get pods --all-namespace
+```
+
+## ResourceQuota
+建立 特定 namespace 下的資源限制
+
+compute-quota.yaml
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+  namespace: dev
+spec:
+  hard:
+    pods: "10"
+    requests.cpu: "4"
+    requests.memory: 5Gi
+    limits.cpu: "10"
+    limits.memory: 10Gi
+```
+
+`kubectl create -f compute-quota.yaml`
