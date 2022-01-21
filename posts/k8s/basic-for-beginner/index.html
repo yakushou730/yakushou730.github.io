@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/basic-for-beginner/><link rel=prev href=https://blog.yakushou.com/posts/udemy/complete-guide-to-elasticsearch/mapping-and-analysis/><link rel=next href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"basic for beginner","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/basic-for-beginner\/"},"genre":"posts","keywords":"programming, k8s","wordcount":843,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/basic-for-beginner\/","datePublished":"2021-12-24T11:28:29+08:00","dateModified":"2021-12-24T11:28:29+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"basic for beginner"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"basic for beginner","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/basic-for-beginner\/"},"genre":"posts","keywords":"programming, k8s","wordcount":948,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/basic-for-beginner\/","datePublished":"2021-12-24T11:28:29+08:00","dateModified":"2021-12-24T11:28:29+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"basic for beginner"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;843 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-24>2021-12-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;948 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -146,6 +146,12 @@ kubectl get nodes -o wide
 <p>指令:</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 從 dockerhub 拉下 nginx image 並執行成 名為 nginx 的 pod</span>
 kubectl run nginx --image nginx
+<span class=c1># 建立 pod 同時指定要開放的 port 8080</span>
+kubectl run custom-nginx --image<span class=o>=</span>nginx --port<span class=o>=</span><span class=m>8080</span>
+<span class=c1># 建立 pod 同時建立 labels</span>
+kukbectl run redis --image<span class=o>=</span>redis:alpine --labels<span class=o>=</span><span class=nv>tier</span><span class=o>=</span>db
+<span class=c1># 建立 pod 的時候順便指定 expose 的 port，--expose 會連 service 一起建出來</span>
+kubectl run httpd --image<span class=o>=</span>httpd:alpine --port<span class=o>=</span><span class=m>80</span> --expose
 <span class=c1># 取得 pods 列表</span>
 kubectl get pods
 <span class=c1># 取得特定 pod 的詳細描述</span>
@@ -180,7 +186,14 @@ kubectl apply -f &lt;file name&gt;
 <p>把新版本的 image 部署到 node 上</p>
 <p>可以做 rolling update / rollback</p>
 <p>Deployment 可以視為更大的範圍(集合)，包含了 Replica Set 在裡面</p>
-<h2 id=deployment-updates-and-rollback>Deployment Updates and Rollback</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 手動建立 deployment</span>
+<span class=c1># deployment 名稱 webapp</span>
+<span class=c1># image 用 kodekloud/webapp-color</span>
+<span class=c1># repilicaset = 3</span>
+kubectl create deployment webapp --image<span class=o>=</span>kodekloud/webapp-color --replicas<span class=o>=</span><span class=m>3</span>
+<span class=c1># 建立在 namespace dev-ns 上</span>
+kubectl create deployment redis-deploy -n dev-ns --image<span class=o>=</span>redis --replicas<span class=o>=</span><span class=m>2</span>
+</code></pre></div><h2 id=deployment-updates-and-rollback>Deployment Updates and Rollback</h2>
 <p>建立 deployment 的時候，會觸發 rollout</p>
 <p>一個新的 rollout 會建立一個新的 deployment revision</p>
 <p>(例: 第一次發布為 revision 1，第二次發布為 revision 2)</p>
@@ -253,7 +266,12 @@ kubectl create -f &lt;deployment file name&gt; --record
 </ul>
 </li>
 </ul>
-<p><strong>NodePort</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 靠指令直接建立出 service</span>
+<span class=c1># 建出名稱 redis-service</span>
+<span class=c1># 是要接到 pod redis 開 port 6379，然後對到 pod target port 6379</span>
+<span class=c1># 建出來的是 ClusterIP</span>
+kubectl expose pod redis --port<span class=o>=</span><span class=m>6379</span> --target-port<span class=o>=</span><span class=m>6379</span> --name redis-service
+</code></pre></div><p><strong>NodePort</strong></p>
 <ul>
 <li>意思是在 Node上面開一個 Port，可以從外部對應到內部的 pod</li>
 <li>可以設定 mapping 給 Node port 對 Pod port</li>
@@ -283,6 +301,7 @@ kubectl create -f &lt;deployment file name&gt; --record
 <li>對 application 提供 Load Balancer</li>
 <li>LoadBalancer 是掛在 Cluster 等級，用來接外部的流量要進哪台 Node</li>
 <li>大部分的 Cloud provider 都有提供這功能</li>
+<li>要 Cloud Provider 提供才可以做，Virtual box 是做不到的</li>
 </ul>
 <h2 id=microservice-architecture-範例>microservice architecture 範例</h2>
 <p><img class=lazyload data-src=/k8s/k8s-docker-architecture-sample.jpg data-srcset="/k8s/k8s-docker-architecture-sample.jpg, /k8s/k8s-docker-architecture-sample.jpg 1.5x, /k8s/k8s-docker-architecture-sample.jpg 2x" data-sizes=auto alt=/k8s/k8s-docker-architecture-sample.jpg title=k8s-docker-architecture-sample></p>

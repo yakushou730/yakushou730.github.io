@@ -1,0 +1,261 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>ultimate `syntax - YakuShou's NOTEBOOK</title><meta name=Description content="ultimate syntax"><meta property="og:title" content="ultimate `syntax">
+<meta property="og:description" content="ultimate syntax">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-18T08:25:04+08:00">
+<meta property="article:modified_time" content="2022-01-18T08:25:04+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="ultimate `syntax">
+<meta name=twitter:description content="ultimate syntax">
+<meta name=application-name content="YakuShou's NOTEBOOK">
+<meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
+<meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/><link rel=prev href=https://blog.yakushou.com/posts/programming/tools/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"ultimate `syntax","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-syntax\/"},"genre":"posts","keywords":"programming, golang","wordcount":416,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-syntax\/","datePublished":"2022-01-18T08:25:04+08:00","dateModified":"2022-01-18T08:25:04+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"ultimate syntax"}</script></head>
+<body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><span class="menu-item delimiter"></span><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>Contents</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ultimate `syntax</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-18>2022-01-18</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-18>2022-01-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;416 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#variables>Variables</a></li>
+<li><a href=#strings>Strings</a></li>
+<li><a href=#struct>Struct</a></li>
+<li><a href=#type-conversions>Type Conversions</a></li>
+<li><a href=#pointers>Pointers</a></li>
+<li><a href=#literal-struct>Literal Struct</a></li>
+<li><a href=#constants>Constants</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h2 id=variables>Variables</h2>
+<ul>
+<li>一般來說使用 int 較多，而不是 int32 或 int64</li>
+<li>少用 <code>:= zero value</code>，碰到 zero value 的話不如直接用 var 宣吿</li>
+</ul>
+<h2 id=strings>Strings</h2>
+<ul>
+<li>string 是 2 words 的 data structures
+<ul>
+<li>空字串
+<ul>
+<li>第一個 word 是 <code>nil</code></li>
+<li>第二個 word 是 <code>0</code></li>
+</ul>
+</li>
+<li>字串 Hello
+<ul>
+<li>第一個 word 是指標，指向 <code>hello</code> 陣列的 <code>h</code> 位址</li>
+<li>第二個 word 是長度 <code>5</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id=struct>Struct</h2>
+<p>golang 的三種印出格式</p>
+<ul>
+<li><code>%v</code> -> <code>{false 0 0}</code></li>
+<li><code>%+v</code> -> <code>{flag:false counter:0 pi:0}</code></li>
+<li><code>%#v</code> -> <code>main.example{flag:false, counter:0, pi:0}</code></li>
+</ul>
+<p><strong>Literal Construction</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>e2</span> <span class=o>:=</span> <span class=nx>example</span><span class=p>{</span>
+	<span class=nx>flag</span><span class=p>:</span>    <span class=kc>true</span><span class=p>,</span>
+	<span class=nx>counter</span><span class=p>:</span> <span class=mi>10</span><span class=p>,</span>
+	<span class=nx>pi</span><span class=p>:</span>      <span class=mf>3.141592</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Empty Literal Construction</strong></p>
+<p>不建議，因為在某些情境下不會真的都是 zero value</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>e2</span> <span class=o>:=</span> <span class=nx>example</span><span class=p>{}</span>
+</code></pre></div><p>建議如果是 zero value 的話就用 <code>var</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>e2</span> <span class=nx>example</span>
+</code></pre></div><p>如果 struct 裡面有 zero value 的欄位，建立的時候不用 assign value</p>
+<p>不要做 partial construction</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 不要做 partial construction
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>e</span> <span class=nx>example</span>
+<span class=nx>e</span><span class=p>.</span><span class=nx>flag</span> <span class=p>=</span> <span class=kc>true</span>
+<span class=c1>// 而是
+</span><span class=c1></span><span class=nx>e</span> <span class=o>:=</span> <span class=nx>example</span><span class=p>{</span>
+	<span class=nx>flag</span><span class=p>:</span> <span class=kc>true</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=type-conversions>Type Conversions</h2>
+<p>struct literal type 可以 assign 給 name type</p>
+<p>但不同的 name type 彼此間不能互相 assign</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>bill</span> <span class=kd>struct</span><span class=p>{</span>
+	<span class=nx>flag</span> <span class=kt>bool</span>
+<span class=p>}</span>
+
+<span class=kd>type</span> <span class=nx>eric</span> <span class=nx>struc</span><span class=p>{</span>
+	<span class=nx>flag</span> <span class=kt>bool</span>
+<span class=p>}</span>
+
+<span class=nx>e</span> <span class=o>:=</span> <span class=kd>struct</span><span class=p>{</span>
+	<span class=nx>flag</span> <span class=kt>bool</span>
+<span class=p>}{</span>
+	<span class=nx>flag</span><span class=p>:</span> <span class=kc>true</span>
+<span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>bi</span> <span class=nx>bill</span>
+<span class=kd>var</span> <span class=nx>er</span> <span class=nx>eric</span>
+
+<span class=c1>// compile failed
+</span><span class=c1></span><span class=nx>bi</span> <span class=p>=</span> <span class=nx>er</span>
+
+<span class=c1>// compile succeed
+</span><span class=c1></span><span class=nx>bi</span> <span class=p>=</span> <span class=nx>e</span>
+
+<span class=c1>// compile succeed
+</span><span class=c1></span><span class=nx>bi</span> <span class=p>=</span> <span class=nf>bill</span><span class=p>(</span><span class=nx>er</span><span class=p>)</span>
+</code></pre></div><h2 id=pointers>Pointers</h2>
+<ul>
+<li>value semantics: a piece of code is copied as moved in your program</li>
+<li>pointer semantics: one copy and shared by everybody</li>
+</ul>
+<p>value semantics 可以讓資料彼此都是獨立的 (isolated) 不會碰到 mutation bug</p>
+<blockquote>
+<p>data integrity: 數據完整性</p>
+</blockquote>
+<p>pointer semantics 的話 因為太多人可以改他，所以 data integrity 很差</p>
+<h2 id=literal-struct>Literal Struct</h2>
+<p>是指沒有 name 的 type</p>
+<p>不是什麼東西都要給一個 name (type pollution)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>e2</span> <span class=o>:=</span> <span class=kd>struct</span> <span class=p>{</span>
+	<span class=nx>flag</span> <span class=kt>bool</span>
+	<span class=nx>counter</span> <span class=kt>int16</span>
+	<span class=nx>pi</span> <span class=kt>float32</span>
+<span class=p>}{</span>
+	<span class=nx>flag</span><span class=p>:</span>    <span class=kc>true</span><span class=p>,</span>
+	<span class=nx>counter</span><span class=p>:</span> <span class=mi>10</span><span class=p>,</span>
+	<span class=nx>pi</span><span class=p>:</span>      <span class=mf>3.141592</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=constants>Constants</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// untyped constants
+</span><span class=c1></span><span class=kd>const</span> <span class=nx>ui</span> <span class=p>=</span> <span class=mi>12345</span>     <span class=c1>// kind: integer
+</span><span class=c1></span><span class=kd>const</span> <span class=nx>uf</span> <span class=p>=</span> <span class=mf>3.141592</span>  <span class=c1>// kind: floating-point
+</span><span class=c1></span>
+<span class=c1>// typed constants
+</span><span class=c1></span><span class=kd>const</span> <span class=nx>ti</span> <span class=kt>int</span> <span class=p>=</span> <span class=mi>12345</span>         <span class=c1>// type: int
+</span><span class=c1></span><span class=kd>const</span> <span class=nx>tf</span> <span class=kt>float64</span> <span class=p>=</span> <span class=mf>3.141592</span>  <span class=c1>// type: float64
+</span><span class=c1></span>
+<span class=c1>// Variable answer will of type float64
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>answer</span> <span class=p>=</span> <span class=mi>3</span> <span class=o>*</span> <span class=mf>0.333</span> <span class=c1>// KindFloat(3) * KindFloat(3.0)
+</span><span class=c1></span>
+<span class=c1>// Constant third will be of kind floating point
+</span><span class=c1></span><span class=kd>const</span> <span class=nx>third</span> <span class=p>=</span> <span class=mi>1</span> <span class=o>/</span> <span class=mf>3.0</span> <span class=c1>// KindFloat(1) / KindFloat(3.0)
+</span><span class=c1></span>
+<span class=c1>// Constant zero will be of kind integer
+</span><span class=c1></span><span class=kd>const</span> <span class=nx>zero</span> <span class=p>=</span> <span class=mi>1</span> <span class=o>/</span> <span class=mi>3</span> <span class=c1>// KindInt(1) / KindInt(3)
+</span><span class=c1></span>
+<span class=c1>// Max Integer value on 64 bit architecture
+</span><span class=c1></span><span class=kd>const</span> <span class=nx>maxInt</span> <span class=p>=</span> <span class=mi>9223372036854775807</span>
+
+<span class=c1>// Much larger value than int64
+</span><span class=c1>// compile 階段不會報錯
+</span><span class=c1></span><span class=kd>const</span> <span class=nx>bigger</span> <span class=p>=</span> <span class=mi>9223372036854775808543522345</span>
+<span class=c1>// 會錯 overflows，因為指定了型別
+</span><span class=c1></span><span class=kd>const</span> <span class=nx>biggerInt</span> <span class=kt>int64</span> <span class=p>=</span> <span class=mi>9223372036854775808543522345</span>
+</code></pre></div><p>iota 只有在 block 內有作用</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>const</span> <span class=p>(</span>
+	<span class=nx>A</span> <span class=p>=</span> <span class=kc>iota</span> <span class=c1>// 0
+</span><span class=c1></span>	<span class=nx>B</span>        <span class=c1>// 1
+</span><span class=c1></span>	<span class=nx>C</span>        <span class=c1>// 2
+</span><span class=c1></span><span class=p>)</span>
+
+<span class=kd>const</span> <span class=p>(</span>
+	<span class=nx>Ldate</span>         <span class=p>=</span> <span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=kc>iota</span> <span class=c1>//  1
+</span><span class=c1></span>	<span class=nx>Ltime</span>                     <span class=c1>//  2  
+</span><span class=c1></span>	<span class=nx>Lmicroseconds</span>             <span class=c1>//  4
+</span><span class=c1></span>	<span class=nx>Llongfile</span>                 <span class=c1>//  8
+</span><span class=c1></span>	<span class=nx>Lshortfile</span>                <span class=c1>// 16
+</span><span class=c1></span>	<span class=nx>LUTC</span>                      <span class=c1>// 32
+</span><span class=c1></span><span class=p>)</span>
+</code></pre></div></div>
+<div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>Updated on 2022-01-18</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/programming/tools/ class=prev rel=prev title=tools><i class="fas fa-angle-left fa-fw"></i>tools</a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{}}</script></div>
+</body>
+</html>
