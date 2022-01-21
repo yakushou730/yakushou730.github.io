@@ -200,6 +200,8 @@ namespace: dev
 - `db-service` 是 service name
 
 ```shell
+# 指令建立 namespace 名稱 dev-ns
+kubectl create ns dev-ns
 # 列出 namespace default 的 pods
 kubectl get pods
 # 列出指定 namespace 的 pods
@@ -215,4 +217,164 @@ metadata:
   namespace: dev
 ```
 
+切換 namespace
+```shell
+kubectl config set-context $(kubectl config current-context) --namespace=<target namspace>
+```
 
+```shell
+# 列出所有 namespace 下的 pod
+kubectl get pods --all-namespaces
+```
+
+```shell
+# 常用指令
+# --no-headers 是指不要印出 header 行
+
+# 其他組合
+kubectl get ns --no-headers | wc -l
+kubectl get po -n research --no-headers | wc -l
+```
+
+> 練習中有一個範例是在 pod 顯示頁面輸入 host 和 port 來連線到 redis
+> 
+> host 要是 能連到 db pod 的 service name，而不是 db 的 pod name
+
+## Imperative vs Declarative
+以搭計程車為例:
+- Imperative: 告訴司機先往左，再往右，再直走... 等等等步驟
+  - 重點是 how to do
+- Declarative: 直接告訴司機終點地址
+  - 重點是 最後結果 (what to do)
+
+以 Infrastructure as Code 為例
+
+Imperative
+```
+1. Provision a VM by the name 'web-server'
+2. Install NGINX Software on it
+3. Edit configuration file to use port 8080
+4. Edit configuration file to web path '/var/www/nginx'
+5. Load web pages to '/var/www/nginx' from GIT Repo - X
+6. Start NGINX server
+```
+
+Declarative
+```yaml
+VM NAME: web-server
+Package: nginx
+Port: 8080
+Path: /var/www/nginx
+Code: GIT Repo - X
+```
+
+以 Kubernetes 為例
+
+Imperative
+- 透過數個 `kubectl create` 指令來建立 pod / deployment ....等等等
+- 要自己手動下指令調整各種設定
+- 不需要 configuration file
+- 很難 track，換個人就不知道怎麼操作了
+
+Declarative
+- 只要透過 `kubectl apply` 使用定義好的 configuration file，其他邏輯都不用管
+
+## Kubectl apply command
+系統會比對設定檔的差異
+
+`Local file` <-> 比對 k8s `Live object configuration` (in memory)
+
+如果不一樣的話就會更新，並把最新的版本更新到 `Last applied Configuration`
+- 這資料是存在 k8s Live Object Configuration 的 `metadata.annotations.kubectl.kubernetes.io/last-applied-configuration`
+- 要透過 `kubectl apply` 才會生成，`kubectl create` 或 `kubectl replace` 是不會更新這資料的
+
+## Manual Scheduling
+Pod 在 k8s 上的 live object configuration 上面會被賦予 `nodeName`
+
+而 scheduler 是專門查 pod 上誰沒有 nodeName，發現的話就用自己的演算法賦予 node 上去 
+
+> k8s 不給修改已經賦予 nodeName 的 pod 上面的 nodeName
+
+pod-bind-definition.yaml
+```yaml
+apiVersion: v1
+kind: Binding
+metadata:
+  name: nginx
+target:
+  apiVersion: v1
+  kind: Node
+  name: node2
+```
+
+再把上面的 yaml 轉成 json 後 post 給 k8s 做處理
+
+```shell
+# 檢查 scheduler 是否在 k8s 上
+kubectl get pods --namespace kube-system
+```
+
+## Labels and Selectors
+ 用來分群的
+
+```shell
+# 透過 selector 來 filter 特定 label 的資料
+kubectl get pods --selector app=App1
+# 多個 labels 用逗號隔開
+kubectl get pods --selector env=prod,bu=finance,tier=frontend
+```
+
+**Annotations**
+
+用來儲存其他資訊
+
+## Taints and Tolerations
+解釋如何決定並把 pod 放到對應 node 上的機制 (限制哪些 pod 可以被 scheduled)
+
+如果要避免把 pod 放到某個 node，就對那個 node 做 taint (又叫污點)
+
+再來是把想要有抵抗力的 pod 做 toleration，這樣就可以被放到那個 node 裡面
+
+所以
+- taint 是設定在 node 上
+- toleration 是設定在 pod 上
+
+```shell
+# 語法
+# taint-effect 是指 如果 POD 無法 tolerate 這個 taint 的話會怎麼樣
+# 其中 taint-effect 可以為 NoSchedule | PreferNoSchedule | NoExecute
+# NoSchedule: 不會被 schedule 到這個 node
+# PreferNoSchedule: 盡量不要把 pod 放到這個 node
+# NoExecute: 不會被 schedule 到這個 node 而且已經在上面的 pod 也會被趕走
+kubectl taint nodes node-name key-value:taint-effect
+# 範例
+kubectl taint nodes node1 app=blue:NoExecute
+```
+
+對應在 pod spec 上的設定
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+    - name: nginx-controller
+      image: nginx
+  tolerations: # 注意要用 double quotes
+    - key: "app"
+      operator: "Equal"
+      value: "blue"
+      effect: "NoSchedule"
+```
+
+> master node 天生就被給予了 taint，pod 不會被放上去
+
+```shell
+# 查看 taint
+kubectl describe node kubemaster | grep Taint
+# 移除 taint [原本的 taint 是 node-role.kubernetes.io/master:NoSchedule]
+# 看起來是最後面加個減號可以拿掉
+kubectl taint nodes controlplane node-role.kubernetes.io/master:NoSchedule-
+```

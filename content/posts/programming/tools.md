@@ -20,5 +20,15 @@ draft: false
 docker run --rm -v $PWD:/tmp aldanial/cloc .
 ```
 
+## commitizen
+[https://github.com/commitizen/cz-cli](https://github.com/commitizen/cz-cli#making-your-repo-commitizen-friendly)
 
+可以簡單產生 commitizen 的 git commit
 
+[https://www.conventionalcommits.org/en/v1.0.0/](https://www.conventionalcommits.org/en/v1.0.0/)
+
+安裝:
+```shell
+npm install commitizen
+commitizen init cz-conventional-changelog --save-dev --save-exact
+```

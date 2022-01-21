@@ -259,16 +259,6 @@ metadata:
 kubectl create namespace dev
 ```
 
-切換 namespace
-```shell
-kubectl config set-context $(kubectl config current-context) --namespace=<target namspace>
-```
-
-```shell
-# 列出所有 namespace 下的 pod
-kubectl get pods --all-namespace
-```
-
 ## ResourceQuota
 建立 特定 namespace 下的資源限制
 

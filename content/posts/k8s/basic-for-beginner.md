@@ -89,6 +89,12 @@ kubectl describe nodes <node name>
 ```shell
 # 從 dockerhub 拉下 nginx image 並執行成 名為 nginx 的 pod
 kubectl run nginx --image nginx
+# 建立 pod 同時指定要開放的 port 8080
+kubectl run custom-nginx --image=nginx --port=8080
+# 建立 pod 同時建立 labels
+kukbectl run redis --image=redis:alpine --labels=tier=db
+# 建立 pod 的時候順便指定 expose 的 port，--expose 會連 service 一起建出來
+kubectl run httpd --image=httpd:alpine --port=80 --expose
 # 取得 pods 列表
 kubectl get pods
 # 取得特定 pod 的詳細描述
@@ -123,6 +129,16 @@ ReplicaSet 要取代舊式的 Replication Controller
 可以做 rolling update / rollback
 
 Deployment 可以視為更大的範圍(集合)，包含了 Replica Set 在裡面
+
+```shell
+# 手動建立 deployment
+# deployment 名稱 webapp
+# image 用 kodekloud/webapp-color
+# repilicaset = 3
+kubectl create deployment webapp --image=kodekloud/webapp-color --replicas=3
+# 建立在 namespace dev-ns 上
+kubectl create deployment redis-deploy -n dev-ns --image=redis --replicas=2
+```
 
 ## Deployment Updates and Rollback
 建立 deployment 的時候，會觸發 rollout
@@ -184,6 +200,13 @@ k8s 的 service 用來協調 外部和內部 application 的溝通
   - ClusterIP
   - LoadBalancer
 
+```shell
+# 靠指令直接建立出 service
+# 建出名稱 redis-service
+# 是要接到 pod redis 開 port 6379，然後對到 pod target port 6379
+# 建出來的是 ClusterIP
+kubectl expose pod redis --port=6379 --target-port=6379 --name redis-service
+```
 
 **NodePort**
 - 意思是在 Node上面開一個 Port，可以從外部對應到內部的 pod
@@ -206,6 +229,7 @@ k8s 的 service 用來協調 外部和內部 application 的溝通
 - 對 application 提供 Load Balancer
 - LoadBalancer 是掛在 Cluster 等級，用來接外部的流量要進哪台 Node
 - 大部分的 Cloud provider 都有提供這功能
+- 要 Cloud Provider 提供才可以做，Virtual box 是做不到的
 
 ## microservice architecture 範例
 ![k8s-docker-architecture-sample](/k8s/k8s-docker-architecture-sample.jpg)

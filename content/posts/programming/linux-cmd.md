@@ -349,3 +349,19 @@ sed -i 's/8080/9090/g'
 # 在背景執行 python app.py，且不會受到使用者登出影響
 nohup python app.py &
 ```
+
+## wc
+word count
+
+計算資料的字數/行數
+
+```shell
+# 印出 filename 的資訊
+wc [filename]
+# 印出 換行數 (new line) / 字數 (word) / 位元組數 (byte)
+
+# l flag 是指只要行數
+wc -l [file]
+```
+
+## eval
