@@ -365,3 +365,21 @@ wc -l [file]
 ```
 
 ## eval
+可以把環境變數當成指令來執行
+
+[reference](https://linuxhint.com/bash_eval_command/)
+
+```shell
+# 把指令做成參數
+mycommand="wc -l department.txt"
+# 透過 eval 呼叫
+eval $mycommand
+```
+
+## unset
+刪除環境變數
+
+```shell
+# 刪除 env 中的 GONORPOXY
+unset GONOPROXY
+```

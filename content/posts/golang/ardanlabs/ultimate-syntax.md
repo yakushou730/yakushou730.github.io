@@ -167,3 +167,53 @@ const (
 	LUTC                      // 32
 )
 ```
+
+> 不要因為想要 compiler protection 而建立多餘的 type
+> 
+> 維持 type 的一致性
+
+error 是 interface type
+
+## Literal Functions
+
+> Functions are values
+> 
+> Functions are first class values in go
+
+```go
+// Declare an anonymous function and call it
+// 呼叫的當下，n 是什麼就是什麼
+func() {
+	fmt.Println("Direct:", n)
+}()
+
+// 更常見的用法是宣告匿名 function，並賦值給變數
+f := func(){
+	fmt.Println("Variable:", n)
+}
+// 透過變數呼叫 function
+f()
+```
+
+## Array Basics
+
+宣告 Array 大小的時候不能用變數
+
+```go
+// ... 表示完全依照後面的項目決定數量，合法語法但不常用
+numbers := [...]int{10, 20, 30, 40}
+```
+
+用 range 方式 iterate 的 item 是 copy
+```go
+func main() {
+	arr := [5]int{1, 2, 3, 4, 5}
+	for _, v := range arr {
+		v += 1
+	}
+	fmt.Println(arr)
+}
+
+// result
+[1 2 3 4 5]
+```
