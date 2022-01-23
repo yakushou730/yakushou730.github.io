@@ -1,4 +1,11 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>golang - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/tags/golang/</link><description>golang - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 18 Jan 2022 08:25:04 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/tags/golang/" rel="self" type="application/rss+xml"/><item><title>ultimate `syntax</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/</link><pubDate>Tue, 18 Jan 2022 08:25:04 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/</guid><description>Variables 一般來說使用 int 較多，而不是 int32 或 int64 少用 := zero value，碰到 zero value 的話不如直接用 var 宣吿 Strings string 是 2 words 的 data structures 空字串 第一個 word 是 nil 第二個 word 是 0 字串 Hello 第一個 word 是指標，指向 hello 陣列的 h 位址 第二個 word 是長度 5 Struct golang 的三種印出格式
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>golang - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/tags/golang/</link><description>golang - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 23 Jan 2022 21:41:43 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/tags/golang/" rel="self" type="application/rss+xml"/><item><title>Ultimate Service V3</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/</link><pubDate>Sun, 23 Jan 2022 21:41:43 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/</guid><description><![CDATA[Modules Project:
+ a repo of code defines the philosophy, policy and guideline  go mod init [module name] # 範例 go mod init github.com/ardanlabs/service3-video go env # GOMODCACHE=&#34;指向 module cache&#34; GOPROXY=&#34;proxy的位址和方式&#34; GONOPROXY=&#34;這個位址的不要透過proxy，表示直接抓這個位址&#34; # 清掉 module cache go clean -modcache # 自動處理專案的 import go mod tidy go.mod 會存放這個專案會用到的 dependency module
+go.sum 會存放用來驗證要用到的 dependency module 的編碼
+每當 proxy 抓到新版時，就會另外算出 checksum 放在 checksum DB，讓之後其他人抓 module 的時候可以比對是不是正確的 module
+# 建立 vendor 資料夾並把相依抓下來放到這個目錄下 # 這樣專案就會直接找這個資料夾下的資料 go mod vendor  如果發生抓下來的 module 出現 incompatible 怎麼辦?]]></description></item><item><title>Ultimate Go</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/</link><pubDate>Sat, 22 Jan 2022 14:41:10 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/</guid><description>Design Guideline Memory &amp;amp; Data semantics</description></item><item><title>Refactor With Bill</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/refactor-with-bill/</link><pubDate>Sat, 22 Jan 2022 13:46:18 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/refactor-with-bill/</guid><description>Project init 結構會是先建出下列資料夾 (一個 repo 可以執行多個 binary 的結構)
+再來是做 go mod init [name]
+# 可執行的程式入口 cmd/violin/css/ cmd/violin/image/ cmd/violin/mp3/ cmd/violin/templates/ cmd/violin/internal/ cmd/violin/main.go # 商業邏輯 internal/platform/ go.mod 起手式 main.go
+func main(){ if err := run(); err != nil { log.Println(err) os.Exit(1) } } func run() { return nil }</description></item><item><title>ultimate `syntax</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/</link><pubDate>Tue, 18 Jan 2022 08:25:04 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/</guid><description>Variables 一般來說使用 int 較多，而不是 int32 或 int64 少用 := zero value，碰到 zero value 的話不如直接用 var 宣吿 Strings string 是 2 words 的 data structures 空字串 第一個 word 是 nil 第二個 word 是 0 字串 Hello 第一個 word 是指標，指向 hello 陣列的 h 位址 第二個 word 是長度 5 Struct golang 的三種印出格式
 %v -&amp;gt; {false 0 0} %+v -&amp;gt; {flag:false counter:0 pi:0} %#v -&amp;gt; main.</description></item><item><title>fundamental</title><link>https://blog.yakushou.com/posts/golang/fundamental/</link><pubDate>Mon, 27 Dec 2021 16:10:27 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/fundamental/</guid><description><![CDATA[如何在 go get 的時候可以拉到 private repo 概念:
 因為是 private repo 的關係， 所以要讓 go 有權限去拉
 拉的時候是透過 git，所以要設定具有權限的 token 給 git
@@ -27,33 +34,4 @@ s := []string{ &#34;&lt;foo&gt;&#34;, &#34;bar &amp; baz&#34;, } // result [&#34
 之後便可在這兩份檔案寫入對應的 SQL 語法
 執行 migrate (up) $ export GREENLIGHT_DB_DSN=&amp;#39;postgres://greenlight:@localhost/greenlight?</description></item><item><title>Signal</title><link>https://blog.yakushou.com/posts/golang/signal/</link><pubDate>Sat, 20 Nov 2021 23:24:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/signal/</guid><description>Signal 類型 Signal Description Keyboard Shortcut Catchable SIGINT 鍵盤中斷訊號 Ctrl + C true SIGQUIT 鍵盤離開訊號 Ctrl + |true SIGKILL 刪除程序(立即終止) - no SIGTERM 照順序終止程序 - true kill pid 會傳送SIGTERM到程序pid
 shutdown() shutdown 的關閉流程不會中斷任何作用中的連線
-先關閉所有 open 的 listener 再關閉所有 idle 的 listener 等候作用中連線成為 idle shutdown http.Server 的 Shutdown 會在結束時回傳錯誤碼 (沒錯誤的話回傳 nil)</description></item><item><title>Slice</title><link>https://blog.yakushou.com/posts/golang/slice/</link><pubDate>Tue, 16 Nov 2021 22:59:16 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/slice/</guid><description>建立空的 Slice var movies []*Movie movie = &amp;amp;Movie{} // 這樣子建立出來的 movies slice 是 nil // 但已經足夠用來做 append // 不需要寫成 movies := []*Movie{} movies = append(movies, movie) 把 array 轉成 slice // hash 是 [32]byte 的 byte array hash := sha256.Sum256(info) // b.Hash 是 byte slice b.Hash = hash[:]</description></item><item><title>Useful Golang Site</title><link>https://blog.yakushou.com/posts/site/useful-golang-site/</link><pubDate>Fri, 12 Nov 2021 15:46:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/site/useful-golang-site/</guid><description>Golang Developer Roadmap
-Go Patterns
-Code Review Comments
-Go Best Practices
-Golang Open Source Projects
-Calhoun&amp;rsquo;s Golang Blog
-小惡魔 - ApplyBOY
-KKDAI.GITHUB.IO
-Applied Go
-OPENHOME
-Kenny&amp;rsquo;s Blog
-segmentfault Golang 攻略
-ALEX EDWARDS
-PJCHENder
-GO 語言書推薦
-Welcome To Golang By Example
-Go的50度灰：Golang新开发者要注意的陷阱和常见错误
-GoBooks
-Programming Percy
-Three Dots Labs
-Spaceship Go
-Webapps in Go
-Steven Victor
-LeetCode Cookbook
-Go 技巧 101
-Practical Go Lessons
-Learn Go with Tests
-Ompluscator Blog
-鳥窩
-Intermediate Go</description></item></channel></rss>
+先關閉所有 open 的 listener 再關閉所有 idle 的 listener 等候作用中連線成為 idle shutdown http.Server 的 Shutdown 會在結束時回傳錯誤碼 (沒錯誤的話回傳 nil)</description></item><item><title>Slice</title><link>https://blog.yakushou.com/posts/golang/slice/</link><pubDate>Tue, 16 Nov 2021 22:59:16 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/slice/</guid><description>建立空的 Slice var movies []*Movie movie = &amp;amp;Movie{} // 這樣子建立出來的 movies slice 是 nil // 但已經足夠用來做 append // 不需要寫成 movies := []*Movie{} movies = append(movies, movie) 把 array 轉成 slice // hash 是 [32]byte 的 byte array hash := sha256.Sum256(info) // b.Hash 是 byte slice b.Hash = hash[:]</description></item></channel></rss>

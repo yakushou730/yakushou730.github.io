@@ -1,0 +1,146 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>Ultimate Service V3 - YakuShou's NOTEBOOK</title><meta name=Description content="Ultimate Service V3"><meta property="og:title" content="Ultimate Service V3">
+<meta property="og:description" content="Ultimate Service V3">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-23T21:41:43+08:00">
+<meta property="article:modified_time" content="2022-01-23T21:41:43+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Ultimate Service V3">
+<meta name=twitter:description content="Ultimate Service V3">
+<meta name=application-name content="YakuShou's NOTEBOOK">
+<meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
+<meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/><link rel=prev href=https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Ultimate Service V3","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/"},"genre":"posts","keywords":"programming, golang","wordcount":114,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/","datePublished":"2022-01-23T21:41:43+08:00","dateModified":"2022-01-23T21:41:43+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Ultimate Service V3"}</script></head>
+<body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><span class="menu-item delimiter"></span><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>Contents</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Ultimate Service V3</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;114 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div>
+</div><div class=content id=content><h1 id=modules>Modules</h1>
+<p>Project:</p>
+<ul>
+<li>a repo of code</li>
+<li>defines the philosophy, policy and guideline</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>go mod init <span class=o>[</span>module name<span class=o>]</span>
+<span class=c1># 範例</span>
+go mod init github.com/ardanlabs/service3-video
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>go env
+<span class=c1>#</span>
+<span class=nv>GOMODCACHE</span><span class=o>=</span><span class=s2>&#34;指向 module cache&#34;</span>
+<span class=nv>GOPROXY</span><span class=o>=</span><span class=s2>&#34;proxy的位址和方式&#34;</span>
+<span class=nv>GONOPROXY</span><span class=o>=</span><span class=s2>&#34;這個位址的不要透過proxy，表示直接抓這個位址&#34;</span>
+
+<span class=c1># 清掉 module cache</span>
+go clean -modcache
+
+<span class=c1># 自動處理專案的 import</span>
+go mod tidy
+</code></pre></div><p>go.mod 會存放這個專案會用到的 dependency module</p>
+<p>go.sum 會存放用來驗證要用到的 dependency module 的編碼</p>
+<p>每當 proxy 抓到新版時，就會另外算出 checksum 放在 checksum DB，讓之後其他人抓 module 的時候可以比對是不是正確的 module</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 建立 vendor 資料夾並把相依抓下來放到這個目錄下</span>
+<span class=c1># 這樣專案就會直接找這個資料夾下的資料</span>
+go mod vendor
+</code></pre></div><blockquote>
+<p>如果發生抓下來的 module 出現 incompatible 怎麼辦?</p>
+<p>因為 module 其實還額外支援 module 版本，所以可能是要指定特殊版本來使用</p>
+<p>範例: <a href=https://linuxhint.com/bash_eval_command/ target=_blank rel="noopener noreffer">github.com/dimfeld/httptreemux/v5</a></p>
+<p><a href=https://github.com/dimfeld/httptreemux/blob/v5.3.0/go.mod target=_blank rel="noopener noreffer">Reference</a></p>
+<p>上面的連結可以看出 tag v5.3.0 的版本號是給 v5 用的</p>
+<p>這邊的 v5 是指說要抓這個特殊版本</p>
+</blockquote>
+<p>MVS: minimal version selection</p>
+<p>如果同時有 module A 相依 module C v1.4，和 module B 相依 module C v1.5</p>
+<p>則系統會抓 C v1.5</p>
+</div>
+<div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>Updated on 2022-01-23</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/golang/ardanlabs/ultimate-go/ class=prev rel=prev title="Ultimate Go"><i class="fas fa-angle-left fa-fw"></i>Ultimate Go</a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{}}</script></div>
+</body>
+</html>
