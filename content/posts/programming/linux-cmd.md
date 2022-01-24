@@ -203,8 +203,15 @@ echo -n hello
 ```
 
 ## ls
+long list
+
 列出檔案 / 文件夾
 ```shell
+# -l 可以多顯示 detail 資訊
+# -a 可以顯示隱藏檔案
+# -t 照建立時間排序
+# -tr 照建立時間反排序
+
 ls
 ```
 
@@ -212,6 +219,9 @@ ls
 變更當前目錄位置
 ```shell
 cd <dir>
+# 只輸入 cd 不帶參數的話，會回家目錄
+cd
+# ~
 ```
 
 ## pwd
@@ -226,6 +236,8 @@ pwd
 mkdir <new directory>
 # -p flag 會把不存在的資料夾一並建出來
 mkdir -p /tmp/asia/india/bangalore
+# 可以一次建立多個資料夾
+mkdir Asia Europe Africa America
 ```
 
 ## multiple commands
@@ -382,4 +394,102 @@ eval $mycommand
 ```shell
 # 刪除 env 中的 GONORPOXY
 unset GONOPROXY
+```
+
+## uptime
+詢問系統啟動了多久
+
+[man page](https://man7.org/linux/man-pages/man1/uptime.1.html)
+
+```shell
+uptime
+# result
+21:49  up 10:27, 5 users, load averages: 3.69 3.24 4.32
+# 21:49    是系統當前時間
+# up 10:27 是指已執行時間
+# 5 users  是指使用者總連線數
+# load average 是指最近 1, 5, 15 中的系統平均負載
+```
+
+## type
+可以用 type 來看這個指令是什麼類型的
+
+```shell
+# 查看 echo 的型別
+type echo
+# result
+echo is a shell builtin
+```
+
+## pushd & popd
+pushd 會進入對應資料夾，並 push 到 stack
+
+popd 會退回上一次的路徑，並把 stack pop 出來
+
+```shell
+pushd /etc
+popd
+```
+
+## more
+進入能滾動的文字顯示畫面
+
+```shell
+more new_file.txt
+# [space] 往下滾一面
+# [enter] 往下滾一行
+# [b] 可以回滾一面
+# [/] 可以搜尋
+# [q] 結束
+```
+
+## less
+和 more 類似
+
+```shell
+less new_file.txt
+```
+
+## whatis
+用一行敘述描述這個指令是做什麼的
+
+```shell
+whatis date
+```
+
+## apropos
+查詢 keyword 相關功能的命令
+
+```shell
+# 查看 mkdir
+apropos mkdir
+```
+
+## chsh
+更換 shell
+
+```shell
+chsh
+# 系統會要求輸入使用者密碼以及要使用的shell
+
+# 或是直接一道指令
+# 例: 把 shell 換成 Bourne Shell
+sudo chsh -s /bin/sh shou
+```
+
+## env
+查看所有環境變數
+
+```shell
+env
+```
+
+## which
+查看某個指令的位置
+
+```shell
+# 查看 kubectl
+which kubectl
+# result
+/usr/local/bin/kubectl
 ```
