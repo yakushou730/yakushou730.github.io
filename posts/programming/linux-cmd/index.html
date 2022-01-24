@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/linux-cmd/><link rel=prev href=https://blog.yakushou.com/posts/programming/postgresql/><link rel=next href=https://blog.yakushou.com/posts/dictionary/en-phrase-dictionary/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux Cmd","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/"},"genre":"posts","keywords":"programming","wordcount":590,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/","datePublished":"2021-11-14T10:55:14+08:00","dateModified":"2021-11-14T10:55:14+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Linux Cmd"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux Cmd","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/"},"genre":"posts","keywords":"programming","wordcount":760,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/linux-cmd\/","datePublished":"2021-11-14T10:55:14+08:00","dateModified":"2021-11-14T10:55:14+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Linux Cmd"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;590 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-11-14>2021-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;760 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -107,6 +107,16 @@
 <li><a href=#wc>wc</a></li>
 <li><a href=#eval>eval</a></li>
 <li><a href=#unset>unset</a></li>
+<li><a href=#uptime>uptime</a></li>
+<li><a href=#type>type</a></li>
+<li><a href=#pushd--popd>pushd & popd</a></li>
+<li><a href=#more>more</a></li>
+<li><a href=#less>less</a></li>
+<li><a href=#whatis>whatis</a></li>
+<li><a href=#apropos>apropos</a></li>
+<li><a href=#chsh>chsh</a></li>
+<li><a href=#env>env</a></li>
+<li><a href=#which>which</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=find>find</h2>
@@ -222,11 +232,20 @@ $ ufw deny <span class=m>4000</span>
 <span class=c1># n flag: do not output the trailing newline</span>
 <span class=nb>echo</span> -n hello
 </code></pre></div><h2 id=ls>ls</h2>
+<p>long list</p>
 <p>列出檔案 / 文件夾</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>ls
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># -l 可以多顯示 detail 資訊</span>
+<span class=c1># -a 可以顯示隱藏檔案</span>
+<span class=c1># -t 照建立時間排序</span>
+<span class=c1># -tr 照建立時間反排序</span>
+
+ls
 </code></pre></div><h2 id=cd>cd</h2>
 <p>變更當前目錄位置</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>cd</span> &lt;dir&gt;
+<span class=c1># 只輸入 cd 不帶參數的話，會回家目錄</span>
+<span class=nb>cd</span>
+<span class=c1># ~</span>
 </code></pre></div><h2 id=pwd>pwd</h2>
 <p>顯示當前目錄位置</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>pwd</span>
@@ -235,6 +254,8 @@ $ ufw deny <span class=m>4000</span>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>mkdir &lt;new directory&gt;
 <span class=c1># -p flag 會把不存在的資料夾一並建出來</span>
 mkdir -p /tmp/asia/india/bangalore
+<span class=c1># 可以一次建立多個資料夾</span>
+mkdir Asia Europe Africa America
 </code></pre></div><h2 id=multiple-commands>multiple commands</h2>
 <p>一次執行多個指令 (用分號隔開)</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>cd</span> &lt;directory&gt;<span class=p>;</span> mkdir &lt;new directory&gt;<span class=p>;</span> <span class=nb>pwd</span> 
@@ -322,6 +343,62 @@ wc -l <span class=o>[</span>file<span class=o>]</span>
 <p>刪除環境變數</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 刪除 env 中的 GONORPOXY</span>
 <span class=nb>unset</span> GONOPROXY
+</code></pre></div><h2 id=uptime>uptime</h2>
+<p>詢問系統啟動了多久</p>
+<p><a href=https://man7.org/linux/man-pages/man1/uptime.1.html target=_blank rel="noopener noreffer">man page</a></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>uptime
+<span class=c1># result</span>
+21:49  up 10:27, <span class=m>5</span> users, load averages: 3.69 3.24 4.32
+<span class=c1># 21:49    是系統當前時間</span>
+<span class=c1># up 10:27 是指已執行時間</span>
+<span class=c1># 5 users  是指使用者總連線數</span>
+<span class=c1># load average 是指最近 1, 5, 15 中的系統平均負載</span>
+</code></pre></div><h2 id=type>type</h2>
+<p>可以用 type 來看這個指令是什麼類型的</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 查看 echo 的型別</span>
+<span class=nb>type</span> <span class=nb>echo</span>
+<span class=c1># result</span>
+<span class=nb>echo</span> is a shell <span class=nb>builtin</span>
+</code></pre></div><h2 id=pushd--popd>pushd & popd</h2>
+<p>pushd 會進入對應資料夾，並 push 到 stack</p>
+<p>popd 會退回上一次的路徑，並把 stack pop 出來</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>pushd</span> /etc
+<span class=nb>popd</span>
+</code></pre></div><h2 id=more>more</h2>
+<p>進入能滾動的文字顯示畫面</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>more new_file.txt
+<span class=c1># [space] 往下滾一面</span>
+<span class=c1># [enter] 往下滾一行</span>
+<span class=c1># [b] 可以回滾一面</span>
+<span class=c1># [/] 可以搜尋</span>
+<span class=c1># [q] 結束</span>
+</code></pre></div><h2 id=less>less</h2>
+<p>和 more 類似</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>less new_file.txt
+</code></pre></div><h2 id=whatis>whatis</h2>
+<p>用一行敘述描述這個指令是做什麼的</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>whatis date
+</code></pre></div><h2 id=apropos>apropos</h2>
+<p>查詢 keyword 相關功能的命令</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 查看 mkdir</span>
+apropos mkdir
+</code></pre></div><h2 id=chsh>chsh</h2>
+<p>更換 shell</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>chsh
+<span class=c1># 系統會要求輸入使用者密碼以及要使用的shell</span>
+
+<span class=c1># 或是直接一道指令</span>
+<span class=c1># 例: 把 shell 換成 Bourne Shell</span>
+sudo chsh -s /bin/sh shou
+</code></pre></div><h2 id=env>env</h2>
+<p>查看所有環境變數</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>env
+</code></pre></div><h2 id=which>which</h2>
+<p>查看某個指令的位置</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 查看 kubectl</span>
+which kubectl
+<span class=c1># result</span>
+/usr/local/bin/kubectl
 </code></pre></div></div>
 <div class=post-footer id=post-footer>
 <div class=post-info>

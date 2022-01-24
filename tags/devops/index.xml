@@ -1,4 +1,14 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>devops - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/tags/devops/</link><description>devops - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 02 Jan 2022 22:41:12 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/tags/devops/" rel="self" type="application/rss+xml"/><item><title>gitops</title><link>https://blog.yakushou.com/posts/devops/gitops/</link><pubDate>Sun, 02 Jan 2022 22:41:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/devops/gitops/</guid><description>What is GitOps 為了避免手動 deploy 而提出的解決方案
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>devops - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/tags/devops/</link><description>devops - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 24 Jan 2022 00:16:26 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/tags/devops/" rel="self" type="application/rss+xml"/><item><title>The Linux Basics Course</title><link>https://blog.yakushou.com/posts/kodekloud/the-linux-basics-course/</link><pubDate>Mon, 24 Jan 2022 00:16:26 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/kodekloud/the-linux-basics-course/</guid><description>The Linux Basics Course
+Working with Shell - I / 是根目錄
+/home 是所有使用者的家目錄放置的位置
+比如一個使用者叫做 shou，那 shou 的家目錄就在 /home/shou
+一般使用者不能訪問其他使用者的家目錄
+家目錄的標記為 ~ 英文是 tilde
+flag 通常是 一個單字 配一個 - hyphen
+. 代表當前目錄 .. 代表上一層目錄 通常指令要找 help 的話可以在指令後方加上 -h 或 --help
+$HOME 是家目錄的環境變數
+Shell Types
+Bourne Shell (sh) C Shell (csh or tcsh) Korn Shell (ksh) Z Shell (zsh) Bourne again Shell (bash) # 查看當前是用哪種 shell echo $SHELL Bash Shell Features</description></item><item><title>gitops</title><link>https://blog.yakushou.com/posts/devops/gitops/</link><pubDate>Sun, 02 Jan 2022 22:41:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/devops/gitops/</guid><description>What is GitOps 為了避免手動 deploy 而提出的解決方案
 Infrastructure as Code 提倡後，大家會把 infrastructure 寫成 code 以後管控
 但是針對變更 infrastructure 仍然後是在本機安裝工具後手動變更 (ex: ansible / terraform&amp;hellip;)
 GitOps 提倡一切 (infrastructure/network/policy/configuration/security&amp;hellip;) 都以 YAML 的形式放在 git 上，並且透過 PR 自動更新資源

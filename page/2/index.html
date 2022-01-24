@@ -56,6 +56,15 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/devops/flux/>flux</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-02>2022-01-02</time></span></div><div class=content>目前看起來像是 K8S 的 CD 工具
+Flux 是什麼? Flux 是一組用於 k8s 的 delivery solution
+Flux 提供 GitOps for apps 和 infrastructure Flux 和 Flagger 提供 canaries/feature flags/AB rollouts 來部署 app 可用來管理 k8s 資源 推 git 以後，剩下的 Flux 會處理 可套用 CD (by Flagger) 和 PD (progressive delivery) container image 發生更新後，Flux 可以自動推 git Flux 相容現有的工具 含 github/gitlab/bitbucket/s3&mldr;，以及全部有提供 cli 的 provider Flux 可用於任何 k8s 和所有常見的 k8s 工具 Kustomize/Helm/RBAC&mldr;等等 Flux 處理 multi-everything 可以處理多數個 cluster Flux 有告警和提示 只要 git push，可以得到通知 使用者信任 Flux Flux 是 CNCF 孵化出的專案 Flux 有友善的社群 任何人都可以貢獻 Flux 是一組 k8s 用的工具，可以 sync 資源設定 (像 git repository)</div><div class=post-footer>
+<a href=/posts/devops/flux/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/programming/git/>git</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -143,19 +152,6 @@ DELETE /products Indexing documents 插入資料: index a document
 POST /products/_doc { "name": "Coffee Maker", "price": 64, "in_stock": 10 } # result { "_index" : "products", "_type" : "_doc", "_id" : "ek25vn0BLyjHJvg3PVzk", "_version" : 1, "result" : "created", "_shards" : { "total" : 2, "successful" : 1, "failed" : 0 }, "_seq_no" : 0, "_primary_term" : 1 } _shards: 表示有多少 shards 成功/失敗 儲存這筆資料 _id: 表示這筆資料的 identifier (系統自動產生，或者也可以自己指定)</div><div class=post-footer>
 <a href=/posts/udemy/complete-guide-to-elasticsearch/managing-documtents/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/udemy/complete-guide-to-elasticsearch/getting-started/>getting started</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-14>2021-12-14</time></span></div><div class=content>Installation 安裝 Elasticsearch 安裝後可以用 http://localhost:9200 確認服務是否正常 Elasticsearch 的檔案目錄 bin 放置執行檔 (Elasticsearch 以外的還有如 plugin 安裝檔 或 cli) config 放置 configuration file elasticsearch.yml 檔案內容是 comment 標起來的，如果不另外把 comment 拿掉的話，系統會使用預設值
-best practice 是要註明 cluster.name 和 node.name
-data / log 的路徑最好也自行指定 (特別指在 production 上)
-這樣即使砍了 Elasticsearch 也不會有資料遺失
-jvm.options
-用來調整系統的記憶體配置 log4j2.properties
-寫 log 的 framework data jdk 包含 OpenJDK lib 包含 Elasticsearch 會用到的 dependency logs modules 包含很多內建的 module plugins Basic architecture 基礎單元是 node，是 Elasticsearch 的 instance，用來儲存 data node 可以執行複數個，各自儲存部分的資料 node 不是機器，所以可以用幾台機器運行更多個 node 每個 node 都隸屬在 cluster 下 cluster 包含 nodes 通常不同的 cluster 會用來做不同的搜尋情境，彼此獨立 資料單位稱為 document，是一筆 json 格式的資料 index a document，意思是送一筆 json object 給 Elasticsearch 該筆 json object 到 Elasticsearch 後會在 "_source" 的節點下，並賦予其他 meta data index 包含多個 document query 的時候，是對指定的 index 做搜尋 document Kibana console 進入 Kibana 介面，並點擊 Dev Tools query HTTP method + request path 範例: 取得 cluster 狀態</div><div class=post-footer>
-<a href=/posts/udemy/complete-guide-to-elasticsearch/getting-started/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>
@@ -173,8 +169,10 @@ jvm.options
 <a href=/page/4/>4</a>
 </span>
 </li><li class=page-item>
+<span class=page-link aria-hidden=true>&mldr;</span>
+</li><li class=page-item>
 <span class=page-link>
-<a href=/page/5/>5</a>
+<a href=/page/6/>6</a>
 </span>
 </li></ul></div></div>
 </main><footer class=footer>
