@@ -85,6 +85,7 @@ go build -ldflags "-X main.build=local"
 ```
 這樣會印出 `starting service local`
 
+參數可以參閱 [Go build flags](https://pkg.go.dev/cmd/go#hdr-Compile_packages_and_dependencies)
 
 `dockerfile`
 ```dockerfile
@@ -146,9 +147,11 @@ service:
 ```
 
 > 跳過 kind 設定 local k8s 的段落
-> 
 
 - 稍微列一下注意事項
   - 在本機開發安裝 kind 來模擬 k8s 環境
-  - 注意 golang 專案黨名，或是確保 build 出來的 binary 是自己要的
-  - 
+  - 注意 golang 專案檔名，或是確保 build 出來的 binary 是自己要的，不然包 docker run 會失敗
+  - 確認 kind load 有設定，這樣才會抓本機的 docker images
+  - kubectl 要確認 namespace，不然會查不到已存在的 k8s component
+
+
