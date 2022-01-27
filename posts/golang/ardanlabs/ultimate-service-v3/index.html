@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/><link rel=prev href=https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/><link rel=next href=https://blog.yakushou.com/posts/kodekloud/the-linux-basics-course/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Ultimate Service V3","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/"},"genre":"posts","keywords":"programming, golang","wordcount":114,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/","datePublished":"2022-01-23T21:41:43+08:00","dateModified":"2022-01-23T21:41:43+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Ultimate Service V3"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Ultimate Service V3","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/"},"genre":"posts","keywords":"programming, golang","wordcount":272,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/","datePublished":"2022-01-23T21:41:43+08:00","dateModified":"2022-01-23T21:41:43+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Ultimate Service V3"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,14 +61,18 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;114 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;272 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents></nav></div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#kubernetes>Kubernetes</a></li>
+</ul>
+</nav></div>
 </div><div class=content id=content><h1 id=modules>Modules</h1>
 <p>Project:</p>
 <ul>
@@ -106,6 +110,86 @@ go mod vendor
 <p>MVS: minimal version selection</p>
 <p>如果同時有 module A 相依 module C v1.4，和 module B 相依 module C v1.5</p>
 <p>則系統會抓 C v1.5</p>
+<h2 id=kubernetes>Kubernetes</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kn>import</span> <span class=s>&#34;log&#34;</span>
+
+<span class=kd>var</span> <span class=nx>build</span> <span class=p>=</span> <span class=s>&#34;development&#34;</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+	<span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;starting service&#34;</span><span class=p>,</span> <span class=nx>build</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>build 的時候 可以強行指定抽換 var</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># -ldflags 表示會發生參數抽換</span>
+<span class=c1># -X 表示鏈結選項 格式 -X [importpath].[name]=[value]</span>
+go build -ldflags <span class=s2>&#34;-X main.build=local&#34;</span>
+</code></pre></div><p>這樣會印出 <code>starting service local</code></p>
+<p><code>dockerfile</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=k>FROM</span><span class=s> golang:1.17 as build_sales-api</span><span class=err>
+</span><span class=err></span><span class=c># CGO_ENABLED 0 才可以做到交叉編譯</span><span class=err>
+</span><span class=err></span><span class=c># 即編譯成不同的 os 和 architect</span><span class=err>
+</span><span class=err></span><span class=k>ENV</span> CGO_ENABLED <span class=m>0</span><span class=err>
+</span><span class=err></span><span class=c># ARG 是可以從外部帶入的參數</span><span class=err>
+</span><span class=err></span><span class=k>ARG</span> BUILD_REF<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># Copy the source code into the container</span><span class=err>
+</span><span class=err></span><span class=k>COPY</span> . /service<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># Build the service binary</span><span class=err>
+</span><span class=err></span><span class=k>WORKDIR</span><span class=s> /service</span><span class=err>
+</span><span class=err></span><span class=k>RUN</span> go build -ldflags <span class=s2>&#34;-X main.build=</span><span class=si>${</span><span class=nv>BUILD_REF</span><span class=si>}</span><span class=s2>&#34;</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=c># Run the Go Binary in alpine</span><span class=err>
+</span><span class=err></span><span class=k>FROM</span><span class=s> alpine:3.15</span><span class=err>
+</span><span class=err></span><span class=k>ARG</span> BUILD_DATE<span class=err>
+</span><span class=err></span><span class=k>ARG</span> BUILD_REF<span class=err>
+</span><span class=err></span><span class=k>COPY</span> --from<span class=o>=</span>build_sales-api /service /service/service<span class=err>
+</span><span class=err></span><span class=k>WORKDIR</span><span class=s> /service</span><span class=err>
+</span><span class=err></span><span class=k>CMD</span> <span class=p>[</span><span class=s2>&#34;./service&#34;</span><span class=p>]</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>LABEL</span> org.opencontainers.image.created<span class=o>=</span><span class=s2>&#34;</span><span class=si>${</span><span class=nv>BUILD_DATE</span><span class=si>}</span><span class=s2>&#34;</span> <span class=se>\
+</span><span class=se></span>      org.opencontainers.image.title<span class=o>=</span><span class=s2>&#34;sales-api&#34;</span> <span class=se>\
+</span><span class=se></span>      org.opencontainers.image.authors<span class=o>=</span><span class=s2>&#34;Shou Tseng &lt;yakushou730@gmail.com&gt;&#34;</span> <span class=se>\
+</span><span class=se></span>      org.opencontainers.image.source<span class=o>=</span><span class=s2>&#34;https://github.com/yakushou730/service/app/sales-api&#34;</span> <span class=se>\
+</span><span class=se></span>      org.opencontainers.image.version<span class=o>=</span><span class=s2>&#34;</span><span class=si>${</span><span class=nv>BUILD_REF</span><span class=si>}</span><span class=s2>&#34;</span> <span class=se>\
+</span><span class=se></span>      org.opencontainers.image.vendor<span class=o>=</span><span class=s2>&#34;Yakushou730&#34;</span><span class=err>
+</span><span class=err>
+</span></code></pre></div><p><code>Makefile</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-makefile data-lang=makefile><span class=nv>SHELL</span> <span class=o>:=</span> /bin/bash
+
+<span class=nf>run</span><span class=o>:</span>
+	go run main.go
+
+<span class=nf>build</span><span class=o>:</span>
+	go build -ldflags <span class=s2>&#34;-X main.build=local&#34;</span>
+
+<span class=c># ============================================================
+</span><span class=c># Building containers
+</span><span class=c></span><span class=nv>VERSION</span> <span class=o>:=</span> 1.0
+
+<span class=nf>all</span><span class=o>:</span> <span class=n>service</span>
+
+<span class=nf>service</span><span class=o>:</span>
+	docker build <span class=se>\
+</span><span class=se></span>		-f zarf/docker/dockerfile <span class=se>\
+</span><span class=se></span>		-t service-amd64:<span class=si>${</span><span class=nv>VERSION</span><span class=si>}</span> <span class=se>\
+</span><span class=se></span>		--build-arg <span class=nv>BUILD_REF</span><span class=o>=</span><span class=si>${</span><span class=nv>VERSION</span><span class=si>}</span> <span class=se>\
+</span><span class=se></span>		--build-arg <span class=nv>BUILD_DATE</span><span class=o>=</span><span class=sb>`</span>date -u +<span class=s2>&#34;%Y-%m%dT%H:%M:%SZ&#34;</span><span class=sb>`</span> <span class=se>\
+</span><span class=se></span>		.
+
+</code></pre></div><blockquote>
+<p>跳過 kind 設定 local k8s 的段落</p>
+</blockquote>
+<ul>
+<li>稍微列一下注意事項
+<ul>
+<li>在本機開發安裝 kind 來模擬 k8s 環境</li>
+<li>注意 golang 專案黨名，或是確保 build 出來的 binary 是自己要的</li>
+<li></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>

@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>sql - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/tags/sql/</link><description>sql - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 27 Jan 2022 15:05:19 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/tags/sql/" rel="self" type="application/rss+xml"/><item><title>Mysql</title><link>https://blog.yakushou.com/posts/programming/database/mysql/</link><pubDate>Thu, 27 Jan 2022 15:05:19 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/database/mysql/</guid><description><![CDATA[使用者相關 要注意的是 User, Host 的搭配會影響到使用者可不可以登入
+或是登入後的權限不同
+% 指的是 localhost
+::1 指的是 Ipv6 的 localhost
+How to delete or remove a MySQL/MariaDB user account on Linux/Unix
+How To Create a New User and Grant Permissions in MySQL
+Grant_Priv 欄位是指可不可以更換權限
+# 檢視 user 欄位 descmysql.user;# 顯示當前使用者 SELECTuser();# 搜尋使用者 SELECT*FROMmysql.user;# 建立使用者 CREATEUSER&#39;shou&#39;@&#39;%&#39;IDENTIFIEDBY&#39;password&#39;;CREATEUSER&#39;academy&#39;@&#39;172.123.0.0/255.255.0.0&#39;IDENTIFIEDBY&#39;password&#39;;# 更改使用者密碼 ALTERUSER&#39;shou&#39;@&#39;%&#39;IDENTIFIEDBY&#39;newPass&#39;;# 刷新權限 FLUSHPRIVILEGES;# 給予使用者權限 GRANTALLPRIVILEGESON*.*TO&#39;shou&#39;@&#39;%&#39;;GRANTSELECTON*.*TO&#39;shou&#39;@&#39;%&#39;;# 查詢權限 SHOWGRANTSFOR&#39;shou&#39;@&#39;%&#39;;# 刪除使用者 DROPUSER&#39;shou&#39;@&#39;%&#39;;]]></description></item></channel></rss>
