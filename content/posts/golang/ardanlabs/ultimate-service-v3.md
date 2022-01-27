@@ -62,3 +62,93 @@ MVS: minimal version selection
 如果同時有 module A 相依 module C v1.4，和 module B 相依 module C v1.5
 
 則系統會抓 C v1.5
+
+## Kubernetes
+
+```go
+package main
+
+import "log"
+
+var build = "development"
+
+func main() {
+	log.Println("starting service", build)
+}
+```
+
+build 的時候 可以強行指定抽換 var
+```shell
+# -ldflags 表示會發生參數抽換
+# -X 表示鏈結選項 格式 -X [importpath].[name]=[value]
+go build -ldflags "-X main.build=local"
+```
+這樣會印出 `starting service local`
+
+
+`dockerfile`
+```dockerfile
+FROM golang:1.17 as build_sales-api
+# CGO_ENABLED 0 才可以做到交叉編譯
+# 即編譯成不同的 os 和 architect
+ENV CGO_ENABLED 0
+# ARG 是可以從外部帶入的參數
+ARG BUILD_REF
+
+# Copy the source code into the container
+COPY . /service
+
+# Build the service binary
+WORKDIR /service
+RUN go build -ldflags "-X main.build=${BUILD_REF}"
+
+# Run the Go Binary in alpine
+FROM alpine:3.15
+ARG BUILD_DATE
+ARG BUILD_REF
+COPY --from=build_sales-api /service /service/service
+WORKDIR /service
+CMD ["./service"]
+
+LABEL org.opencontainers.image.created="${BUILD_DATE}" \
+      org.opencontainers.image.title="sales-api" \
+      org.opencontainers.image.authors="Shou Tseng <yakushou730@gmail.com>" \
+      org.opencontainers.image.source="https://github.com/yakushou730/service/app/sales-api" \
+      org.opencontainers.image.version="${BUILD_REF}" \
+      org.opencontainers.image.vendor="Yakushou730"
+
+```
+
+`Makefile`
+```makefile
+SHELL := /bin/bash
+
+run:
+	go run main.go
+
+build:
+	go build -ldflags "-X main.build=local"
+
+# ============================================================
+# Building containers
+VERSION := 1.0
+
+all: service
+
+service:
+	docker build \
+		-f zarf/docker/dockerfile \
+		-t service-amd64:${VERSION} \
+		--build-arg BUILD_REF=${VERSION} \
+		--build-arg BUILD_DATE=`date -u +"%Y-%m%dT%H:%M:%SZ"` \
+		.
+
+```
+
+> 跳過 kind 設定 local k8s 的段落
+> 
+
+- 稍微列一下注意事項
+  - 在本機開發安裝 kind 來模擬 k8s 環境
+  - 注意 golang 專案黨名，或是確保 build 出來的 binary 是自己要的
+  - 
