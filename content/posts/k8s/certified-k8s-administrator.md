@@ -219,7 +219,10 @@ metadata:
 
 切換 namespace
 ```shell
+# context 是 cluster
 kubectl config set-context $(kubectl config current-context) --namespace=<target namspace>
+# 當前 cluster
+kubectl config set-context --current --namespace=<target namespace>
 ```
 
 ```shell

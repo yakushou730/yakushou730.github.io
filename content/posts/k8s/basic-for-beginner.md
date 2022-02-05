@@ -155,6 +155,8 @@ revision 可以作為進版或退版的版本
 kubectl rollout status deployment/<deployment name>
 # 查看特定 deployment 的 rollout 歷史紀錄
 kubectl rollout history deployment/<deployment name>
+# 重新開始 resource rollout
+kubectl rollout restart deployment/<deployment name>
 ```
 
 - Deployment strategy

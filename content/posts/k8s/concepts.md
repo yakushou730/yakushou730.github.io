@@ -110,3 +110,11 @@ Service 是用來建立一個網路連線可以連到 pod
 - ssh key...等等
 
 k8s 可以把 secrets 當作環境變數來使用
+
+**Log**
+查看 pod 的 log
+```shell
+# l flag => label
+# f flag => stream pod logs (stdout)
+kubectl logs -l app=service --all-containers=true -f --tail=100
+```

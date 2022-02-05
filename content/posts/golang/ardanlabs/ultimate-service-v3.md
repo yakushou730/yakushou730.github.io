@@ -7,6 +7,33 @@ tags: ["programming","golang"]
 draft: false
 ---
 
+[**Github repo**](https://github.com/yakushou730/ultimate-service-v3)
+
+整理了下，如果整個 cluster 重啟，要跑哪些步驟
+```shell
+# 把 cluster shutdown
+make kind-down
+
+# 1. 啟動 kind
+make kind-up
+
+# 2. build 新的 service image
+make all
+
+# 3. 設定 kind 要抓本機的 image
+make kind-load
+
+# 4. 設定 kind cluster 要吃本機的 config 設定
+make kind-apply
+
+# extra: 看 log
+make kind-logs
+
+# extra: 直接更新 kind 設定
+# all + kind-load + kind-restart
+make kind-update
+```
+
 # Modules
 
 Project:
@@ -154,4 +181,81 @@ service:
   - 確認 kind load 有設定，這樣才會抓本機的 docker images
   - kubectl 要確認 namespace，不然會查不到已存在的 k8s component
 
+- kustomization 的用法是 可以 patch 原本的 base k8s yaml
+  - 如 有一個 `base-service.yaml` 內含 deployment 資訊，透過 kustomization 可以把額外的資訊當成補丁更新上去
+
+> 如果 go mode tidy 跳了錯誤是關於
+> 
+> module declares its path as: go.uber.org/automaxprocs
+> 
+> but was required as: github.com/uber-go/automaxprocs
+> 
+> 表示該 go module 的路徑不是照 github 的規範來做，就要修改成 go module 該套件定義的路徑
+
+## Initial Service Design
+5 個資料夾分類
+
+- app
+  - services
+    - metrics `sidecar for service-api`
+    - service-api
+      - handlers
+      - tests
+      - main.go
+  - tooling
+    - logfmt
+      - main.go
+    - service-admin
+      - commands
+      - main.go
+- business `business logic`
+  - core
+    - report
+  - data
+    - schema
+    - store
+      - product `store 內的東西彼此要獨立 不要互相 import`
+      - user
+    - tests
+  - sys `system oriented`
+    - auth
+    - database
+    - metrics
+    - validate
+  - web
+- foundation `是個 reusable 的項目，彼此間可以 import 引用`
+  - docker
+  - keystore
+  - logger
+  - web
+  - worker
+- vendor `3rd party`
+- zarf `configuration`
+
+```shell
+# 清理 docker 資源
+docker system prune
+# This will remove:
+# all stopped containers
+# all networks not used by at least one container
+# all dangling images
+# all build cache
+```
+
+**如果發生應該要 顯示出來的欄位而沒出現，先猜可能是大小寫問題造成的 private / public 問題**
+
+> 處理 logger，可以先在 main.go 做，不急著拉去 package
+> 
+> 除了 main.go 不應該有其他 package 可以存取 configuration
+
+新專案的處理順序
+1. 定義 project layout
+2. 建立 logger
+3. 建立 configuration
+4. 建立 debugging / metrics support
+5. 建立 shutdown signaling and load shedding
+
+> 一般來說，linter 會建議 package 上方要有註解，此時可以在那個 package 專門建立一個 doc.go 在 package 上方做註解，不需要其他程式碼
+
+## HTTP Routing Basis
 
