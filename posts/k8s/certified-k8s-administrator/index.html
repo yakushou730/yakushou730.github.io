@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/><link rel=prev href=https://blog.yakushou.com/posts/k8s/helm/><link rel=next href=https://blog.yakushou.com/posts/programming/tools/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Certified K8s Administrator","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/"},"genre":"posts","keywords":"programming, k8s","wordcount":1048,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/","datePublished":"2022-01-09T21:07:35+08:00","dateModified":"2022-01-09T21:07:35+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Certified K8s Administrator"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Certified K8s Administrator","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/"},"genre":"posts","keywords":"programming, k8s","wordcount":1061,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/","datePublished":"2022-01-09T21:07:35+08:00","dateModified":"2022-01-09T21:07:35+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Certified K8s Administrator"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1048 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1061 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -310,7 +310,10 @@ kubectl create -f pod-definition.yaml --namespace<span class=o>=</span>dev
 </span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
 </span><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>dev</span><span class=w>
 </span></code></pre></div><p>切換 namespace</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>kubectl config set-context <span class=k>$(</span>kubectl config current-context<span class=k>)</span> --namespace<span class=o>=</span>&lt;target namspace&gt;
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># context 是 cluster</span>
+kubectl config set-context <span class=k>$(</span>kubectl config current-context<span class=k>)</span> --namespace<span class=o>=</span>&lt;target namspace&gt;
+<span class=c1># 當前 cluster</span>
+kubectl config set-context --current --namespace<span class=o>=</span>&lt;target namespace&gt;
 </code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 列出所有 namespace 下的 pod</span>
 kubectl get pods --all-namespaces
 </code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 常用指令</span>

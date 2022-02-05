@@ -90,11 +90,10 @@ Bourne Shell (sh) C Shell (csh or tcsh) Korn Shell (ksh) Z Shell (zsh) Bourne ag
 <a href=/posts/golang/ardanlabs/ultimate-service-v3/>Ultimate Service V3</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-23>2022-01-23</time></span></div><div class=content>Modules Project:
-a repo of code defines the philosophy, policy and guideline go mod init [module name] # 範例 go mod init github.com/ardanlabs/service3-video go env # GOMODCACHE="指向 module cache" GOPROXY="proxy的位址和方式" GONOPROXY="這個位址的不要透過proxy，表示直接抓這個位址" # 清掉 module cache go clean -modcache # 自動處理專案的 import go mod tidy go.mod 會存放這個專案會用到的 dependency module
-go.sum 會存放用來驗證要用到的 dependency module 的編碼
-每當 proxy 抓到新版時，就會另外算出 checksum 放在 checksum DB，讓之後其他人抓 module 的時候可以比對是不是正確的 module
-# 建立 vendor 資料夾並把相依抓下來放到這個目錄下 # 這樣專案就會直接找這個資料夾下的資料 go mod vendor 如果發生抓下來的 module 出現 incompatible 怎麼辦?</div><div class=post-footer>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-23>2022-01-23</time></span></div><div class=content>Github repo
+整理了下，如果整個 cluster 重啟，要跑哪些步驟
+# 把 cluster shutdown make kind-down # 1. 啟動 kind make kind-up # 2. build 新的 service image make all # 3. 設定 kind 要抓本機的 image make kind-load # 4. 設定 kind cluster 要吃本機的 config 設定 make kind-apply # extra: 看 log make kind-logs # extra: 直接更新 kind 設定 # all + kind-load + kind-restart make kind-update Modules Project:
+a repo of code defines the philosophy, policy and guideline go mod init [module name] # 範例 go mod init github.</div><div class=post-footer>
 <a href=/posts/golang/ardanlabs/ultimate-service-v3/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
