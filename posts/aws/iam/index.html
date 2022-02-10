@@ -3,22 +3,22 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
-<title class=pjax-title>tools - YakuShou's NOTEBOOK</title><meta name=Description content="tools"><meta property="og:title" content="tools">
-<meta property="og:description" content="tools">
+<title class=pjax-title>iam - YakuShou's NOTEBOOK</title><meta name=Description content="iam"><meta property="og:title" content="iam">
+<meta property="og:description" content="iam">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://blog.yakushou.com/posts/programming/tools/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-01-10T10:29:47+08:00">
-<meta property="article:modified_time" content="2022-01-10T10:29:47+08:00">
+<meta property="og:url" content="https://blog.yakushou.com/posts/aws/iam/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-02-07T11:51:44+08:00">
+<meta property="article:modified_time" content="2022-02-07T11:51:44+08:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="tools">
-<meta name=twitter:description content="tools">
+<meta name=twitter:title content="iam">
+<meta name=twitter:description content="iam">
 <meta name=application-name content="YakuShou's NOTEBOOK">
 <meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
 <meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/tools/><link rel=prev href=https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/><link rel=next href=https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/aws/iam/><link rel=prev href=https://blog.yakushou.com/posts/programming/database/mysql/><link rel=next href=https://blog.yakushou.com/posts/programming/rabbitmq/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"tools","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/tools\/"},"genre":"posts","keywords":"programming","wordcount":40,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/tools\/","datePublished":"2022-01-10T10:29:47+08:00","dateModified":"2022-01-10T10:29:47+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"tools"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"iam","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/aws\/iam\/"},"genre":"posts","keywords":"aws, devops","wordcount":42,"url":"https:\/\/blog.yakushou.com\/posts\/aws\/iam\/","datePublished":"2022-02-07T11:51:44+08:00","dateModified":"2022-02-07T11:51:44+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"iam"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -57,11 +57,11 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>Contents</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">tools</h1><div class=post-meta>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">iam</h1><div class=post-meta>
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-10>2022-01-10</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-10>2022-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;40 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-07>2022-02-07</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-02-07>2022-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;42 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -70,29 +70,24 @@
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#cloc>cloc</a></li>
-<li><a href=#commitizen>commitizen</a></li>
+<li><a href=#設定帳戶密碼失敗>設定帳戶密碼失敗</a></li>
 </ul>
 </nav></div>
-</div><div class=content id=content><h2 id=cloc>cloc</h2>
-<p><a href=https://github.com/AlDanial/cloc target=_blank rel="noopener noreffer">https://github.com/AlDanial/cloc</a></p>
-<p>計算 檔案數量 / 行數 等等的工具</p>
-<p>可以使用 docker container 來跑，就不用安裝 binary</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 最後的 . 是指當前目錄，可以換成對應的目錄</span>
-docker run --rm -v <span class=nv>$PWD</span>:/tmp aldanial/cloc .
-</code></pre></div><h2 id=commitizen>commitizen</h2>
-<p><a href=https://github.com/commitizen/cz-cli#making-your-repo-commitizen-friendly target=_blank rel="noopener noreffer">https://github.com/commitizen/cz-cli</a></p>
-<p>可以簡單產生 commitizen 的 git commit</p>
-<p><a href=https://www.conventionalcommits.org/en/v1.0.0/ target=_blank rel="noopener noreffer">https://www.conventionalcommits.org/en/v1.0.0/</a></p>
-<p>安裝:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>npm install commitizen
-commitizen init cz-conventional-changelog --save-dev --save-exact
-</code></pre></div></div>
+</div><div class=content id=content><h2 id=設定帳戶密碼失敗>設定帳戶密碼失敗</h2>
+<p>可能是碰到需要 MFA 操作，但是在剛建立使用者的時候還沒有 MFA 的關係</p>
+<p><a href=https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_my-sec-creds-self-manage.html target=_blank rel="noopener noreffer">AWS: Allows MFA-authenticated IAM users to manage their own credentials on the My Security Credentials page</a></p>
+<p><a href=https://serverfault.com/questions/992027/aws-iam-wont-let-my-users-change-their-passwords target=_blank rel="noopener noreffer">AWS IAM won&rsquo;t let my users change their passwords</a></p>
+<p>做法有兩種</p>
+<ol>
+<li>改 policy 的規則，讓變更密碼這件事不需要 MFA (官方說不推薦這做法)</li>
+<li>砍掉帳號重新建立一個，然後先不要勾 <code>Require password reset</code>，等他登入後設定完 MFA，這樣之後就可以改密碼了</li>
+</ol>
+</div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>Updated on 2022-01-10</span>
+<span>Updated on 2022-02-07</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -104,13 +99,13 @@ commitizen init cz-conventional-changelog --save-dev --save-exact
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/aws/>aws</a>,&nbsp;<a href=/tags/devops/>devops</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/posts/k8s/certified-k8s-administrator/ class=prev rel=prev title="Certified K8s Administrator"><i class="fas fa-angle-left fa-fw"></i>Certified K8s Administrator</a>
-<a href=/posts/golang/ardanlabs/ultimate-syntax/ class=next rel=next title="ultimate syntax">ultimate syntax<i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/posts/programming/database/mysql/ class=prev rel=prev title=Mysql><i class="fas fa-angle-left fa-fw"></i>Mysql</a>
+<a href=/posts/programming/rabbitmq/ class=next rel=next title=rabbitmq>rabbitmq<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

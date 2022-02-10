@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=prev href=https://blog.yakushou.com/posts/k8s/basic-for-beginner/><link rel=next href=https://blog.yakushou.com/posts/programming/software/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":44,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":663,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;44 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;663 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -71,6 +71,17 @@
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
 <li><a href=#如何在-go-get-的時候可以拉到-private-repo>如何在 go get 的時候可以拉到 private repo</a></li>
+<li><a href=#type-assertion-vs-type-conversion>Type Assertion vs Type Conversion</a></li>
+<li><a href=#type-switch>Type switch</a></li>
+<li><a href=#empty-struct-的作用>empty struct 的作用</a></li>
+<li><a href=#如何-copy-slice-和-map>如何 copy slice 和 map</a></li>
+<li><a href=#goroot-vs-gopath>GOROOT vs GOPATH</a></li>
+<li><a href=#如何對-custom-struct-排序>如何對 custom struct 排序</a></li>
+<li><a href=#byte-vs-rune>byte vs rune</a></li>
+<li><a href=#list-倒轉>list 倒轉</a></li>
+<li><a href=#如何有效率的對字串做-concatenate>如何有效率的對字串做 concatenate</a></li>
+<li><a href=#package-載入時的執行順序>package 載入時的執行順序</a></li>
+<li><a href=#reference>Reference</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=如何在-go-get-的時候可以拉到-private-repo>如何在 go get 的時候可以拉到 private repo</h2>
@@ -83,7 +94,210 @@
 <li>用 copy 下來的 token 取代下列的 GITHUB_TOKEN</li>
 </ol>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ git config --global url.<span class=s2>&#34;https://</span><span class=si>${</span><span class=nv>GITHUB_TOKEN</span><span class=si>}</span><span class=s2>@github.com&#34;</span>.insteadOf <span class=s2>&#34;https://github.com&#34;</span>
-</code></pre></div></div>
+</code></pre></div><h2 id=type-assertion-vs-type-conversion>Type Assertion vs Type Conversion</h2>
+<p>Type Assertion (斷言)</p>
+<ul>
+<li>從 interface object 直接斷言型態是什麼</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>greeting</span> <span class=kd>interface</span><span class=p>{}</span> <span class=p>=</span> <span class=s>&#34;hello world&#34;</span>
+<span class=nx>greetingStr</span> <span class=o>:=</span> <span class=nx>greeting</span><span class=p>.(</span><span class=kt>string</span><span class=p>)</span>
+</code></pre></div><p>Type Conversion (型態轉換)</p>
+<ul>
+<li>原本就是 concrete type，做型別轉換</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>greeting</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;hello world&#34;</span><span class=p>)</span>
+<span class=nx>greetingStr</span> <span class=o>:=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>greeting</span><span class=p>)</span>
+</code></pre></div><h2 id=type-switch>Type switch</h2>
+<p>如果要確認 variable 的 type 的話，可以用 type switch</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>switch</span> <span class=nx>v</span> <span class=o>:=</span> <span class=nx>param</span><span class=p>.(</span><span class=kd>type</span><span class=p>)</span> <span class=p>{</span> 
+<span class=k>default</span><span class=p>:</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Unexpected type %T&#34;</span><span class=p>,</span> <span class=nx>v</span><span class=p>)</span>
+<span class=k>case</span> <span class=kt>uint64</span><span class=p>:</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Integer type&#34;</span><span class=p>)</span>
+<span class=k>case</span> <span class=kt>string</span><span class=p>:</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;String type&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=empty-struct-的作用>empty struct 的作用</h2>
+<p>當我們想要節省記憶體空間的時候用空結構</p>
+<p>空結構不需要花費記憶體給 value (即不用 value)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>a</span> <span class=o>:=</span> <span class=kd>struct</span><span class=p>{}{}</span>
+
+<span class=c1>// 印出結果會是 0
+</span><span class=c1></span><span class=nb>println</span><span class=p>(</span><span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=nx>a</span><span class=p>))</span> 
+<span class=c1>// 0
+</span></code></pre></div><ol>
+<li>當實作 data set 的時候</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>map_obj</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kd>struct</span><span class=p>{})</span>
+<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span><span class=s>&#34;interviewbit&#34;</span><span class=p>,</span> <span class=s>&#34;golang&#34;</span><span class=p>,</span> <span class=s>&#34;questions&#34;</span><span class=p>}</span> <span class=p>{</span>
+<span class=nx>map_obj</span><span class=p>[</span><span class=nx>value</span><span class=p>]</span> <span class=p>=</span> <span class=kd>struct</span><span class=p>{}{}</span>
+<span class=p>}</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>map_obj</span><span class=p>)</span>
+<span class=c1>// Output
+</span><span class=c1></span><span class=kd>map</span><span class=p>[</span><span class=nx>interviewbit</span><span class=p>:{}</span> <span class=nx>golang</span><span class=p>:{}</span> <span class=nx>questions</span><span class=p>:{}]</span>
+</code></pre></div><ol start=2>
+<li>In graph traversals in the map of tracking visited vertices.</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>visited</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kd>struct</span><span class=p>{})</span>
+<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>isExists</span> <span class=o>:=</span> <span class=nx>visited</span><span class=p>[</span><span class=nx>v</span><span class=p>];</span> <span class=p>!</span><span class=nx>isExists</span> <span class=p>{</span>
+    <span class=c1>// First time visiting a vertex.
+</span><span class=c1></span>    <span class=nx>visited</span><span class=p>[</span><span class=nx>v</span><span class=p>]</span> <span class=p>=</span> <span class=kd>struct</span><span class=p>{}{}</span>
+<span class=p>}</span>
+</code></pre></div><ol start=3>
+<li>當 channel 需要訊號，而不是需要資料的時候</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>workerRoutine</span><span class=p>(</span><span class=nx>ch</span> <span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span> <span class=p>{</span>
+    <span class=c1>// Receive message from main program.
+</span><span class=c1></span>    <span class=o>&lt;-</span><span class=nx>ch</span>
+    <span class=nb>println</span><span class=p>(</span><span class=s>&#34;Signal Received&#34;</span><span class=p>)</span>
+
+    <span class=c1>// Send a message to the main program.
+</span><span class=c1></span>    <span class=nb>close</span><span class=p>(</span><span class=nx>ch</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=c1>//Create channel
+</span><span class=c1></span>    <span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span>
+    <span class=c1>//define workerRoutine
+</span><span class=c1></span>    <span class=k>go</span> <span class=nf>workerRoutine</span><span class=p>(</span><span class=nx>ch</span><span class=p>)</span>
+    <span class=c1>// Send signal to worker goroutine
+</span><span class=c1></span>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=kd>struct</span><span class=p>{}{}</span>
+    <span class=c1>// Receive a message from the workerRoutine.
+</span><span class=c1></span>    <span class=o>&lt;-</span><span class=nx>ch</span>
+    <span class=nb>println</span><span class=p>(</span><span class=err>“</span><span class=nx>Signal</span> <span class=nx>Received</span><span class=err>&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=如何-copy-slice-和-map>如何 copy slice 和 map</h2>
+<p>用 <code>copy()</code> 複製整個 slice</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>slice1</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>}</span>
+<span class=nx>slice2</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>}</span>
+<span class=nx>slice3</span> <span class=o>:=</span> <span class=nx>slice1</span>
+<span class=nb>copy</span><span class=p>(</span><span class=nx>slice1</span><span class=p>,</span> <span class=nx>slice2</span><span class=p>)</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>slice1</span><span class=p>,</span> <span class=nx>slice2</span><span class=p>,</span> <span class=nx>slice3</span><span class=p>)</span>
+<span class=c1>// Output
+</span><span class=c1></span><span class=p>[</span><span class=mi>3</span> <span class=mi>4</span><span class=p>]</span> <span class=p>[</span><span class=mi>3</span> <span class=mi>4</span><span class=p>]</span> <span class=p>[</span><span class=mi>3</span> <span class=mi>4</span><span class=p>]</span>
+</code></pre></div><p>用 <code>=</code> 只重新賦予 slice description</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>slice1</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>}</span>
+<span class=nx>slice2</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>}</span>
+<span class=nx>slice3</span> <span class=o>:=</span> <span class=nx>slice1</span>
+<span class=nx>slice1</span> <span class=p>=</span> <span class=nx>slice2</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>slice1</span><span class=p>,</span> <span class=nx>slice2</span><span class=p>,</span> <span class=nx>slice3</span><span class=p>)</span>
+<span class=err>#</span> <span class=nx>Output</span>
+<span class=p>[</span><span class=mi>3</span> <span class=mi>4</span><span class=p>]</span> <span class=p>[</span><span class=mi>3</span> <span class=mi>4</span><span class=p>]</span> <span class=p>[</span><span class=mi>1</span> <span class=mi>2</span><span class=p>]</span>
+</code></pre></div><p>copy map 的話只能用 map 遍歷來做</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>map1</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>bool</span><span class=p>{</span><span class=s>&#34;Interview&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span> <span class=s>&#34;Bit&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>}</span>
+<span class=nx>map2</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>bool</span><span class=p>)</span>
+<span class=k>for</span> <span class=nx>key</span><span class=p>,</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>map1</span> <span class=p>{</span>
+	<span class=nx>map2</span><span class=p>[</span><span class=nx>key</span><span class=p>]</span> <span class=p>=</span> <span class=nx>value</span>
+<span class=p>}</span>
+</code></pre></div><p>只是要 copy map 的 description 的話 用 <code>=</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>map1</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>bool</span><span class=p>{</span><span class=s>&#34;Interview&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span> <span class=s>&#34;Bit&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>}</span>
+<span class=nx>map2</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>bool</span><span class=p>{</span><span class=s>&#34;Interview&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span> <span class=s>&#34;Questions&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>}</span>
+<span class=nx>map3</span> <span class=o>:=</span> <span class=nx>map1</span>
+<span class=nx>map1</span> <span class=p>=</span> <span class=nx>map2</span>    <span class=c1>//copy description
+</span><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>map1</span><span class=p>,</span> <span class=nx>map2</span><span class=p>,</span> <span class=nx>map3</span><span class=p>)</span>
+</code></pre></div><h2 id=goroot-vs-gopath>GOROOT vs GOPATH</h2>
+<p>GOROOT:</p>
+<ul>
+<li>放置官方的程式庫
+GOPATH:</li>
+<li>放置第三方套件，還沒有 go module 以前的 workspace</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>ls <span class=nv>$GOPATH</span>
+<span class=c1># bin pkg src</span>
+</code></pre></div><p><strong>go run</strong></p>
+<ul>
+<li>將程式碼編譯，產生可執行檔，運行該可執行檔，運行後系統自動刪除</li>
+</ul>
+<p><strong>go build</strong></p>
+<ul>
+<li>編譯出執行檔</li>
+</ul>
+<h2 id=如何對-custom-struct-排序>如何對 custom struct 排序</h2>
+<p>要用到 <code>sort.Sort()</code></p>
+<p>需要實作以下 interface</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Interface</span> <span class=kd>interface</span> <span class=p>{</span>
+    <span class=c1>// Find number of elements in collection
+</span><span class=c1></span>    <span class=nf>Len</span><span class=p>()</span> <span class=kt>int</span>
+    
+    <span class=c1>// Less method is used for identifying which elements among index i and j are lesser and is used for sorting
+</span><span class=c1></span>    <span class=nf>Less</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>bool</span>
+    
+    <span class=c1>// Swap method is used for swapping elements with indexes i and j
+</span><span class=c1></span>    <span class=nf>Swap</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=kt>int</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>舉例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Human</span> <span class=kd>struct</span> <span class=p>{</span>
+    <span class=nx>name</span> <span class=kt>string</span>
+    <span class=nx>age</span>  <span class=kt>int</span>
+<span class=p>}</span>
+
+<span class=c1>// AgeFactor implements sort.Interface that sorts the slice based on age field.
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>AgeFactor</span> <span class=p>[]</span><span class=nx>Human</span>
+<span class=kd>func</span> <span class=p>(</span><span class=nx>a</span> <span class=nx>AgeFactor</span><span class=p>)</span> <span class=nf>Len</span><span class=p>()</span> <span class=kt>int</span>           <span class=p>{</span> <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=p>}</span>
+<span class=kd>func</span> <span class=p>(</span><span class=nx>a</span> <span class=nx>AgeFactor</span><span class=p>)</span> <span class=nf>Less</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>bool</span> <span class=p>{</span> <span class=k>return</span> <span class=nx>a</span><span class=p>[</span><span class=nx>i</span><span class=p>].</span><span class=nx>age</span> <span class=p>&lt;</span> <span class=nx>a</span><span class=p>[</span><span class=nx>j</span><span class=p>].</span><span class=nx>age</span> <span class=p>}</span>
+<span class=kd>func</span> <span class=p>(</span><span class=nx>a</span> <span class=nx>AgeFactor</span><span class=p>)</span> <span class=nf>Swap</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=kt>int</span><span class=p>)</span>      <span class=p>{</span> <span class=nx>a</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span> <span class=nx>a</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span> <span class=p>=</span> <span class=nx>a</span><span class=p>[</span><span class=nx>j</span><span class=p>],</span> <span class=nx>a</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>audience</span> <span class=o>:=</span> <span class=p>[]</span><span class=nx>Human</span><span class=p>{</span>
+        <span class=p>{</span><span class=s>&#34;Alice&#34;</span><span class=p>,</span> <span class=mi>35</span><span class=p>},</span>
+        <span class=p>{</span><span class=s>&#34;Bob&#34;</span><span class=p>,</span> <span class=mi>45</span><span class=p>},</span>
+        <span class=p>{</span><span class=s>&#34;James&#34;</span><span class=p>,</span> <span class=mi>25</span><span class=p>},</span>
+    <span class=p>}</span>
+    <span class=nx>sort</span><span class=p>.</span><span class=nf>Sort</span><span class=p>(</span><span class=nf>AgeFactor</span><span class=p>(</span><span class=nx>audience</span><span class=p>))</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>audience</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=c1>// Output
+</span><span class=c1></span><span class=p>[{</span><span class=nx>James</span> <span class=mi>25</span><span class=p>}</span> <span class=p>{</span><span class=nx>Alice</span> <span class=mi>35</span><span class=p>}</span> <span class=p>{</span><span class=nx>Bob</span> <span class=mi>45</span><span class=p>}]</span>
+</code></pre></div><h2 id=byte-vs-rune>byte vs rune</h2>
+<p><code>byte</code> 是 <code>uint8</code> 的 alias，可代表 ASCII 字元</p>
+<p><code>rune</code> 是 <code>int32</code> 的 alias，可代表 UTF-8 編碼</p>
+<p>rune literal 是單引號刮起來的 <code>'a'</code></p>
+<h2 id=list-倒轉>list 倒轉</h2>
+<p>用兩個索引，一個從前面 一個從後面，做 <code>num1, num2 = num2, num1</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+
+<span class=kd>func</span> <span class=nf>swapContents</span><span class=p>(</span><span class=nx>listObj</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+        <span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>listObj</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>j</span><span class=p>;</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=p>=</span> <span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nx>j</span><span class=o>-</span><span class=mi>1</span> <span class=p>{</span>
+                <span class=nx>listObj</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span> <span class=nx>listObj</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span> <span class=p>=</span> <span class=nx>listObj</span><span class=p>[</span><span class=nx>j</span><span class=p>],</span> <span class=nx>listObj</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+        <span class=p>}</span>
+<span class=p>}</span>
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+	<span class=nx>listObj</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>}</span>
+	<span class=nf>swapContents</span><span class=p>(</span><span class=nx>listObj</span><span class=p>)</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>listObj</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=c1>// Output
+</span><span class=c1></span><span class=p>[</span><span class=mi>3</span> <span class=mi>2</span> <span class=mi>1</span><span class=p>]</span>
+</code></pre></div><h2 id=如何有效率的對字串做-concatenate>如何有效率的對字串做 concatenate</h2>
+<p>要使用 <code>strings.Builder</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kn>import</span> <span class=p>(</span>
+    <span class=s>&#34;strings&#34;</span>
+    <span class=s>&#34;fmt&#34;</span>
+<span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=kd>var</span> <span class=nx>str</span> <span class=nx>strings</span><span class=p>.</span><span class=nx>Builder</span>
+
+    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>5</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+        <span class=nx>str</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;a&#34;</span><span class=p>)</span>
+    <span class=p>}</span>
+
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>str</span><span class=p>.</span><span class=nf>String</span><span class=p>())</span>
+<span class=p>}</span>
+<span class=c1>// Output
+</span><span class=c1></span><span class=nx>aaaaa</span>
+</code></pre></div><h2 id=package-載入時的執行順序>package 載入時的執行順序</h2>
+<p><code>import --> const --> var --> init()</code></p>
+<p>如果 import 多個 package 的時候，按照 package 順序以上面的順序執行</p>
+<p>每個 imported package 初始完以後再往下一個 package 執行</p>
+<h2 id=reference>Reference</h2>
+<p><a href=https://www.interviewbit.com/golang-interview-questions/ target=_blank rel="noopener noreffer">Golang Interview Questions</a></p>
+</div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>

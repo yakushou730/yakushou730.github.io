@@ -56,6 +56,29 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/site/useful-ruby-site/>Useful Ruby Site</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-13>2021-11-13</time></span></div><div class=content>Ruby on Rails 實戰聖經
+Ruby Hacking Guide
+Ruby on Rails 教程 | 他山</div><div class=post-footer>
+<a href=/posts/site/useful-ruby-site/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/ruby/>ruby</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/site/online-learning-site/>Online Learning Site</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-13>2021-11-13</time></span></div><div class=content>HiSKIO
+O&rsquo;REILLY
+Calhoun&rsquo;s Golang Course
+Applied Go Courses
+Udemy
+Kode Kloud
+Gumroad
+Medium</div><div class=post-footer>
+<a href=/posts/site/online-learning-site/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/site/useful-devops-site/>Useful DevOps Site</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -215,8 +238,10 @@ headroom (空間或橋梁的)淨空高度
 hitch 故障；突然停止
 hoop 鉤；拴；環；圈；半圈
 I integrity 完整
+J jargon 行話，行業術語，電腦術語
 L lexeme 詞素；詞元
 lift 搭便車
+M mutex (Mutual exclusion) 互斥鎖
 N notation 符號系統；數學符號
 nuance 細微差別
 O obscurity 鮮為人知；默默無聞
@@ -225,11 +250,7 @@ prescription 命令；處方
 R reassurance 能消除疑慮的話；安慰，慰藉
 refresher (尤指爲練習和提高長期不用的技能而上的) 進修課程
 S sanity 心智健全的狀態
-saturation point 達到飽和點
-severity 嚴重
-slang 俚語
-stem 主幹
-strain 壓力；作用力</div><div class=post-footer>
+saturation point 達到飽和點</div><div class=post-footer>
 <a href=/posts/dictionary/en-noun-dictionary/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
@@ -246,43 +267,6 @@ materially 本質上；重要地
 O onwards (繼續) 向前
 P purposefully 有目的地；有決心地</div><div class=post-footer>
 <a href=/posts/dictionary/en-adv-dictionary/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/solid-single-responsibility-principle/>SOLID - Single Responsibility Principle</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-10>2021-11-10</time></span></div><div class=content>SOLID 是軟體開發的準則
-分別代表
-Single Responsibility Principle (SRP - 單一職責原則) Open-Closed Principle (OCP - 開放封閉原則) Liskov Substitution Principle (LSP - Liskov替換原則) Interface Segregation Principle (ISP - 介面隔離原則) Dependency Inversion Principle (DIP - 依賴反轉原則) 本篇是簡單整理 SRP 的內容
-SRP 的定義是單一職責，類別內只做單一的事情
-即如果有要改動這個類別的話，只會有一個原因
-不會有多數需求要修改到這個類別
-舉例來說 一個 Journey 類別，裡面可以 新增/移除 複數個觀光景點
-則這個類別的職責就是只要負責記錄觀光景點就好
-假設今天需要一個功能是產生報表
-或許直接加方法在這個類別可以簡單的實作
-但卻破壞了 SRP 原則，這個時候就應該要把產生報表的行為移到另一個類別來負責
-引入的參數可以是這個 Journey 物件
-讓這個 Journey 類別只負責記錄觀光景點，不多做不相干的事情
-參考資料 SOLID 之 單一職責原則（Single responsibility principle） </div><div class=post-footer>
-<a href=/posts/programming/solid-single-responsibility-principle/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/dictionary/en-tech-dictionary/>英文: 技術專有名稱</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-10>2021-11-10</time></span></div><div class=content>A ampersand 和的符號 &
-angle bracket 尖的括號 &lt; 或 >
-asterisk 星星符號 *
-B backtick 上方小頓號 `
-H hash mark 井字號 #
-hyphen 減號 -
-P periods 點 .
-plus 加號 +
-S SMTP 簡單電子郵件傳輸協議 (電腦之間發送電子郵件的一種方式) (Simple Mail Transfer Protocol的縮寫)
-U underscore 底線符號 _
-W wildcard 萬用字元 %</div><div class=post-footer>
-<a href=/posts/dictionary/en-tech-dictionary/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>

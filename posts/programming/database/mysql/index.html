@@ -16,9 +16,9 @@
 <meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
 <meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/database/mysql/><link rel=prev href=https://blog.yakushou.com/posts/kodekloud/the-linux-basics-course/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/programming/database/mysql/><link rel=prev href=https://blog.yakushou.com/posts/kodekloud/the-linux-basics-course/><link rel=next href=https://blog.yakushou.com/posts/aws/iam/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Mysql","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/database\/mysql\/"},"genre":"posts","keywords":"programming, sql","wordcount":59,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/database\/mysql\/","datePublished":"2022-01-27T15:05:19+08:00","dateModified":"2022-01-27T15:05:19+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"mysql"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Mysql","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/programming\/database\/mysql\/"},"genre":"posts","keywords":"programming, sql","wordcount":62,"url":"https:\/\/blog.yakushou.com\/posts\/programming\/database\/mysql\/","datePublished":"2022-01-27T15:05:19+08:00","dateModified":"2022-01-27T15:05:19+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"mysql"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-27>2022-01-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-27>2022-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;59 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-27>2022-01-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-27>2022-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;62 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -71,6 +71,7 @@
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
 <li><a href=#使用者相關>使用者相關</a></li>
+<li><a href=#reset-table-index>Reset table index</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=使用者相關>使用者相關</h2>
@@ -101,6 +102,8 @@
 </span><span class=c1></span><span class=k>SHOW</span><span class=w> </span><span class=n>GRANTS</span><span class=w> </span><span class=k>FOR</span><span class=w> </span><span class=s1>&#39;shou&#39;</span><span class=o>@</span><span class=s1>&#39;%&#39;</span><span class=p>;</span><span class=w>
 </span><span class=w></span><span class=c1># 刪除使用者
 </span><span class=c1></span><span class=k>DROP</span><span class=w> </span><span class=k>USER</span><span class=w> </span><span class=s1>&#39;shou&#39;</span><span class=o>@</span><span class=s1>&#39;%&#39;</span><span class=p>;</span><span class=w>
+</span></code></pre></div><h2 id=reset-table-index>Reset table index</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=p>[</span><span class=n>table_name</span><span class=p>]</span><span class=w> </span><span class=kp>AUTO_INCREMENT</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w>
 </span></code></pre></div></div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
@@ -123,7 +126,8 @@
 <span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/posts/kodekloud/the-linux-basics-course/ class=prev rel=prev title="The Linux Basics Course"><i class="fas fa-angle-left fa-fw"></i>The Linux Basics Course</a></div>
+<div class=post-nav><a href=/posts/kodekloud/the-linux-basics-course/ class=prev rel=prev title="The Linux Basics Course"><i class="fas fa-angle-left fa-fw"></i>The Linux Basics Course</a>
+<a href=/posts/aws/iam/ class=next rel=next title=iam>iam<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

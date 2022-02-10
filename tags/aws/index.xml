@@ -1,0 +1,5 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>aws - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/tags/aws/</link><description>aws - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 07 Feb 2022 11:51:44 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/tags/aws/" rel="self" type="application/rss+xml"/><item><title>iam</title><link>https://blog.yakushou.com/posts/aws/iam/</link><pubDate>Mon, 07 Feb 2022 11:51:44 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/aws/iam/</guid><description>設定帳戶密碼失敗 可能是碰到需要 MFA 操作，但是在剛建立使用者的時候還沒有 MFA 的關係
+AWS: Allows MFA-authenticated IAM users to manage their own credentials on the My Security Credentials page
+AWS IAM won&amp;rsquo;t let my users change their passwords
+做法有兩種
+改 policy 的規則，讓變更密碼這件事不需要 MFA (官方說不推薦這做法) 砍掉帳號重新建立一個，然後先不要勾 Require password reset，等他登入後設定完 MFA，這樣之後就可以改密碼了</description></item></channel></rss>
