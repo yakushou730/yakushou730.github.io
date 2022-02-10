@@ -37,10 +37,16 @@ hoop 鉤；拴；環；圈；半圈
 ## I
 integrity 完整
 
+## J
+jargon 行話，行業術語，電腦術語
+
 ## L
 lexeme 詞素；詞元
 
 lift 搭便車
+
+## M
+mutex (Mutual exclusion) 互斥鎖
 
 ## N
 notation 符號系統；數學符號

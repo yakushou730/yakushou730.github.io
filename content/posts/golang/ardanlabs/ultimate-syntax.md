@@ -1,5 +1,5 @@
 ---
-title: "ultimate `syntax"
+title: "ultimate syntax"
 authors: [yakushou730]
 date: 2022-01-18T08:25:04+08:00
 description: "ultimate syntax"

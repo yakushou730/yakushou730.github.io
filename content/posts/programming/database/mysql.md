@@ -44,3 +44,8 @@ SHOW GRANTS FOR 'shou'@'%';
 # 刪除使用者
 DROP USER 'shou'@'%';
 ```
+
+## Reset table index
+```mysql
+ALTER TABLE [table_name] AUTO_INCREMENT = 0;
+```

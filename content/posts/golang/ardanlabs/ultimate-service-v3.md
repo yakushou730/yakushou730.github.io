@@ -255,7 +255,30 @@ docker system prune
 4. 建立 debugging / metrics support
 5. 建立 shutdown signaling and load shedding
 
+log 用到的 package [go.uber.org/zap](https://github.com/uber-go/zap)
+
+可以視覺化 pprof 的套件 [https://github.com/divan/expvarmon](https://github.com/divan/expvarmon)
+
 > 一般來說，linter 會建議 package 上方要有註解，此時可以在那個 package 專門建立一個 doc.go 在 package 上方做註解，不需要其他程式碼
 
 ## HTTP Routing Basis
+建立可以讓 k8s 偵測的 readiness / liveness endpoint
+
+## Web Framework
+設計呼叫流程，包含怎麼套用 middleware
+
+呼叫 middleware 就像洋蔥圈的方式，最內層是要呼叫的 function
+
+由外往內一層一層進去
+
+## Middleware
+errors
+- Is: error variable comparison
+- As: type comparison
+
+middleware 的 layer 順序
+1. (最外層) Logger
+2. Error
+3. panics
+4. (最內層) Handler action
 
