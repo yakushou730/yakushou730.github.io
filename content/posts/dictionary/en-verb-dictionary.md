@@ -22,6 +22,8 @@ compromise 損害
 
 concatenate 使連接；把...連成一串
 
+conceive 想像；想出；構想
+
 conduct 實施；處理
 
 ## D
@@ -56,6 +58,8 @@ intercept 攔截，截住
 
 intermingle 混合；混在一起
 
+interpret 理解，解釋，闡釋
+
 ## L
 leverage 借助已有的...實現新 (或更好) 的目標
 
@@ -66,7 +70,17 @@ mitigate 使緩和；減輕（危害等）
 
 mutate 轉變
 
+## O
+omit 疏忽，遺漏；刪節，排除
+
+outpace (速度上) 超過，比...更快
+
+## P
+preface 為...寫序言；作為...的開端 (或序幕)
+
 ## R
+refrain 避免；忍住；節制
+
 rehash 以新形式表達舊內容；換湯不換藥
 
 relay 傳達，轉發

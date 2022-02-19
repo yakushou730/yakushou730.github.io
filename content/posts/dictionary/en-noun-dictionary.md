@@ -10,17 +10,30 @@ draft: false
 ## A
 affiliation 從屬關係；聯繫
 
+anagram 相同字母異序詞
+
+aspire to sth 追求；渴望；有志於
+
 ## C
 caveat (進一步行動前的) 警告；限制條款
+
+clutter 雜亂，淩亂；雜亂的東西
+
+coercion 強制，強迫；威逼，脅迫
 
 consequence (常指不好或不利的) 結果，後果
 
 constituent 成分；構成部分
 
 ## D
+delimiter 定界符
+
 denial 否定
 
 discrepancy 不一致，出入
+
+## F
+factoring 因數分解，因式分解
 
 ## G
 groundwork 基礎工作；準備工作
@@ -36,6 +49,8 @@ hoop 鉤；拴；環；圈；半圈
 
 ## I
 integrity 完整
+
+introspection 反省，自省
 
 ## J
 jargon 行話，行業術語，電腦術語
@@ -59,9 +74,17 @@ obscurity 鮮為人知；默默無聞
 ## P
 panther 黑豹
 
+point of view 觀點，想法
+
+precedence (時間、順序、重要程度等的) 居前，領先
+
 prescription 命令；處方
 
+punctuation 標點符號；標點符號用法
+
 ## R
+ream 500張紙
+
 reassurance 能消除疑慮的話；安慰，慰藉
 
 refresher (尤指爲練習和提高長期不用的技能而上的) 進修課程

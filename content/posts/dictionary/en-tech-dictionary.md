@@ -15,7 +15,13 @@ angle bracket 尖的括號 < 或 >
 asterisk 星星符號 *
 
 ## B
+backslash 反折號 \
+
 backtick 上方小頓號 `
+
+brace 大括號 {}
+
+bracket 方括號 []
 
 ## H
 
@@ -24,6 +30,8 @@ hash mark 井字號 #
 hyphen 減號 -
 
 ## P
+parentheses 圓括號 () 
+
 periods 點 .
 
 plus 加號 +

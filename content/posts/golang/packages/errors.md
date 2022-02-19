@@ -7,7 +7,7 @@ tags: ["golang"]
 draft: false
 ---
 
-## #As
+## As
 `func As(err error, target interface{}) bool`
 
 第一個參數是現在拿到的 error
@@ -30,7 +30,7 @@ if err != nil {
 }
 ```
 
-## #Is
+## Is
 `func Is(err error, target error) bool`
 
 第一個參數是現在拿到的 error
