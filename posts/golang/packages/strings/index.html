@@ -1,0 +1,198 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>strings - YakuShou's NOTEBOOK</title><meta name=Description content="strings"><meta property="og:title" content="strings">
+<meta property="og:description" content="strings">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.yakushou.com/posts/golang/packages/strings/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-02-19T17:44:28+08:00">
+<meta property="article:modified_time" content="2022-02-19T17:44:28+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="strings">
+<meta name=twitter:description content="strings">
+<meta name=application-name content="YakuShou's NOTEBOOK">
+<meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
+<meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/packages/strings/><link rel=prev href=https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go-notebook/><link rel=next href=https://blog.yakushou.com/posts/golang/packages/strconv/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"strings","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/packages\/strings\/"},"genre":"posts","keywords":"golang","wordcount":151,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/packages\/strings\/","datePublished":"2022-02-19T17:44:28+08:00","dateModified":"2022-02-19T17:44:28+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"strings"}</script></head>
+<body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><span class="menu-item delimiter"></span><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>Contents</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">strings</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-19>2022-02-19</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-02-19>2022-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;151 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#hasprefix>HasPrefix</a></li>
+<li><a href=#hassuffix>HasSuffix</a></li>
+<li><a href=#contains>Contains</a></li>
+<li><a href=#index>Index</a></li>
+<li><a href=#lastindex>LastIndex</a></li>
+<li><a href=#indexrune>IndexRune</a></li>
+<li><a href=#replace>Replace</a></li>
+<li><a href=#count>Count</a></li>
+<li><a href=#repeat>Repeat</a></li>
+<li><a href=#tolower>ToLower</a></li>
+<li><a href=#toupper>ToUpper</a></li>
+<li><a href=#trimspace>TrimSpace</a></li>
+<li><a href=#trim>Trim</a></li>
+<li><a href=#trimleft>TrimLeft</a></li>
+<li><a href=#trimright>TrimRight</a></li>
+<li><a href=#fields>Fields</a></li>
+<li><a href=#split>Split</a></li>
+<li><a href=#join>Join</a></li>
+<li><a href=#read>Read</a></li>
+<li><a href=#readbyte>ReadByte</a></li>
+<li><a href=#readrune>ReadRune</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h2 id=hasprefix>HasPrefix</h2>
+<p>檢驗字串的 prefix</p>
+<p><code>strings.HasPrefix(s, prefix string) bool</code></p>
+<h2 id=hassuffix>HasSuffix</h2>
+<p>檢驗字串的 suffix</p>
+<p><code>strings.HasSuffix(s, suffix string) bool</code></p>
+<h2 id=contains>Contains</h2>
+<p>檢驗字串是否包含 substring</p>
+<p><code>strings.Contains(s, substr string) bool</code></p>
+<h2 id=index>Index</h2>
+<p>指出第一個符合的 substring 是在哪個位置，沒找到的話回傳 -1</p>
+<p><code>strings.Index(s, str string) int</code></p>
+<h2 id=lastindex>LastIndex</h2>
+<p>指出最後一個符合的 substring 是在哪個位置，沒找到的話回傳 -1</p>
+<p><code>strings.LastIndex(s, str string) int</code></p>
+<blockquote>
+<p>若是非 ACSII 的話，用 <code>strings.IndexRune(s string, ch int) int</code></p>
+</blockquote>
+<h2 id=indexrune>IndexRune</h2>
+<p>非 ASCII 找 index 時用的</p>
+<p><code>strings.IndexRune(s string, ch int) int</code></p>
+<h2 id=replace>Replace</h2>
+<p>取代字串，從頭開始 n 次，全部取代的話用 <code>-1</code></p>
+<p><code>strings.Replace(str, old, new string, n int)</code></p>
+<h2 id=count>Count</h2>
+<p>計算 substring 不重疊出現次數</p>
+<p><code>strings.Count(s, str string) int</code></p>
+<h2 id=repeat>Repeat</h2>
+<p>重複 count 數量的字串</p>
+<p><code>strings.Repeat(s string, count int) string</code></p>
+<h2 id=tolower>ToLower</h2>
+<p>回傳原本字串都轉成小寫的 copy</p>
+<p><code>strings.ToLower(s) string</code></p>
+<h2 id=toupper>ToUpper</h2>
+<p>回傳原本字串都轉成大寫的 copy</p>
+<p><code>strings.ToUpper(s) string</code></p>
+<h2 id=trimspace>TrimSpace</h2>
+<p>移除全部的空白</p>
+<p><code>strings.TrimSpace(s)</code></p>
+<h2 id=trim>Trim</h2>
+<p>移除全部特定的字串</p>
+<p><code>trings.Trim(s, str)</code></p>
+<h2 id=trimleft>TrimLeft</h2>
+<h2 id=trimright>TrimRight</h2>
+<h2 id=fields>Fields</h2>
+<p>用 空白 或 連續空白 來分割字串</p>
+<p>回傳 []string</p>
+<p><code>strings.Fields(s)</code></p>
+<h2 id=split>Split</h2>
+<p>用特殊分割符號來切字串</p>
+<p><code>strings.Split(s, sep)</code></p>
+<h2 id=join>Join</h2>
+<p>把 []string 用特殊字符串起來</p>
+<p><code>strings.Join(sl []string, sep string)</code></p>
+<h2 id=read>Read</h2>
+<p><code>strings.NewReader(str)</code></p>
+<p>先產生一個指標指向 reader value</p>
+<p>用 Read() 可以把資料讀取為 <code>[]byte</code></p>
+<h2 id=readbyte>ReadByte</h2>
+<p>同上先呼叫 <code>strings.NewReader(str)</code> 後</p>
+<p>用 ReadByte() 讀下一個 byte</p>
+<h2 id=readrune>ReadRune</h2>
+<p>同上先呼叫 <code>strings.NewReader(str)</code> 後</p>
+<p>用 ReadRune() 讀下一個 rune</p>
+</div>
+<div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>Updated on 2022-02-19</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/golang/ardanlabs/ultimate-go-notebook/ class=prev rel=prev title="Ultimate Go Notebook"><i class="fas fa-angle-left fa-fw"></i>Ultimate Go Notebook</a>
+<a href=/posts/golang/packages/strconv/ class=next rel=next title=strconv>strconv<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{}}</script></div>
+</body>
+</html>

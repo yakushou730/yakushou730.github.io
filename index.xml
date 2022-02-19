@@ -1,4 +1,35 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Feb 2022 00:49:12 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/index.xml" rel="self" type="application/rss+xml"/><item><title>rabbitmq</title><link>https://blog.yakushou.com/posts/programming/rabbitmq/</link><pubDate>Tue, 08 Feb 2022 00:49:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/rabbitmq/</guid><description>RabbitMQ
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 19 Feb 2022 18:27:51 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/index.xml" rel="self" type="application/rss+xml"/><item><title>time</title><link>https://blog.yakushou.com/posts/golang/packages/time/</link><pubDate>Sat, 19 Feb 2022 18:27:51 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/time/</guid><description><![CDATA[基本用法 t := time.Now() fmt.Printf(&#34;%02d.%02d.%4d\n&#34;, t.Day(), t.Month(), t.Year()) // e.g.: 29.10.2019 Duration 是指兩個時間相減的 nano second (int64)
+Location 會 mapping 時區
+ UTC: Universal Coordinated Time
+ Since 回傳過了多久
+Since(t Time)
+Format 把時間轉成特定格式
+func (t Time) Format(s string) string
+可也以是 time.ANSIC 或 time.RFC822
+t := time.Now().UTC() fmt.Println(t.Format(&#34;02 Jan 2006 15:04&#34;))// e.g: 29 Oct 2019 11:00 ]]></description></item><item><title>strconv</title><link>https://blog.yakushou.com/posts/golang/packages/strconv/</link><pubDate>Sat, 19 Feb 2022 17:44:34 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/strconv/</guid><description>IntSize 回傳 int 的 size 大小
+Itoa int 轉 string
+strconv.Itoa(i int) string
+FormatFloat 把 float 轉成 string
+strconv.FormatFloat(f float64, fmt byte, prec int, bitSize int) string
+Atoi 字串轉 int
+strconv.Atoi(s string) (i int, err error)
+ParseFloat 字串轉 float
+strconv.ParseFloat(s string, bitSize int) (f float64, err error)</description></item><item><title>strings</title><link>https://blog.yakushou.com/posts/golang/packages/strings/</link><pubDate>Sat, 19 Feb 2022 17:44:28 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/strings/</guid><description>HasPrefix 檢驗字串的 prefix
+strings.HasPrefix(s, prefix string) bool
+HasSuffix 檢驗字串的 suffix
+strings.HasSuffix(s, suffix string) bool
+Contains 檢驗字串是否包含 substring
+strings.Contains(s, substr string) bool
+Index 指出第一個符合的 substring 是在哪個位置，沒找到的話回傳 -1
+strings.Index(s, str string) int
+LastIndex 指出最後一個符合的 substring 是在哪個位置，沒找到的話回傳 -1
+strings.LastIndex(s, str string) int
+若是非 ACSII 的話，用 strings.IndexRune(s string, ch int) int
+IndexRune 非 ASCII 找 index 時用的
+strings.IndexRune(s string, ch int) int
+Replace 取代字串，從頭開始 n 次，全部取代的話用 -1
+strings.Replace(str, old, new string, n int)</description></item><item><title>Ultimate Go Notebook</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go-notebook/</link><pubDate>Fri, 11 Feb 2022 14:49:00 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go-notebook/</guid><description>Chapter 1: Introduction Golang 的第一宗旨要著重在可讀性
+mental model 很重要，如果寫了 code 但是再回頭看看不懂，表示需要重構了</description></item><item><title>rabbitmq</title><link>https://blog.yakushou.com/posts/programming/rabbitmq/</link><pubDate>Tue, 08 Feb 2022 00:49:12 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/rabbitmq/</guid><description>RabbitMQ
 RabbitMQ = message broker (accepts, stores, and forwards binary blobs of data - messages)
 術語:
 Producer: 送出 messages (sending) Queue: a large message buffer producer 可以送 message 到 queue 裡面 consumer 可以從 queue 把 message 收走 Consumer: 等待接收 messages (receiving) producer, consumer, broker 不需要在相同的 host 上
@@ -30,19 +61,4 @@ Shell Types
 Bourne Shell (sh) C Shell (csh or tcsh) Korn Shell (ksh) Z Shell (zsh) Bourne again Shell (bash) # 查看當前是用哪種 shell echo $SHELL Bash Shell Features</description></item><item><title>Ultimate Service V3</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/</link><pubDate>Sun, 23 Jan 2022 21:41:43 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/</guid><description>Github repo
 整理了下，如果整個 cluster 重啟，要跑哪些步驟
 # 把 cluster shutdown make kind-down # 1. 啟動 kind make kind-up # 2. build 新的 service image make all # 3. 設定 kind 要抓本機的 image make kind-load # 4. 設定 kind cluster 要吃本機的 config 設定 make kind-apply # extra: 看 log make kind-logs # extra: 直接更新 kind 設定 # all + kind-load + kind-restart make kind-update Modules Project:
-a repo of code defines the philosophy, policy and guideline go mod init [module name] # 範例 go mod init github.</description></item><item><title>Ultimate Go</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/</link><pubDate>Sat, 22 Jan 2022 14:41:10 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/</guid><description>Design Guideline Memory &amp;amp; Data semantics</description></item><item><title>Refactor With Bill</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/refactor-with-bill/</link><pubDate>Sat, 22 Jan 2022 13:46:18 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/refactor-with-bill/</guid><description>Project init 結構會是先建出下列資料夾 (一個 repo 可以執行多個 binary 的結構)
-再來是做 go mod init [name]
-# 可執行的程式入口 cmd/violin/css/ cmd/violin/image/ cmd/violin/mp3/ cmd/violin/templates/ cmd/violin/internal/ cmd/violin/main.go # 商業邏輯 internal/platform/ go.mod 起手式 main.go
-func main(){ if err := run(); err != nil { log.Println(err) os.Exit(1) } } func run() { return nil }</description></item><item><title>ultimate syntax</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/</link><pubDate>Tue, 18 Jan 2022 08:25:04 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/</guid><description>Variables 一般來說使用 int 較多，而不是 int32 或 int64 少用 := zero value，碰到 zero value 的話不如直接用 var 宣吿 Strings string 是 2 words 的 data structures 空字串 第一個 word 是 nil 第二個 word 是 0 字串 Hello 第一個 word 是指標，指向 hello 陣列的 h 位址 第二個 word 是長度 5 Struct golang 的三種印出格式
-%v -&amp;gt; {false 0 0} %+v -&amp;gt; {flag:false counter:0 pi:0} %#v -&amp;gt; main.</description></item><item><title>tools</title><link>https://blog.yakushou.com/posts/programming/tools/</link><pubDate>Mon, 10 Jan 2022 10:29:47 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/tools/</guid><description>cloc https://github.com/AlDanial/cloc
-計算 檔案數量 / 行數 等等的工具
-可以使用 docker container 來跑，就不用安裝 binary
-# 最後的 . 是指當前目錄，可以換成對應的目錄 docker run --rm -v $PWD:/tmp aldanial/cloc . commitizen https://github.com/commitizen/cz-cli
-可以簡單產生 commitizen 的 git commit
-https://www.conventionalcommits.org/en/v1.0.0/
-安裝:
-npm install commitizen commitizen init cz-conventional-changelog --save-dev --save-exact</description></item><item><title>Certified K8s Administrator</title><link>https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/</link><pubDate>Sun, 09 Jan 2022 21:07:35 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/</guid><description>Core Concepts k8s 的目的是要以自動化的形式管理 container 形式的 app
-讓使用者可以簡單的部署，並讓各服務的溝通可以簡單化
-解說:
-假設現在有兩艘船，cargo ship 和 control ship
-Cargo Ship 負責實際運載 container 的工作 每艘船的船長，負責管理船上的 activities，負責接收當 master 需要裝載 container 時的資訊， 並回報給 master 這艘船的狀態和 container 的狀態 Control Ship 負責監測和管理 cargo ships 透過 control plane 元件負責管理 cargo ship 的大小事 ETCD: 每天都有很多 container 要被載到 cargo ships 上，所以需要紀錄不同的船上有哪個 container，包含載入的時間 而這些是以 key-value 的形式被保存的 kube-scheduler: 當 cargo ship 來的時候，要負責判斷並把對應的 container 奘載給他 Controller manager: 指派特殊工作，例: operation team 要處理交通控制，或是 container 壞掉的時候，怎麼樣建立一個可以用的 container service office 用來讓各部門溝通，或是讓不同的船之間溝通 最高部門: kube-apiserver，各部門之間管理的最高層級，負責 Cluster 的工作協調 對應到 k8s 的名詞</description></item></channel></rss>
+a repo of code defines the philosophy, policy and guideline go mod init [module name] # 範例 go mod init github.</description></item><item><title>Ultimate Go</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/</link><pubDate>Sat, 22 Jan 2022 14:41:10 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/</guid><description>Design Guideline Memory &amp;amp; Data semantics</description></item></channel></rss>

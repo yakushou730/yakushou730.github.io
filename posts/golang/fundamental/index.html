@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=prev href=https://blog.yakushou.com/posts/k8s/basic-for-beginner/><link rel=next href=https://blog.yakushou.com/posts/programming/software/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":663,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":1020,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;663 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1020 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -70,6 +70,7 @@
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
+<li><a href=#in-memory>in memory</a></li>
 <li><a href=#如何在-go-get-的時候可以拉到-private-repo>如何在 go get 的時候可以拉到 private repo</a></li>
 <li><a href=#type-assertion-vs-type-conversion>Type Assertion vs Type Conversion</a></li>
 <li><a href=#type-switch>Type switch</a></li>
@@ -81,10 +82,23 @@
 <li><a href=#list-倒轉>list 倒轉</a></li>
 <li><a href=#如何有效率的對字串做-concatenate>如何有效率的對字串做 concatenate</a></li>
 <li><a href=#package-載入時的執行順序>package 載入時的執行順序</a></li>
+<li><a href=#value--reference>value & reference</a></li>
+<li><a href=#int>int</a></li>
+<li><a href=#float>float</a></li>
+<li><a href=#進位制表示>進位制表示</a></li>
+<li><a href=#character-type>Character type</a></li>
+<li><a href=#bitwise-operators>bitwise operators</a></li>
+<li><a href=#運算子優先順序>運算子優先順序</a></li>
+<li><a href=#string>string</a></li>
+<li><a href=#pointer>pointer</a></li>
 <li><a href=#reference>Reference</a></li>
 </ul>
 </nav></div>
-</div><div class=content id=content><h2 id=如何在-go-get-的時候可以拉到-private-repo>如何在 go get 的時候可以拉到 private repo</h2>
+</div><div class=content id=content><h2 id=in-memory>in memory</h2>
+<p>程式的用法在記憶體上會切成很多小區塊，每一塊我們稱為 word</p>
+<p>32 bits CPU: 1 word = 32bits = 4 bytes
+64 bits CPU: 1 word = 64bits = 8 bytes</p>
+<h2 id=如何在-go-get-的時候可以拉到-private-repo>如何在 go get 的時候可以拉到 private repo</h2>
 <p>概念:</p>
 <p>因為是 private repo 的關係， 所以要讓 go 有權限去拉</p>
 <p>拉的時候是透過 git，所以要設定具有權限的 token 給 git</p>
@@ -295,6 +309,107 @@ GOPATH:</li>
 <p><code>import --> const --> var --> init()</code></p>
 <p>如果 import 多個 package 的時候，按照 package 順序以上面的順序執行</p>
 <p>每個 imported package 初始完以後再往下一個 package 執行</p>
+<h2 id=value--reference>value & reference</h2>
+<p>value type</p>
+<ul>
+<li>透過 <code>=</code> 做 assign 給另外一個變數的時候，值的 copy 會被放在另一個變數的 memory</li>
+<li>value type 的變數會被放在 stack memory</li>
+</ul>
+<p>reference type</p>
+<ul>
+<li>複雜的資料，使用上會佔用很多 word 的則會用 reference type</li>
+<li>指向複雜資料的第一個 word</li>
+<li>assign reference type 的時候，只有存放的 address 被 copy 了</li>
+<li>指向的資料改了的話，全部指向同一個記憶體位址的資料都會一起被改動</li>
+<li>指向的資料是被放在 memory heap 上的，會碰到 gc，且記憶體空間也比 stack 大得多</li>
+</ul>
+<h2 id=int>int</h2>
+<p>int 的儲存大小取決於 CPU 架構</p>
+<ul>
+<li>32 bits CPU : 32 bits (4 bytes)</li>
+<li>64 bits CPU : 64 bits (8 bytes)</li>
+</ul>
+<p>int8, int16, int32, int64: 這類的是指定儲存大小</p>
+<h2 id=float>float</h2>
+<p>多用 float64，因為 math package 的 function 都使用此 type</p>
+<h2 id=進位制表示>進位制表示</h2>
+<p>octal notation (8進制) : prefix 放 <code>0</code></p>
+<ul>
+<li>63 表示為 077</li>
+</ul>
+<p>hexadecimal notation (16進制) : prefix 放 <code>0x</code></p>
+<ul>
+<li>255 表示為 0xFF</li>
+</ul>
+<p>scientific notation (科學表示) : 用 <code>e</code> 表示 10 的次方</p>
+<ul>
+<li>1000 可以寫成 1e3</li>
+</ul>
+<h2 id=character-type>Character type</h2>
+<p>嚴格來說不是 golang 的 type，而是 int 的特殊情境</p>
+<p>byte: alias of <code>uint8</code></p>
+<ul>
+<li>1 byte 可以描述 ASCII 的字元</li>
+<li>例 <code>'A'</code> 是 <code>65</code> (10進位) 或 <code>\x41</code> (16進位)</li>
+</ul>
+<blockquote>
+<p>&lsquo;\x&rsquo; 後面一定是接兩個數字，是16進位的表示 如: &lsquo;\x41&rsquo;</p>
+<p>&lsquo;' 後面一定是接三個數字，是8進位的表示 如: &lsquo;\377&rsquo;</p>
+</blockquote>
+<p>Character 也支援 Unicode (UTF-8)</p>
+<p>Character 稱為 Unicode code points</p>
+<p>一個 unicode character 是用一個 int 存在記憶體位址，表示為 <code>U+hhhh</code> (h 是 16進位表示)</p>
+<p>rune: alias of <code>int32</code></p>
+<p>要用 unicode-character 的話，16 進制前要用 <code>\u</code> 或 <code>\U</code></p>
+<ul>
+<li><code>\u</code> 是 4 位 hex digits</li>
+<li><code>\U</code> 是 8 位 hex digits</li>
+</ul>
+<h2 id=bitwise-operators>bitwise operators</h2>
+<p>AND: <code>&</code></p>
+<p>OR: <code>|</code></p>
+<p>XOR: <code>^</code></p>
+<p>CLEAR <code>&^</code></p>
+<p>COMPLEMENT: <code>^</code></p>
+<h2 id=運算子優先順序>運算子優先順序</h2>
+<p>1st: <code>^</code> <code>!</code>
+2nd: <code>*</code> <code>/</code> <code>%</code> <code>&lt;&lt;</code> <code>>></code> <code>&</code> <code>&^</code>
+3rd: <code>+</code> <code>-</code> <code>|</code> <code>^</code>
+4th: <code>==</code> <code>!=</code> <code>&lt;</code> <code>&lt;=</code> <code>>=</code> <code>></code>
+5th: <code>&lt;-</code>
+6th: <code>&&</code>
+7th: <code>||</code></p>
+<blockquote>
+<p>加上 <code>()</code> 的話會變成最優先</p>
+</blockquote>
+<h2 id=string>string</h2>
+<p>string 是一連串的 UTF-8 characters (each 1 to 4 bytes)</p>
+<ul>
+<li>variable-width</li>
+<li>immutable arrays of bytes</li>
+</ul>
+<blockquote>
+<p>the 1-byte ASCII-code is used when possible, and a 2-4 byte UTF-8 code when necessary</p>
+<p>len() to string is the number of bytes</p>
+<p>taking the address of a character in a string is illegal</p>
+</blockquote>
+<h2 id=pointer>pointer</h2>
+<p><code>&</code>: address-of operator
+<code>*</code>: type modifier</p>
+<p>pointer 的大小 (都是一個 word)</p>
+<ul>
+<li>32 bits machine -> 4 bytes</li>
+<li>64 bits machine -> 8 bytes</li>
+</ul>
+<blockquote>
+<p>透過 pointer refer 到 value，稱為 indirection</p>
+<p>pointer 的 default 是 nil</p>
+</blockquote>
+<p>透過 <code>*</code> 取指標的值稱為 dereference</p>
+<p>參數用指標傳的好處是 如果是很大的結構的話就不用傳 copy of value，可節省記憶體使用</p>
+<p>只要還有一個指標指向該記憶體，就不會被清掉，所以生命週期是獨立於建立時的 scope 之外</p>
+<p>因為指標是 indirection，所以在非必要時使用的話 會造成效能下降</p>
+<p>nil 的指標無法被 dereference，會 panic</p>
 <h2 id=reference>Reference</h2>
 <p><a href=https://www.interviewbit.com/golang-interview-questions/ target=_blank rel="noopener noreffer">Golang Interview Questions</a></p>
 </div>

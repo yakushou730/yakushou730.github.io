@@ -56,6 +56,65 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/time/>time</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-19>2022-02-19</time></span></div><div class=content>基本用法 t := time.Now() fmt.Printf("%02d.%02d.%4d\n", t.Day(), t.Month(), t.Year()) // e.g.: 29.10.2019 Duration 是指兩個時間相減的 nano second (int64)
+Location 會 mapping 時區
+UTC: Universal Coordinated Time
+Since 回傳過了多久
+Since(t Time)
+Format 把時間轉成特定格式
+func (t Time) Format(s string) string
+可也以是 time.ANSIC 或 time.RFC822
+t := time.Now().UTC() fmt.Println(t.Format("02 Jan 2006 15:04"))// e.g: 29 Oct 2019 11:00 </div><div class=post-footer>
+<a href=/posts/golang/packages/time/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/strconv/>strconv</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-19>2022-02-19</time></span></div><div class=content>IntSize 回傳 int 的 size 大小
+Itoa int 轉 string
+strconv.Itoa(i int) string
+FormatFloat 把 float 轉成 string
+strconv.FormatFloat(f float64, fmt byte, prec int, bitSize int) string
+Atoi 字串轉 int
+strconv.Atoi(s string) (i int, err error)
+ParseFloat 字串轉 float
+strconv.ParseFloat(s string, bitSize int) (f float64, err error)</div><div class=post-footer>
+<a href=/posts/golang/packages/strconv/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/strings/>strings</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-19>2022-02-19</time></span></div><div class=content>HasPrefix 檢驗字串的 prefix
+strings.HasPrefix(s, prefix string) bool
+HasSuffix 檢驗字串的 suffix
+strings.HasSuffix(s, suffix string) bool
+Contains 檢驗字串是否包含 substring
+strings.Contains(s, substr string) bool
+Index 指出第一個符合的 substring 是在哪個位置，沒找到的話回傳 -1
+strings.Index(s, str string) int
+LastIndex 指出最後一個符合的 substring 是在哪個位置，沒找到的話回傳 -1
+strings.LastIndex(s, str string) int
+若是非 ACSII 的話，用 strings.IndexRune(s string, ch int) int
+IndexRune 非 ASCII 找 index 時用的
+strings.IndexRune(s string, ch int) int
+Replace 取代字串，從頭開始 n 次，全部取代的話用 -1
+strings.Replace(str, old, new string, n int)</div><div class=post-footer>
+<a href=/posts/golang/packages/strings/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/ardanlabs/ultimate-go-notebook/>Ultimate Go Notebook</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-11>2022-02-11</time></span></div><div class=content>Chapter 1: Introduction Golang 的第一宗旨要著重在可讀性
+mental model 很重要，如果寫了 code 但是再回頭看看不懂，表示需要重構了</div><div class=post-footer>
+<a href=/posts/golang/ardanlabs/ultimate-go-notebook/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/programming/rabbitmq/>rabbitmq</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -129,49 +188,6 @@ a repo of code defines the philosophy, policy and guideline go mod init [module 
 </span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-22>2022-01-22</time></span></div><div class=content>Design Guideline Memory & Data semantics </div><div class=post-footer>
 <a href=/posts/golang/ardanlabs/ultimate-go/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/ardanlabs/refactor-with-bill/>Refactor With Bill</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-22>2022-01-22</time></span></div><div class=content>Project init 結構會是先建出下列資料夾 (一個 repo 可以執行多個 binary 的結構)
-再來是做 go mod init [name]
-# 可執行的程式入口 cmd/violin/css/ cmd/violin/image/ cmd/violin/mp3/ cmd/violin/templates/ cmd/violin/internal/ cmd/violin/main.go # 商業邏輯 internal/platform/ go.mod 起手式 main.go
-func main(){ if err := run(); err != nil { log.Println(err) os.Exit(1) } } func run() { return nil } </div><div class=post-footer>
-<a href=/posts/golang/ardanlabs/refactor-with-bill/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/ardanlabs/ultimate-syntax/>ultimate syntax</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-18>2022-01-18</time></span></div><div class=content>Variables 一般來說使用 int 較多，而不是 int32 或 int64 少用 := zero value，碰到 zero value 的話不如直接用 var 宣吿 Strings string 是 2 words 的 data structures 空字串 第一個 word 是 nil 第二個 word 是 0 字串 Hello 第一個 word 是指標，指向 hello 陣列的 h 位址 第二個 word 是長度 5 Struct golang 的三種印出格式
-%v -> {false 0 0} %+v -> {flag:false counter:0 pi:0} %#v -> main.</div><div class=post-footer>
-<a href=/posts/golang/ardanlabs/ultimate-syntax/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/tools/>tools</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-10>2022-01-10</time></span></div><div class=content>cloc https://github.com/AlDanial/cloc
-計算 檔案數量 / 行數 等等的工具
-可以使用 docker container 來跑，就不用安裝 binary
-# 最後的 . 是指當前目錄，可以換成對應的目錄 docker run --rm -v $PWD:/tmp aldanial/cloc . commitizen https://github.com/commitizen/cz-cli
-可以簡單產生 commitizen 的 git commit
-https://www.conventionalcommits.org/en/v1.0.0/
-安裝:
-npm install commitizen commitizen init cz-conventional-changelog --save-dev --save-exact </div><div class=post-footer>
-<a href=/posts/programming/tools/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/k8s/certified-k8s-administrator/>Certified K8s Administrator</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-09>2022-01-09</time></span></div><div class=content>Core Concepts k8s 的目的是要以自動化的形式管理 container 形式的 app
-讓使用者可以簡單的部署，並讓各服務的溝通可以簡單化
-解說:
-假設現在有兩艘船，cargo ship 和 control ship
-Cargo Ship 負責實際運載 container 的工作 每艘船的船長，負責管理船上的 activities，負責接收當 master 需要裝載 container 時的資訊， 並回報給 master 這艘船的狀態和 container 的狀態 Control Ship 負責監測和管理 cargo ships 透過 control plane 元件負責管理 cargo ship 的大小事 ETCD: 每天都有很多 container 要被載到 cargo ships 上，所以需要紀錄不同的船上有哪個 container，包含載入的時間 而這些是以 key-value 的形式被保存的 kube-scheduler: 當 cargo ship 來的時候，要負責判斷並把對應的 container 奘載給他 Controller manager: 指派特殊工作，例: operation team 要處理交通控制，或是 container 壞掉的時候，怎麼樣建立一個可以用的 container service office 用來讓各部門溝通，或是讓不同的船之間溝通 最高部門: kube-apiserver，各部門之間管理的最高層級，負責 Cluster 的工作協調 對應到 k8s 的名詞</div><div class=post-footer>
-<a href=/posts/k8s/certified-k8s-administrator/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>

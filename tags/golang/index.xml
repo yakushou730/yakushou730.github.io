@@ -1,37 +1,50 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>golang - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/tags/golang/</link><description>golang - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 23 Jan 2022 21:41:43 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/tags/golang/" rel="self" type="application/rss+xml"/><item><title>Ultimate Service V3</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/</link><pubDate>Sun, 23 Jan 2022 21:41:43 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/</guid><description>Github repo
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>golang - Tag - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/tags/golang/</link><description>golang - Tag - YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 19 Feb 2022 18:27:51 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/tags/golang/" rel="self" type="application/rss+xml"/><item><title>time</title><link>https://blog.yakushou.com/posts/golang/packages/time/</link><pubDate>Sat, 19 Feb 2022 18:27:51 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/time/</guid><description><![CDATA[基本用法 t := time.Now() fmt.Printf(&#34;%02d.%02d.%4d\n&#34;, t.Day(), t.Month(), t.Year()) // e.g.: 29.10.2019 Duration 是指兩個時間相減的 nano second (int64)
+Location 會 mapping 時區
+ UTC: Universal Coordinated Time
+ Since 回傳過了多久
+Since(t Time)
+Format 把時間轉成特定格式
+func (t Time) Format(s string) string
+可也以是 time.ANSIC 或 time.RFC822
+t := time.Now().UTC() fmt.Println(t.Format(&#34;02 Jan 2006 15:04&#34;))// e.g: 29 Oct 2019 11:00 ]]></description></item><item><title>strconv</title><link>https://blog.yakushou.com/posts/golang/packages/strconv/</link><pubDate>Sat, 19 Feb 2022 17:44:34 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/strconv/</guid><description>IntSize 回傳 int 的 size 大小
+Itoa int 轉 string
+strconv.Itoa(i int) string
+FormatFloat 把 float 轉成 string
+strconv.FormatFloat(f float64, fmt byte, prec int, bitSize int) string
+Atoi 字串轉 int
+strconv.Atoi(s string) (i int, err error)
+ParseFloat 字串轉 float
+strconv.ParseFloat(s string, bitSize int) (f float64, err error)</description></item><item><title>strings</title><link>https://blog.yakushou.com/posts/golang/packages/strings/</link><pubDate>Sat, 19 Feb 2022 17:44:28 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/strings/</guid><description>HasPrefix 檢驗字串的 prefix
+strings.HasPrefix(s, prefix string) bool
+HasSuffix 檢驗字串的 suffix
+strings.HasSuffix(s, suffix string) bool
+Contains 檢驗字串是否包含 substring
+strings.Contains(s, substr string) bool
+Index 指出第一個符合的 substring 是在哪個位置，沒找到的話回傳 -1
+strings.Index(s, str string) int
+LastIndex 指出最後一個符合的 substring 是在哪個位置，沒找到的話回傳 -1
+strings.LastIndex(s, str string) int
+若是非 ACSII 的話，用 strings.IndexRune(s string, ch int) int
+IndexRune 非 ASCII 找 index 時用的
+strings.IndexRune(s string, ch int) int
+Replace 取代字串，從頭開始 n 次，全部取代的話用 -1
+strings.Replace(str, old, new string, n int)</description></item><item><title>Ultimate Go Notebook</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go-notebook/</link><pubDate>Fri, 11 Feb 2022 14:49:00 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go-notebook/</guid><description>Chapter 1: Introduction Golang 的第一宗旨要著重在可讀性
+mental model 很重要，如果寫了 code 但是再回頭看看不懂，表示需要重構了</description></item><item><title>Ultimate Service V3</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/</link><pubDate>Sun, 23 Jan 2022 21:41:43 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/</guid><description>Github repo
 整理了下，如果整個 cluster 重啟，要跑哪些步驟
 # 把 cluster shutdown make kind-down # 1. 啟動 kind make kind-up # 2. build 新的 service image make all # 3. 設定 kind 要抓本機的 image make kind-load # 4. 設定 kind cluster 要吃本機的 config 設定 make kind-apply # extra: 看 log make kind-logs # extra: 直接更新 kind 設定 # all + kind-load + kind-restart make kind-update Modules Project:
 a repo of code defines the philosophy, policy and guideline go mod init [module name] # 範例 go mod init github.</description></item><item><title>Ultimate Go</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/</link><pubDate>Sat, 22 Jan 2022 14:41:10 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/</guid><description>Design Guideline Memory &amp;amp; Data semantics</description></item><item><title>Refactor With Bill</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/refactor-with-bill/</link><pubDate>Sat, 22 Jan 2022 13:46:18 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/refactor-with-bill/</guid><description>Project init 結構會是先建出下列資料夾 (一個 repo 可以執行多個 binary 的結構)
 再來是做 go mod init [name]
 # 可執行的程式入口 cmd/violin/css/ cmd/violin/image/ cmd/violin/mp3/ cmd/violin/templates/ cmd/violin/internal/ cmd/violin/main.go # 商業邏輯 internal/platform/ go.mod 起手式 main.go
 func main(){ if err := run(); err != nil { log.Println(err) os.Exit(1) } } func run() { return nil }</description></item><item><title>ultimate syntax</title><link>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/</link><pubDate>Tue, 18 Jan 2022 08:25:04 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-syntax/</guid><description>Variables 一般來說使用 int 較多，而不是 int32 或 int64 少用 := zero value，碰到 zero value 的話不如直接用 var 宣吿 Strings string 是 2 words 的 data structures 空字串 第一個 word 是 nil 第二個 word 是 0 字串 Hello 第一個 word 是指標，指向 hello 陣列的 h 位址 第二個 word 是長度 5 Struct golang 的三種印出格式
-%v -&amp;gt; {false 0 0} %+v -&amp;gt; {flag:false counter:0 pi:0} %#v -&amp;gt; main.</description></item><item><title>fundamental</title><link>https://blog.yakushou.com/posts/golang/fundamental/</link><pubDate>Mon, 27 Dec 2021 16:10:27 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/fundamental/</guid><description><![CDATA[如何在 go get 的時候可以拉到 private repo 概念:
+%v -&amp;gt; {false 0 0} %+v -&amp;gt; {flag:false counter:0 pi:0} %#v -&amp;gt; main.</description></item><item><title>fundamental</title><link>https://blog.yakushou.com/posts/golang/fundamental/</link><pubDate>Mon, 27 Dec 2021 16:10:27 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/fundamental/</guid><description><![CDATA[in memory 程式的用法在記憶體上會切成很多小區塊，每一塊我們稱為 word
+32 bits CPU: 1 word = 32bits = 4 bytes 64 bits CPU: 1 word = 64bits = 8 bytes
+如何在 go get 的時候可以拉到 private repo 概念:
 因為是 private repo 的關係， 所以要讓 go 有權限去拉
 拉的時候是透過 git，所以要設定具有權限的 token 給 git
- 在個人的 github settings 建立一個可以拉取 private repo 的 token 把 token 記下以後，在本機操作 git cli 用 copy 下來的 token 取代下列的 GITHUB_TOKEN  $ git config --global url.&#34;https://${GITHUB_TOKEN}@github.com&#34;.insteadOf &#34;https://github.com&#34; Type Assertion vs Type Conversion Type Assertion (斷言)
- 從 interface object 直接斷言型態是什麼  var greeting interface{} = &#34;hello world&#34; greetingStr := greeting.(string) Type Conversion (型態轉換)]]></description></item><item><title>errors</title><link>https://blog.yakushou.com/posts/golang/packages/errors/</link><pubDate>Tue, 23 Nov 2021 18:26:55 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/errors/</guid><description>#As func As(err error, target interface{}) bool
+ 在個人的 github settings 建立一個可以拉取 private repo 的 token 把 token 記下以後，在本機操作 git cli 用 copy 下來的 token 取代下列的 GITHUB_TOKEN  $ git config --global url.&#34;https://${GITHUB_TOKEN}@github.com&#34;.insteadOf &#34;https://github.com&#34; Type Assertion vs Type Conversion Type Assertion (斷言)]]></description></item><item><title>errors</title><link>https://blog.yakushou.com/posts/golang/packages/errors/</link><pubDate>Tue, 23 Nov 2021 18:26:55 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/errors/</guid><description>As func As(err error, target interface{}) bool
 第一個參數是現在拿到的 error
 會透過呼叫 Unwrap 來比對 err 的第一個錯誤是否和 target 相同 如果對的話，會把 target 設定為 err 並回傳 true 否則回傳 false
 範例
-err := dec.Decode(dst) if err != nil { var syntaxError *json.SyntaxError switch { case errors.As(err, &amp;amp;syntaxError): return fmt.Errorf(&amp;#34;body contains badly-formed JSON (at character %d)&amp;#34;, syntaxError.Offset) default: return err } } #Is func Is(err error, target error) bool
+err := dec.Decode(dst) if err != nil { var syntaxError *json.SyntaxError switch { case errors.As(err, &amp;amp;syntaxError): return fmt.Errorf(&amp;#34;body contains badly-formed JSON (at character %d)&amp;#34;, syntaxError.Offset) default: return err } } Is func Is(err error, target error) bool
 第一個參數是現在拿到的 error 第二個參數是想要比對的特定 error
-比對方式是透過呼叫 Unwrap 逐一拆解來比對是否包含 特定的 error</description></item><item><title>json</title><link>https://blog.yakushou.com/posts/golang/packages/json/</link><pubDate>Tue, 23 Nov 2021 17:08:07 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/json/</guid><description><![CDATA[tag 標記用法 範例 json:&quot;name,omitempty&quot;
-這個欄位名稱為 name，如果欄位內容是空值的話，則欄位會被忽略
-範例 json:&quot;-&quot; 不管欄位名稱是什麼，都會忽略不印出
-omitempty 這個欄位 如果是結構的話
-無論是否為空值，一定會產生出欄位，值為空
-例如
-s := struct { Foo struct { Bar string `json:&#34;,omitempty&#34;` } `json:&#34;,omitempty&#34;` }{} // encoding result {&#34;Foo&#34;:{}} 解決辦法是透過指標的方式
-例如
-s := struct { Foo *struct { Bar string `json:&#34;,omitempty&#34;` } `json:&#34;,omitempty&#34;` }{} // encoding result {} 此外如果欄位型態是 time.Time 的話
-omitempty 不會運作
-escaped json 編碼的時候如果碰到 &gt; &lt; &amp;
-會轉為逃逸字元
-範例
-s := []string{ &#34;&lt;foo&gt;&#34;, &#34;bar &amp; baz&#34;, } // result [&#34;\u003cfoo\u003e&#34;,&#34;bar \u0026 baz&#34;] 如果要避免的話，要在 json.]]></description></item><item><title>golang-migrate</title><link>https://blog.yakushou.com/posts/golang/packages/golang-migrate/</link><pubDate>Sun, 21 Nov 2021 23:36:24 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/golang-migrate/</guid><description>github link
-以 postgreSQL 為例
-安裝 (用 homebrew) $ brew install golang-migrate 確認版本 $ migrate -version 建立 migration 檔案 # 建立 migration 檔案 $ migrate create -seq -ext=.sql -dir=./migrations create_movies_table -sql : 用數字序列的方式命名 migration 檔案 (如0001, 0002, &amp;hellip;) 預設是用 unix timestamp -ext : 指定 migration 檔案的 extension 名稱 -dir : 表示我們要把 migration 檔案建立在哪個路徑 (若路徑不存在的話會自動建立) create_movies_table 是想要建立的檔案名稱 接著系統會建立兩份 migration 檔案 000001_create_movies_table.down.sql 000001_create_movies_table.up.sql
-之後便可在這兩份檔案寫入對應的 SQL 語法
-執行 migrate (up) $ export GREENLIGHT_DB_DSN=&amp;#39;postgres://greenlight:@localhost/greenlight?</description></item><item><title>Signal</title><link>https://blog.yakushou.com/posts/golang/signal/</link><pubDate>Sat, 20 Nov 2021 23:24:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/signal/</guid><description>Signal 類型 Signal Description Keyboard Shortcut Catchable SIGINT 鍵盤中斷訊號 Ctrl + C true SIGQUIT 鍵盤離開訊號 Ctrl + |true SIGKILL 刪除程序(立即終止) - no SIGTERM 照順序終止程序 - true kill pid 會傳送SIGTERM到程序pid
-shutdown() shutdown 的關閉流程不會中斷任何作用中的連線
-先關閉所有 open 的 listener 再關閉所有 idle 的 listener 等候作用中連線成為 idle shutdown http.Server 的 Shutdown 會在結束時回傳錯誤碼 (沒錯誤的話回傳 nil)</description></item><item><title>Slice</title><link>https://blog.yakushou.com/posts/golang/slice/</link><pubDate>Tue, 16 Nov 2021 22:59:16 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/slice/</guid><description>建立空的 Slice var movies []*Movie movie = &amp;amp;Movie{} // 這樣子建立出來的 movies slice 是 nil // 但已經足夠用來做 append // 不需要寫成 movies := []*Movie{} movies = append(movies, movie) 把 array 轉成 slice // hash 是 [32]byte 的 byte array hash := sha256.Sum256(info) // b.Hash 是 byte slice b.Hash = hash[:]</description></item></channel></rss>
+比對方式是透過呼叫 Unwrap 逐一拆解來比對是否包含 特定的 error</description></item></channel></rss>

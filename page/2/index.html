@@ -56,6 +56,49 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/ardanlabs/refactor-with-bill/>Refactor With Bill</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-22>2022-01-22</time></span></div><div class=content>Project init 結構會是先建出下列資料夾 (一個 repo 可以執行多個 binary 的結構)
+再來是做 go mod init [name]
+# 可執行的程式入口 cmd/violin/css/ cmd/violin/image/ cmd/violin/mp3/ cmd/violin/templates/ cmd/violin/internal/ cmd/violin/main.go # 商業邏輯 internal/platform/ go.mod 起手式 main.go
+func main(){ if err := run(); err != nil { log.Println(err) os.Exit(1) } } func run() { return nil } </div><div class=post-footer>
+<a href=/posts/golang/ardanlabs/refactor-with-bill/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/ardanlabs/ultimate-syntax/>ultimate syntax</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-18>2022-01-18</time></span></div><div class=content>Variables 一般來說使用 int 較多，而不是 int32 或 int64 少用 := zero value，碰到 zero value 的話不如直接用 var 宣吿 Strings string 是 2 words 的 data structures 空字串 第一個 word 是 nil 第二個 word 是 0 字串 Hello 第一個 word 是指標，指向 hello 陣列的 h 位址 第二個 word 是長度 5 Struct golang 的三種印出格式
+%v -> {false 0 0} %+v -> {flag:false counter:0 pi:0} %#v -> main.</div><div class=post-footer>
+<a href=/posts/golang/ardanlabs/ultimate-syntax/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/programming/tools/>tools</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-10>2022-01-10</time></span></div><div class=content>cloc https://github.com/AlDanial/cloc
+計算 檔案數量 / 行數 等等的工具
+可以使用 docker container 來跑，就不用安裝 binary
+# 最後的 . 是指當前目錄，可以換成對應的目錄 docker run --rm -v $PWD:/tmp aldanial/cloc . commitizen https://github.com/commitizen/cz-cli
+可以簡單產生 commitizen 的 git commit
+https://www.conventionalcommits.org/en/v1.0.0/
+安裝:
+npm install commitizen commitizen init cz-conventional-changelog --save-dev --save-exact </div><div class=post-footer>
+<a href=/posts/programming/tools/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/k8s/certified-k8s-administrator/>Certified K8s Administrator</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-09>2022-01-09</time></span></div><div class=content>Core Concepts k8s 的目的是要以自動化的形式管理 container 形式的 app
+讓使用者可以簡單的部署，並讓各服務的溝通可以簡單化
+解說:
+假設現在有兩艘船，cargo ship 和 control ship
+Cargo Ship 負責實際運載 container 的工作 每艘船的船長，負責管理船上的 activities，負責接收當 master 需要裝載 container 時的資訊， 並回報給 master 這艘船的狀態和 container 的狀態 Control Ship 負責監測和管理 cargo ships 透過 control plane 元件負責管理 cargo ship 的大小事 ETCD: 每天都有很多 container 要被載到 cargo ships 上，所以需要紀錄不同的船上有哪個 container，包含載入的時間 而這些是以 key-value 的形式被保存的 kube-scheduler: 當 cargo ship 來的時候，要負責判斷並把對應的 container 奘載給他 Controller manager: 指派特殊工作，例: operation team 要處理交通控制，或是 container 壞掉的時候，怎麼樣建立一個可以用的 container service office 用來讓各部門溝通，或是讓不同的船之間溝通 最高部門: kube-apiserver，各部門之間管理的最高層級，負責 Cluster 的工作協調 對應到 k8s 的名詞</div><div class=post-footer>
+<a href=/posts/k8s/certified-k8s-administrator/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/k8s/helm/>helm</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -116,50 +159,6 @@ RPM 不管 dependency CentOS Red Hat Enterprise Linux Fedora package 會被包�
 # install package rpm -i telnet.rpm # uninstall package rpm -e telnet.rpm # query package rpm -q telnet.rpm # query all installed package rpm -qa YUM 包裝過 rpm，會順便安裝 dependency</div><div class=post-footer>
 <a href=/posts/devops/basics/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/k8s/yaml-files/>YAML Files</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-28>2021-12-28</time></span></div><div class=content>General YAML template 必要的 4 個欄位
-apiVersion:# 要用來建立物件的 k8s API 版本 kind:# 要建立的物件metadata:# 物件的其他資訊，如 name, labels...spec:# 建立物件需要的訊息 apiVersion (string) POD: v1 Service: v1 ReplicaSet: apps/v1 Deployment: apps/v1 kind (string) Pod Service ReplicaSet Deployment metadata (dictionary) name labels labels 下的 key/value 值是可以自訂的 spec (dictionary) 指令:
-# 可以看介紹 kubectl explain &lt;k8s kind> POD with YAML pod-definition.yaml
-apiVersion:v1kind:Podmetadata:name:myapp-podlabels:app:myapptype:front-endspec:containers:- name:nginx-containerimage:nginx指令
-# 建立 kubectl create -f pod-definition.</div><div class=post-footer>
-<a href=/posts/k8s/yaml-files/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/k8s/concepts/>concepts</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-28>2021-12-28</time></span></div><div class=content>概念 Container + Orchestration
-k8s 是一種容器編排技術，用於協調數百個對象的部署和管理 cluster 中的數千個容器
-VM vs Docker VM 是在 原本的 OS 上，再額外起來的完整的虛擬機器，具有完整的虛擬 OS 每個 VM 裡面除了 OS 外還有各自的 libs 和 deps 動輒以 GB 為單位 啟動速度慢 Docker 是基於原本的內核，起起來的 container libs 和 deps 在各自容器內 大約以 MB 為單位 啟動速度快 術語 node (minion) 安裝了 k8s 的機器，container 會起在這上面 cluster 一組複數個 nodes ( 1 個 master / 多個 worker) 會有一台 master node，負責監管和負責流程編排 node 上 的 container components 安裝 k8s 時，會安裝的一些元件 API server 可以作為 k8s 的前端 (系統操作入口) 不管是使用者對 k8s 或是 node 對 master 都是透過 apiserver 溝通 唯一可以和 etcd 溝通的元件，其他元件都必須透過 apiserver 才能訪問集群狀態 以 RESTful interface 提供外部或內部組件使用 etcd key-value store 確保 master 間沒有 conflict kubelet 每個 node 都會安裝的 agent 確保 container 可以運作在 node 上 container runtime 用來跑 container 的環境 (ex: Docker) controller manager 負責 k8s cluster 故障檢測和恢復的自動化，執行多種 controller replication controller 定期關聯 replication controller 和 pod，保證 pod 數量正確 node controller kubelet 啟動的時候會通過 apiserver 註冊自己本身節點的資訊，定時向 apiserver 報告狀態 apiserver 收到後更新到 etcd node controller 實現管理和監控 node 資訊 resourceQuota controller 用來管理使用的資源不要超過設定 namespace controller 用戶透過 apiserver 可以建立新的 namespace，存於 etcd service account controller 確保 default 的 ServiceAccount 在每個 namespace 中都存在 token controller 用來監聽 service account 的建立/刪除 和 監聽 secret 的增加/刪除 service controller 監聽 service 的變化 endpoint controller endpoint 表示了 service 對應的所有 pod 副本的位址 而 endpoint controller 是負責生成和維護所有 endpoints 的控制器，保證 service 到 pod 的對應總是最新的 orchestration 的大腦，在 nodes / containers 發生故障時發出通知和回應 決定是否建立新的 container scheduler 分配 container 給 nodes master 上 會安裝 kube-apiserver 會安裝 etcd 儲存資訊 會安裝 controller 會安裝 scheduler worker 上 會安裝 kubelet 和 master 溝通 k8s component 的 kind 種類 ConfigMap</div><div class=post-footer>
-<a href=/posts/k8s/concepts/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/software/>software</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-27>2021-12-27</time></span></div><div class=content>Declarative vs imperative language Declarative programming (宣告式)
-What 代表為 functional programming (function 之間不會互相共用狀態) 程式碼通常是可以直接看到在做什麼 (重視 what) Imperative programming (命令式)
-how to do 代表為 OOP (狀態互相依賴) 看得見邏輯運算過程 (how to do) Repository Pattern Repository Pattern 是在 domain 和 data mapping 的中間層
-透過 collection-like 的 interface 來存取 domain object
-換句話說可以是 application 和 data access logic 的中間層
-好處:
-修改邏輯的時候只要改一個地方 測試 controller 變簡單了，不用真實存取資料庫資料 舉例: EmployeeController -> Employee Repository -> SQL server Database</div><div class=post-footer>
-<a href=/posts/programming/software/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/fundamental/>fundamental</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-27>2021-12-27</time></span></div><div class=content>如何在 go get 的時候可以拉到 private repo 概念:
-因為是 private repo 的關係， 所以要讓 go 有權限去拉
-拉的時候是透過 git，所以要設定具有權限的 token 給 git
-在個人的 github settings 建立一個可以拉取 private repo 的 token 把 token 記下以後，在本機操作 git cli 用 copy 下來的 token 取代下列的 GITHUB_TOKEN $ git config --global url."https://${GITHUB_TOKEN}@github.com".insteadOf "https://github.com" Type Assertion vs Type Conversion Type Assertion (斷言)
-從 interface object 直接斷言型態是什麼 var greeting interface{} = "hello world" greetingStr := greeting.(string) Type Conversion (型態轉換)</div><div class=post-footer>
-<a href=/posts/golang/fundamental/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>
