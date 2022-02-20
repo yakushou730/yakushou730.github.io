@@ -56,6 +56,22 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/programming/git/>git</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-02>2022-01-02</time></span></div><div class=content>git</div><div class=post-footer>
+<a href=/posts/programming/git/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/git/>git</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/devops/basics/>basics</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-02>2022-01-02</time></span></div><div class=content>Environment variable SHELL: 系統使用了哪種 shell 確認 OS Version # 印出所有 release 版本 # * 是指 wildcard ls /etc/*release* # 印出當前版本細節 cat /etc/*release* package managers RPM (Red Hat Package Manager)
+RPM 不管 dependency CentOS Red Hat Enterprise Linux Fedora package 會被包裝成 &lt;檔名>.rpm
+# install package rpm -i telnet.rpm # uninstall package rpm -e telnet.rpm # query package rpm -q telnet.rpm # query all installed package rpm -qa YUM 包裝過 rpm，會順便安裝 dependency</div><div class=post-footer>
+<a href=/posts/devops/basics/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/k8s/yaml-files/>YAML Files</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -142,21 +158,6 @@ jvm.options
 寫 log 的 framework data jdk 包含 OpenJDK lib 包含 Elasticsearch 會用到的 dependency logs modules 包含很多內建的 module plugins Basic architecture 基礎單元是 node，是 Elasticsearch 的 instance，用來儲存 data node 可以執行複數個，各自儲存部分的資料 node 不是機器，所以可以用幾台機器運行更多個 node 每個 node 都隸屬在 cluster 下 cluster 包含 nodes 通常不同的 cluster 會用來做不同的搜尋情境，彼此獨立 資料單位稱為 document，是一筆 json 格式的資料 index a document，意思是送一筆 json object 給 Elasticsearch 該筆 json object 到 Elasticsearch 後會在 "_source" 的節點下，並賦予其他 meta data index 包含多個 document query 的時候，是對指定的 index 做搜尋 document Kibana console 進入 Kibana 介面，並點擊 Dev Tools query HTTP method + request path 範例: 取得 cluster 狀態</div><div class=post-footer>
 <a href=/posts/udemy/complete-guide-to-elasticsearch/getting-started/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/udemy/complete-guide-to-elasticsearch/introduction/>introduction</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-14>2021-12-14</time></span></div><div class=content>Introduction to Elasticsearch 儲存一筆資料的單位是 document (類似 RDB 的 row) Document 的欄位叫做 fields (類似 RDB 的 column) 儲存的格式像 json client 透過 REST API 和 Elasticsearch 溝通 Overview of the Elastic Stack Kibana 分析 / 視覺畫的平台 透過 Elasticsearch 的資料來做視覺化 (發 http request) Logstash 處理 log (或其他資料，如訂單) 後把資料送給 Elasticsearch (也可以傳給不同的對象，如 Kafka) 資料處理的 pipeline pipeline 三步驟: input filter output pipeline configuration 的格式像 json X-Pack 提供額外功能給 Elasticsearch 和 Kibana Security authentication authorization Monitoring 視覺化 Elastic Stack 如何運作 (如顯示 CPU / memory usage / disk space) Alerting 設定告警 (如透過 email 通知) Reporting 輸出 Kibana 的資料 Machine Learning enable machine learning for Elasticsearch & Kibana Graph 分析資料的關聯 Elasticsearch SQL 可以傳送 SQL query 給 Elasticsearch Beats 蒐集資料並運送 Walkthrough of common architectures 同時儲存資料在 DB 和 Elasticsearch，後端收到 request 的時候兩邊都做 query </div><div class=post-footer>
-<a href=/posts/udemy/complete-guide-to-elasticsearch/introduction/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/makefile/>Makefile</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-05>2021-12-05</time></span></div><div class=content>範例
-GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?sslmode=disable' ## help: print this help message .PHONY: help help: @echo 'Usage:' @sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' | sed -e 's/^/ /' .PHONY: confirm confirm: @echo 'Are you sure? [y/N] ' && read ans && [ $${ans:-N} = y ] ## run/api: run the cmd/api application .PHONY: run/api run/api: go run ./cmd/api ## db/psql: connect to the database using psql .PHONY: db/psql db/psql: psql ${GREENLIGHT_DB_DSN} ## db/migrations/new name=$1: create a new database migration .</div><div class=post-footer>
-<a href=/posts/programming/makefile/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>

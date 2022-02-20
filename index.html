@@ -56,6 +56,21 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/runtime/>runtime</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-20>2022-02-20</time></span></div><div class=content>Caller Caller() 會回傳呼叫到這個 method 的地方的資訊 (時間/檔案/行數)</div><div class=post-footer>
+<a href=/posts/golang/packages/runtime/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/os/>os</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-20>2022-02-20</time></span></div><div class=content>Exit 透過系統錯誤碼終止程式
+Open 以名稱開啟檔案</div><div class=post-footer>
+<a href=/posts/golang/packages/os/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/packages/time/>time</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -67,7 +82,8 @@ Since(t Time)
 Format 把時間轉成特定格式
 func (t Time) Format(s string) string
 可也以是 time.ANSIC 或 time.RFC822
-t := time.Now().UTC() fmt.Println(t.Format("02 Jan 2006 15:04"))// e.g: 29 Oct 2019 11:00 </div><div class=post-footer>
+t := time.Now().UTC() fmt.Println(t.Format("02 Jan 2006 15:04"))// e.g: 29 Oct 2019 11:00 Sub 時間相減出來的時間差
+delta := end.Sub(start)</div><div class=post-footer>
 <a href=/posts/golang/packages/time/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
@@ -171,23 +187,6 @@ Shell Types
 Bourne Shell (sh) C Shell (csh or tcsh) Korn Shell (ksh) Z Shell (zsh) Bourne again Shell (bash) # 查看當前是用哪種 shell echo $SHELL Bash Shell Features</div><div class=post-footer>
 <a href=/posts/kodekloud/the-linux-basics-course/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/ardanlabs/ultimate-service-v3/>Ultimate Service V3</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-23>2022-01-23</time></span></div><div class=content>Github repo
-整理了下，如果整個 cluster 重啟，要跑哪些步驟
-# 把 cluster shutdown make kind-down # 1. 啟動 kind make kind-up # 2. build 新的 service image make all # 3. 設定 kind 要抓本機的 image make kind-load # 4. 設定 kind cluster 要吃本機的 config 設定 make kind-apply # extra: 看 log make kind-logs # extra: 直接更新 kind 設定 # all + kind-load + kind-restart make kind-update Modules Project:
-a repo of code defines the philosophy, policy and guideline go mod init [module name] # 範例 go mod init github.</div><div class=post-footer>
-<a href=/posts/golang/ardanlabs/ultimate-service-v3/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/ardanlabs/ultimate-go/>Ultimate Go</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-22>2022-01-22</time></span></div><div class=content>Design Guideline Memory & Data semantics </div><div class=post-footer>
-<a href=/posts/golang/ardanlabs/ultimate-go/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>

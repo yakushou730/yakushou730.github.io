@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=prev href=https://blog.yakushou.com/posts/k8s/basic-for-beginner/><link rel=next href=https://blog.yakushou.com/posts/programming/software/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":1020,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":1596,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1020 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1596 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -91,6 +91,9 @@
 <li><a href=#運算子優先順序>運算子優先順序</a></li>
 <li><a href=#string>string</a></li>
 <li><a href=#pointer>pointer</a></li>
+<li><a href=#switch>switch</a></li>
+<li><a href=#loop>loop</a></li>
+<li><a href=#functions>functions</a></li>
 <li><a href=#reference>Reference</a></li>
 </ul>
 </nav></div>
@@ -410,7 +413,206 @@ GOPATH:</li>
 <p>只要還有一個指標指向該記憶體，就不會被清掉，所以生命週期是獨立於建立時的 scope 之外</p>
 <p>因為指標是 indirection，所以在非必要時使用的話 會造成效能下降</p>
 <p>nil 的指標無法被 dereference，會 panic</p>
-<h2 id=reference>Reference</h2>
+<h2 id=switch>switch</h2>
+<p>switch 有一種用法是在 switch 語句的時候做 initialization statement</p>
+<blockquote>
+<p>這種用法要在 init 後段手動加上 <code>;</code></p>
+</blockquote>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>switch</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=o>:=</span> <span class=nx>x</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span> <span class=nx>y</span><span class=p>[</span><span class=nx>j</span><span class=p>];</span> <span class=p>{</span>
+    <span class=k>case</span> <span class=nx>a</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>:</span> <span class=nx>t</span> <span class=p>=</span> <span class=o>-</span><span class=mi>1</span>
+    <span class=k>case</span> <span class=nx>a</span> <span class=o>==</span> <span class=nx>b</span><span class=p>:</span> <span class=nx>t</span> <span class=p>=</span> <span class=mi>0</span>
+    <span class=k>case</span> <span class=nx>a</span> <span class=p>&gt;</span> <span class=nx>b</span><span class=p>:</span> <span class=nx>t</span> <span class=p>=</span> <span class=mi>1</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=loop>loop</h2>
+<p>不要在 loop 的 body 裡面更改 counter variable</p>
+<p>初始化多於一個變數的範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>N</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>j</span><span class=p>;</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=p>=</span> <span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nx>j</span><span class=o>-</span><span class=mi>1</span> <span class=p>{</span> <span class=p>}</span>
+</code></pre></div><blockquote>
+<p>用 for i 的方式來 loop 非 ASCII 字串的話，會看到依照 byte 被切開的非預期結果</p>
+</blockquote>
+<p><code>for ix, val := range coll {}</code> 的語法中 ix 是 index，而 val 是 coll 在 index 處的 copy</p>
+<ul>
+<li>即 val 只能作為 only read-purposes</li>
+</ul>
+<blockquote>
+<p>勁量不要用 goto</p>
+<p>若需要使用 goto LABEL 時，對應的 LABEL 最好是在程式後段</p>
+<p>往前跳的話會讓 code 很難讀</p>
+</blockquote>
+<h2 id=functions>functions</h2>
+<p>3 種類型</p>
+<ul>
+<li>Normal functions with an identifier</li>
+<li>anonymous or lambda functions</li>
+<li>methods</li>
+</ul>
+<blockquote>
+<p>function signature: function 的 參數 和 回傳值 (包含 type)</p>
+<p>called / invoked 是指對 function 的呼叫</p>
+<p>當呼叫 function 的時候，參數會以 copy 的形式被傳進 function</p>
+</blockquote>
+<p>function 在 golang 中可以是 first-class object，即作為參數傳送或作為 return value</p>
+<p>或指派給變數</p>
+<blockquote>
+<p>function 可以是一個 type 作為宣告，zero value 是 nil</p>
+<p>function value 可以做比較，如果都是指向同一個 function 的話就是 true</p>
+<p>或都是 nil 的話為 true</p>
+</blockquote>
+<p>名詞定義:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nf>greeting</span><span class=p>(</span><span class=nx>lastname</span><span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>greeting</span><span class=p>(</span><span class=nx>name</span> <span class=kt>string</span><span class=p>)</span>  <span class=p>{}</span>
+</code></pre></div><p>lastname 是 <code>actual parameter</code></p>
+<p>name 是 <code>formal parameter</code></p>
+<blockquote>
+<p>niladic function: 指不需要參數的 function，如: main.main()</p>
+</blockquote>
+<p>function 的傳入參數</p>
+<ul>
+<li>by value: 傳入 value 的 copy</li>
+<li>by reference: 傳入 address 的 copy
+<ul>
+<li>可以變更記憶體位址對應的值</li>
+<li>和 copy 物件相比，copy reference 的成本較低</li>
+<li><code>slice</code> <code>map</code> <code>interface</code> <code>channel</code> 預設上是 pass by reference</li>
+</ul>
+</li>
+</ul>
+<p><strong>defer</strong></p>
+<p>defer call 是 function scoped</p>
+<p>常見用法</p>
+<ul>
+<li>關閉檔案串流</li>
+<li>解鎖已上鎖資源 (mutex)</li>
+<li>印出報表的 footer</li>
+<li>關閉資料庫連線</li>
+</ul>
+<p><strong>built-in function</strong></p>
+<ul>
+<li>close: 關閉 channel communication</li>
+<li>len & cap
+<ul>
+<li>len: <code>strings, arrays, slices, maps, channels</code> 的長度</li>
+<li>cap: <code>slices, maps</code> 的容量</li>
+</ul>
+</li>
+<li>new & make: 用來配置記憶體位址的
+<ul>
+<li>new: 用在 value types 和 user defined types (structs)
+<ul>
+<li>new(T) 回傳的是記憶體位址，對應的值為 zero value</li>
+</ul>
+</li>
+<li>make: 用在 built-in reference types <code>slices, maps, channels</code>
+<ul>
+<li>make(T) 回傳出使用的變數 type T</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>copy & append
+<ul>
+<li>copy: copying slices</li>
+<li>append: concatenating slices</li>
+</ul>
+</li>
+<li>panic & recover: 作為 error handling 用的</li>
+<li>print & println: 低階的輸出方式，一般使用 fmt package 輸出即可</li>
+<li>complex & real & imag: 用作複數計算</li>
+</ul>
+<p><strong>Higher-Order functions</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>inc1</span><span class=p>(</span><span class=nx>x</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>int</span> <span class=p>{</span> <span class=k>return</span> <span class=nx>x</span><span class=o>+</span><span class=mi>1</span> <span class=p>}</span>
+<span class=nx>f1</span> <span class=o>:=</span> <span class=nx>inc1</span>
+</code></pre></div><p>舉例: 把函式當參數傳遞的例子</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// func IndexFunc(s string, f func(c int) bool) int
+</span><span class=c1></span><span class=nx>strings</span><span class=p>.</span><span class=nf>IndexFunc</span><span class=p>(</span><span class=nx>line</span><span class=p>,</span> <span class=nx>unicode</span><span class=p>.</span><span class=nx>IsSpace</span><span class=p>)</span>
+</code></pre></div><blockquote>
+<p>tips: 其他例子可以為 第一個參數給 raw data，第二個參數給 function 來處理前面的 raw data</p>
+<p>像是 第一個參數給 int slice，第二個參數給判斷 <code>isOdd(n int) bool</code> 或 <code>isEven(n int) bool</code> 的 function</p>
+</blockquote>
+<p>匿名函式</p>
+<ul>
+<li>anonymous function</li>
+<li>又稱 lambda function, function literal, closure</li>
+<li>例: <code>func(x, y int) int { return x + y }</code></li>
+<li>無法自行存在，但可以被指派給變數 <code>fplus := func(x, y int) int { return x + y }</code></li>
+</ul>
+<p>因為匿名函式可以在內部設定共用參數，所以可以用另一種非遞迴的寫法來實作 Fibonacci</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>fib</span><span class=p>()</span> <span class=kd>func</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span>
+    <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=o>:=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1</span>
+    <span class=k>return</span> <span class=kd>func</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span>
+        <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=p>=</span> <span class=nx>b</span><span class=p>,</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span>
+        <span class=k>return</span> <span class=nx>b</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Factory function</strong></p>
+<p>當 function 可以回傳 function 的時候，也可以作為 factory function 使用</p>
+<p>例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>MakeAddSuffix</span><span class=p>(</span><span class=nx>suffix</span> <span class=kt>string</span><span class=p>)</span> <span class=kd>func</span><span class=p>(</span><span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=kd>func</span><span class=p>(</span><span class=nx>name</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+        <span class=k>if</span> <span class=p>!</span><span class=nx>strings</span><span class=p>.</span><span class=nf>HasSuffix</span><span class=p>(</span><span class=nx>name</span><span class=p>,</span> <span class=nx>suffix</span><span class=p>)</span> <span class=p>{</span>
+            <span class=k>return</span> <span class=nx>name</span> <span class=o>+</span> <span class=nx>suffix</span>
+        <span class=p>}</span>
+        <span class=k>return</span> <span class=nx>name</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=c1>// 使用
+</span><span class=c1></span><span class=nx>addBmp</span> <span class=o>:=</span> <span class=nf>MakeAddSuffix</span><span class=p>(</span><span class=s>&#34;.bmp&#34;</span><span class=p>)</span>
+<span class=nx>addJpeg</span> <span class=o>:=</span> <span class=nf>MakeAddSuffix</span><span class=p>(</span><span class=s>&#34;.jpeg&#34;</span><span class=p>)</span>
+
+<span class=nf>addBmp</span><span class=p>(</span><span class=s>&#34;file&#34;</span><span class=p>)</span> <span class=c1>// returns: file.bmp
+</span><span class=c1></span><span class=nf>addJpeg</span><span class=p>(</span><span class=s>&#34;file&#34;</span><span class=p>)</span> <span class=c1>// returns: file.jpeg
+</span></code></pre></div><p><strong>Memoization</strong></p>
+<p>可增加效能: 對於已經做過的運算就不要重複做，而是重複利用 (透過記在 memory 做 cache 的方式)</p>
+<p>尚未理解的呼叫次序</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+<span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+<span class=kd>func</span> <span class=nf>trace</span><span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;entering:&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
+    <span class=k>return</span> <span class=nx>s</span>
+<span class=p>}</span>
+<span class=kd>func</span> <span class=nf>un</span><span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;leaving:&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=kd>func</span> <span class=nf>a</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>defer</span> <span class=nf>un</span><span class=p>(</span><span class=nf>trace</span><span class=p>(</span><span class=s>&#34;a&#34;</span><span class=p>))</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;in a&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=kd>func</span> <span class=nf>b</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>defer</span> <span class=nf>un</span><span class=p>(</span><span class=nf>trace</span><span class=p>(</span><span class=s>&#34;b&#34;</span><span class=p>))</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;in b&#34;</span><span class=p>)</span>
+    <span class=nf>a</span><span class=p>()</span>
+<span class=p>}</span>
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nf>b</span><span class=p>()</span>
+<span class=p>}</span>
+
+<span class=c1>// Results
+</span><span class=c1>//
+</span><span class=c1>// entering: b
+</span><span class=c1>// in b
+</span><span class=c1>// entering: a
+</span><span class=c1>// in a
+</span><span class=c1>// leaving: a
+</span><span class=c1>// leaving: b
+</span></code></pre></div><p>尚未理解呼叫次序第二彈</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>trace</span><span class=p>(</span><span class=nx>name</span> <span class=kt>string</span><span class=p>)</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Entering %s\n&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=p>)</span>
+	<span class=k>return</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Leaving %s\n&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=p>)</span>
+	<span class=p>}</span>
+<span class=p>}</span>
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+	<span class=k>defer</span> <span class=nf>trace</span><span class=p>(</span><span class=s>&#34;f&#34;</span><span class=p>)()</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Doing something&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=c1>// Results
+</span><span class=c1>//
+</span><span class=c1>// Entering f
+</span><span class=c1>// Doing something
+</span><span class=c1>// Leaving f
+</span></code></pre></div><h2 id=reference>Reference</h2>
 <p><a href=https://www.interviewbit.com/golang-interview-questions/ target=_blank rel="noopener noreffer">Golang Interview Questions</a></p>
 </div>
 <div class=post-footer id=post-footer>

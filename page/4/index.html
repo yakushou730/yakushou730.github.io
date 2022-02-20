@@ -56,6 +56,21 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/udemy/complete-guide-to-elasticsearch/introduction/>introduction</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-14>2021-12-14</time></span></div><div class=content>Introduction to Elasticsearch 儲存一筆資料的單位是 document (類似 RDB 的 row) Document 的欄位叫做 fields (類似 RDB 的 column) 儲存的格式像 json client 透過 REST API 和 Elasticsearch 溝通 Overview of the Elastic Stack Kibana 分析 / 視覺畫的平台 透過 Elasticsearch 的資料來做視覺化 (發 http request) Logstash 處理 log (或其他資料，如訂單) 後把資料送給 Elasticsearch (也可以傳給不同的對象，如 Kafka) 資料處理的 pipeline pipeline 三步驟: input filter output pipeline configuration 的格式像 json X-Pack 提供額外功能給 Elasticsearch 和 Kibana Security authentication authorization Monitoring 視覺化 Elastic Stack 如何運作 (如顯示 CPU / memory usage / disk space) Alerting 設定告警 (如透過 email 通知) Reporting 輸出 Kibana 的資料 Machine Learning enable machine learning for Elasticsearch & Kibana Graph 分析資料的關聯 Elasticsearch SQL 可以傳送 SQL query 給 Elasticsearch Beats 蒐集資料並運送 Walkthrough of common architectures 同時儲存資料在 DB 和 Elasticsearch，後端收到 request 的時候兩邊都做 query </div><div class=post-footer>
+<a href=/posts/udemy/complete-guide-to-elasticsearch/introduction/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/programming/makefile/>Makefile</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-05>2021-12-05</time></span></div><div class=content>範例
+GREENLIGHT_DB_DSN='postgres://greenlight:@localhost/greenlight?sslmode=disable' ## help: print this help message .PHONY: help help: @echo 'Usage:' @sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' | sed -e 's/^/ /' .PHONY: confirm confirm: @echo 'Are you sure? [y/N] ' && read ans && [ $${ans:-N} = y ] ## run/api: run the cmd/api application .PHONY: run/api run/api: go run ./cmd/api ## db/psql: connect to the database using psql .PHONY: db/psql db/psql: psql ${GREENLIGHT_DB_DSN} ## db/migrations/new name=$1: create a new database migration .</div><div class=post-footer>
+<a href=/posts/programming/makefile/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/programming/script/>script</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -150,26 +165,6 @@ https 是 scheme foo.com 是 host 443 是 port a 是 path web browser 預設是�
 </span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-16>2021-11-16</time></span></div><div class=content>建立空的 Slice var movies []*Movie movie = &Movie{} // 這樣子建立出來的 movies slice 是 nil // 但已經足夠用來做 append // 不需要寫成 movies := []*Movie{} movies = append(movies, movie) 把 array 轉成 slice // hash 是 [32]byte 的 byte array hash := sha256.Sum256(info) // b.Hash 是 byte slice b.Hash = hash[:] </div><div class=post-footer>
 <a href=/posts/golang/slice/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/dictionary/en-slang-dictionary/>英文: 俚語</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-15>2021-11-15</time></span></div><div class=content>G gotcha （為了嚇人或表示佔了上風時的用語）抓住你了</div><div class=post-footer>
-<a href=/posts/dictionary/en-slang-dictionary/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/dictionary/en-phrase-dictionary/>英文: 片語</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-14>2021-11-14</time></span></div><div class=content>B bear/keep sth in mind 記住
-I in terms of 在&mldr;方面；從&mldr;方面來說
-in turn 依次，輪流
-O off the shelf (産品) 現成的，不需訂製的
-P piece sth together 拼合；湊集
-R rule of thumb 經驗法則
-T the nuts and bolts 實質性內容</div><div class=post-footer>
-<a href=/posts/dictionary/en-phrase-dictionary/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>

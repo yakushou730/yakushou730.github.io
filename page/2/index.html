@@ -56,6 +56,23 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/ardanlabs/ultimate-service-v3/>Ultimate Service V3</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-23>2022-01-23</time></span></div><div class=content>Github repo
+整理了下，如果整個 cluster 重啟，要跑哪些步驟
+# 把 cluster shutdown make kind-down # 1. 啟動 kind make kind-up # 2. build 新的 service image make all # 3. 設定 kind 要抓本機的 image make kind-load # 4. 設定 kind cluster 要吃本機的 config 設定 make kind-apply # extra: 看 log make kind-logs # extra: 直接更新 kind 設定 # all + kind-load + kind-restart make kind-update Modules Project:
+a repo of code defines the philosophy, policy and guideline go mod init [module name] # 範例 go mod init github.</div><div class=post-footer>
+<a href=/posts/golang/ardanlabs/ultimate-service-v3/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/ardanlabs/ultimate-go/>Ultimate Go</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-22>2022-01-22</time></span></div><div class=content>Design Guideline Memory & Data semantics </div><div class=post-footer>
+<a href=/posts/golang/ardanlabs/ultimate-go/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/ardanlabs/refactor-with-bill/>Refactor With Bill</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -142,22 +159,6 @@ GitOps flow Create Pull/Merge Request 任何人都可以發 PR，大家可以 re
 Flux 是什麼? Flux 是一組用於 k8s 的 delivery solution
 Flux 提供 GitOps for apps 和 infrastructure Flux 和 Flagger 提供 canaries/feature flags/AB rollouts 來部署 app 可用來管理 k8s 資源 推 git 以後，剩下的 Flux 會處理 可套用 CD (by Flagger) 和 PD (progressive delivery) container image 發生更新後，Flux 可以自動推 git Flux 相容現有的工具 含 github/gitlab/bitbucket/s3&mldr;，以及全部有提供 cli 的 provider Flux 可用於任何 k8s 和所有常見的 k8s 工具 Kustomize/Helm/RBAC&mldr;等等 Flux 處理 multi-everything 可以處理多數個 cluster Flux 有告警和提示 只要 git push，可以得到通知 使用者信任 Flux Flux 是 CNCF 孵化出的專案 Flux 有友善的社群 任何人都可以貢獻 Flux 是一組 k8s 用的工具，可以 sync 資源設定 (像 git repository)</div><div class=post-footer>
 <a href=/posts/devops/flux/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/git/>git</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-02>2022-01-02</time></span></div><div class=content>git</div><div class=post-footer>
-<a href=/posts/programming/git/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/git/>git</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/devops/basics/>basics</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-02>2022-01-02</time></span></div><div class=content>Environment variable SHELL: 系統使用了哪種 shell 確認 OS Version # 印出所有 release 版本 # * 是指 wildcard ls /etc/*release* # 印出當前版本細節 cat /etc/*release* package managers RPM (Red Hat Package Manager)
-RPM 不管 dependency CentOS Red Hat Enterprise Linux Fedora package 會被包裝成 &lt;檔名>.rpm
-# install package rpm -i telnet.rpm # uninstall package rpm -e telnet.rpm # query package rpm -q telnet.rpm # query all installed package rpm -qa YUM 包裝過 rpm，會順便安裝 dependency</div><div class=post-footer>
-<a href=/posts/devops/basics/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
