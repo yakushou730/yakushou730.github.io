@@ -35,5 +35,9 @@ t := time.Now().UTC()
 fmt.Println(t.Format("02 Jan 2006 15:04"))// e.g: 29 Oct 2019 11:00
 ```
 
+## Sub
+時間相減出來的時間差
+
+`delta := end.Sub(start)`
 
 

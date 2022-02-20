@@ -7,9 +7,9 @@ tags: ["dictionary"]
 draft: false
 ---
 ## A
-deterministic 決定論的
-
 aesthetic 美感的；藝術的
+
+amiss 不對的；不合適的；不正常的
 
 analogous 類似的；可比擬的
 
@@ -36,12 +36,18 @@ cumbersome 笨重的；累贅的；低效的
 ## D
 de facto 事實上的，實際上的
 
+deterministic 決定論的
+
+didactic 教訓的，說教的
+
 dissatisfactory 不滿意的
 
 dogmatic 武斷的；自以為是的
 
 ## E
 easy-peasy 簡單得很；容易極了
+
+elaborate 詳盡的；複雜的
 
 elusive 難以描述 (或找到、達到、記起) 的；困難的
 
@@ -56,11 +62,15 @@ extraneous 無直接關係的；無關的
 ## F
 fail-safe 萬無一失的，萬全的
 
+flawless 完美的；無瑕的
+
 ## G
 granular 顆粒組成的
 
 ## H
 handy 有用的；方便的
+
+heterogeneous 各種各樣的；混雜的
 
 ## I
 idiomatic 符合慣例的
@@ -70,6 +80,8 @@ imperative 極重要的；緊急的；迫切的
 inbuilt 內在的；固有的
 
 indispensable 必不可少的，必需的
+
+innermost 最內層的
 
 innocuous 無害的
 
@@ -105,6 +117,8 @@ overarching 首要的；包羅萬象的，支配一切的
 phoney 虛偽的；假冒的
 
 prohibitive (費用) 高得負擔不起的，(價格等) 使人望之卻步的
+
+proverbial 諺語的，俗話所說的，常言中的
 
 ## R
 reductive (尤指過度) 簡化的

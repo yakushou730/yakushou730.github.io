@@ -14,6 +14,9 @@ anagram 相同字母異序詞
 
 aspire to sth 追求；渴望；有志於
 
+## B
+brevity 簡短，簡潔；短暫
+
 ## C
 caveat (進一步行動前的) 警告；限制條款
 
@@ -31,6 +34,8 @@ delimiter 定界符
 denial 否定
 
 discrepancy 不一致，出入
+
+dispatch 發送；派遣
 
 ## F
 factoring 因數分解，因式分解
@@ -52,6 +57,8 @@ integrity 完整
 
 introspection 反省，自省
 
+invocation 調用
+
 ## J
 jargon 行話，行業術語，電腦術語
 
@@ -61,6 +68,8 @@ lexeme 詞素；詞元
 lift 搭便車
 
 ## M
+midst 中間，當中，中央
+
 mutex (Mutual exclusion) 互斥鎖
 
 ## N
@@ -108,6 +117,10 @@ the gist 要旨，要點；大意
 throttle 節流閥
 
 triage 情況鑑別分類
+
+tuple (數據的) 元組
+- a structure of data that has several parts
+
 
 ## V
 vein 靜脈；特徵

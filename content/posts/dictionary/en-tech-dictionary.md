@@ -23,6 +23,9 @@ brace 大括號 {}
 
 bracket 方括號 []
 
+## E
+ellipses 點點點 ...
+
 ## H
 
 hash mark 井字號 #

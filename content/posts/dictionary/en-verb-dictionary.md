@@ -40,9 +40,13 @@ dwell 居住；存在
 ## F
 facilitate 促進；使便利
 
+fend sb off 抵擋，推開，擊退
+
 forge 偽造；假冒
 
 ## H
+halt (使) 停止，停下
+
 hinder 阻礙；妨礙
 
 hinge 給...安裝鉸鏈
@@ -84,6 +88,8 @@ refrain 避免；忍住；節制
 rehash 以新形式表達舊內容；換湯不換藥
 
 relay 傳達，轉發
+
+resemble 像；看起來像；與...相似
 
 ## S
 scramble (急速而艱難地) 移動；爬

@@ -386,5 +386,220 @@ pointer 的大小 (都是一個 word)
 
 nil 的指標無法被 dereference，會 panic
 
+## switch
+switch 有一種用法是在 switch 語句的時候做 initialization statement
+
+> 這種用法要在 init 後段手動加上 `;`
+
+```go
+switch a, b := x[i], y[j]; {
+    case a < b: t = -1
+    case a == b: t = 0
+    case a > b: t = 1
+}
+```
+
+## loop
+不要在 loop 的 body 裡面更改 counter variable
+
+初始化多於一個變數的範例
+```go
+for i, j := 0, N; i < j; i, j = i+1, j-1 { }
+```
+
+> 用 for i 的方式來 loop 非 ASCII 字串的話，會看到依照 byte 被切開的非預期結果
+
+`for ix, val := range coll {}` 的語法中 ix 是 index，而 val 是 coll 在 index 處的 copy
+- 即 val 只能作為 only read-purposes
+
+> 勁量不要用 goto
+> 
+> 若需要使用 goto LABEL 時，對應的 LABEL 最好是在程式後段
+> 
+> 往前跳的話會讓 code 很難讀
+
+## functions
+3 種類型
+- Normal functions with an identifier
+- anonymous or lambda functions
+- methods
+
+> function signature: function 的 參數 和 回傳值 (包含 type)
+> 
+> called / invoked 是指對 function 的呼叫
+> 
+> 當呼叫 function 的時候，參數會以 copy 的形式被傳進 function
+
+function 在 golang 中可以是 first-class object，即作為參數傳送或作為 return value
+
+或指派給變數
+
+> function 可以是一個 type 作為宣告，zero value 是 nil
+> 
+> function value 可以做比較，如果都是指向同一個 function 的話就是 true
+> 
+> 或都是 nil 的話為 true
+
+名詞定義:
+```go
+greeting(lastname)
+
+func greeting(name string)  {}
+```
+
+lastname 是 `actual parameter`
+
+name 是 `formal parameter`
+
+> niladic function: 指不需要參數的 function，如: main.main()
+
+function 的傳入參數
+- by value: 傳入 value 的 copy
+- by reference: 傳入 address 的 copy
+  - 可以變更記憶體位址對應的值
+  - 和 copy 物件相比，copy reference 的成本較低
+  - `slice` `map` `interface` `channel` 預設上是 pass by reference
+
+**defer**
+
+defer call 是 function scoped
+
+常見用法
+- 關閉檔案串流
+- 解鎖已上鎖資源 (mutex)
+- 印出報表的 footer
+- 關閉資料庫連線
+
+**built-in function**
+- close: 關閉 channel communication
+- len & cap
+  - len: `strings, arrays, slices, maps, channels` 的長度
+  - cap: `slices, maps` 的容量
+- new & make: 用來配置記憶體位址的
+  - new: 用在 value types 和 user defined types (structs)
+    - new(T) 回傳的是記憶體位址，對應的值為 zero value
+  - make: 用在 built-in reference types `slices, maps, channels`
+    - make(T) 回傳出使用的變數 type T
+- copy & append
+  - copy: copying slices
+  - append: concatenating slices
+- panic & recover: 作為 error handling 用的
+- print & println: 低階的輸出方式，一般使用 fmt package 輸出即可
+- complex & real & imag: 用作複數計算
+
+**Higher-Order functions**
+```go
+func inc1(x int) int { return x+1 }
+f1 := inc1
+```
+
+舉例: 把函式當參數傳遞的例子
+```go
+// func IndexFunc(s string, f func(c int) bool) int
+strings.IndexFunc(line, unicode.IsSpace)
+```
+
+> tips: 其他例子可以為 第一個參數給 raw data，第二個參數給 function 來處理前面的 raw data
+> 
+> 像是 第一個參數給 int slice，第二個參數給判斷 `isOdd(n int) bool` 或 `isEven(n int) bool` 的 function
+
+匿名函式
+- anonymous function
+- 又稱 lambda function, function literal, closure
+- 例: `func(x, y int) int { return x + y }`
+- 無法自行存在，但可以被指派給變數 `fplus := func(x, y int) int { return x + y }`
+
+因為匿名函式可以在內部設定共用參數，所以可以用另一種非遞迴的寫法來實作 Fibonacci
+```go
+func fib() func() int {
+    a, b := 1, 1
+    return func() int {
+        a, b = b, a + b
+        return b
+    }
+}
+```
+
+**Factory function**
+
+當 function 可以回傳 function 的時候，也可以作為 factory function 使用
+
+例
+```go
+func MakeAddSuffix(suffix string) func(string) string {
+    return func(name string) string {
+        if !strings.HasSuffix(name, suffix) {
+            return name + suffix
+        }
+        return name
+    }
+}
+
+// 使用
+addBmp := MakeAddSuffix(".bmp")
+addJpeg := MakeAddSuffix(".jpeg")
+
+addBmp("file") // returns: file.bmp
+addJpeg("file") // returns: file.jpeg
+```
+
+**Memoization**
+
+可增加效能: 對於已經做過的運算就不要重複做，而是重複利用 (透過記在 memory 做 cache 的方式)
+
+尚未理解的呼叫次序
+```go
+package main
+import "fmt"
+func trace(s string) string {
+    fmt.Println("entering:", s)
+    return s
+}
+func un(s string) {
+    fmt.Println("leaving:", s)
+}
+func a() {
+    defer un(trace("a"))
+    fmt.Println("in a")
+}
+func b() {
+    defer un(trace("b"))
+    fmt.Println("in b")
+    a()
+}
+func main() {
+    b()
+}
+
+// Results
+//
+// entering: b
+// in b
+// entering: a
+// in a
+// leaving: a
+// leaving: b
+```
+
+尚未理解呼叫次序第二彈
+```go
+func trace(name string) func() {
+	fmt.Printf("Entering %s\n", name)
+	return func() {
+		fmt.Printf("Leaving %s\n", name)
+	}
+}
+func main() {
+	defer trace("f")()
+	fmt.Println("Doing something")
+}
+// Results
+//
+// Entering f
+// Doing something
+// Leaving f
+```
+
+
 ## Reference
 [Golang Interview Questions](https://www.interviewbit.com/golang-interview-questions/)
