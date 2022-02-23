@@ -72,6 +72,8 @@ handy 有用的；方便的
 
 heterogeneous 各種各樣的；混雜的
 
+homogeneous 由同類事物 (或人) 組成的；同類的；相似的
+
 ## I
 idiomatic 符合慣例的
 
@@ -88,6 +90,8 @@ innocuous 無害的
 insidious 暗中為害的；潛伏的
 
 intact 完整無缺的；未經觸動的
+
+integral 構成整體所必需的
 
 interim 暫時的，過渡時期的
 

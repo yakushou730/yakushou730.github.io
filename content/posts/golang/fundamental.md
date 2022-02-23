@@ -600,6 +600,117 @@ func main() {
 // Leaving f
 ```
 
+## Arrays and Slices
+Slice 是建立在 Array 上的抽象層
+
+array 的 length 需要明確，因為在 compile 時要分配記憶體空間
+
+> The maximum array length is 2GB
+
+array 是 golang 的 `value type`，所以可以透過 `new` 來建立
+
+```go
+// 下面的寫法有差異
+
+// new 所回傳的是記憶體位址，所以 arr2 是 *[5]int，是不為 nil 的記憶體位址
+var arr2 = new([5]int)
+
+// var 的話是 type [5]int
+var arr1 [5]int
+```
+
+> array 的賦值是 value copy，不會影響到原本的 array
+> 
+> 傳 array 作為參數到 function 時也是傳 copy
+
+`[...]int{1,2,3}` 的寫法，compiler 會自己去算個數，還是 array
+
+但不能用 `[...]int` 作為 type
+
+array 宣告時可以指定第幾個位置要放什麼內容
+```go
+var arrKeyValue = [5]string{3: "Chris", 4: "ron"}
+```
+
+> 當傳送很大的 array 到 function 的時候會吃很多記憶體
+> 
+> 因為 array 傳入 function 時是 copy by value
+> 
+> 解法
+> - 傳 array 的指標
+>   - 傳進去的 array 不需要做 dereference 即可直接使用
+> - 使用 slice of the array
+
+slice 是 reference type，所以不需要額外的記憶體位空間，使用起來比 array 有效率
+
+slice 在 memory 內是三個欄位的結構
+1. 一個 pointer 指向 underlying array
+2. slice 的 length
+3. slice 的 capacity
+
+> slices are **indexable** and have a length given by the `len()` function
+
+slice 的程度是可以動態變動的
+- 最小是 0
+- 最大是 underlying array 的長度
+
+對於 slice 來說 `cap()` 指的是這個 slice 的長度可以變成多長
+- 是 `slice 的長度` 加上 `array 超過 slice 的長度`
+
+> s 是 slice
+> 
+> cap 是指從 s[0] 開始到 array 的最後
+> 
+> slice 的 length 絕不會超過 capacity
+> 
+> `0 <= len(s) <= cap(s)`
+
+相同 underlying array 的不同 slices 間，可以分享資料
+
+不同的 array 是不能分享資料的
+
+```go
+// 這樣宣告出來的 slice 指向 nil
+// len 0
+var identifier []type
+// slice 宣告的時候可以指定是哪個 array 的切片 (start 到 end - 1)
+var slice1 []type = arr1[start:end]
+// slice 宣告的時候指定整個 array
+var slice1 []type = arr[:]
+// 其他切片語法
+s := [3]int{1,2,3}[:]
+s := [...]int{1,2,3}[:]
+s := []int{1,2,3}
+var x = []int{1,2,3,4,5}
+// 會參照相同的 underlying array
+s2 := s[:]
+// 以下為 true
+s == s[:i] + s[i:]
+// 可以做移位操作
+s2 = s2[1:]
+```
+
+傳參數時，使用 slice 會比傳 array 來得有效率
+
+```go
+slice1 := make([]type, len)
+slice1 := make([]type, len, cap)
+// 以下是等價的
+make([]int, 50, 100)
+new([100]int)[0:50]
+```
+
+`new()` vs `make()`
+- 兩個都是在 heap 上分配記憶體位址，但做不同的事，用到的 type 也不一樣
+- new -> allocates
+- make -> initializes
+- `new(T)`
+  - array, struct
+  - 建立 0 值，並回傳 address
+- `make(T)`
+  - slice, map, channel
+  - 回傳初始化 type T 的值
+
 
 ## Reference
 [Golang Interview Questions](https://www.interviewbit.com/golang-interview-questions/)

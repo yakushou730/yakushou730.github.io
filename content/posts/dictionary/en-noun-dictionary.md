@@ -24,6 +24,8 @@ clutter 雜亂，淩亂；雜亂的東西
 
 coercion 強制，強迫；威逼，脅迫
 
+compartment (車輛的) 分隔廂，艙；(尤指火車的) 隔間，包廂
+
 consequence (常指不好或不利的) 結果，後果
 
 constituent 成分；構成部分
@@ -83,6 +85,10 @@ obscurity 鮮為人知；默默無聞
 ## P
 panther 黑豹
 
+peculiarity 古怪；奇異；怪癖
+
+plethora 過多，過剩
+
 point of view 觀點，想法
 
 precedence (時間、順序、重要程度等的) 居前，領先
@@ -124,5 +130,8 @@ tuple (數據的) 元組
 
 ## V
 vein 靜脈；特徵
+
+## W
+workhorse 克苦耐勞的人；埋頭苦幹的人
 
 

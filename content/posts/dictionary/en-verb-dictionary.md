@@ -27,6 +27,8 @@ conceive 想像；想出；構想
 conduct 實施；處理
 
 ## D
+delve 探索；深入尋找，搜尋
+
 denote 表示；代表
 
 derive 取得；衍生出
@@ -63,6 +65,8 @@ intercept 攔截，截住
 intermingle 混合；混在一起
 
 interpret 理解，解釋，闡釋
+
+intrigue (尤指因奇怪、不尋常或神秘而) 使很感興趣，迷住
 
 ## L
 leverage 借助已有的...實現新 (或更好) 的目標
