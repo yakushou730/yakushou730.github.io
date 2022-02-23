@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=prev href=https://blog.yakushou.com/posts/k8s/basic-for-beginner/><link rel=next href=https://blog.yakushou.com/posts/programming/software/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":1596,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":1903,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1596 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1903 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -94,6 +94,7 @@
 <li><a href=#switch>switch</a></li>
 <li><a href=#loop>loop</a></li>
 <li><a href=#functions>functions</a></li>
+<li><a href=#arrays-and-slices>Arrays and Slices</a></li>
 <li><a href=#reference>Reference</a></li>
 </ul>
 </nav></div>
@@ -612,7 +613,111 @@ GOPATH:</li>
 </span><span class=c1>// Entering f
 </span><span class=c1>// Doing something
 </span><span class=c1>// Leaving f
-</span></code></pre></div><h2 id=reference>Reference</h2>
+</span></code></pre></div><h2 id=arrays-and-slices>Arrays and Slices</h2>
+<p>Slice 是建立在 Array 上的抽象層</p>
+<p>array 的 length 需要明確，因為在 compile 時要分配記憶體空間</p>
+<blockquote>
+<p>The maximum array length is 2GB</p>
+</blockquote>
+<p>array 是 golang 的 <code>value type</code>，所以可以透過 <code>new</code> 來建立</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 下面的寫法有差異
+</span><span class=c1></span>
+<span class=c1>// new 所回傳的是記憶體位址，所以 arr2 是 *[5]int，是不為 nil 的記憶體位址
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>arr2</span> <span class=p>=</span> <span class=nb>new</span><span class=p>([</span><span class=mi>5</span><span class=p>]</span><span class=kt>int</span><span class=p>)</span>
+
+<span class=c1>// var 的話是 type [5]int
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>arr1</span> <span class=p>[</span><span class=mi>5</span><span class=p>]</span><span class=kt>int</span>
+</code></pre></div><blockquote>
+<p>array 的賦值是 value copy，不會影響到原本的 array</p>
+<p>傳 array 作為參數到 function 時也是傳 copy</p>
+</blockquote>
+<p><code>[...]int{1,2,3}</code> 的寫法，compiler 會自己去算個數，還是 array</p>
+<p>但不能用 <code>[...]int</code> 作為 type</p>
+<p>array 宣告時可以指定第幾個位置要放什麼內容</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>arrKeyValue</span> <span class=p>=</span> <span class=p>[</span><span class=mi>5</span><span class=p>]</span><span class=kt>string</span><span class=p>{</span><span class=mi>3</span><span class=p>:</span> <span class=s>&#34;Chris&#34;</span><span class=p>,</span> <span class=mi>4</span><span class=p>:</span> <span class=s>&#34;ron&#34;</span><span class=p>}</span>
+</code></pre></div><blockquote>
+<p>當傳送很大的 array 到 function 的時候會吃很多記憶體</p>
+<p>因為 array 傳入 function 時是 copy by value</p>
+<p>解法</p>
+<ul>
+<li>傳 array 的指標
+<ul>
+<li>傳進去的 array 不需要做 dereference 即可直接使用</li>
+</ul>
+</li>
+<li>使用 slice of the array</li>
+</ul>
+</blockquote>
+<p>slice 是 reference type，所以不需要額外的記憶體位空間，使用起來比 array 有效率</p>
+<p>slice 在 memory 內是三個欄位的結構</p>
+<ol>
+<li>一個 pointer 指向 underlying array</li>
+<li>slice 的 length</li>
+<li>slice 的 capacity</li>
+</ol>
+<blockquote>
+<p>slices are <strong>indexable</strong> and have a length given by the <code>len()</code> function</p>
+</blockquote>
+<p>slice 的程度是可以動態變動的</p>
+<ul>
+<li>最小是 0</li>
+<li>最大是 underlying array 的長度</li>
+</ul>
+<p>對於 slice 來說 <code>cap()</code> 指的是這個 slice 的長度可以變成多長</p>
+<ul>
+<li>是 <code>slice 的長度</code> 加上 <code>array 超過 slice 的長度</code></li>
+</ul>
+<blockquote>
+<p>s 是 slice</p>
+<p>cap 是指從 s[0] 開始到 array 的最後</p>
+<p>slice 的 length 絕不會超過 capacity</p>
+<p><code>0 &lt;= len(s) &lt;= cap(s)</code></p>
+</blockquote>
+<p>相同 underlying array 的不同 slices 間，可以分享資料</p>
+<p>不同的 array 是不能分享資料的</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 這樣宣告出來的 slice 指向 nil
+</span><span class=c1>// len 0
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>identifier</span> <span class=p>[]</span><span class=kd>type</span>
+<span class=c1>// slice 宣告的時候可以指定是哪個 array 的切片 (start 到 end - 1)
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>slice1</span> <span class=p>[]</span><span class=kd>type</span> <span class=p>=</span> <span class=nx>arr1</span><span class=p>[</span><span class=nx>start</span><span class=p>:</span><span class=nx>end</span><span class=p>]</span>
+<span class=c1>// slice 宣告的時候指定整個 array
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>slice1</span> <span class=p>[]</span><span class=kd>type</span> <span class=p>=</span> <span class=nx>arr</span><span class=p>[:]</span>
+<span class=c1>// 其他切片語法
+</span><span class=c1></span><span class=nx>s</span> <span class=o>:=</span> <span class=p>[</span><span class=mi>3</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>}[:]</span>
+<span class=nx>s</span> <span class=o>:=</span> <span class=p>[</span><span class=o>...</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>}[:]</span>
+<span class=nx>s</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>}</span>
+<span class=kd>var</span> <span class=nx>x</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=mi>5</span><span class=p>}</span>
+<span class=c1>// 會參照相同的 underlying array
+</span><span class=c1></span><span class=nx>s2</span> <span class=o>:=</span> <span class=nx>s</span><span class=p>[:]</span>
+<span class=c1>// 以下為 true
+</span><span class=c1></span><span class=nx>s</span> <span class=o>==</span> <span class=nx>s</span><span class=p>[:</span><span class=nx>i</span><span class=p>]</span> <span class=o>+</span> <span class=nx>s</span><span class=p>[</span><span class=nx>i</span><span class=p>:]</span>
+<span class=c1>// 可以做移位操作
+</span><span class=c1></span><span class=nx>s2</span> <span class=p>=</span> <span class=nx>s2</span><span class=p>[</span><span class=mi>1</span><span class=p>:]</span>
+</code></pre></div><p>傳參數時，使用 slice 會比傳 array 來得有效率</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>slice1</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kd>type</span><span class=p>,</span> <span class=nx>len</span><span class=p>)</span>
+<span class=nx>slice1</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kd>type</span><span class=p>,</span> <span class=nx>len</span><span class=p>,</span> <span class=nx>cap</span><span class=p>)</span>
+<span class=c1>// 以下是等價的
+</span><span class=c1></span><span class=nb>make</span><span class=p>([]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>50</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
+<span class=nb>new</span><span class=p>([</span><span class=mi>100</span><span class=p>]</span><span class=kt>int</span><span class=p>)[</span><span class=mi>0</span><span class=p>:</span><span class=mi>50</span><span class=p>]</span>
+</code></pre></div><p><code>new()</code> vs <code>make()</code></p>
+<ul>
+<li>兩個都是在 heap 上分配記憶體位址，但做不同的事，用到的 type 也不一樣</li>
+<li>new -> allocates</li>
+<li>make -> initializes</li>
+<li><code>new(T)</code>
+<ul>
+<li>array, struct</li>
+<li>建立 0 值，並回傳 address</li>
+</ul>
+</li>
+<li><code>make(T)</code>
+<ul>
+<li>slice, map, channel</li>
+<li>回傳初始化 type T 的值</li>
+</ul>
+</li>
+</ul>
+<h2 id=reference>Reference</h2>
 <p><a href=https://www.interviewbit.com/golang-interview-questions/ target=_blank rel="noopener noreffer">Golang Interview Questions</a></p>
 </div>
 <div class=post-footer id=post-footer>
