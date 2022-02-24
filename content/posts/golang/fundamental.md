@@ -711,6 +711,88 @@ new([100]int)[0:50]
   - slice, map, channel
   - 回傳初始化 type T 的值
 
+> arrays, slices 一直都是 1-dimensional 的
+> 
+> 透過 compose 的方式做成更高的維度
+
+```go
+values := [][]int{} // multidimensional slice
+// These are the first two rows.
+row1 := []int{1, 2, 3}
+row2 := []int{4, 5, 6}
+
+// Append each row to the two-dimensional slice.
+values = append(values, row1)
+values = append(values, row2)
+```
+
+**`bytes` package**
+
+byte slice 在 bytes package 很常見
+```go
+// New Buffer.
+var b bytes.Buffer
+// Write strings to the Buffer.
+
+b.WriteString("ABC")
+b.WriteString("DEF")
+// Use Fprintf with Buffer.
+fmt.Fprintf(&b, " A number: %d, a string: %v\n", 10, "bird")
+b.WriteString("[DONE]")
+// Convert to a string and print it.
+fmt.Println(b.String())
+
+// Outputs
+ABCDEF A number: 10, a string: bird
+[DONE]
+```
+
+> 透過 buffer 來操作字串連接，和 `+=` 比起來，
+> 
+> 在大量的字串連接上可以更有效使用 memory 和 CPU
+
+```go
+// ix 是 index
+// value 是每一次 loop 的值，只做用在 body 內，是 copy of the slice item
+// 所以不能用來更改 slice 內容
+for ix, value := range slice1 {
+...
+}
+
+// 要改內容的話要透過 index
+seasons := []string{"Spring","Summer","Autumn","Winter"}
+for ix := range seasons {
+  seasons[ix] = strings.ToUpper(seasons[ix])  // modifying the seasons
+}
+```
+
+```go
+// 多擴充一位給 slice
+sl = sl[0:len(sl)+1]
+```
+
+> slice 可以被 resize 直到 underlying array 滿了
+
+增大 slice capacity 的方法是先建立一個更大的 slice 以後把資料 copy 過來
+
+```go
+// copy function
+// 用 src 覆蓋掉 dst
+// 回傳複製了多少 element
+// 當 src 是 string 的時候，element type 是 byte
+func copy(dst, src []T) int
+
+// append function
+// 如果 append 會造成超過 underlying type 的話，會分配到另一個新的且足夠大的 slice
+func append(s[]T, x ...T) []T
+
+// 把一個 slice append 到另一個 slice
+x = append(x, y...)
+```
+
+
+
+
 
 ## Reference
 [Golang Interview Questions](https://www.interviewbit.com/golang-interview-questions/)

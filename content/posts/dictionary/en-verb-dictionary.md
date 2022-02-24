@@ -72,6 +72,8 @@ intrigue (尤指因奇怪、不尋常或神秘而) 使很感興趣，迷住
 leverage 借助已有的...實現新 (或更好) 的目標
 
 ## M
+magnify 放大，擴大
+
 mimic 學...的樣子
 
 mitigate 使緩和；減輕（危害等）
