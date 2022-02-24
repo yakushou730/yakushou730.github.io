@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=prev href=https://blog.yakushou.com/posts/k8s/basic-for-beginner/><link rel=next href=https://blog.yakushou.com/posts/programming/software/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":1903,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":2137,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1903 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2137 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;11 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -717,7 +717,70 @@ GOPATH:</li>
 </ul>
 </li>
 </ul>
-<h2 id=reference>Reference</h2>
+<blockquote>
+<p>arrays, slices 一直都是 1-dimensional 的</p>
+<p>透過 compose 的方式做成更高的維度</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>values</span> <span class=o>:=</span> <span class=p>[][]</span><span class=kt>int</span><span class=p>{}</span> <span class=c1>// multidimensional slice
+</span><span class=c1>// These are the first two rows.
+</span><span class=c1></span><span class=nx>row1</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>}</span>
+<span class=nx>row2</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>}</span>
+
+<span class=c1>// Append each row to the two-dimensional slice.
+</span><span class=c1></span><span class=nx>values</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>values</span><span class=p>,</span> <span class=nx>row1</span><span class=p>)</span>
+<span class=nx>values</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>values</span><span class=p>,</span> <span class=nx>row2</span><span class=p>)</span>
+</code></pre></div><p><strong><code>bytes</code> package</strong></p>
+<p>byte slice 在 bytes package 很常見</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// New Buffer.
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>b</span> <span class=nx>bytes</span><span class=p>.</span><span class=nx>Buffer</span>
+<span class=c1>// Write strings to the Buffer.
+</span><span class=c1></span>
+<span class=nx>b</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;ABC&#34;</span><span class=p>)</span>
+<span class=nx>b</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;DEF&#34;</span><span class=p>)</span>
+<span class=c1>// Use Fprintf with Buffer.
+</span><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>b</span><span class=p>,</span> <span class=s>&#34; A number: %d, a string: %v\n&#34;</span><span class=p>,</span> <span class=mi>10</span><span class=p>,</span> <span class=s>&#34;bird&#34;</span><span class=p>)</span>
+<span class=nx>b</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;[DONE]&#34;</span><span class=p>)</span>
+<span class=c1>// Convert to a string and print it.
+</span><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>b</span><span class=p>.</span><span class=nf>String</span><span class=p>())</span>
+
+<span class=c1>// Outputs
+</span><span class=c1></span><span class=nx>ABCDEF</span> <span class=nx>A</span> <span class=nx>number</span><span class=p>:</span> <span class=mi>10</span><span class=p>,</span> <span class=nx>a</span> <span class=kt>string</span><span class=p>:</span> <span class=nx>bird</span>
+<span class=p>[</span><span class=nx>DONE</span><span class=p>]</span>
+</code></pre></div><blockquote>
+<p>透過 buffer 來操作字串連接，和 <code>+=</code> 比起來，</p>
+<p>在大量的字串連接上可以更有效使用 memory 和 CPU</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// ix 是 index
+</span><span class=c1>// value 是每一次 loop 的值，只做用在 body 內，是 copy of the slice item
+</span><span class=c1>// 所以不能用來更改 slice 內容
+</span><span class=c1></span><span class=k>for</span> <span class=nx>ix</span><span class=p>,</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>slice1</span> <span class=p>{</span>
+<span class=o>...</span>
+<span class=p>}</span>
+
+<span class=c1>// 要改內容的話要透過 index
+</span><span class=c1></span><span class=nx>seasons</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span><span class=s>&#34;Spring&#34;</span><span class=p>,</span><span class=s>&#34;Summer&#34;</span><span class=p>,</span><span class=s>&#34;Autumn&#34;</span><span class=p>,</span><span class=s>&#34;Winter&#34;</span><span class=p>}</span>
+<span class=k>for</span> <span class=nx>ix</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>seasons</span> <span class=p>{</span>
+  <span class=nx>seasons</span><span class=p>[</span><span class=nx>ix</span><span class=p>]</span> <span class=p>=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>ToUpper</span><span class=p>(</span><span class=nx>seasons</span><span class=p>[</span><span class=nx>ix</span><span class=p>])</span>  <span class=c1>// modifying the seasons
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 多擴充一位給 slice
+</span><span class=c1></span><span class=nx>sl</span> <span class=p>=</span> <span class=nx>sl</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=nb>len</span><span class=p>(</span><span class=nx>sl</span><span class=p>)</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span>
+</code></pre></div><blockquote>
+<p>slice 可以被 resize 直到 underlying array 滿了</p>
+</blockquote>
+<p>增大 slice capacity 的方法是先建立一個更大的 slice 以後把資料 copy 過來</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// copy function
+</span><span class=c1>// 用 src 覆蓋掉 dst
+</span><span class=c1>// 回傳複製了多少 element
+</span><span class=c1>// 當 src 是 string 的時候，element type 是 byte
+</span><span class=c1></span><span class=kd>func</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>dst</span><span class=p>,</span> <span class=nx>src</span> <span class=p>[]</span><span class=nx>T</span><span class=p>)</span> <span class=kt>int</span>
+
+<span class=c1>// append function
+</span><span class=c1>// 如果 append 會造成超過 underlying type 的話，會分配到另一個新的且足夠大的 slice
+</span><span class=c1></span><span class=kd>func</span> <span class=nb>append</span><span class=p>(</span><span class=nx>s</span><span class=p>[]</span><span class=nx>T</span><span class=p>,</span> <span class=nx>x</span> <span class=o>...</span><span class=nx>T</span><span class=p>)</span> <span class=p>[]</span><span class=nx>T</span>
+
+<span class=c1>// 把一個 slice append 到另一個 slice
+</span><span class=c1></span><span class=nx>x</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>x</span><span class=p>,</span> <span class=nx>y</span><span class=o>...</span><span class=p>)</span>
+</code></pre></div><h2 id=reference>Reference</h2>
 <p><a href=https://www.interviewbit.com/golang-interview-questions/ target=_blank rel="noopener noreffer">Golang Interview Questions</a></p>
 </div>
 <div class=post-footer id=post-footer>
