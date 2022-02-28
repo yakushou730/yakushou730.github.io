@@ -1173,6 +1173,174 @@ func main() {
 `go doc [package name]` 可以印出 package 的文件
 - `godoc -http=:6060` 可以在 localhost:6060 以 html 開啟 doc
 
+跑全部的測試 `go test ./...`
+
+`go install` vs `go get`
+- `go get` 驗證 package 是否需要被下載，是的話會下載並編譯
+- `go install` 不會下載，只會編譯
+
+## Structs and Methods
+struct 是 value type，且可以用 `new()` 建立，內含的欄位稱為 `fields`
+
+golang 並沒有 class 的概念，所以 struct type 很重要
+
+`t := new(T)`
+- 在物件導向會稱呼 t 為 struct T 的 instance 或 object
+- 在 golang 會稱呼 t 為 struct T 的 value
+- `new(Type)` 和 `&Type{}` 是等價的 (equivalent expression)
+
+可透過 `size := unsafe.Sizeof(T{})` 查看 struct T 的一個 value 佔用了多少記憶體 (bytes)
+
+```go
+// 這樣宣告是兩個相同 underlying type 的不同 type，不可直接互用，要轉型
+type nr number   // new distinct type
+// 這樣宣告是可互通的 不同 type
+type nrAlias = number // alias type
+```
+
+**Factory Method**
+像物件導向的建構子的用法，如 `func NewFile(fd int, name string) *File`
+
+要怎麼避免呼叫的人直接用 `new()` 的方法作為建構 struct，就是把那個結構做成 unexposed struct
+
+這樣 `func NewXXX() *XXX` 就會變成唯一的建構方式
+
+struct 內欄位用到的 tag 只有 `reflect` package 可以存取
+
+tag 範例
+```go
+type TagType struct { // tags
+    field1 bool "An important answer"
+    field2 string `The name of the thing`
+    field3 int "How much there are"
+}
+
+tt := TagType{true, "Barack Obama", 1}
+
+for i:= 0; i < 3; i++ {
+    ttType := reflect.TypeOf(tt)
+    ixField := ttType.Field(i)       // getting field at a position ix
+    fmt.Printf("%v\n", ixField.Tag)   // printing tags
+}
+```
+
+取得 tag value 範例
+```go
+type T struct {
+  a int "This is a tag"
+  b int `A raw string tag`
+  c int `key1:"value1" key2:"value2"`
+}
+
+if field, ok := reflect.TypeOf(t).FieldByName("c"); ok {
+    fmt.Println(field.Tag)
+    fmt.Println(field.Tag.Get("key1"))
+}
+```
+
+在 struct 內，一樣 type 的 anonymous filed 只能有一個
+
+結構內相同欄位名稱的話，會從外層先呼叫，再往內層找
+
+> Methods are not mixed with the data definition (the structs).
+> 
+> They are orthogonal to types;
+> 
+> representation (data) and behavior (methods) are independent.
+
+Pointer and value methods can both be called on the pointer or non-pointer values.
+
+method 和 function 轉換的範例
+```go
+type T struct {
+  a int
+}
+
+func (t T) print(message string) {
+  fmt.Println(message, t.a)
+}
+
+func (T) hello(message string) {
+  fmt.Println("Hello!", message)
+}
+
+func callMethod(t T, method func(T, string)) {
+  method(t, "A message")
+}
+
+func main() {
+  t1 := T{10}
+  t2 := T{20}
+  var f func(T, string) = T.print
+  callMethod(t1, f)
+  callMethod(t2, f)
+  callMethod(t1, T.hello)
+}
+```
+
+convention:
+- 取得欄位的 method 直接用大寫開頭命名該欄位名稱
+- 設定欄位的 method 加上 `Set` 的 prefix
+
+> `(recv T) String() {}` 的 body 不能使用 fmt 作為字串串接，否則會發生 infinite loop
+
+embedded type 的做法很像物件導向的繼承，也很像 ruby 的 mixin
+- 可以拿到 embedded type 的 method 來用
+
+範例
+```go
+type Point struct {
+  x, y float64
+}
+
+func (p *Point) Abs() float64 {
+  return math.Sqrt(p.x*p.x + p.y*p.y)
+}
+
+type NamedPoint struct {
+  Point   // anonymous field of Point type
+  name string
+}
+
+func main() {
+  n := &NamedPoint{Point{3, 4}, "Pythagoras"} // making pointer type variable
+  fmt.Println(n.Abs()) // prints 5
+}
+```
+
+2 種 embed 的方式
+1. Aggregation (or composition) : 包含 named field of the type of the wanted functionality
+2. Embedding: 鑲嵌 wanted type anonymously
+
+golang 可以透過 embedded 的方式達到 繼承複數個父類別的概念
+
+在少數情況，可以呼叫 `runtime.GC()` 來呼叫 garbage collection
+
+讀取 memory status 的範例
+
+```go
+func main() {
+  ms := runtime.MemStats{}
+  runtime.ReadMemStats(&ms)
+    
+  println("Heap after GC. Used:", ms.HeapInuse, " Free:", ms.HeapIdle, " Meta:", ms.GCSys)
+
+  time.Sleep(5 * time.Second)
+}
+```
+
+如果當要把某個 object 從記憶體移除時同步呼叫某個行為 (例如寫 log)
+
+可以透過以下方式呼叫來達成
+
+`runtime.SetFinalizer(obj, func(obj *typeObj))`
+
+當程式正常結束或發生錯誤的時候 SetFinalizer 不會被執行
+
+當對應的 object 要被 GC 清掉的時候才會執行
+
+## interface
+
 
 
 ## Reference

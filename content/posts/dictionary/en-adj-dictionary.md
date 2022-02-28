@@ -19,6 +19,10 @@ appealing 上訴的；哀求的
 brittle 易碎的，脆的
 
 ## C
+canonical 規範的，典範的
+
+clumsy 笨拙的，不靈活的
+
 compliant 順從的，聽從的；服從的
 
 concise 簡潔的；簡明的
@@ -115,6 +119,8 @@ mandatory 強制的；必須履行的；法定的
 
 minimalist (行動或干預) 盡量少的
 
+momentary 片刻的，瞬間的；短暫的
+
 ## N
 negligible 微不足道的，可忽略的
 
@@ -161,6 +167,8 @@ uniform 相同的；一律的；整齊劃一的
 utmost 最大的；極度的
 
 ## V
+vague 含糊的，不明確的
+
 versatile 多種用途的；萬用的；多才多藝的
 
 ## W
