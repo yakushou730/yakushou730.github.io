@@ -56,6 +56,16 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/site/general-tech-site/>General Tech Site</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-13>2021-11-13</time></span></div><div class=content>gRPC
+Google&rsquo;s Engineering Practices
+Refactoring GURU
+TW511教學網</div><div class=post-footer>
+<a href=/posts/site/general-tech-site/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/site/>site</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/site/engineering-site/>Engineering Site</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -127,6 +137,7 @@ B brittle 易碎的，脆的
 C compliant 順從的，聽從的；服從的
 concise 簡潔的；簡明的
 conscious 意識到；察覺到
+consecutive 連續的，連貫的，無間斷的
 conservative 保守的；守舊的
 contemporary 當代的；現代的
 contrary 相反的，對立的；完全不同的
@@ -144,15 +155,15 @@ erroneous 錯誤的；不正確的
 evocative 引起 (愉快) 回憶的；產生 (美好) 聯想的；喚起 (美好) 感情的
 extraneous 無直接關係的；無關的
 F fail-safe 萬無一失的，萬全的
-flawless 完美的；無瑕的
-G granular 顆粒組成的</div><div class=post-footer>
+flawless 完美的；無瑕的</div><div class=post-footer>
 <a href=/posts/dictionary/en-adj-dictionary/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/dictionary/en-verb-dictionary/>英文: 動詞</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-12>2021-11-12</time></span></div><div class=content>A annotate 給&mldr;作註解；給&mldr;加評註
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-12>2021-11-12</time></span></div><div class=content>A accommodate 為&mldr;提供住宿；容納；為&mldr;提供空間
+annotate 給&mldr;作註解；給&mldr;加評註
 B bear 忍受；承擔
 C cease 停止，中止
 commission (正式地) 安排&mldr;做
@@ -198,6 +209,8 @@ consequence (常指不好或不利的) 結果，後果
 constituent 成分；構成部分
 D delimiter 定界符
 denial 否定
+denominator (分數中的) 分母
+determination 決心；毅力
 discrepancy 不一致，出入
 dispatch 發送；派遣
 F factoring 因數分解，因式分解
@@ -210,9 +223,7 @@ I integrity 完整
 introspection 反省，自省
 invocation 調用
 J jargon 行話，行業術語，電腦術語
-L lexeme 詞素；詞元
-lift 搭便車
-M midst 中間，當中，中央</div><div class=post-footer>
+L lexeme 詞素；詞元</div><div class=post-footer>
 <a href=/posts/dictionary/en-noun-dictionary/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/dictionary/>dictionary</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
@@ -289,17 +300,6 @@ TARGET ====== TARGET ------ TARGET TARGET 連結 連結的格式為中括號內�
 - TARGET1 - TARGET2 second line - TARGET3 TARGET1</div><div class=post-footer>
 <a href=/posts/programming/markdown-tutorial/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/markdown/>markdown</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/hugo-tutorial/>Hugo 基本建立教學</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-10>2021-11-10</time></span></div><div class=content>流程 以下為使用 Hugo 架部落格，並架在 github page 上
-我的電腦是使用 macOS，會需要透過 homebrew 來安裝需要用到的套件
-git: 檔案版本控管 gvm: golang 的版本控管，用來安裝 golang hugo: hugo cli 用來下對應的 hugo 指令 使用 hugo 指令初始化一個新的網站 hugo-blog
-並且初始化 git
-$ hugo new site hugo-blog $ cd hugo-blog $ git init 搭配 DoIt 主題作為顯示，以 submodule 加入至主題 $ git submodule add https://github.com/HEIGE-PCloud/DoIt.git themes/DoIt 再來是設置 config.toml 以下是 範例，參考用 baseURL = "http://example.org/"# [en, zh-cn, fr, .</div><div class=post-footer>
-<a href=/posts/programming/hugo-tutorial/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/hugo/>hugo</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>
@@ -317,6 +317,10 @@ $ hugo new site hugo-blog $ cd hugo-blog $ git init 搭配 DoIt 主題作為顯�
 </li><li class="page-item active">
 <span class=page-link>
 <a href=/page/6/>6</a>
+</span>
+</li><li class=page-item>
+<span class=page-link>
+<a href=/page/7/>7</a>
 </span>
 </li></ul></div></div>
 </main><footer class=footer>

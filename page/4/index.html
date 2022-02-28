@@ -56,6 +56,19 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/udemy/complete-guide-to-elasticsearch/getting-started/>getting started</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-14>2021-12-14</time></span></div><div class=content>Installation 安裝 Elasticsearch 安裝後可以用 http://localhost:9200 確認服務是否正常 Elasticsearch 的檔案目錄 bin 放置執行檔 (Elasticsearch 以外的還有如 plugin 安裝檔 或 cli) config 放置 configuration file elasticsearch.yml 檔案內容是 comment 標起來的，如果不另外把 comment 拿掉的話，系統會使用預設值
+best practice 是要註明 cluster.name 和 node.name
+data / log 的路徑最好也自行指定 (特別指在 production 上)
+這樣即使砍了 Elasticsearch 也不會有資料遺失
+jvm.options
+用來調整系統的記憶體配置 log4j2.properties
+寫 log 的 framework data jdk 包含 OpenJDK lib 包含 Elasticsearch 會用到的 dependency logs modules 包含很多內建的 module plugins Basic architecture 基礎單元是 node，是 Elasticsearch 的 instance，用來儲存 data node 可以執行複數個，各自儲存部分的資料 node 不是機器，所以可以用幾台機器運行更多個 node 每個 node 都隸屬在 cluster 下 cluster 包含 nodes 通常不同的 cluster 會用來做不同的搜尋情境，彼此獨立 資料單位稱為 document，是一筆 json 格式的資料 index a document，意思是送一筆 json object 給 Elasticsearch 該筆 json object 到 Elasticsearch 後會在 "_source" 的節點下，並賦予其他 meta data index 包含多個 document query 的時候，是對指定的 index 做搜尋 document Kibana console 進入 Kibana 介面，並點擊 Dev Tools query HTTP method + request path 範例: 取得 cluster 狀態</div><div class=post-footer>
+<a href=/posts/udemy/complete-guide-to-elasticsearch/getting-started/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/udemy/complete-guide-to-elasticsearch/introduction/>introduction</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -158,13 +171,6 @@ https://foo.com:443/a/
 https 是 scheme foo.com 是 host 443 是 port a 是 path web browser 預設是禁止的 網站可以內嵌其他 origin 的資源 一個網站可以傳送資料給不同的 origin 位址 但是一個網站不能夠接收來自不同 origin 的資料 (瀏覽器行為) 可以透過設定 Header 內的 Access-Control 來控制允許或不允洗特定的 cross-origin requests 打我們的 API 藍覽器以外的工具，如 curl, wget 不會受到影響 如果在 API 的 response header 的 Header 的 Access-Control-Allow-Origin 塞值 *</div><div class=post-footer>
 <a href=/posts/programming/web-development/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/slice/>Slice</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-16>2021-11-16</time></span></div><div class=content>建立空的 Slice var movies []*Movie movie = &Movie{} // 這樣子建立出來的 movies slice 是 nil // 但已經足夠用來做 append // 不需要寫成 movies := []*Movie{} movies = append(movies, movie) 把 array 轉成 slice // hash 是 [32]byte 的 byte array hash := sha256.Sum256(info) // b.Hash 是 byte slice b.Hash = hash[:] </div><div class=post-footer>
-<a href=/posts/golang/slice/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>
@@ -188,6 +194,10 @@ https 是 scheme foo.com 是 host 443 是 port a 是 path web browser 預設是�
 </li><li class=page-item>
 <span class=page-link>
 <a href=/page/6/>6</a>
+</span>
+</li><li class=page-item>
+<span class=page-link>
+<a href=/page/7/>7</a>
 </span>
 </li></ul></div></div>
 </main><footer class=footer>

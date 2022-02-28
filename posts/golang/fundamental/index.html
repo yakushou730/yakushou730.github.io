@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=prev href=https://blog.yakushou.com/posts/k8s/basic-for-beginner/><link rel=next href=https://blog.yakushou.com/posts/programming/software/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":2137,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":3283,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2137 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;11 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3283 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;16 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -95,6 +95,8 @@
 <li><a href=#loop>loop</a></li>
 <li><a href=#functions>functions</a></li>
 <li><a href=#arrays-and-slices>Arrays and Slices</a></li>
+<li><a href=#maps>Maps</a></li>
+<li><a href=#packages>packages</a></li>
 <li><a href=#reference>Reference</a></li>
 </ul>
 </nav></div>
@@ -780,7 +782,434 @@ GOPATH:</li>
 
 <span class=c1>// 把一個 slice append 到另一個 slice
 </span><span class=c1></span><span class=nx>x</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>x</span><span class=p>,</span> <span class=nx>y</span><span class=o>...</span><span class=p>)</span>
-</code></pre></div><h2 id=reference>Reference</h2>
+</code></pre></div><blockquote>
+<p>A string in memory is, in fact, a 2 word-structure consisting of a pointer to the string data and the length.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// s 是 string
+</span><span class=c1></span><span class=nx>c</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+
+<span class=c1>// copy 也可以處理字串來源
+</span><span class=c1></span><span class=nb>copy</span><span class=p>(</span><span class=nx>dst</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>src</span> <span class=kt>string</span><span class=p>)</span>
+
+<span class=c1>// range unicode string 的話
+</span><span class=c1>// 每一個 loop 是一個 rune
+</span><span class=c1></span><span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;\u00ff\u754c&#34;</span>
+<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>c</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>s</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%d:%c &#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=c1>// Outputs
+</span><span class=c1></span><span class=mi>0</span><span class=p>:</span><span class=nx>ÿ</span> <span class=mi>2</span><span class=p>:</span><span class=nx>界</span>
+
+
+<span class=c1>// 建立 substring
+</span><span class=c1></span><span class=nx>substr</span> <span class=o>:=</span> <span class=nx>str</span><span class=p>[</span><span class=nx>start</span><span class=p>:</span><span class=nx>end</span><span class=p>]</span>
+</code></pre></div><p>string 是 immutable 的，不能直接指定替換 string 的元素</p>
+<p>另一種方式是 先把 string 轉成 byte array 後變更，再轉回 string</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;hello&#34;</span>
+<span class=nx>c</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=c1>// converting string s to array of bytes `c`.
+</span><span class=c1></span><span class=nx>c</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=p>=</span> <span class=sc>&#39;c&#39;</span>     <span class=c1>// modifying the c 
+</span><span class=c1></span><span class=nx>s2</span> <span class=o>:=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span> <span class=c1>// Converting c to string, s2 == &#34;cello&#34;
+</span></code></pre></div><p>一些透過 append 做到的 slice 操作技巧</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 把 b 加到 a
+</span><span class=c1></span><span class=nx>a</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=o>...</span><span class=p>)</span>
+<span class=c1>// 刪除 index i
+</span><span class=c1></span><span class=nx>a</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>a</span><span class=p>[:</span><span class=nx>i</span><span class=p>],</span> <span class=nx>a</span><span class=p>[</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>:]</span><span class=o>...</span><span class=p>)</span>
+<span class=c1>// 從 index i 到 j 的部分切掉
+</span><span class=c1></span><span class=nx>a</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>a</span><span class=p>[:</span><span class=nx>i</span><span class=p>],</span> <span class=nx>a</span><span class=p>[</span><span class=nx>j</span><span class=p>:]</span><span class=o>...</span><span class=p>)</span>
+<span class=c1>// 使用新的 slice 做擴展
+</span><span class=c1></span><span class=nx>a</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=nb>make</span><span class=p>([]</span><span class=nx>T</span><span class=p>,</span> <span class=nx>j</span><span class=p>)</span><span class=o>...</span><span class=p>)</span>
+<span class=c1>// 插入 item 到 index i
+</span><span class=c1></span><span class=nx>a</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>a</span><span class=p>[:</span><span class=nx>i</span><span class=p>],</span> <span class=nb>append</span><span class=p>([]</span><span class=nx>T</span><span class=p>{</span><span class=nx>x</span><span class=p>},</span> <span class=nx>a</span><span class=p>[</span><span class=nx>i</span><span class=p>:]</span><span class=o>...</span><span class=p>)</span><span class=o>...</span><span class=p>)</span>
+<span class=c1>// 插入新的 長度 j 的 slice 於 index i
+</span><span class=c1></span><span class=nx>a</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>a</span><span class=p>[:</span><span class=nx>i</span><span class=p>],</span> <span class=nb>append</span><span class=p>(</span><span class=nb>make</span><span class=p>([]</span><span class=nx>T</span><span class=p>,</span> <span class=nx>j</span><span class=p>),</span> <span class=nx>a</span><span class=p>[</span><span class=nx>i</span><span class=p>:]</span><span class=o>...</span><span class=p>)</span><span class=o>...</span><span class=p>)</span>
+<span class=c1>// 插入已存在的 slice b 於 index i
+</span><span class=c1></span><span class=nx>a</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>a</span><span class=p>[:</span><span class=nx>i</span><span class=p>],</span> <span class=nb>append</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>a</span><span class=p>[</span><span class=nx>i</span><span class=p>:]</span><span class=o>...</span><span class=p>)</span><span class=o>...</span><span class=p>)</span>
+<span class=c1>// 從 stack 拿掉最高的元素
+</span><span class=c1></span><span class=nx>x</span><span class=p>,</span> <span class=nx>a</span> <span class=p>=</span> <span class=nx>a</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=nx>a</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>],</span> <span class=nx>a</span><span class=p>[:</span><span class=nb>len</span><span class=p>(</span><span class=nx>a</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>
+<span class=c1>// 插入一個元素到 stack
+</span><span class=c1></span><span class=nx>a</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=nx>x</span><span class=p>)</span>
+</code></pre></div><blockquote>
+<p>在數學應用上 slice 又稱為 vector</p>
+<p>有需要的話可以做 alias 使用</p>
+</blockquote>
+<p>Garbage collection 探索案例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>digitRegexp</span> <span class=p>=</span> <span class=nx>regexp</span><span class=p>.</span><span class=nf>MustCompile</span><span class=p>(</span><span class=s>&#34;[0-9]+&#34;</span><span class=p>)</span>
+<span class=kd>func</span> <span class=nf>FindDigits</span><span class=p>(</span><span class=nx>filename</span> <span class=kt>string</span><span class=p>)</span> <span class=p>[]</span><span class=kt>byte</span> <span class=p>{</span>
+  <span class=nx>b</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>ReadFile</span><span class=p>(</span><span class=nx>filename</span><span class=p>)</span>
+  <span class=k>return</span> <span class=nx>digitRegexp</span><span class=p>.</span><span class=nf>Find</span><span class=p>(</span><span class=nx>b</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>上述的程式有缺點，因為 slice <code>[]byte</code> 會用到的 underlying array 非常大 (整份 file)</p>
+<p>因為被 reference 的關係會一直存在記憶體不會被清掉</p>
+<p>所以要特別處理，免得記憶體爆炸</p>
+<p>改善版本如下，建立一個需要用到的 slice (符合需求的 underlying array)</p>
+<p>這樣就不會佔用額外記憶體空間</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>FindDigits</span><span class=p>(</span><span class=nx>filename</span> <span class=kt>string</span><span class=p>)</span> <span class=p>[]</span><span class=kt>byte</span> <span class=p>{</span>
+  <span class=nx>b</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>ReadFile</span><span class=p>(</span><span class=nx>filename</span><span class=p>)</span>
+  <span class=nx>b</span> <span class=p>=</span> <span class=nx>digitRegexp</span><span class=p>.</span><span class=nf>Find</span><span class=p>(</span><span class=nx>b</span><span class=p>)</span>
+  <span class=nx>c</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>b</span><span class=p>))</span>
+  <span class=nb>copy</span><span class=p>(</span><span class=nx>c</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span> <span class=c1>// copying b to c
+</span><span class=c1></span>  <span class=k>return</span> <span class=nx>c</span>
+<span class=p>}</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// string 可以直接做成 rune slice
+</span><span class=c1></span><span class=nx>str</span> <span class=o>:=</span> <span class=s>&#34;hello&#34;</span>
+<span class=nx>runes</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>rune</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+<span class=c1>// 也可以直接做成 byte slice
+</span><span class=c1></span><span class=nx>bytes</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+
+<span class=c1>// 轉回 string
+</span><span class=c1></span><span class=nb>string</span><span class=p>(</span><span class=nx>runes</span><span class=p>)</span>
+<span class=nb>string</span><span class=p>(</span><span class=nx>bytes</span><span class=p>)</span>
+</code></pre></div><h2 id=maps>Maps</h2>
+<p>又稱為 associative arrays 或 dictionaries</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>map1</span> <span class=kd>map</span><span class=p>[</span><span class=nx>keytype</span><span class=p>]</span><span class=nx>valuetype</span>
+<span class=c1>// example
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>map1</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>int</span>
+</code></pre></div><p>map 是 reference type</p>
+<p>未初始化的 map value 是 <code>nil</code></p>
+<p>key type 可以是任何支援 <code>==</code> 和 <code>!=</code> 的 type</p>
+<ul>
+<li>可以: string, int, float, array, struct, pointer, interface</li>
+<li>不行: slice (因為 slice 沒有定義 equality)</li>
+</ul>
+<blockquote>
+<p>map 是 reference type，所以傳入 function 的成本很低</p>
+<p>查詢的效能: 透過 slice or array 的 index > 透過 map 的 key > 透過線性的 slice or array</p>
+</blockquote>
+<p>map 沒取到值的話會是 zero value</p>
+<p><code>len(map1)</code> 可以取得這個 map 有多少對 key value</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 初始化 map
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>map1</span> <span class=kd>map</span><span class=p>[</span><span class=nx>keytype</span><span class=p>]</span><span class=nx>valuetype</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=nx>keytype</span><span class=p>]</span><span class=nx>valuetype</span><span class=p>)</span>
+<span class=c1>// or
+</span><span class=c1></span><span class=nx>map1</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=nx>keytype</span><span class=p>]</span><span class=nx>valuetype</span><span class=p>)</span>
+</code></pre></div><p>value 使用 function 的範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>mf</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span><span class=kd>func</span><span class=p>()</span> <span class=kt>int</span><span class=p>{</span> <span class=c1>// key type int, and value type func()int
+</span><span class=c1></span>    <span class=mi>1</span><span class=p>:</span> <span class=kd>func</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span> <span class=k>return</span> <span class=mi>10</span> <span class=p>},</span>
+    <span class=mi>2</span><span class=p>:</span> <span class=kd>func</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span> <span class=k>return</span> <span class=mi>20</span> <span class=p>},</span>
+    <span class=mi>5</span><span class=p>:</span> <span class=kd>func</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span> <span class=k>return</span> <span class=mi>50</span> <span class=p>},</span>
+  <span class=p>}</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>mf</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=c1>// Outputs
+</span><span class=c1>// 注意 value 是 function 的 address
+</span><span class=c1></span><span class=kd>map</span><span class=p>[</span><span class=mi>1</span><span class=p>:</span><span class=mh>0x4011c0</span> <span class=mi>2</span><span class=p>:</span><span class=mh>0x4011d0</span> <span class=mi>5</span><span class=p>:</span><span class=mh>0x4011e0</span><span class=p>]</span>
+</code></pre></div><p>map 宣告的時候可以指定 capacity，如果後來超過的話，會逐漸增加 (+1,+1 這樣繼續長)</p>
+<ul>
+<li>64 bits 的機器 default 是 8 bytes</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=nx>keytype</span><span class=p>]</span><span class=nx>valuetype</span><span class=p>,</span> <span class=nx>cap</span><span class=p>)</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 確認 map 是否有值
+</span><span class=c1></span><span class=k>if</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>map1</span><span class=p>[</span><span class=nx>key1</span><span class=p>];</span> <span class=nx>ok</span> <span class=p>{</span>
+  <span class=c1>// ...
+</span><span class=c1></span><span class=p>}</span>
+
+<span class=c1>// 刪除 map 內的 key 值
+</span><span class=c1></span><span class=nb>delete</span><span class=p>(</span><span class=nx>map1</span><span class=p>,</span> <span class=nx>key1</span><span class=p>)</span>
+</code></pre></div><p>可以在 range map 內刪除 map 的 key value pair</p>
+<p>建立 map 的 slice</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>items</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kd>map</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
+<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>items</span> <span class=p>{</span>
+  <span class=nx>items</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span> 
+  <span class=nx>items</span><span class=p>[</span><span class=nx>i</span><span class=p>][</span><span class=mi>1</span><span class=p>]</span> <span class=p>=</span> <span class=mi>2</span> <span class=c1>// This &#39;item&#39; data will not be lost on the next iteration
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><h2 id=packages>packages</h2>
+<ul>
+<li><code>unsafe</code>
+<ul>
+<li>一般不會用到，可以跳過 type 檢查</li>
+<li>和 C/C++ 交互作用時會用到</li>
+</ul>
+</li>
+<li><code>os</code>
+<ul>
+<li>提供 os 層級的功能</li>
+<li>unix-like design</li>
+</ul>
+</li>
+<li><code>os/exec</code>
+<ul>
+<li>提供 執行外部 os 指令和程式</li>
+</ul>
+</li>
+<li><code>syscall</code>
+<ul>
+<li>low-level, external package, 針對 underlying OS&rsquo;s 呼叫提供原始的介面</li>
+</ul>
+</li>
+<li><code>archive/tar</code> 和 <code>archive/zip</code> 和 <code>compress</code>
+<ul>
+<li>包含壓縮 / 解壓縮的功能</li>
+</ul>
+</li>
+<li><code>fmt</code>
+<ul>
+<li>包含格式化輸入輸出的功能</li>
+</ul>
+</li>
+<li><code>io</code>
+<ul>
+<li>提供基本 io 功能，大部分是包裝 os 指令</li>
+</ul>
+</li>
+<li><code>bufio</code>
+<ul>
+<li>提供 buffered input/output 功能的包裝</li>
+</ul>
+</li>
+<li><code>path/filepath</code>
+<ul>
+<li>包含 os 會用到的操作檔名路徑的程序</li>
+</ul>
+</li>
+<li><code>flag</code>
+<ul>
+<li>包含 command-line 參數的功能</li>
+</ul>
+</li>
+<li><code>strings</code>
+<ul>
+<li>包含操作和處理字串的功能</li>
+</ul>
+</li>
+<li><code>strconv</code>
+<ul>
+<li>把字串轉成基本的資料型態</li>
+</ul>
+</li>
+<li><code>unicode</code>
+<ul>
+<li>包含 unicode 的特殊函式</li>
+</ul>
+</li>
+<li><code>regexp</code>
+<ul>
+<li>提供字串的 pattern 搜尋功能</li>
+</ul>
+</li>
+<li><code>bytes</code>
+<ul>
+<li>包含操作 byte slice 的功能</li>
+</ul>
+</li>
+<li><code>index/suffixarry</code>
+<ul>
+<li>包含在字串內非常快速搜尋的功能</li>
+</ul>
+</li>
+<li><code>math</code>
+<ul>
+<li>包含基本數學常數和函式</li>
+</ul>
+</li>
+<li><code>math/cmplx</code>
+<ul>
+<li>提供操作複數的 method</li>
+</ul>
+</li>
+<li><code>math/rand</code>
+<ul>
+<li>提供產生 pseudo-random 數字</li>
+</ul>
+</li>
+<li><code>sort</code>
+<ul>
+<li>提供針對 array 和 user-defined collections 的排序功能</li>
+</ul>
+</li>
+<li><code>math/big</code>
+<ul>
+<li>包含更高精度的數學方法</li>
+</ul>
+</li>
+<li><code>container</code>
+<ul>
+<li>實作容器來操作 collections
+<ul>
+<li><code>list</code>: 處理 doubly-linked list</li>
+<li><code>ring</code>: 處理 circular lists</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>time</code>
+<ul>
+<li>包含處理 times, dates 的基本功能</li>
+</ul>
+</li>
+<li><code>log</code>
+<ul>
+<li>包含處理程式執行中的 log 資訊</li>
+</ul>
+</li>
+<li><code>encoding/json</code>
+<ul>
+<li>實作 JSON 格式的 讀取/解碼 和 寫入/編碼</li>
+</ul>
+</li>
+<li><code>encoding/xml</code>
+<ul>
+<li>提供簡單的 XML 1.0 轉換</li>
+</ul>
+</li>
+<li><code>net</code>
+<ul>
+<li>包含基本的 處理 network data</li>
+</ul>
+</li>
+<li><code>http</code>
+<ul>
+<li>包含 parse HTTP requests/replies 的功能，提供 HTTP server 和基本的 client</li>
+</ul>
+</li>
+<li><code>html</code>
+<ul>
+<li>提供 HTML5 的 parser</li>
+</ul>
+</li>
+<li><code>crypto - encoding - hash - ...</code>
+<ul>
+<li>提供大部分的 package encrypting 和 decrypting</li>
+</ul>
+</li>
+<li><code>runtime</code>
+<ul>
+<li>包含和 go-runtime 互動的操作，像是 garbage collection 和 go-routine</li>
+</ul>
+</li>
+<li><code>reflect</code>
+<ul>
+<li>實作 runtime introspection，允許程式操作任意型別的變數</li>
+</ul>
+</li>
+</ul>
+<p><code>container/list</code> 範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>insertListElements</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)(</span><span class=o>*</span><span class=nx>list</span><span class=p>.</span><span class=nx>List</span><span class=p>){</span>   <span class=c1>// add elements in list from 1 to n
+</span><span class=c1></span>  <span class=nx>lst</span> <span class=o>:=</span> <span class=nx>list</span><span class=p>.</span><span class=nf>New</span><span class=p>()</span>
+  <span class=k>for</span> <span class=nx>i</span><span class=o>:=</span><span class=mi>1</span><span class=p>;</span><span class=nx>i</span><span class=o>&lt;=</span><span class=nx>n</span><span class=p>;</span><span class=nx>i</span><span class=o>++</span><span class=p>{</span>
+    <span class=nx>lst</span><span class=p>.</span><span class=nf>PushBack</span><span class=p>(</span><span class=nx>i</span><span class=p>)</span>         <span class=c1>// insertion here
+</span><span class=c1></span>  <span class=p>}</span> 
+  <span class=k>return</span> <span class=nx>lst</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>n</span> <span class=o>:=</span> <span class=mi>5</span>                    <span class=c1>// total number of elements to be inserted
+</span><span class=c1></span>  <span class=nx>myList</span> <span class=o>:=</span> <span class=nf>insertListElements</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span> <span class=c1>// function call
+</span><span class=c1></span>  <span class=k>for</span> <span class=nx>e</span> <span class=o>:=</span> <span class=nx>myList</span><span class=p>.</span><span class=nf>Front</span><span class=p>();</span> <span class=nx>e</span> <span class=o>!=</span> <span class=kc>nil</span><span class=p>;</span> <span class=nx>e</span> <span class=p>=</span> <span class=nx>e</span><span class=p>.</span><span class=nf>Next</span><span class=p>()</span> <span class=p>{</span>
+		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>Value</span><span class=p>)</span>  <span class=c1>// printing values of list
+</span><span class=c1></span>	<span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p><code>regexp</code> 範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>searchIn</span> <span class=o>:=</span> <span class=s>&#34;John: 2578.34 William: 4567.23 Steve: 5632.18&#34;</span> <span class=c1>// string to search
+</span><span class=c1></span>  <span class=nx>pat</span> <span class=o>:=</span> <span class=s>&#34;[0-9]+.[0-9]+&#34;</span> <span class=c1>// pattern search in searchIn
+</span><span class=c1></span>
+  <span class=nx>f</span> <span class=o>:=</span> <span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+    <span class=nx>v</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>strconv</span><span class=p>.</span><span class=nf>ParseFloat</span><span class=p>(</span><span class=nx>s</span><span class=p>,</span> <span class=mi>32</span><span class=p>)</span>
+    <span class=k>return</span> <span class=nx>strconv</span><span class=p>.</span><span class=nf>FormatFloat</span><span class=p>(</span><span class=nx>v</span> <span class=o>*</span> <span class=mi>2</span><span class=p>,</span> <span class=sc>&#39;f&#39;</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>32</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=c1>// 檢查是否 pattern 可以找到 match
+</span><span class=c1></span>  <span class=k>if</span> <span class=nx>ok</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>regexp</span><span class=p>.</span><span class=nf>Match</span><span class=p>(</span><span class=nx>pat</span><span class=p>,</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>searchIn</span><span class=p>));</span> <span class=nx>ok</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Match found!&#34;</span><span class=p>)</span>
+  <span class=p>}</span>
+  
+  <span class=c1>// 做出指定 pattern 的 regexp object
+</span><span class=c1></span>  <span class=c1>// 如果是用 MustCompile 的話，如果 pattern 轉換成 regexp object 失敗會 panic
+</span><span class=c1></span>  <span class=nx>re</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>regexp</span><span class=p>.</span><span class=nf>Compile</span><span class=p>(</span><span class=nx>pat</span><span class=p>)</span>
+
+  <span class=c1>// 透過 regexp object 去處理輸入的 文章字串
+</span><span class=c1></span>  <span class=c1>// 並用 ReplaceAllString 去做取代
+</span><span class=c1></span>  <span class=nx>str</span> <span class=o>:=</span> <span class=nx>re</span><span class=p>.</span><span class=nf>ReplaceAllString</span><span class=p>(</span><span class=nx>searchIn</span><span class=p>,</span> <span class=s>&#34;##.#&#34;</span><span class=p>)</span> <span class=c1>// replace pat with &#34;##.#&#34;
+</span><span class=c1></span>  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+  <span class=c1>// using a function
+</span><span class=c1></span>  <span class=nx>str2</span> <span class=o>:=</span> <span class=nx>re</span><span class=p>.</span><span class=nf>ReplaceAllStringFunc</span><span class=p>(</span><span class=nx>searchIn</span><span class=p>,</span> <span class=nx>f</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>str2</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>發生 race condition 的話，經典的解法是只讓一個 thread 可以更改 shared variable</p>
+<p>shared variable 在程式內稱為 critical section，透過 lock 的機制來處理</p>
+<p>同時只讓一個 thread 可以執行這段，當執行完 critical section 再 unlock</p>
+<blockquote>
+<p>map 沒有 internal locking 機制 (考慮到效能因素)</p>
+<p>map type 不是 thread-safe</p>
+<p>所以 concurrent 存取會對 shared map 的資料造成資料毀損</p>
+</blockquote>
+<p>處理 race condition 可以用到 <code>sync</code> package 的 <code>Mutex</code> (mutual exclusion lock)</p>
+<p>用來保護 critical section，使得一次只有一個 thread 可以進入 critical section</p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 假設 Info 是個要被保護的 shared variable
+</span><span class=c1>// 可以給他一個 sync.Mutex 變數來處理
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>Info</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>mu</span> <span class=nx>sync</span><span class=p>.</span><span class=nx>Mutex</span>
+  <span class=c1>// ... other fields, e.g.:
+</span><span class=c1></span>  <span class=nx>Str</span> <span class=kt>string</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>Update</span><span class=p>(</span><span class=nx>info</span> <span class=o>*</span><span class=nx>Info</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>info</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+    <span class=c1>// critical section:
+</span><span class=c1></span>    <span class=nx>info</span><span class=p>.</span><span class=nx>Str</span> <span class=p>=</span> <span class=c1>// new value
+</span><span class=c1></span>    <span class=c1>// end critical section
+</span><span class=c1></span>    <span class=nx>info</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+<span class=p>}</span>
+</code></pre></div><p><code>RWMutex</code></p>
+<ul>
+<li>允許多個 reader threads 使用 <code>RLock()</code>，但一個 write thread</li>
+</ul>
+<p><code>once.Do(call)</code></p>
+<ul>
+<li><code>once</code> 是 type Once 的變數</li>
+<li>不管呼叫到多少次，once 都只會執行一次 function call</li>
+</ul>
+<p><code>math/big</code>: 可以處理任意位數，唯一的限制是機器的可用記憶體大小</p>
+<ul>
+<li><code>big.Int</code> 處理很大的整數</li>
+<li><code>big.Rat</code> 處理有理數</li>
+<li><code>big.Float</code></li>
+</ul>
+<p><code>math/big</code> 範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=c1>// Here are some calculations with bigInts:
+</span><span class=c1></span>  <span class=nx>im</span> <span class=o>:=</span> <span class=nx>big</span><span class=p>.</span><span class=nf>NewInt</span><span class=p>(</span><span class=nx>math</span><span class=p>.</span><span class=nx>MaxInt64</span><span class=p>)</span>
+  <span class=nx>in</span> <span class=o>:=</span> <span class=nx>im</span>
+  <span class=nx>io</span> <span class=o>:=</span> <span class=nx>big</span><span class=p>.</span><span class=nf>NewInt</span><span class=p>(</span><span class=mi>1956</span><span class=p>)</span>
+  <span class=nx>ip</span> <span class=o>:=</span> <span class=nx>big</span><span class=p>.</span><span class=nf>NewInt</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+  <span class=nx>ip</span><span class=p>.</span><span class=nf>Mul</span><span class=p>(</span><span class=nx>im</span><span class=p>,</span> <span class=nx>in</span><span class=p>).</span><span class=nf>Add</span><span class=p>(</span><span class=nx>ip</span><span class=p>,</span> <span class=nx>im</span><span class=p>).</span><span class=nf>Div</span><span class=p>(</span><span class=nx>ip</span><span class=p>,</span> <span class=nx>io</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Big Int: %v\n&#34;</span><span class=p>,</span> <span class=nx>ip</span><span class=p>)</span>
+  <span class=c1>// Here are some calculations with big rationals:
+</span><span class=c1></span>  <span class=nx>rm</span> <span class=o>:=</span> <span class=nx>big</span><span class=p>.</span><span class=nf>NewRat</span><span class=p>(</span><span class=nx>math</span><span class=p>.</span><span class=nx>MaxInt64</span><span class=p>,</span> <span class=mi>1956</span><span class=p>)</span>
+  <span class=nx>rn</span> <span class=o>:=</span> <span class=nx>big</span><span class=p>.</span><span class=nf>NewRat</span><span class=p>(</span><span class=o>-</span><span class=mi>1956</span><span class=p>,</span> <span class=nx>math</span><span class=p>.</span><span class=nx>MaxInt64</span><span class=p>)</span>
+  <span class=nx>ro</span> <span class=o>:=</span> <span class=nx>big</span><span class=p>.</span><span class=nf>NewRat</span><span class=p>(</span><span class=mi>19</span><span class=p>,</span> <span class=mi>56</span><span class=p>)</span>
+  <span class=nx>rp</span> <span class=o>:=</span> <span class=nx>big</span><span class=p>.</span><span class=nf>NewRat</span><span class=p>(</span><span class=mi>1111</span><span class=p>,</span> <span class=mi>2222</span><span class=p>)</span>
+  <span class=nx>rq</span> <span class=o>:=</span> <span class=nx>big</span><span class=p>.</span><span class=nf>NewRat</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+  <span class=nx>rq</span><span class=p>.</span><span class=nf>Mul</span><span class=p>(</span><span class=nx>rm</span><span class=p>,</span> <span class=nx>rn</span><span class=p>).</span><span class=nf>Add</span><span class=p>(</span><span class=nx>rq</span><span class=p>,</span> <span class=nx>ro</span><span class=p>).</span><span class=nf>Mul</span><span class=p>(</span><span class=nx>rq</span><span class=p>,</span> <span class=nx>rp</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Big Rat: %v\n&#34;</span><span class=p>,</span> <span class=nx>rq</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>自訂 package 名稱</p>
+<ul>
+<li>short</li>
+<li>single-word</li>
+<li>lowercase</li>
+<li>filenames without <code>_</code></li>
+</ul>
+<p><code>GOPATH</code>: 告訴 go 要去哪邊尋找和安裝 go package，是 workspace 的路徑</p>
+<ul>
+<li><code>src</code>: 包含目錄結構的 go source files (.go)</li>
+<li><code>pkg</code>: 包含安裝的和編譯的 package objects (.a)</li>
+<li><code>bin</code>: 包含可執行檔 (.out 或 .exe)</li>
+</ul>
+<p><code>GOROOT</code>: golang 在系統中的 SDK (Software Development Kit) 位置</p>
+<p><code>go install importpath</code>: build 和安裝 package object (.a)</p>
+<ul>
+<li>路徑 <code>pkg/linux_amd64\book</code> (linux)</li>
+</ul>
+<p>一個檔案可以有不只一個 <code>init()</code> 就會是隨機順序</p>
+<ul>
+<li>init() 只會在 initialize 階段呼叫一次</li>
+</ul>
+<p><code>go doc [package name]</code> 可以印出 package 的文件</p>
+<ul>
+<li><code>godoc -http=:6060</code> 可以在 localhost:6060 以 html 開啟 doc</li>
+</ul>
+<h2 id=reference>Reference</h2>
 <p><a href=https://www.interviewbit.com/golang-interview-questions/ target=_blank rel="noopener noreffer">Golang Interview Questions</a></p>
 </div>
 <div class=post-footer id=post-footer>
