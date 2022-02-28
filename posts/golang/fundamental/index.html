@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=prev href=https://blog.yakushou.com/posts/k8s/basic-for-beginner/><link rel=next href=https://blog.yakushou.com/posts/programming/software/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":3283,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":3769,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3283 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;16 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3769 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;18 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -97,6 +97,8 @@
 <li><a href=#arrays-and-slices>Arrays and Slices</a></li>
 <li><a href=#maps>Maps</a></li>
 <li><a href=#packages>packages</a></li>
+<li><a href=#structs-and-methods>Structs and Methods</a></li>
+<li><a href=#interface>interface</a></li>
 <li><a href=#reference>Reference</a></li>
 </ul>
 </nav></div>
@@ -1209,6 +1211,141 @@ GOPATH:</li>
 <ul>
 <li><code>godoc -http=:6060</code> 可以在 localhost:6060 以 html 開啟 doc</li>
 </ul>
+<p>跑全部的測試 <code>go test ./...</code></p>
+<p><code>go install</code> vs <code>go get</code></p>
+<ul>
+<li><code>go get</code> 驗證 package 是否需要被下載，是的話會下載並編譯</li>
+<li><code>go install</code> 不會下載，只會編譯</li>
+</ul>
+<h2 id=structs-and-methods>Structs and Methods</h2>
+<p>struct 是 value type，且可以用 <code>new()</code> 建立，內含的欄位稱為 <code>fields</code></p>
+<p>golang 並沒有 class 的概念，所以 struct type 很重要</p>
+<p><code>t := new(T)</code></p>
+<ul>
+<li>在物件導向會稱呼 t 為 struct T 的 instance 或 object</li>
+<li>在 golang 會稱呼 t 為 struct T 的 value</li>
+<li><code>new(Type)</code> 和 <code>&Type{}</code> 是等價的 (equivalent expression)</li>
+</ul>
+<p>可透過 <code>size := unsafe.Sizeof(T{})</code> 查看 struct T 的一個 value 佔用了多少記憶體 (bytes)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 這樣宣告是兩個相同 underlying type 的不同 type，不可直接互用，要轉型
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>nr</span> <span class=nx>number</span>   <span class=c1>// new distinct type
+</span><span class=c1>// 這樣宣告是可互通的 不同 type
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>nrAlias</span> <span class=p>=</span> <span class=nx>number</span> <span class=c1>// alias type
+</span></code></pre></div><p><strong>Factory Method</strong>
+像物件導向的建構子的用法，如 <code>func NewFile(fd int, name string) *File</code></p>
+<p>要怎麼避免呼叫的人直接用 <code>new()</code> 的方法作為建構 struct，就是把那個結構做成 unexposed struct</p>
+<p>這樣 <code>func NewXXX() *XXX</code> 就會變成唯一的建構方式</p>
+<p>struct 內欄位用到的 tag 只有 <code>reflect</code> package 可以存取</p>
+<p>tag 範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>TagType</span> <span class=kd>struct</span> <span class=p>{</span> <span class=c1>// tags
+</span><span class=c1></span>    <span class=nx>field1</span> <span class=kt>bool</span> <span class=s>&#34;An important answer&#34;</span>
+    <span class=nx>field2</span> <span class=kt>string</span> <span class=s>`The name of the thing`</span>
+    <span class=nx>field3</span> <span class=kt>int</span> <span class=s>&#34;How much there are&#34;</span>
+<span class=p>}</span>
+
+<span class=nx>tt</span> <span class=o>:=</span> <span class=nx>TagType</span><span class=p>{</span><span class=kc>true</span><span class=p>,</span> <span class=s>&#34;Barack Obama&#34;</span><span class=p>,</span> <span class=mi>1</span><span class=p>}</span>
+
+<span class=k>for</span> <span class=nx>i</span><span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>3</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+    <span class=nx>ttType</span> <span class=o>:=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>TypeOf</span><span class=p>(</span><span class=nx>tt</span><span class=p>)</span>
+    <span class=nx>ixField</span> <span class=o>:=</span> <span class=nx>ttType</span><span class=p>.</span><span class=nf>Field</span><span class=p>(</span><span class=nx>i</span><span class=p>)</span>       <span class=c1>// getting field at a position ix
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%v\n&#34;</span><span class=p>,</span> <span class=nx>ixField</span><span class=p>.</span><span class=nx>Tag</span><span class=p>)</span>   <span class=c1>// printing tags
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><p>取得 tag value 範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>T</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>a</span> <span class=kt>int</span> <span class=s>&#34;This is a tag&#34;</span>
+  <span class=nx>b</span> <span class=kt>int</span> <span class=s>`A raw string tag`</span>
+  <span class=nx>c</span> <span class=kt>int</span> <span class=s>`key1:&#34;value1&#34; key2:&#34;value2&#34;`</span>
+<span class=p>}</span>
+
+<span class=k>if</span> <span class=nx>field</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>TypeOf</span><span class=p>(</span><span class=nx>t</span><span class=p>).</span><span class=nf>FieldByName</span><span class=p>(</span><span class=s>&#34;c&#34;</span><span class=p>);</span> <span class=nx>ok</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>field</span><span class=p>.</span><span class=nx>Tag</span><span class=p>)</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>field</span><span class=p>.</span><span class=nx>Tag</span><span class=p>.</span><span class=nf>Get</span><span class=p>(</span><span class=s>&#34;key1&#34;</span><span class=p>))</span>
+<span class=p>}</span>
+</code></pre></div><p>在 struct 內，一樣 type 的 anonymous filed 只能有一個</p>
+<p>結構內相同欄位名稱的話，會從外層先呼叫，再往內層找</p>
+<blockquote>
+<p>Methods are not mixed with the data definition (the structs).</p>
+<p>They are orthogonal to types;</p>
+<p>representation (data) and behavior (methods) are independent.</p>
+</blockquote>
+<p>Pointer and value methods can both be called on the pointer or non-pointer values.</p>
+<p>method 和 function 轉換的範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>T</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>a</span> <span class=kt>int</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=nx>T</span><span class=p>)</span> <span class=nb>print</span><span class=p>(</span><span class=nx>message</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>message</span><span class=p>,</span> <span class=nx>t</span><span class=p>.</span><span class=nx>a</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=p>(</span><span class=nx>T</span><span class=p>)</span> <span class=nf>hello</span><span class=p>(</span><span class=nx>message</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Hello!&#34;</span><span class=p>,</span> <span class=nx>message</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>callMethod</span><span class=p>(</span><span class=nx>t</span> <span class=nx>T</span><span class=p>,</span> <span class=nx>method</span> <span class=kd>func</span><span class=p>(</span><span class=nx>T</span><span class=p>,</span> <span class=kt>string</span><span class=p>))</span> <span class=p>{</span>
+  <span class=nf>method</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=s>&#34;A message&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>t1</span> <span class=o>:=</span> <span class=nx>T</span><span class=p>{</span><span class=mi>10</span><span class=p>}</span>
+  <span class=nx>t2</span> <span class=o>:=</span> <span class=nx>T</span><span class=p>{</span><span class=mi>20</span><span class=p>}</span>
+  <span class=kd>var</span> <span class=nx>f</span> <span class=kd>func</span><span class=p>(</span><span class=nx>T</span><span class=p>,</span> <span class=kt>string</span><span class=p>)</span> <span class=p>=</span> <span class=nx>T</span><span class=p>.</span><span class=nx>print</span>
+  <span class=nf>callMethod</span><span class=p>(</span><span class=nx>t1</span><span class=p>,</span> <span class=nx>f</span><span class=p>)</span>
+  <span class=nf>callMethod</span><span class=p>(</span><span class=nx>t2</span><span class=p>,</span> <span class=nx>f</span><span class=p>)</span>
+  <span class=nf>callMethod</span><span class=p>(</span><span class=nx>t1</span><span class=p>,</span> <span class=nx>T</span><span class=p>.</span><span class=nx>hello</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>convention:</p>
+<ul>
+<li>取得欄位的 method 直接用大寫開頭命名該欄位名稱</li>
+<li>設定欄位的 method 加上 <code>Set</code> 的 prefix</li>
+</ul>
+<blockquote>
+<p><code>(recv T) String() {}</code> 的 body 不能使用 fmt 作為字串串接，否則會發生 infinite loop</p>
+</blockquote>
+<p>embedded type 的做法很像物件導向的繼承，也很像 ruby 的 mixin</p>
+<ul>
+<li>可以拿到 embedded type 的 method 來用</li>
+</ul>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Point</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>x</span><span class=p>,</span> <span class=nx>y</span> <span class=kt>float64</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=p>(</span><span class=nx>p</span> <span class=o>*</span><span class=nx>Point</span><span class=p>)</span> <span class=nf>Abs</span><span class=p>()</span> <span class=kt>float64</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=nx>math</span><span class=p>.</span><span class=nf>Sqrt</span><span class=p>(</span><span class=nx>p</span><span class=p>.</span><span class=nx>x</span><span class=o>*</span><span class=nx>p</span><span class=p>.</span><span class=nx>x</span> <span class=o>+</span> <span class=nx>p</span><span class=p>.</span><span class=nx>y</span><span class=o>*</span><span class=nx>p</span><span class=p>.</span><span class=nx>y</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>type</span> <span class=nx>NamedPoint</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>Point</span>   <span class=c1>// anonymous field of Point type
+</span><span class=c1></span>  <span class=nx>name</span> <span class=kt>string</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>n</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>NamedPoint</span><span class=p>{</span><span class=nx>Point</span><span class=p>{</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>},</span> <span class=s>&#34;Pythagoras&#34;</span><span class=p>}</span> <span class=c1>// making pointer type variable
+</span><span class=c1></span>  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>n</span><span class=p>.</span><span class=nf>Abs</span><span class=p>())</span> <span class=c1>// prints 5
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><p>2 種 embed 的方式</p>
+<ol>
+<li>Aggregation (or composition) : 包含 named field of the type of the wanted functionality</li>
+<li>Embedding: 鑲嵌 wanted type anonymously</li>
+</ol>
+<p>golang 可以透過 embedded 的方式達到 繼承複數個父類別的概念</p>
+<p>在少數情況，可以呼叫 <code>runtime.GC()</code> 來呼叫 garbage collection</p>
+<p>讀取 memory status 的範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>ms</span> <span class=o>:=</span> <span class=nx>runtime</span><span class=p>.</span><span class=nx>MemStats</span><span class=p>{}</span>
+  <span class=nx>runtime</span><span class=p>.</span><span class=nf>ReadMemStats</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>ms</span><span class=p>)</span>
+    
+  <span class=nb>println</span><span class=p>(</span><span class=s>&#34;Heap after GC. Used:&#34;</span><span class=p>,</span> <span class=nx>ms</span><span class=p>.</span><span class=nx>HeapInuse</span><span class=p>,</span> <span class=s>&#34; Free:&#34;</span><span class=p>,</span> <span class=nx>ms</span><span class=p>.</span><span class=nx>HeapIdle</span><span class=p>,</span> <span class=s>&#34; Meta:&#34;</span><span class=p>,</span> <span class=nx>ms</span><span class=p>.</span><span class=nx>GCSys</span><span class=p>)</span>
+
+  <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mi>5</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>如果當要把某個 object 從記憶體移除時同步呼叫某個行為 (例如寫 log)</p>
+<p>可以透過以下方式呼叫來達成</p>
+<p><code>runtime.SetFinalizer(obj, func(obj *typeObj))</code></p>
+<p>當程式正常結束或發生錯誤的時候 SetFinalizer 不會被執行</p>
+<p>當對應的 object 要被 GC 清掉的時候才會執行</p>
+<h2 id=interface>interface</h2>
 <h2 id=reference>Reference</h2>
 <p><a href=https://www.interviewbit.com/golang-interview-questions/ target=_blank rel="noopener noreffer">Golang Interview Questions</a></p>
 </div>
