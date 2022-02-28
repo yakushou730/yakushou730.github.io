@@ -25,6 +25,8 @@ concise 簡潔的；簡明的
 
 conscious 意識到；察覺到
 
+consecutive 連續的，連貫的，無間斷的
+
 conservative 保守的；守舊的
 
 contemporary 當代的；現代的
@@ -97,6 +99,8 @@ interim 暫時的，過渡時期的
 
 intricate 精密複雜的
 
+irrational 不理智的，沒有理性的
+
 irrespective 不考慮地，不顧地
 
 ## J
@@ -119,6 +123,8 @@ overarching 首要的；包羅萬象的，支配一切的
 
 ## P
 phoney 虛偽的；假冒的
+
+primitive 原始的，早期的，遠古的
 
 prohibitive (費用) 高得負擔不起的，(價格等) 使人望之卻步的
 
@@ -150,7 +156,12 @@ tangible 真實的；非想像的
 transient 短暫的，轉瞬即逝的
 
 ## U
+uniform 相同的；一律的；整齊劃一的
+
 utmost 最大的；極度的
+
+## V
+versatile 多種用途的；萬用的；多才多藝的
 
 ## W
 wary 謹慎的；小心翼翼的

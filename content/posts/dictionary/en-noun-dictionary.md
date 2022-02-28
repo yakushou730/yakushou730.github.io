@@ -35,6 +35,10 @@ delimiter 定界符
 
 denial 否定
 
+denominator (分數中的) 分母
+
+determination 決心；毅力
+
 discrepancy 不一致，出入
 
 dispatch 發送；派遣
@@ -78,6 +82,8 @@ mutex (Mutual exclusion) 互斥鎖
 notation 符號系統；數學符號
 
 nuance 細微差別
+
+numerator (分數的) 分子
 
 ## O
 obscurity 鮮為人知；默默無聞

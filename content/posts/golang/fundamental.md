@@ -790,7 +790,388 @@ func append(s[]T, x ...T) []T
 x = append(x, y...)
 ```
 
+> A string in memory is, in fact, a 2 word-structure consisting of a pointer to the string data and the length.
 
+```go
+// s 是 string
+c := []byte(s)
+
+// copy 也可以處理字串來源
+copy(dst []byte, src string)
+
+// range unicode string 的話
+// 每一個 loop 是一個 rune
+s := "\u00ff\u754c"
+for i, c := range s {
+    fmt.Printf("%d:%c ", i, c)
+}
+// Outputs
+0:ÿ 2:界
+
+
+// 建立 substring
+substr := str[start:end]
+```
+
+string 是 immutable 的，不能直接指定替換 string 的元素
+
+另一種方式是 先把 string 轉成 byte array 後變更，再轉回 string
+
+```go
+s := "hello"
+c := []byte(s) // converting string s to array of bytes `c`.
+c[0] = 'c'     // modifying the c 
+s2 := string(c) // Converting c to string, s2 == "cello"
+```
+
+一些透過 append 做到的 slice 操作技巧
+```go
+// 把 b 加到 a
+a = append(a, b...)
+// 刪除 index i
+a = append(a[:i], a[i+1:]...)
+// 從 index i 到 j 的部分切掉
+a = append(a[:i], a[j:]...)
+// 使用新的 slice 做擴展
+a = append(a, make([]T, j)...)
+// 插入 item 到 index i
+a = append(a[:i], append([]T{x}, a[i:]...)...)
+// 插入新的 長度 j 的 slice 於 index i
+a = append(a[:i], append(make([]T, j), a[i:]...)...)
+// 插入已存在的 slice b 於 index i
+a = append(a[:i], append(b, a[i:]...)...)
+// 從 stack 拿掉最高的元素
+x, a = a[len(a)-1], a[:len(a)-1]
+// 插入一個元素到 stack
+a = append(a, x)
+```
+
+> 在數學應用上 slice 又稱為 vector
+> 
+> 有需要的話可以做 alias 使用
+
+Garbage collection 探索案例
+```go
+var digitRegexp = regexp.MustCompile("[0-9]+")
+func FindDigits(filename string) []byte {
+  b, _ := ioutil.ReadFile(filename)
+  return digitRegexp.Find(b)
+}
+```
+
+上述的程式有缺點，因為 slice `[]byte` 會用到的 underlying array 非常大 (整份 file)
+
+因為被 reference 的關係會一直存在記憶體不會被清掉
+
+所以要特別處理，免得記憶體爆炸
+
+改善版本如下，建立一個需要用到的 slice (符合需求的 underlying array)
+
+這樣就不會佔用額外記憶體空間
+
+```go
+func FindDigits(filename string) []byte {
+  b, _ := ioutil.ReadFile(filename)
+  b = digitRegexp.Find(b)
+  c := make([]byte, len(b))
+  copy(c, b) // copying b to c
+  return c
+}
+```
+
+```go
+// string 可以直接做成 rune slice
+str := "hello"
+runes := []rune(str)
+// 也可以直接做成 byte slice
+bytes := []byte(str)
+
+// 轉回 string
+string(runes)
+string(bytes)
+```
+
+## Maps
+又稱為 associative arrays 或 dictionaries
+
+```go
+var map1 map[keytype]valuetype
+// example
+var map1 map[string]int
+```
+
+map 是 reference type
+
+未初始化的 map value 是 `nil`
+
+key type 可以是任何支援 `==` 和 `!=` 的 type
+- 可以: string, int, float, array, struct, pointer, interface
+- 不行: slice (因為 slice 沒有定義 equality)
+
+> map 是 reference type，所以傳入 function 的成本很低
+> 
+> 查詢的效能: 透過 slice or array 的 index > 透過 map 的 key > 透過線性的 slice or array
+
+map 沒取到值的話會是 zero value
+
+`len(map1)` 可以取得這個 map 有多少對 key value
+
+```go
+// 初始化 map
+var map1 map[keytype]valuetype = make(map[keytype]valuetype)
+// or
+map1 := make(map[keytype]valuetype)
+```
+
+value 使用 function 的範例
+```go
+func main() {
+  mf := map[int]func() int{ // key type int, and value type func()int
+    1: func() int { return 10 },
+    2: func() int { return 20 },
+    5: func() int { return 50 },
+  }
+  fmt.Println(mf)
+}
+// Outputs
+// 注意 value 是 function 的 address
+map[1:0x4011c0 2:0x4011d0 5:0x4011e0]
+```
+
+map 宣告的時候可以指定 capacity，如果後來超過的話，會逐漸增加 (+1,+1 這樣繼續長)
+- 64 bits 的機器 default 是 8 bytes
+```go
+make(map[keytype]valuetype, cap)
+```
+
+```go
+// 確認 map 是否有值
+if _, ok := map1[key1]; ok {
+  // ...
+}
+
+// 刪除 map 內的 key 值
+delete(map1, key1)
+```
+
+可以在 range map 內刪除 map 的 key value pair
+
+建立 map 的 slice
+```go
+items := make([]map[int]int, 5)
+for i := range items {
+  items[i] = make(map[int]int, 1) 
+  items[i][1] = 2 // This 'item' data will not be lost on the next iteration
+}
+```
+
+## packages
+- `unsafe`
+  - 一般不會用到，可以跳過 type 檢查
+  - 和 C/C++ 交互作用時會用到
+- `os`
+  - 提供 os 層級的功能
+  - unix-like design
+- `os/exec`
+  - 提供 執行外部 os 指令和程式
+- `syscall`
+  - low-level, external package, 針對 underlying OS's 呼叫提供原始的介面
+- `archive/tar` 和 `archive/zip` 和 `compress`
+  - 包含壓縮 / 解壓縮的功能
+- `fmt`
+  - 包含格式化輸入輸出的功能
+- `io`
+  - 提供基本 io 功能，大部分是包裝 os 指令
+- `bufio`
+  - 提供 buffered input/output 功能的包裝
+- `path/filepath`
+  - 包含 os 會用到的操作檔名路徑的程序
+- `flag`
+  - 包含 command-line 參數的功能
+- `strings`
+  - 包含操作和處理字串的功能
+- `strconv`
+  - 把字串轉成基本的資料型態
+- `unicode`
+  - 包含 unicode 的特殊函式
+- `regexp`
+  - 提供字串的 pattern 搜尋功能
+- `bytes`
+  - 包含操作 byte slice 的功能
+- `index/suffixarry`
+  - 包含在字串內非常快速搜尋的功能
+- `math`
+  - 包含基本數學常數和函式
+- `math/cmplx`
+  - 提供操作複數的 method
+- `math/rand` 
+  - 提供產生 pseudo-random 數字
+- `sort`
+  - 提供針對 array 和 user-defined collections 的排序功能
+- `math/big`
+  - 包含更高精度的數學方法
+- `container`
+  - 實作容器來操作 collections
+    - `list`: 處理 doubly-linked list
+    - `ring`: 處理 circular lists
+- `time`
+  - 包含處理 times, dates 的基本功能
+- `log`
+  - 包含處理程式執行中的 log 資訊
+- `encoding/json`
+  - 實作 JSON 格式的 讀取/解碼 和 寫入/編碼
+- `encoding/xml`
+  - 提供簡單的 XML 1.0 轉換
+- `net`
+  - 包含基本的 處理 network data
+- `http`
+  - 包含 parse HTTP requests/replies 的功能，提供 HTTP server 和基本的 client
+- `html`
+  - 提供 HTML5 的 parser
+- `crypto - encoding - hash - ...`
+  - 提供大部分的 package encrypting 和 decrypting
+- `runtime`
+  - 包含和 go-runtime 互動的操作，像是 garbage collection 和 go-routine
+- `reflect`
+  - 實作 runtime introspection，允許程式操作任意型別的變數 
+
+`container/list` 範例
+```go
+func insertListElements(n int)(*list.List){   // add elements in list from 1 to n
+  lst := list.New()
+  for i:=1;i<=n;i++{
+    lst.PushBack(i)         // insertion here
+  } 
+  return lst
+}
+
+func main() {
+  n := 5                    // total number of elements to be inserted
+  myList := insertListElements(n) // function call
+  for e := myList.Front(); e != nil; e = e.Next() {
+		fmt.Println(e.Value)  // printing values of list
+	}
+}
+```
+
+`regexp` 範例
+```go
+func main() {
+  searchIn := "John: 2578.34 William: 4567.23 Steve: 5632.18" // string to search
+  pat := "[0-9]+.[0-9]+" // pattern search in searchIn
+
+  f := func (s string) string {
+    v, _ := strconv.ParseFloat(s, 32)
+    return strconv.FormatFloat(v * 2, 'f', 2, 32)
+  }
+  // 檢查是否 pattern 可以找到 match
+  if ok, _ := regexp.Match(pat, []byte(searchIn)); ok {
+    fmt.Println("Match found!")
+  }
+  
+  // 做出指定 pattern 的 regexp object
+  // 如果是用 MustCompile 的話，如果 pattern 轉換成 regexp object 失敗會 panic
+  re, _ := regexp.Compile(pat)
+
+  // 透過 regexp object 去處理輸入的 文章字串
+  // 並用 ReplaceAllString 去做取代
+  str := re.ReplaceAllString(searchIn, "##.#") // replace pat with "##.#"
+  fmt.Println(str)
+  // using a function
+  str2 := re.ReplaceAllStringFunc(searchIn, f)
+  fmt.Println(str2)
+}
+```
+
+發生 race condition 的話，經典的解法是只讓一個 thread 可以更改 shared variable
+
+shared variable 在程式內稱為 critical section，透過 lock 的機制來處理
+
+同時只讓一個 thread 可以執行這段，當執行完 critical section 再 unlock
+
+> map 沒有 internal locking 機制 (考慮到效能因素)
+> 
+> map type 不是 thread-safe
+> 
+> 所以 concurrent 存取會對 shared map 的資料造成資料毀損
+
+處理 race condition 可以用到 `sync` package 的 `Mutex` (mutual exclusion lock)
+
+用來保護 critical section，使得一次只有一個 thread 可以進入 critical section
+
+範例
+```go
+// 假設 Info 是個要被保護的 shared variable
+// 可以給他一個 sync.Mutex 變數來處理
+type Info struct {
+  mu sync.Mutex
+  // ... other fields, e.g.:
+  Str string
+}
+
+func Update(info *Info) {
+    info.mu.Lock()
+    // critical section:
+    info.Str = // new value
+    // end critical section
+    info.mu.Unlock()
+}
+```
+
+`RWMutex`
+- 允許多個 reader threads 使用 `RLock()`，但一個 write thread
+
+`once.Do(call)`
+- `once` 是 type Once 的變數
+- 不管呼叫到多少次，once 都只會執行一次 function call
+
+`math/big`: 可以處理任意位數，唯一的限制是機器的可用記憶體大小
+- `big.Int` 處理很大的整數
+- `big.Rat` 處理有理數
+- `big.Float`
+
+`math/big` 範例
+```go
+func main() {
+  // Here are some calculations with bigInts:
+  im := big.NewInt(math.MaxInt64)
+  in := im
+  io := big.NewInt(1956)
+  ip := big.NewInt(1)
+  ip.Mul(im, in).Add(ip, im).Div(ip, io)
+  fmt.Printf("Big Int: %v\n", ip)
+  // Here are some calculations with big rationals:
+  rm := big.NewRat(math.MaxInt64, 1956)
+  rn := big.NewRat(-1956, math.MaxInt64)
+  ro := big.NewRat(19, 56)
+  rp := big.NewRat(1111, 2222)
+  rq := big.NewRat(1, 1)
+  rq.Mul(rm, rn).Add(rq, ro).Mul(rq, rp)
+  fmt.Printf("Big Rat: %v\n", rq)
+}
+```
+
+自訂 package 名稱
+- short
+- single-word
+- lowercase
+- filenames without `_`
+
+`GOPATH`: 告訴 go 要去哪邊尋找和安裝 go package，是 workspace 的路徑
+- `src`: 包含目錄結構的 go source files (.go)
+- `pkg`: 包含安裝的和編譯的 package objects (.a)
+- `bin`: 包含可執行檔 (.out 或 .exe)
+
+`GOROOT`: golang 在系統中的 SDK (Software Development Kit) 位置
+
+`go install importpath`: build 和安裝 package object (.a)
+- 路徑 `pkg/linux_amd64\book` (linux)
+
+一個檔案可以有不只一個 `init()` 就會是隨機順序
+- init() 只會在 initialize 階段呼叫一次
+
+`go doc [package name]` 可以印出 package 的文件
+- `godoc -http=:6060` 可以在 localhost:6060 以 html 開啟 doc
 
 
 
