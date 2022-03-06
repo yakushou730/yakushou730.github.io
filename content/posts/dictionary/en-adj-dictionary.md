@@ -162,6 +162,8 @@ tangible 真實的；非想像的
 transient 短暫的，轉瞬即逝的
 
 ## U
+ubiquitous 普遍存在的，似乎無處不在的
+
 uniform 相同的；一律的；整齊劃一的
 
 utmost 最大的；極度的

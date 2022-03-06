@@ -1340,6 +1340,318 @@ func main() {
 當對應的 object 要被 GC 清掉的時候才會執行
 
 ## interface
+interface 格式
+
+```go
+// 名稱通常是以 -er 為結尾
+type Namer interface {
+    Method1(param_list) return_type
+    Method2(param_list) return_type
+    ...
+}
+// 宣告，此時 ai 尚未初始化，值是 nil
+// interface 是 reference type
+var ai Namer
+// ai 是 receiver value + method table ptr
+```
+
+interface 已經是 reference type，所以不會有 pointers to interface
+
+- type 在實作介面的時候不需要明確的闡明是哪個 interface，只要 method set 滿足就自動成立
+- 多個 type 都可以實作相同的 interface
+- 實作 interface 的 type 仍然可以有其他 function
+- 一個 type 可以實作多個 interface
+- interface 對應到一個實作該介面的 instance 的 reference
+
+> interface 就是 golang 的 polymorphism
+> 
+> 要注意實作 interface 介面的是 struct object type instance 或 struct pointer type instance
+
+範例
+```go
+// io.Reader interface
+type `Reader` interface {
+    Read(p []byte) (n int, err error)
+}
+
+var r io.Reader
+// 以下都有滿足介面 Reader
+r = os.Stdin
+r = bufio.NewReader(r)
+r = new(bytes.Buffer)
+f,_ := os.Open("test.txt")
+r = bufio.NewReader(f)
+```
+
+interface 內部還可以內嵌其他 interface
+```go
+type ReadWrite interface {
+  Read(b Buffer) bool
+  Write(b Buffer) bool
+}
+
+type Lock interface {
+  Lock()
+  Unlock()
+}
+
+type File interface {
+  ReadWrite
+  Lock
+  Close()
+}
+```
+
+interface 型態的變數可以透過 assertion 判斷是不是特定的 concrete type
+```go
+// 判斷 interface type 是不是 concrete type T
+if v, ok := varI.(T); ok { // checked type assertion
+    Process(v)
+    return
+}
+// here varI is not of type T
+```
+
+> Note: Always use the comma, ok form for type assertions
+
+**Type Switch**
+
+要注意 `Fallthrough is not permitted`
+
+用到 `element.(type)` 的 assertion 判斷不要用在 switch 以外的地方
+
+範例
+```go
+switch t := areaIntf.(type) {
+    case *Square:
+      fmt.Printf("Type Square %T with value %v\n", t, t)
+    case *Circle:
+      fmt.Printf("Type Circle %T with value %v\n", t, t)
+    default:
+      fmt.Printf("Unexpected type %T", t)
+}
+```
+
+> 透過 type 判斷來做什麼事 非常有幫助，像是 parse JSON or XML data
+
+assertion 也可以判斷是否 concrete type 滿足 interface
+```go
+type Stringer interface { String() string }
+
+if sv, ok := v.(Stringer); ok {
+  fmt.Printf("v implements String(): %s\n", sv.String()); // note: sv, not v
+}
+```
+
+> a pointer can be dereferenced for the receiver
+
+透過 interface 呼叫 method 的時候，一定要是 identical receiver type 或是 直接可是別的 concrete type
+- pointer methods can be called with pointers
+- value methods can be called with values
+- value-receiver methods can be called with pointer values (because they can be dereferenced first)
+- pointer-receiver methods `cannot` be called with values; because the value store inside an interface has no address
+
+`io` package 提供了 `io.Reader` 和 `io.Writer` 介面
+```go
+type Reader interface {
+  Read(p []byte) (n int, err error)
+}
+
+type Writer interface {
+  Write(p []byte) (n int, err error)
+}
+```
+
+- Read() 是指 read from
+  - 一個 object 要能夠是 readable 的話，要實作 `io.Reader`
+  - `Read()` method 讀回物件的 data，並放到 byte array 中
+    - 即 把資料讀到 `p []byte` 裏面 (用 p []byte 去裝資料回來)
+    - n 是裝了多長的資料
+    - 沒發生錯誤的話，err 為 `nil` 或 `io.EOF`
+- Write() 是指 write to
+  - 一個 object 要能夠是 writable 的話，要實作 `io.Writer`
+  - `Write()` 是把 byte array 的資料寫道物件裡面
+- io 提供的 Reader 和 Writer 是 unbuffered 的
+  - `bufio` 提供了對應的 buffered 操作
+    - 在 讀取/寫入 UTF-8 encoded 文件時非常有用
+
+**Empty Interface**
+
+`interface{}` 支援了所有型別
+- 每個 `interface{}` 變數佔用了 2 words 的記憶體
+  - 1 word for type
+  - 1 word for either the contained data or pointer to it
+
+透過 interface{} 的作法，可以做出裝不同 type 的 slice
+```go
+type Element interface{}
+
+type Vector struct {
+  a []Element
+}
+```
+
+`[]interface{}` 要裝東西的話不能直接 assign
+
+可以用 for loop 針對每一個 item 做 assign
+
+**reflect package**
+
+reflection 主要是透過 type 來檢驗 structure 的能力
+
+另一個稱呼是 meta-programming
+
+reflect 可以在 runtime 時調查 type 和 variable
+- size
+- methods
+- 可以動態呼叫這些方法
+- 小心使用，非必要時儘量避免使用
+
+> Basic information of a variable is its type and its value:
+> 
+> these are represented in the reflection package by the types Type, which represents a general Go type,
+> 
+> and Value, which is the reflection interface to a Go value.
+> 
+> `reflect.TypeOf` `reflect.ValueOf`
+
+`Kind()` 可以用來拿到 type
+```go
+var x float64 = 3.4
+v := reflect.ValueOf(x)
+// v 是 reflect.Float64
+```
+
+透過 refect 去 set value 有很多限制，這邊僅列出可動的範例
+```go
+func main() {
+  var x float64 = 3.4
+  v := reflect.ValueOf(x)
+  // setting a value:
+  // Error: will panic: reflect.Value.SetFloat using unaddressable value
+  // v.SetFloat(3.1415)
+  fmt.Println("settability of v:", v.CanSet())
+  v = reflect.ValueOf(&x) // Note: take the address of x.
+  fmt.Println("type of v:", v.Type())
+  fmt.Println("settability of v:", v.CanSet())
+  v = v.Elem()
+  fmt.Println("The Elem of v is: ", v)
+  fmt.Println("settability of v:", v.CanSet())
+  v.SetFloat(3.1415) // this works!
+  fmt.Println(v.Interface())
+
+  fmt.Println(v)
+}
+// outputs
+settability of v: false
+type of v: *float64
+settability of v: false
+The Elem of v is:  3.4
+settability of v: true
+3.1415
+3.1415
+```
+
+> 透過 struct 可以將 `map[string]interface{}` 轉成 struct
+> 
+> 但複雜且不常用，故略過
+
+範例
+```go
+func mapToStruct(m map[string]interface{}) interface{} {
+	var structFields []reflect.StructField
+
+	for k, v := range m {
+		sf := reflect.StructField{
+			Name: strings.Title(k),
+			Type: reflect.TypeOf(v),
+		}
+		structFields = append(structFields, sf)
+	}
+
+	// Creates the struct type
+	structType := reflect.StructOf(structFields)
+
+	// Creates a new struct
+	structObject := reflect.New(structType)
+
+	return structObject.Interface()
+}
+
+
+func main() {
+
+	m := make(map[string]interface{})
+
+	m["name"] = "Barack"
+	m["surname"] = "Obama"
+	m["age"] = 57
+
+	s := mapToStruct(m)
+	fmt.Printf("%t %[1]v\n", s)
+
+	sr := reflect.ValueOf(s)
+	sr.Elem().FieldByName("Name").SetString("Donald")
+	sr.Elem().FieldByName("Surname").SetString("Trump")
+	sr.Elem().FieldByName("Age").SetInt(72)
+	fmt.Println(s)
+}
+```
+
+當一個 struct 裡面包含了 另一個 struct (實作了多數介面) 的指標，
+
+則那個 struct 可以呼叫 embedded struct 的 interface methods
+
+如
+```go
+type Task struct {
+  Command string
+  *log.Logger
+}
+// New
+func NewTask(command string, logger *log.Logger) *Task {
+  return &Task{command, logger}
+}
+// task 可以呼叫 Log 的方法
+task.Log()
+```
+
+在 struct 內嶔 interface
+
+不要搞混，這是指在 struct 裡面有對應的 field 可以塞滿足 interface 的物件
+```go
+type ReaderWriter struct {
+  io.Reader
+  io.Writer
+}
+// 初始化
+
+t := &ReaderWriter{
+    Reader: nil, // 可以塞滿足 interface 的物件
+    Writer: nil,
+}
+```
+
+當把 slice 也做成一種 type 的時候，就可以對該 type 做新的 method
+```go
+type Cars []*Car
+// Cars 可以有方法
+func (cs Cars) Process(f func(car *Car)) {
+    for _, c := range cs {
+        f(c)
+    }
+}
+```
+
+> interface 包含了 value 和 type
+> 
+> 只有在 type 和 value 都是 nil 的情況下才會是 nil
+
+
+
+
+## Reading and Writing
+
 
 
 

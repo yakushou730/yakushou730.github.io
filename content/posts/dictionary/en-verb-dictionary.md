@@ -10,6 +10,8 @@ draft: false
 ## A
 accommodate 為...提供住宿；容納；為...提供空間
 
+alleviate 減輕；緩和，緩解
+
 annotate 給...作註解；給...加評註
 
 ## B

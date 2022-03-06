@@ -119,6 +119,8 @@ severity 嚴重
 
 slang 俚語
 
+standpoint 觀點，立場
+
 stem 主幹
 
 strain 壓力；作用力
