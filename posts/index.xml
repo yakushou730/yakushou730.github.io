@@ -1,4 +1,9 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/posts/</link><description>All Posts | YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 25 Feb 2022 00:31:11 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/posts/" rel="self" type="application/rss+xml"/><item><title>sort</title><link>https://blog.yakushou.com/posts/golang/packages/sort/</link><pubDate>Fri, 25 Feb 2022 00:31:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/sort/</guid><description>Ints 對 int slice 做排序
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/posts/</link><description>All Posts | YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 06 Mar 2022 11:39:08 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/posts/" rel="self" type="application/rss+xml"/><item><title>etcd</title><link>https://blog.yakushou.com/posts/programming/etcd/</link><pubDate>Sun, 06 Mar 2022 11:39:08 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/etcd/</guid><description>install brew install etcd 可在 service list 確認是否正常
+brew services list # results etcd started yakushou730 ~/Library/LaunchAgents/homebrew.mxcl.etcd.plist 操作 安裝完後系統會有 etcdctl 的指令可以使用
+寫入
+etcdctl put foo bar 讀取
+etcdctl get foo # result foo bar # 另一個範例 etcdctl get product.rpc --prefix # result product.rpc/7587860940551895303 192.168.0.221:8081 刪除
+etcdctl del foo # result 1</description></item><item><title>sort</title><link>https://blog.yakushou.com/posts/golang/packages/sort/</link><pubDate>Fri, 25 Feb 2022 00:31:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/sort/</guid><description>Ints 對 int slice 做排序
 sort.Ints(arr) IntsAreSorted 回傳 true / false 判斷 int slice 是否已經排序
 func IntsAreSorted(arr []int) bool Float64s 對 float slice 做排序
 func Float64s(a []float64) Strings 對 string slice 做排序
@@ -49,11 +54,4 @@ send.go (代表 producer 送出 message) receive.</description></item><item><tit
 AWS: Allows MFA-authenticated IAM users to manage their own credentials on the My Security Credentials page
 AWS IAM won&amp;rsquo;t let my users change their passwords
 做法有兩種
-改 policy 的規則，讓變更密碼這件事不需要 MFA (官方說不推薦這做法) 砍掉帳號重新建立一個，然後先不要勾 Require password reset，等他登入後設定完 MFA，這樣之後就可以改密碼了</description></item><item><title>Mysql</title><link>https://blog.yakushou.com/posts/programming/database/mysql/</link><pubDate>Thu, 27 Jan 2022 15:05:19 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/database/mysql/</guid><description><![CDATA[使用者相關 要注意的是 User, Host 的搭配會影響到使用者可不可以登入
-或是登入後的權限不同
-% 指的是 localhost
-::1 指的是 Ipv6 的 localhost
-How to delete or remove a MySQL/MariaDB user account on Linux/Unix
-How To Create a New User and Grant Permissions in MySQL
-Grant_Priv 欄位是指可不可以更換權限
-# 檢視 user 欄位 descmysql.user;# 顯示當前使用者 SELECTuser();# 搜尋使用者 SELECT*FROMmysql.user;# 建立使用者 CREATEUSER&#39;shou&#39;@&#39;%&#39;IDENTIFIEDBY&#39;password&#39;;CREATEUSER&#39;academy&#39;@&#39;172.123.0.0/255.255.0.0&#39;IDENTIFIEDBY&#39;password&#39;;# 更改使用者密碼 ALTERUSER&#39;shou&#39;@&#39;%&#39;IDENTIFIEDBY&#39;newPass&#39;;# 刷新權限 FLUSHPRIVILEGES;# 給予使用者權限 GRANTALLPRIVILEGESON*.*TO&#39;shou&#39;@&#39;%&#39;;GRANTSELECTON*.*TO&#39;shou&#39;@&#39;%&#39;;# 查詢權限 SHOWGRANTSFOR&#39;shou&#39;@&#39;%&#39;;# 刪除使用者 DROPUSER&#39;shou&#39;@&#39;%&#39;;Reset table index ALTERTABLE[table_name]AUTO_INCREMENT=0;]]></description></item></channel></rss>
+改 policy 的規則，讓變更密碼這件事不需要 MFA (官方說不推薦這做法) 砍掉帳號重新建立一個，然後先不要勾 Require password reset，等他登入後設定完 MFA，這樣之後就可以改密碼了</description></item></channel></rss>

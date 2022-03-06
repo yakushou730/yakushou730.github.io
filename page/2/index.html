@@ -56,6 +56,20 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/programming/database/mysql/>Mysql</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-27>2022-01-27</time></span></div><div class=content>使用者相關 要注意的是 User, Host 的搭配會影響到使用者可不可以登入
+或是登入後的權限不同
+% 指的是 localhost
+::1 指的是 Ipv6 的 localhost
+How to delete or remove a MySQL/MariaDB user account on Linux/Unix
+How To Create a New User and Grant Permissions in MySQL
+Grant_Priv 欄位是指可不可以更換權限
+# 檢視 user 欄位 descmysql.user;# 顯示當前使用者 SELECTuser();# 搜尋使用者 SELECT*FROMmysql.user;# 建立使用者 CREATEUSER'shou'@'%'IDENTIFIEDBY'password';CREATEUSER'academy'@'172.123.0.0/255.255.0.0'IDENTIFIEDBY'password';# 更改使用者密碼 ALTERUSER'shou'@'%'IDENTIFIEDBY'newPass';# 刷新權限 FLUSHPRIVILEGES;# 給予使用者權限 GRANTALLPRIVILEGESON*.*TO'shou'@'%';GRANTSELECTON*.*TO'shou'@'%';# 查詢權限 SHOWGRANTSFOR'shou'@'%';# 刪除使用者 DROPUSER'shou'@'%';Reset table index ALTERTABLE[table_name]AUTO_INCREMENT=0;</div><div class=post-footer>
+<a href=/posts/programming/database/mysql/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/sql/>sql</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/kodekloud/the-linux-basics-course/>The Linux Basics Course</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -157,17 +171,6 @@ kind 可以用來在 local 建立 k8s cluster
 # 安裝 kind brew install kind # 建立 cluster kind create cluster # 查看 clusters kind get clusters # 查看 kind 的 kubeconfig kind get kubeconfig # 切換到 kind cluster kubectl config use-context kind-kind # 查看 cluster 狀態 kubectl cluster-info </div><div class=post-footer>
 <a href=/posts/k8s/kind/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/devops/gitops/>gitops</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-02>2022-01-02</time></span></div><div class=content>What is GitOps 為了避免手動 deploy 而提出的解決方案
-Infrastructure as Code 提倡後，大家會把 infrastructure 寫成 code 以後管控
-但是針對變更 infrastructure 仍然後是在本機安裝工具後手動變更 (ex: ansible / terraform&mldr;)
-GitOps 提倡一切 (infrastructure/network/policy/configuration/security&mldr;) 都以 YAML 的形式放在 git 上，並且透過 PR 自動更新資源
-GitOps flow Create Pull/Merge Request 任何人都可以發 PR，大家可以 review Run CI pipeline 驗證 configuration files 跑自動化測試 Approve Changes 到這步代表 code 是經過測試以及 well reviewed Run CD Pipeline merge 回 main 以後觸發 CD pipeline 部署到 aws/k8s&mldr;等等 優點:</div><div class=post-footer>
-<a href=/posts/devops/gitops/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>

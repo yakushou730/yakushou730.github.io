@@ -56,6 +56,18 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/programming/etcd/>etcd</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-03-06>2022-03-06</time></span></div><div class=content>install brew install etcd 可在 service list 確認是否正常
+brew services list # results etcd started yakushou730 ~/Library/LaunchAgents/homebrew.mxcl.etcd.plist 操作 安裝完後系統會有 etcdctl 的指令可以使用
+寫入
+etcdctl put foo bar 讀取
+etcdctl get foo # result foo bar # 另一個範例 etcdctl get product.rpc --prefix # result product.rpc/7587860940551895303 192.168.0.221:8081 刪除
+etcdctl del foo # result 1 </div><div class=post-footer>
+<a href=/posts/programming/etcd/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/git/>git</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/packages/sort/>sort</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -169,20 +181,6 @@ AWS IAM won&rsquo;t let my users change their passwords
 改 policy 的規則，讓變更密碼這件事不需要 MFA (官方說不推薦這做法) 砍掉帳號重新建立一個，然後先不要勾 Require password reset，等他登入後設定完 MFA，這樣之後就可以改密碼了 </div><div class=post-footer>
 <a href=/posts/aws/iam/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/aws/>aws</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/database/mysql/>Mysql</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-27>2022-01-27</time></span></div><div class=content>使用者相關 要注意的是 User, Host 的搭配會影響到使用者可不可以登入
-或是登入後的權限不同
-% 指的是 localhost
-::1 指的是 Ipv6 的 localhost
-How to delete or remove a MySQL/MariaDB user account on Linux/Unix
-How To Create a New User and Grant Permissions in MySQL
-Grant_Priv 欄位是指可不可以更換權限
-# 檢視 user 欄位 descmysql.user;# 顯示當前使用者 SELECTuser();# 搜尋使用者 SELECT*FROMmysql.user;# 建立使用者 CREATEUSER'shou'@'%'IDENTIFIEDBY'password';CREATEUSER'academy'@'172.123.0.0/255.255.0.0'IDENTIFIEDBY'password';# 更改使用者密碼 ALTERUSER'shou'@'%'IDENTIFIEDBY'newPass';# 刷新權限 FLUSHPRIVILEGES;# 給予使用者權限 GRANTALLPRIVILEGESON*.*TO'shou'@'%';GRANTSELECTON*.*TO'shou'@'%';# 查詢權限 SHOWGRANTSFOR'shou'@'%';# 刪除使用者 DROPUSER'shou'@'%';Reset table index ALTERTABLE[table_name]AUTO_INCREMENT=0;</div><div class=post-footer>
-<a href=/posts/programming/database/mysql/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/sql/>sql</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>

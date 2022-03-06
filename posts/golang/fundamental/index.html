@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/fundamental/><link rel=prev href=https://blog.yakushou.com/posts/k8s/basic-for-beginner/><link rel=next href=https://blog.yakushou.com/posts/programming/software/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":3769,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/"},"genre":"posts","keywords":"programming, golang","wordcount":4646,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental\/","datePublished":"2021-12-27T16:10:27+08:00","dateModified":"2021-12-27T16:10:27+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3769 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;18 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2021-12-27>2021-12-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;4646 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;22 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -99,6 +99,7 @@
 <li><a href=#packages>packages</a></li>
 <li><a href=#structs-and-methods>Structs and Methods</a></li>
 <li><a href=#interface>interface</a></li>
+<li><a href=#reading-and-writing>Reading and Writing</a></li>
 <li><a href=#reference>Reference</a></li>
 </ul>
 </nav></div>
@@ -1346,6 +1347,282 @@ GOPATH:</li>
 <p>當程式正常結束或發生錯誤的時候 SetFinalizer 不會被執行</p>
 <p>當對應的 object 要被 GC 清掉的時候才會執行</p>
 <h2 id=interface>interface</h2>
+<p>interface 格式</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 名稱通常是以 -er 為結尾
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>Namer</span> <span class=kd>interface</span> <span class=p>{</span>
+    <span class=nf>Method1</span><span class=p>(</span><span class=nx>param_list</span><span class=p>)</span> <span class=nx>return_type</span>
+    <span class=nf>Method2</span><span class=p>(</span><span class=nx>param_list</span><span class=p>)</span> <span class=nx>return_type</span>
+    <span class=o>...</span>
+<span class=p>}</span>
+<span class=c1>// 宣告，此時 ai 尚未初始化，值是 nil
+</span><span class=c1>// interface 是 reference type
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>ai</span> <span class=nx>Namer</span>
+<span class=c1>// ai 是 receiver value + method table ptr
+</span></code></pre></div><p>interface 已經是 reference type，所以不會有 pointers to interface</p>
+<ul>
+<li>type 在實作介面的時候不需要明確的闡明是哪個 interface，只要 method set 滿足就自動成立</li>
+<li>多個 type 都可以實作相同的 interface</li>
+<li>實作 interface 的 type 仍然可以有其他 function</li>
+<li>一個 type 可以實作多個 interface</li>
+<li>interface 對應到一個實作該介面的 instance 的 reference</li>
+</ul>
+<blockquote>
+<p>interface 就是 golang 的 polymorphism</p>
+<p>要注意實作 interface 介面的是 struct object type instance 或 struct pointer type instance</p>
+</blockquote>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// io.Reader interface
+</span><span class=c1></span><span class=kd>type</span> <span class=s>`Reader`</span> <span class=kd>interface</span> <span class=p>{</span>
+    <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>r</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span>
+<span class=c1>// 以下都有滿足介面 Reader
+</span><span class=c1></span><span class=nx>r</span> <span class=p>=</span> <span class=nx>os</span><span class=p>.</span><span class=nx>Stdin</span>
+<span class=nx>r</span> <span class=p>=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>r</span><span class=p>)</span>
+<span class=nx>r</span> <span class=p>=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>bytes</span><span class=p>.</span><span class=nx>Buffer</span><span class=p>)</span>
+<span class=nx>f</span><span class=p>,</span><span class=nx>_</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=s>&#34;test.txt&#34;</span><span class=p>)</span>
+<span class=nx>r</span> <span class=p>=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>f</span><span class=p>)</span>
+</code></pre></div><p>interface 內部還可以內嵌其他 interface</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>ReadWrite</span> <span class=kd>interface</span> <span class=p>{</span>
+  <span class=nf>Read</span><span class=p>(</span><span class=nx>b</span> <span class=nx>Buffer</span><span class=p>)</span> <span class=kt>bool</span>
+  <span class=nf>Write</span><span class=p>(</span><span class=nx>b</span> <span class=nx>Buffer</span><span class=p>)</span> <span class=kt>bool</span>
+<span class=p>}</span>
+
+<span class=kd>type</span> <span class=nx>Lock</span> <span class=kd>interface</span> <span class=p>{</span>
+  <span class=nf>Lock</span><span class=p>()</span>
+  <span class=nf>Unlock</span><span class=p>()</span>
+<span class=p>}</span>
+
+<span class=kd>type</span> <span class=nx>File</span> <span class=kd>interface</span> <span class=p>{</span>
+  <span class=nx>ReadWrite</span>
+  <span class=nx>Lock</span>
+  <span class=nf>Close</span><span class=p>()</span>
+<span class=p>}</span>
+</code></pre></div><p>interface 型態的變數可以透過 assertion 判斷是不是特定的 concrete type</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 判斷 interface type 是不是 concrete type T
+</span><span class=c1></span><span class=k>if</span> <span class=nx>v</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>varI</span><span class=p>.(</span><span class=nx>T</span><span class=p>);</span> <span class=nx>ok</span> <span class=p>{</span> <span class=c1>// checked type assertion
+</span><span class=c1></span>    <span class=nf>Process</span><span class=p>(</span><span class=nx>v</span><span class=p>)</span>
+    <span class=k>return</span>
+<span class=p>}</span>
+<span class=c1>// here varI is not of type T
+</span></code></pre></div><blockquote>
+<p>Note: Always use the comma, ok form for type assertions</p>
+</blockquote>
+<p><strong>Type Switch</strong></p>
+<p>要注意 <code>Fallthrough is not permitted</code></p>
+<p>用到 <code>element.(type)</code> 的 assertion 判斷不要用在 switch 以外的地方</p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>switch</span> <span class=nx>t</span> <span class=o>:=</span> <span class=nx>areaIntf</span><span class=p>.(</span><span class=kd>type</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>case</span> <span class=o>*</span><span class=nx>Square</span><span class=p>:</span>
+      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Type Square %T with value %v\n&#34;</span><span class=p>,</span> <span class=nx>t</span><span class=p>,</span> <span class=nx>t</span><span class=p>)</span>
+    <span class=k>case</span> <span class=o>*</span><span class=nx>Circle</span><span class=p>:</span>
+      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Type Circle %T with value %v\n&#34;</span><span class=p>,</span> <span class=nx>t</span><span class=p>,</span> <span class=nx>t</span><span class=p>)</span>
+    <span class=k>default</span><span class=p>:</span>
+      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Unexpected type %T&#34;</span><span class=p>,</span> <span class=nx>t</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>透過 type 判斷來做什麼事 非常有幫助，像是 parse JSON or XML data</p>
+</blockquote>
+<p>assertion 也可以判斷是否 concrete type 滿足 interface</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Stringer</span> <span class=kd>interface</span> <span class=p>{</span> <span class=nf>String</span><span class=p>()</span> <span class=kt>string</span> <span class=p>}</span>
+
+<span class=k>if</span> <span class=nx>sv</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>v</span><span class=p>.(</span><span class=nx>Stringer</span><span class=p>);</span> <span class=nx>ok</span> <span class=p>{</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;v implements String(): %s\n&#34;</span><span class=p>,</span> <span class=nx>sv</span><span class=p>.</span><span class=nf>String</span><span class=p>());</span> <span class=c1>// note: sv, not v
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><blockquote>
+<p>a pointer can be dereferenced for the receiver</p>
+</blockquote>
+<p>透過 interface 呼叫 method 的時候，一定要是 identical receiver type 或是 直接可是別的 concrete type</p>
+<ul>
+<li>pointer methods can be called with pointers</li>
+<li>value methods can be called with values</li>
+<li>value-receiver methods can be called with pointer values (because they can be dereferenced first)</li>
+<li>pointer-receiver methods <code>cannot</code> be called with values; because the value store inside an interface has no address</li>
+</ul>
+<p><code>io</code> package 提供了 <code>io.Reader</code> 和 <code>io.Writer</code> 介面</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Reader</span> <span class=kd>interface</span> <span class=p>{</span>
+  <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>type</span> <span class=nx>Writer</span> <span class=kd>interface</span> <span class=p>{</span>
+  <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><ul>
+<li>Read() 是指 read from
+<ul>
+<li>一個 object 要能夠是 readable 的話，要實作 <code>io.Reader</code></li>
+<li><code>Read()</code> method 讀回物件的 data，並放到 byte array 中
+<ul>
+<li>即 把資料讀到 <code>p []byte</code> 裏面 (用 p []byte 去裝資料回來)</li>
+<li>n 是裝了多長的資料</li>
+<li>沒發生錯誤的話，err 為 <code>nil</code> 或 <code>io.EOF</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Write() 是指 write to
+<ul>
+<li>一個 object 要能夠是 writable 的話，要實作 <code>io.Writer</code></li>
+<li><code>Write()</code> 是把 byte array 的資料寫道物件裡面</li>
+</ul>
+</li>
+<li>io 提供的 Reader 和 Writer 是 unbuffered 的
+<ul>
+<li><code>bufio</code> 提供了對應的 buffered 操作
+<ul>
+<li>在 讀取/寫入 UTF-8 encoded 文件時非常有用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Empty Interface</strong></p>
+<p><code>interface{}</code> 支援了所有型別</p>
+<ul>
+<li>每個 <code>interface{}</code> 變數佔用了 2 words 的記憶體
+<ul>
+<li>1 word for type</li>
+<li>1 word for either the contained data or pointer to it</li>
+</ul>
+</li>
+</ul>
+<p>透過 interface{} 的作法，可以做出裝不同 type 的 slice</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Element</span> <span class=kd>interface</span><span class=p>{}</span>
+
+<span class=kd>type</span> <span class=nx>Vector</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>a</span> <span class=p>[]</span><span class=nx>Element</span>
+<span class=p>}</span>
+</code></pre></div><p><code>[]interface{}</code> 要裝東西的話不能直接 assign</p>
+<p>可以用 for loop 針對每一個 item 做 assign</p>
+<p><strong>reflect package</strong></p>
+<p>reflection 主要是透過 type 來檢驗 structure 的能力</p>
+<p>另一個稱呼是 meta-programming</p>
+<p>reflect 可以在 runtime 時調查 type 和 variable</p>
+<ul>
+<li>size</li>
+<li>methods</li>
+<li>可以動態呼叫這些方法</li>
+<li>小心使用，非必要時儘量避免使用</li>
+</ul>
+<blockquote>
+<p>Basic information of a variable is its type and its value:</p>
+<p>these are represented in the reflection package by the types Type, which represents a general Go type,</p>
+<p>and Value, which is the reflection interface to a Go value.</p>
+<p><code>reflect.TypeOf</code> <code>reflect.ValueOf</code></p>
+</blockquote>
+<p><code>Kind()</code> 可以用來拿到 type</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>x</span> <span class=kt>float64</span> <span class=p>=</span> <span class=mf>3.4</span>
+<span class=nx>v</span> <span class=o>:=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>ValueOf</span><span class=p>(</span><span class=nx>x</span><span class=p>)</span>
+<span class=c1>// v 是 reflect.Float64
+</span></code></pre></div><p>透過 refect 去 set value 有很多限制，這邊僅列出可動的範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=kd>var</span> <span class=nx>x</span> <span class=kt>float64</span> <span class=p>=</span> <span class=mf>3.4</span>
+  <span class=nx>v</span> <span class=o>:=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>ValueOf</span><span class=p>(</span><span class=nx>x</span><span class=p>)</span>
+  <span class=c1>// setting a value:
+</span><span class=c1></span>  <span class=c1>// Error: will panic: reflect.Value.SetFloat using unaddressable value
+</span><span class=c1></span>  <span class=c1>// v.SetFloat(3.1415)
+</span><span class=c1></span>  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;settability of v:&#34;</span><span class=p>,</span> <span class=nx>v</span><span class=p>.</span><span class=nf>CanSet</span><span class=p>())</span>
+  <span class=nx>v</span> <span class=p>=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>ValueOf</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>x</span><span class=p>)</span> <span class=c1>// Note: take the address of x.
+</span><span class=c1></span>  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;type of v:&#34;</span><span class=p>,</span> <span class=nx>v</span><span class=p>.</span><span class=nf>Type</span><span class=p>())</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;settability of v:&#34;</span><span class=p>,</span> <span class=nx>v</span><span class=p>.</span><span class=nf>CanSet</span><span class=p>())</span>
+  <span class=nx>v</span> <span class=p>=</span> <span class=nx>v</span><span class=p>.</span><span class=nf>Elem</span><span class=p>()</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;The Elem of v is: &#34;</span><span class=p>,</span> <span class=nx>v</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;settability of v:&#34;</span><span class=p>,</span> <span class=nx>v</span><span class=p>.</span><span class=nf>CanSet</span><span class=p>())</span>
+  <span class=nx>v</span><span class=p>.</span><span class=nf>SetFloat</span><span class=p>(</span><span class=mf>3.1415</span><span class=p>)</span> <span class=c1>// this works!
+</span><span class=c1></span>  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>v</span><span class=p>.</span><span class=nf>Interface</span><span class=p>())</span>
+
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>v</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=c1>// outputs
+</span><span class=c1></span><span class=nx>settability</span> <span class=nx>of</span> <span class=nx>v</span><span class=p>:</span> <span class=kc>false</span>
+<span class=kd>type</span> <span class=nx>of</span> <span class=nx>v</span><span class=p>:</span> <span class=o>*</span><span class=kt>float64</span>
+<span class=nx>settability</span> <span class=nx>of</span> <span class=nx>v</span><span class=p>:</span> <span class=kc>false</span>
+<span class=nx>The</span> <span class=nx>Elem</span> <span class=nx>of</span> <span class=nx>v</span> <span class=nx>is</span><span class=p>:</span>  <span class=mf>3.4</span>
+<span class=nx>settability</span> <span class=nx>of</span> <span class=nx>v</span><span class=p>:</span> <span class=kc>true</span>
+<span class=mf>3.1415</span>
+<span class=mf>3.1415</span>
+</code></pre></div><blockquote>
+<p>透過 struct 可以將 <code>map[string]interface{}</code> 轉成 struct</p>
+<p>但複雜且不常用，故略過</p>
+</blockquote>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>mapToStruct</span><span class=p>(</span><span class=nx>m</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kd>interface</span><span class=p>{})</span> <span class=kd>interface</span><span class=p>{}</span> <span class=p>{</span>
+	<span class=kd>var</span> <span class=nx>structFields</span> <span class=p>[]</span><span class=nx>reflect</span><span class=p>.</span><span class=nx>StructField</span>
+
+	<span class=k>for</span> <span class=nx>k</span><span class=p>,</span> <span class=nx>v</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>m</span> <span class=p>{</span>
+		<span class=nx>sf</span> <span class=o>:=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nx>StructField</span><span class=p>{</span>
+			<span class=nx>Name</span><span class=p>:</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>Title</span><span class=p>(</span><span class=nx>k</span><span class=p>),</span>
+			<span class=nx>Type</span><span class=p>:</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>TypeOf</span><span class=p>(</span><span class=nx>v</span><span class=p>),</span>
+		<span class=p>}</span>
+		<span class=nx>structFields</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>structFields</span><span class=p>,</span> <span class=nx>sf</span><span class=p>)</span>
+	<span class=p>}</span>
+
+	<span class=c1>// Creates the struct type
+</span><span class=c1></span>	<span class=nx>structType</span> <span class=o>:=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>StructOf</span><span class=p>(</span><span class=nx>structFields</span><span class=p>)</span>
+
+	<span class=c1>// Creates a new struct
+</span><span class=c1></span>	<span class=nx>structObject</span> <span class=o>:=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=nx>structType</span><span class=p>)</span>
+
+	<span class=k>return</span> <span class=nx>structObject</span><span class=p>.</span><span class=nf>Interface</span><span class=p>()</span>
+<span class=p>}</span>
+
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+
+	<span class=nx>m</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kd>interface</span><span class=p>{})</span>
+
+	<span class=nx>m</span><span class=p>[</span><span class=s>&#34;name&#34;</span><span class=p>]</span> <span class=p>=</span> <span class=s>&#34;Barack&#34;</span>
+	<span class=nx>m</span><span class=p>[</span><span class=s>&#34;surname&#34;</span><span class=p>]</span> <span class=p>=</span> <span class=s>&#34;Obama&#34;</span>
+	<span class=nx>m</span><span class=p>[</span><span class=s>&#34;age&#34;</span><span class=p>]</span> <span class=p>=</span> <span class=mi>57</span>
+
+	<span class=nx>s</span> <span class=o>:=</span> <span class=nf>mapToStruct</span><span class=p>(</span><span class=nx>m</span><span class=p>)</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%t %[1]v\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
+
+	<span class=nx>sr</span> <span class=o>:=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>ValueOf</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+	<span class=nx>sr</span><span class=p>.</span><span class=nf>Elem</span><span class=p>().</span><span class=nf>FieldByName</span><span class=p>(</span><span class=s>&#34;Name&#34;</span><span class=p>).</span><span class=nf>SetString</span><span class=p>(</span><span class=s>&#34;Donald&#34;</span><span class=p>)</span>
+	<span class=nx>sr</span><span class=p>.</span><span class=nf>Elem</span><span class=p>().</span><span class=nf>FieldByName</span><span class=p>(</span><span class=s>&#34;Surname&#34;</span><span class=p>).</span><span class=nf>SetString</span><span class=p>(</span><span class=s>&#34;Trump&#34;</span><span class=p>)</span>
+	<span class=nx>sr</span><span class=p>.</span><span class=nf>Elem</span><span class=p>().</span><span class=nf>FieldByName</span><span class=p>(</span><span class=s>&#34;Age&#34;</span><span class=p>).</span><span class=nf>SetInt</span><span class=p>(</span><span class=mi>72</span><span class=p>)</span>
+	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>當一個 struct 裡面包含了 另一個 struct (實作了多數介面) 的指標，</p>
+<p>則那個 struct 可以呼叫 embedded struct 的 interface methods</p>
+<p>如</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Task</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>Command</span> <span class=kt>string</span>
+  <span class=o>*</span><span class=nx>log</span><span class=p>.</span><span class=nx>Logger</span>
+<span class=p>}</span>
+<span class=c1>// New
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>NewTask</span><span class=p>(</span><span class=nx>command</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>logger</span> <span class=o>*</span><span class=nx>log</span><span class=p>.</span><span class=nx>Logger</span><span class=p>)</span> <span class=o>*</span><span class=nx>Task</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=o>&amp;</span><span class=nx>Task</span><span class=p>{</span><span class=nx>command</span><span class=p>,</span> <span class=nx>logger</span><span class=p>}</span>
+<span class=p>}</span>
+<span class=c1>// task 可以呼叫 Log 的方法
+</span><span class=c1></span><span class=nx>task</span><span class=p>.</span><span class=nf>Log</span><span class=p>()</span>
+</code></pre></div><p>在 struct 內嶔 interface</p>
+<p>不要搞混，這是指在 struct 裡面有對應的 field 可以塞滿足 interface 的物件</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>ReaderWriter</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span>
+  <span class=nx>io</span><span class=p>.</span><span class=nx>Writer</span>
+<span class=p>}</span>
+<span class=c1>// 初始化
+</span><span class=c1></span>
+<span class=nx>t</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>ReaderWriter</span><span class=p>{</span>
+    <span class=nx>Reader</span><span class=p>:</span> <span class=kc>nil</span><span class=p>,</span> <span class=c1>// 可以塞滿足 interface 的物件
+</span><span class=c1></span>    <span class=nx>Writer</span><span class=p>:</span> <span class=kc>nil</span><span class=p>,</span>
+<span class=p>}</span>
+</code></pre></div><p>當把 slice 也做成一種 type 的時候，就可以對該 type 做新的 method</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Cars</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Car</span>
+<span class=c1>// Cars 可以有方法
+</span><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>cs</span> <span class=nx>Cars</span><span class=p>)</span> <span class=nf>Process</span><span class=p>(</span><span class=nx>f</span> <span class=kd>func</span><span class=p>(</span><span class=nx>car</span> <span class=o>*</span><span class=nx>Car</span><span class=p>))</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>c</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>cs</span> <span class=p>{</span>
+        <span class=nf>f</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>interface 包含了 value 和 type</p>
+<p>只有在 type 和 value 都是 nil 的情況下才會是 nil</p>
+</blockquote>
+<h2 id=reading-and-writing>Reading and Writing</h2>
 <h2 id=reference>Reference</h2>
 <p><a href=https://www.interviewbit.com/golang-interview-questions/ target=_blank rel="noopener noreffer">Golang Interview Questions</a></p>
 </div>
