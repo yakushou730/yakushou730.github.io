@@ -114,6 +114,8 @@ suppress 抑制，忍住
 
 swamp 淹沒；充斥
 
+synthesize 合成
+
 ## T
 tally 符合，吻合
 

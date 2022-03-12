@@ -1,8 +1,8 @@
 ---
-title: "fundamental"
+title: "fundamental1"
 authors: [yakushou730]
 date: 2021-12-27T16:10:27+08:00
-description: "fundamental"
+description: "fundamental1"
 tags: ["programming","golang"]
 draft: false
 ---
@@ -1646,14 +1646,3 @@ func (cs Cars) Process(f func(car *Car)) {
 > interface 包含了 value 和 type
 > 
 > 只有在 type 和 value 都是 nil 的情況下才會是 nil
-
-
-
-
-## Reading and Writing
-
-
-
-
-## Reference
-[Golang Interview Questions](https://www.interviewbit.com/golang-interview-questions/)

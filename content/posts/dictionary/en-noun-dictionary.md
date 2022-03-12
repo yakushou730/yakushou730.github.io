@@ -37,6 +37,8 @@ denial 否定
 
 denominator (分數中的) 分母
 
+depletion 減少；減小；縮小
+
 determination 決心；毅力
 
 discrepancy 不一致，出入
@@ -45,6 +47,8 @@ dispatch 發送；派遣
 
 ## F
 factoring 因數分解，因式分解
+
+fringe (地區或群體的) 邊緣，周邊；(活動的) 次要部分
 
 ## G
 groundwork 基礎工作；準備工作

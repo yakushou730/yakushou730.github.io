@@ -7,6 +7,8 @@ tags: ["dictionary"]
 draft: false
 ---
 ## A
+ad hoc 特別的，專門的；臨時安排的
+
 aesthetic 美感的；藝術的
 
 amiss 不對的；不合適的；不正常的
@@ -70,7 +72,11 @@ fail-safe 萬無一失的，萬全的
 
 flawless 完美的；無瑕的
 
+full-blown 充分發展的；成熟的
+
 ## G
+genuinely 真正的；非僞造的；名副其實的
+
 granular 顆粒組成的
 
 ## H
@@ -110,6 +116,8 @@ irrespective 不考慮地，不顧地
 ## J
 jarring 令人感到不快的；刺激 (神經等) 的
 
+judicious 明斷的；明智而審慎的
+
 ## M
 malformed 畸形的；變形的
 
@@ -125,6 +133,8 @@ momentary 片刻的，瞬間的；短暫的
 negligible 微不足道的，可忽略的
 
 ## O
+obtrusive 顯眼的；刺眼的
+
 overarching 首要的；包羅萬象的，支配一切的
 
 ## P
