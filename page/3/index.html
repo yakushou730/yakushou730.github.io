@@ -56,6 +56,15 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/k8s/kind/>kind</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-03>2022-01-03</time></span></div><div class=content>kind official page
+kind 可以用來在 local 建立 k8s cluster
+# 安裝 kind brew install kind # 建立 cluster kind create cluster # 查看 clusters kind get clusters # 查看 kind 的 kubeconfig kind get kubeconfig # 切換到 kind cluster kubectl config use-context kind-kind # 查看 cluster 狀態 kubectl cluster-info </div><div class=post-footer>
+<a href=/posts/k8s/kind/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/devops/gitops/>gitops</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -125,7 +134,7 @@ how to do 代表為 OOP (狀態互相依賴) 看得見邏輯運算過程 (how to
 <a href=/posts/programming/software/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/fundamental/>fundamental</a>
+<a href=/posts/golang/fundamental1/>fundamental1</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-27>2021-12-27</time></span></div><div class=content>in memory 程式的用法在記憶體上會切成很多小區塊，每一塊我們稱為 word
@@ -134,7 +143,7 @@ how to do 代表為 OOP (狀態互相依賴) 看得見邏輯運算過程 (how to
 因為是 private repo 的關係， 所以要讓 go 有權限去拉
 拉的時候是透過 git，所以要設定具有權限的 token 給 git
 在個人的 github settings 建立一個可以拉取 private repo 的 token 把 token 記下以後，在本機操作 git cli 用 copy 下來的 token 取代下列的 GITHUB_TOKEN $ git config --global url."https://${GITHUB_TOKEN}@github.com".insteadOf "https://github.com" Type Assertion vs Type Conversion Type Assertion (斷言)</div><div class=post-footer>
-<a href=/posts/golang/fundamental/>Read more...</a><div class=post-tags>
+<a href=/posts/golang/fundamental1/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/k8s/basic-for-beginner/>basic for beginner</a>
@@ -146,13 +155,6 @@ aws eks --region ap-southeast-1 update-kubeconfig --name &lt;cluster-name> --kub
 # k8s config setting export KUBECONFIG=~/.kube/service-prod-config:\ ~/.kube/service-staging-config 使用 context # 取得 context list kubectl config get-contexts # 使用特定 context kubectl config use-context &lt;context name> # 詢問當前 context kubectl config current-context 使用 kubectx 可快速切換 k8s context 的工具</div><div class=post-footer>
 <a href=/posts/k8s/basic-for-beginner/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/udemy/complete-guide-to-elasticsearch/mapping-and-analysis/>mapping and analysis</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-17>2021-12-17</time></span></div><div class=content>Introduction to analysis _source object 是做 index document 但卻不是用來作為搜尋的內容欄位 分析字串: analyzer character filter tokenizer token filter 舉例 (filter 和 tokenizer 種類繁多，僅舉例簡單情境): 分析 I REALLY like beer! character filter 做成 I REALLY Like beer! Tokenizer 做成 ["I", "REALLY", "Like", "beer"] Token Filter 做成 ["i", "really", "like", "beer"] 儲存的字串會被切成較小的字串儲存 (Tokenizer) Using the Analyze API POST /_analyze { "text": "2 guys walk into a bar, but the third.</div><div class=post-footer>
-<a href=/posts/udemy/complete-guide-to-elasticsearch/mapping-and-analysis/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/udemy/>udemy</a>,&nbsp;<a href=/tags/elasticsearch/>elasticsearch</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>

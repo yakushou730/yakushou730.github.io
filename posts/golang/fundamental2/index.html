@@ -1,0 +1,1936 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<title class=pjax-title>fundamental2 - YakuShou's NOTEBOOK</title><meta name=Description content="fundamental2"><meta property="og:title" content="fundamental2">
+<meta property="og:description" content="fundamental2">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.yakushou.com/posts/golang/fundamental2/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-03-06T22:05:26+08:00">
+<meta property="article:modified_time" content="2022-03-06T22:05:26+08:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="fundamental2">
+<meta name=twitter:description content="fundamental2">
+<meta name=application-name content="YakuShou's NOTEBOOK">
+<meta name=apple-mobile-web-app-title content="YakuShou's NOTEBOOK">
+<meta name=theme-color content="#f8f8f8"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/fundamental2/><link rel=prev href=https://blog.yakushou.com/posts/programming/etcd/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
+<noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fundamental2","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental2\/"},"genre":"posts","keywords":"programming, golang","wordcount":5975,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/fundamental2\/","datePublished":"2022-03-06T22:05:26+08:00","dateModified":"2022-03-06T22:05:26+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"fundamental2"}</script></head>
+<body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
+<div id=back-to-top></div>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> Posts </a><a class=menu-item href=/tags/> Tags </a><span class="menu-item delimiter"></span><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="YakuShou's NOTEBOOK">YakuShou's NOTEBOOK</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a href=# onclick=return!1 class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>Contents</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle","normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">fundamental2</h1><div class=post-meta>
+<div class=post-meta-line>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-03-06>2022-03-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-03-06>2022-03-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;5975 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;29 minutes&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#reading-and-writing>Reading and Writing</a></li>
+<li><a href=#error-handling-and-testing>Error-Handling and Testing</a></li>
+<li><a href=#goroutines-and-channels>Goroutines and Channels</a></li>
+<li><a href=#networking-templating-and-web-applications>Networking, Templating and Web-Applications</a></li>
+<li><a href=#regular-mistakes-and-suggestions>Regular Mistakes and Suggestions</a></li>
+<li><a href=#performance-advices>Performance Advices</a></li>
+<li><a href=#reference>Reference</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h2 id=reading-and-writing>Reading and Writing</h2>
+<p><code>bufio</code> 用於 buffered input 和 output</p>
+<p>最簡單的 input 方式是使用 fmt 的 Scan 方法</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>firstName</span><span class=p>,</span> <span class=nx>lastName</span> <span class=kt>string</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Scanln</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>firstName</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>lastName</span><span class=p>)</span>
+</code></pre></div><p><code>Scanln</code> 從 standard input 讀取 text，以空白隔開的輸入，直到掃到 newline</p>
+<p><code>Scanf</code>, <code>Fscanf</code>, <code>Sscanf</code> 透過 format string 來 parse 參數</p>
+<ul>
+<li><code>Scanf</code> 透過 keyboard 輸入</li>
+<li><code>Sscanf</code> 透過其他 string 輸入</li>
+</ul>
+<p>透過 <code>bufio</code> 取得輸入字串</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// os.Stdin 滿足 io.Reader
+</span><span class=c1></span><span class=nx>inputReader</span> <span class=p>=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>)</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Please enter some input: &#34;</span><span class=p>)</span>
+<span class=nx>input</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nx>inputReader</span><span class=p>.</span><span class=nf>ReadString</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>)</span>
+<span class=c1>// err 是 io.EOF 如果讀到結尾的話
+</span></code></pre></div><p>os.Stdout 是指印在 screen 上</p>
+<p><code>bufio</code> 允許從任何滿足 Reader 的 type 來讀取輸入</p>
+<p><strong>Reading from a file</strong></p>
+<p>在 golang，Files 是透過 <code>os.File</code> 的物件指標，也叫 file handles</p>
+<ul>
+<li>os.Stdin 和 os.Stdout 都是 *os.File 類型</li>
+</ul>
+<p>標準的讀取檔案範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>inputFile</span><span class=p>,</span> <span class=nx>inputError</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=s>&#34;input.dat&#34;</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>inputError</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;An error occurred on opening the inputfile\n&#34;</span> <span class=o>+</span>
+
+    <span class=s>&#34;Does the file exist?\n&#34;</span> <span class=o>+</span>
+    <span class=s>&#34;Have you got access to it?\n&#34;</span><span class=p>)</span>
+    <span class=k>return</span> <span class=c1>// exit the function on error
+</span><span class=c1></span>  <span class=p>}</span>
+  <span class=k>defer</span> <span class=nx>inputFile</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+  <span class=nx>inputReader</span> <span class=o>:=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>inputFile</span><span class=p>)</span>
+  <span class=k>for</span> <span class=p>{</span>
+    <span class=nx>inputString</span><span class=p>,</span> <span class=nx>readerError</span> <span class=o>:=</span> <span class=nx>inputReader</span><span class=p>.</span><span class=nf>ReadString</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>)</span>
+    <span class=k>if</span> <span class=nx>readerError</span> <span class=o>==</span> <span class=nx>io</span><span class=p>.</span><span class=nx>EOF</span> <span class=p>{</span>
+      <span class=k>return</span>
+  <span class=p>}</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;The input was: %s&#34;</span><span class=p>,</span> <span class=nx>inputString</span><span class=p>)</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>讀取檔案的另一個簡單範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>data</span><span class=p>(</span><span class=nx>name</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+  <span class=nx>f</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=nx>name</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nx>O_RDONLY</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+  <span class=k>defer</span> <span class=nx>f</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span> <span class=c1>// idiomatic Go code!
+</span><span class=c1></span>  <span class=nx>contents</span> <span class=o>:=</span> <span class=nx>io</span><span class=p>.</span><span class=nf>ReadAll</span><span class=p>(</span><span class=nx>f</span><span class=p>)</span>
+  <span class=k>return</span> <span class=nx>contents</span>
+<span class=p>}</span>
+</code></pre></div><p>讀取檔案的另一個範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>inputFile</span> <span class=o>:=</span> <span class=s>&#34;products.txt&#34;</span>
+  <span class=c1>// buf 讀出來是 []byte
+</span><span class=c1></span>  <span class=nx>buf</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>ReadFile</span><span class=p>(</span><span class=nx>inputFile</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stderr</span><span class=p>,</span> <span class=s>&#34;File Error: %s\n&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s\n&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>buf</span><span class=p>))</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>如果檔案很大的話要避免使用 ReadFile 做一次讀取，很吃記憶體</p>
+</blockquote>
+<p>讀取檔案的另一個範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>buf</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>1024</span><span class=p>)</span>
+<span class=o>...</span>
+<span class=nx>n</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>inputReader</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>buf</span><span class=p>)</span>
+<span class=k>if</span> <span class=p>(</span><span class=nx>n</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span> <span class=k>break</span><span class=p>}</span>
+<span class=c1>// n 是取的 bytes 數量
+</span></code></pre></div><p><code>fmt.Fscanln()</code> 可以用來讀取檔案的每一行，並賦值給變數</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>_</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fscanln</span><span class=p>(</span><span class=nx>file</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>v1</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>v2</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>v3</span><span class=p>)</span> <span class=c1>// scans until newline
+</span></code></pre></div><blockquote>
+<p>檔案開啟後都要記得 <code>defer file.close()</code></p>
+<p><code>path</code> package 的 <code>filepaht</code> 提供 os platform 操作 檔名 和 路徑 的功能</p>
+</blockquote>
+<p>可透過 <code>compress</code> package 讀取壓縮檔</p>
+<ul>
+<li>bzip2</li>
+<li>flate</li>
+<li>gzip</li>
+<li>lzw</li>
+<li>zlib</li>
+</ul>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>fName</span> <span class=o>:=</span> <span class=s>&#34;Example.json.gz&#34;</span>
+    <span class=kd>var</span> <span class=nx>r</span> <span class=o>*</span><span class=nx>bufio</span><span class=p>.</span><span class=nx>Reader</span>
+    <span class=nx>fi</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=nx>fName</span><span class=p>)</span>
+    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stderr</span><span class=p>,</span> <span class=s>&#34;%v, Can&#39;t open %s: error: %s\n&#34;</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nx>Args</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=nx>fName</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+        <span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+    <span class=p>}</span>
+    <span class=nx>fz</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>gzip</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>fi</span><span class=p>)</span>
+    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+        <span class=nx>r</span> <span class=p>=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>fi</span><span class=p>)</span>
+    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+        <span class=nx>r</span> <span class=p>=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>fz</span><span class=p>)</span>
+    <span class=p>}</span>
+    <span class=k>for</span> <span class=p>{</span>
+        <span class=nx>line</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>r</span><span class=p>.</span><span class=nf>ReadString</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>)</span>
+        <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Done reading file&#34;</span><span class=p>)</span>
+            <span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+        <span class=p>}</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>line</span><span class=p>)</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Writing data to a file</strong></p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span> <span class=p>()</span> <span class=p>{</span>
+  <span class=nx>outputFile</span><span class=p>,</span> <span class=nx>outputError</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>OpenFile</span><span class=p>(</span><span class=s>&#34;output/output.dat&#34;</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nx>O_WRONLY</span><span class=p>|</span><span class=nx>os</span><span class=p>.</span><span class=nx>O_CREATE</span><span class=p>,</span> <span class=mo>0666</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>outputError</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;An error occurred with file creation\n&#34;</span><span class=p>)</span>
+    <span class=k>return</span>
+  <span class=p>}</span>
+  <span class=k>defer</span> <span class=nx>outputFile</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+  <span class=nx>outputWriter</span><span class=o>:=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewWriter</span><span class=p>(</span><span class=nx>outputFile</span><span class=p>)</span>
+  <span class=nx>outputString</span> <span class=o>:=</span> <span class=s>&#34;hello world!\n&#34;</span>
+  <span class=k>for</span> <span class=nx>i</span><span class=o>:=</span><span class=mi>0</span><span class=p>;</span> <span class=nx>i</span><span class=p>&lt;</span><span class=mi>10</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+    <span class=nx>outputWriter</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>outputString</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=nx>outputWriter</span><span class=p>.</span><span class=nf>Flush</span><span class=p>()</span>
+<span class=p>}</span>
+</code></pre></div><p><code>os.OpenFile</code> 提供除了開啟檔案以外更多的功能</p>
+<ul>
+<li>os.O_RDONLY: read-only</li>
+<li>os.O_WRONLY: write-only</li>
+<li>os.O_RDWR: both read and write</li>
+<li>os.O_CREATE: create the file if it doesn&rsquo;t exist</li>
+<li>os.O_TRUNC: to truncate to size 0 if the file already exists</li>
+</ul>
+<p>另一種寫入檔案方式</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>outputFile</span><span class=p>,</span> <span class=s>&#34;Some test data.\n&#34;</span><span class=p>)</span>
+</code></pre></div><p>上面的方法可以寫入任何的 <code>io.Writer</code></p>
+<p>另一個範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;hello, world\n&#34;</span><span class=p>)</span>
+  <span class=nx>f</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>OpenFile</span><span class=p>(</span><span class=s>&#34;output/test.txt&#34;</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nx>O_CREATE</span><span class=p>|</span><span class=nx>os</span><span class=p>.</span><span class=nx>O_WRONLY</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+  <span class=k>defer</span> <span class=nx>f</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+
+  <span class=nx>f</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;hello, world in a file\n&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>使用 <code>ioutil</code> package 讀寫檔案</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Page</span> <span class=kd>struct</span> <span class=p>{</span>
+	<span class=nx>Title</span> <span class=kt>string</span>
+	<span class=nx>Body</span>  <span class=p>[]</span><span class=kt>byte</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=p>(</span><span class=nx>p</span> <span class=o>*</span><span class=nx>Page</span><span class=p>)</span> <span class=nf>save</span><span class=p>()</span> <span class=kt>error</span> <span class=p>{</span>
+	<span class=nx>filename</span> <span class=o>:=</span> <span class=nx>p</span><span class=p>.</span><span class=nx>Title</span> <span class=o>+</span> <span class=s>&#34;.txt&#34;</span>
+	<span class=k>return</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>WriteFile</span><span class=p>(</span><span class=nx>filename</span><span class=p>,</span> <span class=nx>p</span><span class=p>.</span><span class=nx>Body</span><span class=p>,</span> <span class=mo>0600</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>load</span><span class=p>(</span><span class=nx>title</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=o>*</span><span class=nx>Page</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+	<span class=nx>filename</span> <span class=o>:=</span> <span class=nx>title</span> <span class=o>+</span> <span class=s>&#34;.txt&#34;</span>
+	<span class=nx>body</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>ReadFile</span><span class=p>(</span><span class=nx>filename</span><span class=p>)</span>
+	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+		<span class=k>return</span> <span class=kc>nil</span><span class=p>,</span> <span class=nx>err</span>
+	<span class=p>}</span>
+	<span class=k>return</span> <span class=o>&amp;</span><span class=nx>Page</span><span class=p>{</span><span class=nx>Title</span><span class=p>:</span> <span class=nx>title</span><span class=p>,</span> <span class=nx>Body</span><span class=p>:</span> <span class=nx>body</span><span class=p>},</span> <span class=kc>nil</span>
+<span class=p>}</span>
+</code></pre></div><p>copy file 就是開啟兩個 file 檔案以後，透過 io.Copy 去做</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>CopyFile</span><span class=p>(</span><span class=nx>dstName</span><span class=p>,</span> <span class=nx>srcName</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>written</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>src</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=nx>srcName</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=k>return</span>
+  <span class=p>}</span>
+  <span class=k>defer</span> <span class=nx>src</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+  <span class=nx>dst</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>OpenFile</span><span class=p>(</span><span class=nx>dstName</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nx>O_WRONLY</span><span class=p>|</span><span class=nx>os</span><span class=p>.</span><span class=nx>O_CREATE</span><span class=p>,</span> <span class=mo>0644</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=k>return</span>
+  <span class=p>}</span>
+  <span class=k>defer</span> <span class=nx>dst</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+  <span class=k>return</span> <span class=nx>io</span><span class=p>.</span><span class=nf>Copy</span><span class=p>(</span><span class=nx>dst</span><span class=p>,</span> <span class=nx>src</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Reading arguments from the command-line</strong></p>
+<p><code>os.Args</code> 提供了 slice of string 來裝 command-line 引數</p>
+<ul>
+<li><code>os.Args[0]</code> 是程式名稱</li>
+<li>os.Args[1:] 都是引數字串</li>
+</ul>
+<p><code>flag</code> package 專門用來處理 運行程式時的引數</p>
+<ul>
+<li><code>-h</code> 會列出所有提供的引數</li>
+<li><code>flag.Parse()</code> 呼叫後會轉換並設定好參數</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// iterate os.Args
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>s</span> <span class=kt>string</span>
+<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>flag</span><span class=p>.</span><span class=nf>NArg</span><span class=p>();</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+    <span class=nx>s</span> <span class=o>+=</span> <span class=nx>flag</span><span class=p>.</span><span class=nf>Arg</span><span class=p>(</span><span class=nx>i</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>注意 flag.Arg 和 os.Args 是不一樣的</p>
+<ul>
+<li>flag.Arg 是指轉換之後的參數</li>
+</ul>
+<p>讀取檔案並印出</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>cat</span><span class=p>(</span><span class=nx>f</span> <span class=o>*</span><span class=nx>os</span><span class=p>.</span><span class=nx>File</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>const</span> <span class=nx>NBUF</span> <span class=p>=</span> <span class=mi>512</span>
+  <span class=kd>var</span> <span class=nx>buf</span> <span class=p>[</span><span class=nx>NBUF</span><span class=p>]</span><span class=kt>byte</span>
+  <span class=k>for</span> <span class=p>{</span>
+    <span class=k>switch</span> <span class=nx>nr</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>f</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>buf</span><span class=p>[:]);</span> <span class=kc>true</span> <span class=p>{</span>
+    <span class=k>case</span> <span class=nx>nr</span> <span class=p>&lt;</span> <span class=mi>0</span><span class=p>:</span>
+      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stderr</span><span class=p>,</span> <span class=s>&#34;cat: error reading: %s\n&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>())</span>
+      <span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+    <span class=k>case</span> <span class=nx>nr</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span> <span class=c1>// EOF
+</span><span class=c1></span>      <span class=k>return</span>
+    <span class=k>case</span> <span class=nx>nr</span> <span class=p>&gt;</span> <span class=mi>0</span><span class=p>:</span>
+      <span class=k>if</span> <span class=nx>nw</span><span class=p>,</span> <span class=nx>ew</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>.</span><span class=nf>Write</span><span class=p>(</span><span class=nx>buf</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=nx>nr</span><span class=p>]);</span> <span class=nx>nw</span> <span class=o>!=</span> <span class=nx>nr</span> <span class=p>{</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stderr</span><span class=p>,</span> <span class=s>&#34;cat: error writing: %s\n&#34;</span><span class=p>)</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Scanning inputs</strong></p>
+<p>讀取 stdin 的資料</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>scanner</span> <span class=o>:=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewScanner</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>)</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Please enters some input: &#34;</span><span class=p>)</span>
+<span class=k>if</span> <span class=nx>scanner</span><span class=p>.</span><span class=nf>Scan</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;The input was&#34;</span><span class=p>,</span> <span class=nx>scanner</span><span class=p>.</span><span class=nf>Text</span><span class=p>())</span>
+<span class=p>}</span>
+</code></pre></div><p>另一個用 bufio 讀取輸入的範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>scanner</span> <span class=o>:=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewScanner</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Please enter some input: &#34;</span><span class=p>)</span>
+  <span class=c1>// scanner.Split(bufio.ScanRunes) // &lt;-- scan runes (newline included)
+</span><span class=c1></span>  <span class=nx>scanner</span><span class=p>.</span><span class=nf>Split</span><span class=p>(</span><span class=nx>bufio</span><span class=p>.</span><span class=nx>ScanWords</span><span class=p>)</span> <span class=c1>// &lt;-- scan words (sequence of characters delimited by spaces)
+</span><span class=c1></span>  <span class=c1>// scanner.Split(bufio.ScanLines) // &lt;-- the default: scan lines
+</span><span class=c1></span>  <span class=k>for</span> <span class=nx>scanner</span><span class=p>.</span><span class=nf>Scan</span><span class=p>(){</span> <span class=c1>// The for loop stops when a EOF is given
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Token -&gt;%s&lt;-\n&#34;</span><span class=p>,</span> <span class=nx>scanner</span><span class=p>.</span><span class=nf>Text</span><span class=p>())</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>Never forget to use Flush() when terminating buffered writing, else the last output won’t be written.</p>
+</blockquote>
+<p><strong>The JSON data format</strong></p>
+<ul>
+<li>data struct -> special format string
+<ul>
+<li>marshaling or decoding</li>
+</ul>
+</li>
+<li>special format string to data strcut
+<ul>
+<li>unmarshaling or decoding</li>
+</ul>
+</li>
+</ul>
+<p>示意範例，把 data 轉成 json</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 透過 json.Marshal
+</span><span class=c1></span><span class=nx>js</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>Marshal</span><span class=p>(</span><span class=nx>vc</span><span class=p>)</span>
+  
+<span class=c1>// 或
+</span><span class=c1>// 透過 Encoder
+</span><span class=c1></span><span class=nx>enc</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>NewEncoder</span><span class=p>(</span><span class=nx>file</span><span class=p>)</span>
+<span class=nx>err</span> <span class=o>:=</span> <span class=nx>enc</span><span class=p>.</span><span class=nf>Encode</span><span class=p>(</span><span class=nx>vc</span><span class=p>)</span>
+</code></pre></div><blockquote>
+<p>由於網路安全因素，使用 <code>json.MarshalForHTML()</code> 的話會把 <code>&lt;script></code> 內的字串做溢出</p>
+</blockquote>
+<p>golang type whit JSON format</p>
+<ul>
+<li><code>bool</code> for JSON booleans</li>
+<li><code>float64</code> for JSON numbers</li>
+<li><code>string</code> for JSON strings</li>
+<li><code>nil</code> for JSON null</li>
+</ul>
+<p>為了 Encode go map type，必須使用 <code>map[string]T</code></p>
+<p>只有 exported 的欄位會被 json package 存取</p>
+<p><strong>Unmarshal</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>FamilyMember</span> <span class=kd>struct</span> <span class=p>{</span>
+    <span class=nx>Name</span> <span class=kt>string</span>
+    <span class=nx>Age</span> <span class=kt>int</span>
+    <span class=nx>Parents</span> <span class=p>[]</span><span class=kt>string</span>
+<span class=p>}</span>
+<span class=c1>// b 是 byte slice 
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>m</span> <span class=nx>FamilyMember</span>
+<span class=nx>err</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>Unmarshal</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>m</span><span class=p>)</span>
+</code></pre></div><p><strong>Decoding arbitrary data</strong></p>
+<p><code>json</code> package 使用 <code>map[string]interface{}</code> 和 <code>[]interface{}</code> 來存 JSON objects 和 arrays</p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>b</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>`{&#34;Name&#34;: &#34;Wednesday&#34;, &#34;Age&#34;: 6, &#34;Parents&#34;: [&#34;Gomez&#34;, &#34;Morticia&#34;]}`</span><span class=p>)</span>
+<span class=kd>var</span> <span class=nx>f</span> <span class=kd>interface</span><span class=p>{}</span>
+<span class=nx>err</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>Unmarshal</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>f</span><span class=p>)</span>
+<span class=c1>// f 變成
+</span><span class=c1></span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kd>interface</span><span class=p>{}{</span>
+    <span class=s>&#34;Name&#34;</span><span class=p>:</span> <span class=s>&#34;Wednesday&#34;</span><span class=p>,</span>
+    <span class=s>&#34;Age&#34;</span><span class=p>:</span> <span class=mi>6</span><span class=p>,</span>
+    <span class=s>&#34;Parents&#34;</span><span class=p>:</span> <span class=p>[]</span><span class=kd>interface</span><span class=p>{}{</span>
+        <span class=s>&#34;Gomez&#34;</span><span class=p>,</span>
+        <span class=s>&#34;Morticia&#34;</span><span class=p>,</span>
+    <span class=p>},</span>
+<span class=p>}</span>
+</code></pre></div><p>另一個 marshal / unmarshal 的範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Person</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>Name</span> <span class=kt>string</span> <span class=s>`json:&#34;personName&#34;`</span>
+  <span class=nx>Age</span> <span class=kt>int</span> <span class=s>`json:&#34;personAge&#34;`</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>b</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>`{&#34;personName&#34;: &#34;Obama&#34;, &#34;personAge&#34;: 57}`</span><span class=p>)</span>
+  <span class=kd>var</span> <span class=nx>p</span> <span class=nx>Person</span>
+  <span class=c1>// Unmarshalling
+</span><span class=c1></span>  <span class=nx>json</span><span class=p>.</span><span class=nf>Unmarshal</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>p</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>p</span><span class=p>)</span>
+  <span class=c1>// Marshalling
+</span><span class=c1></span>  <span class=nx>js</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>Marshal</span><span class=p>(</span><span class=nx>p</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s\n&#34;</span><span class=p>,</span> <span class=nx>js</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>The XML Data format</strong></p>
+<p>就像 json package 一樣，也支援 marshal / unmarshal</p>
+<p>使用 <code>encoding/xml</code> package</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Person</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>Name</span> <span class=kt>string</span> <span class=s>`xml:&#34;personName&#34;`</span>
+  <span class=nx>Age</span> <span class=kt>int</span> <span class=s>`xml:&#34;personAge&#34;`</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+
+  <span class=nx>b</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>`&lt;Person&gt;&lt;personName&gt;Obama&lt;/personName&gt;&lt;personAge&gt;57&lt;/personAge&gt;&lt;/Person&gt;`</span><span class=p>)</span>
+  <span class=kd>var</span> <span class=nx>p</span> <span class=nx>Person</span>
+  <span class=c1>// Unmarshalling
+</span><span class=c1></span>  <span class=nx>xml</span><span class=p>.</span><span class=nf>Unmarshal</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>p</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>p</span><span class=p>)</span>
+  <span class=c1>// Marshalling
+</span><span class=c1></span>  <span class=nx>xmlString</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>xml</span><span class=p>.</span><span class=nf>Marshal</span><span class=p>(</span><span class=nx>p</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s\n&#34;</span><span class=p>,</span> <span class=nx>xmlString</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>Unmarshal vs NewDecoder</p>
+<p>使用場景:</p>
+<p>如果是 in memory 的 data (ex: some user input) 使用 unmarshal</p>
+<p>如果是 streaming (ex: file) 使用 NewDecoder</p>
+</blockquote>
+<blockquote>
+<p>暫不對 XML 多做紀錄，先跳過</p>
+</blockquote>
+<p><strong>gob</strong></p>
+<p>gob 是 golang 對資料做成 2進位制格式的 serializing / deserializing</p>
+<ul>
+<li>不可跨語言</li>
+</ul>
+<p>使用 <code>encoding</code> package</p>
+<p>gob (short for Go binary format)</p>
+<p>通常用在 remote procedure calls (RPCs)</p>
+<p>或用在 application 和 machine 之間的通訊</p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>P</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>X</span><span class=p>,</span> <span class=nx>Y</span><span class=p>,</span> <span class=nx>Z</span> <span class=kt>int</span>
+  <span class=nx>Name</span> <span class=kt>string</span>
+<span class=p>}</span>
+
+<span class=kd>type</span> <span class=nx>Q</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>X</span><span class=p>,</span> <span class=nx>Y</span> <span class=o>*</span><span class=kt>int32</span>
+  <span class=nx>Name</span> <span class=kt>string</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=c1>// Initialize the encoder and decoder. Normally enc and dec would be
+</span><span class=c1></span>  <span class=c1>// bound to network connections and the encoder and decoder would
+</span><span class=c1></span>  <span class=c1>// run in different processes.
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>network</span> <span class=nx>bytes</span><span class=p>.</span><span class=nx>Buffer</span> <span class=c1>// Stand-in for a network connection
+</span><span class=c1></span>  <span class=nx>enc</span> <span class=o>:=</span> <span class=nx>gob</span><span class=p>.</span><span class=nf>NewEncoder</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>network</span><span class=p>)</span> <span class=c1>// Will write to network.
+</span><span class=c1></span>  <span class=nx>dec</span> <span class=o>:=</span> <span class=nx>gob</span><span class=p>.</span><span class=nf>NewDecoder</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>network</span><span class=p>)</span><span class=c1>// Will read from network.
+</span><span class=c1></span>  <span class=c1>// Encode (send) the value.
+</span><span class=c1></span>  <span class=nx>err</span> <span class=o>:=</span> <span class=nx>enc</span><span class=p>.</span><span class=nf>Encode</span><span class=p>(</span><span class=nx>P</span><span class=p>{</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=s>&#34;Pythagoras&#34;</span><span class=p>})</span>
+  <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=s>&#34;encode error:&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=c1>// Decode (receive) the value.
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>q</span> <span class=nx>Q</span>
+  <span class=nx>err</span> <span class=p>=</span> <span class=nx>dec</span><span class=p>.</span><span class=nf>Decode</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>q</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=s>&#34;decode error:&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%q: {%d,%d}\n&#34;</span><span class=p>,</span> <span class=nx>q</span><span class=p>.</span><span class=nx>Name</span><span class=p>,</span> <span class=o>*</span><span class=nx>q</span><span class=p>.</span><span class=nx>X</span><span class=p>,</span> <span class=o>*</span><span class=nx>q</span><span class=p>.</span><span class=nx>Y</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>gob 等有常用的時候再補充，先跳過</p>
+</blockquote>
+<p><strong>Cryptography with Go</strong></p>
+<p><code>hash</code> package</p>
+<ul>
+<li>adler32</li>
+<li>crc32</li>
+<li>crc64</li>
+<li>fnv</li>
+</ul>
+<p><code>crypto</code></p>
+<ul>
+<li>md5</li>
+<li>sha1</li>
+<li>aes</li>
+<li>rc4</li>
+<li>rsa</li>
+<li>x509</li>
+</ul>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>hasher</span> <span class=o>:=</span> <span class=nx>sha1</span><span class=p>.</span><span class=nf>New</span><span class=p>()</span>
+  <span class=nx>io</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>hasher</span><span class=p>,</span> <span class=s>&#34;test&#34;</span><span class=p>)</span>
+  <span class=nx>b</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>{}</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Result: %x\n&#34;</span><span class=p>,</span> <span class=nx>hasher</span><span class=p>.</span><span class=nf>Sum</span><span class=p>(</span><span class=nx>b</span><span class=p>))</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Result: %d\n&#34;</span><span class=p>,</span> <span class=nx>hasher</span><span class=p>.</span><span class=nf>Sum</span><span class=p>(</span><span class=nx>b</span><span class=p>))</span>
+  <span class=nx>hasher</span><span class=p>.</span><span class=nf>Reset</span><span class=p>()</span>
+  <span class=nx>data</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;We shall overcome!&#34;</span><span class=p>)</span>
+  <span class=nx>n</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>hasher</span><span class=p>.</span><span class=nf>Write</span><span class=p>(</span><span class=nx>data</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>n</span><span class=o>!=</span><span class=nb>len</span><span class=p>(</span><span class=nx>data</span><span class=p>)</span> <span class=o>||</span> <span class=nx>err</span><span class=o>!=</span><span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Hash write error: %v / %v&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=nx>checksum</span> <span class=o>:=</span> <span class=nx>hasher</span><span class=p>.</span><span class=nf>Sum</span><span class=p>(</span><span class=nx>b</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Result: %x\n&#34;</span><span class=p>,</span> <span class=nx>checksum</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>未來常用到的時候再補充</p>
+</blockquote>
+<h2 id=error-handling-and-testing>Error-Handling and Testing</h2>
+<blockquote>
+<p>go makes a distinction between critical and non-critical errors:</p>
+<p>non-critical errors are returned as normal return values,</p>
+<p>whereas for critical errors, the panic-recover mechanism is used.</p>
+</blockquote>
+<p>Always assign an error to a variable within a compound if-statement; this makes for clearer code.</p>
+<p>如果要停止執行程式的話，可以用 <code>os.Exit(1)</code></p>
+<p>透過 <code>errors.New("")</code> 建立新的 error-type</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>err</span> <span class=o>:=</span> <span class=nx>errors</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=s>&#34;math - square root of negative number&#34;</span><span class=p>)</span>
+</code></pre></div><p>Convention</p>
+<ul>
+<li>Error type 以 <code>Error</code> 為 suffix (如: json.SyntaxError)</li>
+<li>Error variable 以 <code>err</code> 或 <code>Err</code> 為 prefix (如: syscall.Errno)</li>
+</ul>
+<p><code>fmt.Errorf()</code> 也是做成一個 error object</p>
+<p>run-time panic</p>
+<ul>
+<li>會搭配一個 runtime.Error 的 value</li>
+<li>program 會 crash 並提示 runtime.Error 的 message</li>
+<li>這個 value 有 <code>RuntimeError()</code> 的方法</li>
+</ul>
+<p><code>defer</code> 可以在 panic 之後繼續執行</p>
+<p>因為 panic 而程式中止，其中止流程稱為 <code>panicking</code></p>
+<blockquote>
+<p>standard library 如果有 method 是以 <code>Must</code> 為 prefix 的話，表示出錯會造成 panic</p>
+</blockquote>
+<p><code>recover()</code> 是用來停止 panicking 的，可以重新拿回掌控權</p>
+<ul>
+<li>只用在 <code>defer</code> function</li>
+<li>recover() return nil</li>
+</ul>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>protect</span><span class=p>(</span><span class=nx>g</span> <span class=kd>func</span><span class=p>())</span> <span class=p>{</span>
+  <span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;done&#34;</span><span class=p>)</span> <span class=c1>// Println executes normally even if there is a panic
+</span><span class=c1></span>    <span class=k>if</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nb>recover</span><span class=p>();</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+      <span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;run time panic: %v&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+    <span class=p>}</span>
+  <span class=p>}()</span>
+  <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;start&#34;</span><span class=p>)</span>
+  <span class=nf>g</span><span class=p>()</span> <span class=c1>// possible runtime-error
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><blockquote>
+<p>log.Fatal 會在紀錄 log 後呼叫 os.Exit(1)，立刻終止程式</p>
+<p>log.Panic 會在紀錄 log 後呼叫 panic</p>
+</blockquote>
+<p>另一個範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>badCall</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nb>panic</span><span class=p>(</span><span class=s>&#34;bad end&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>test</span><span class=p>()</span> <span class=p>{</span>
+  <span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=nx>e</span> <span class=o>:=</span> <span class=nb>recover</span><span class=p>();</span> <span class=nx>e</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Panicking %s\r\n&#34;</span><span class=p>,</span> <span class=nx>e</span><span class=p>);</span>
+    <span class=p>}</span>
+  <span class=p>}()</span>
+  <span class=nf>badCall</span><span class=p>()</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;After bad call\r\n&#34;</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Calling test\r\n&#34;</span><span class=p>);</span>
+  <span class=nf>test</span><span class=p>()</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Test completed\r\n&#34;</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></div><p>一定要在自己的 package 內對 panic 做 recover</p>
+<ul>
+<li>不要跨越 package 的界線</li>
+<li>回傳的錯誤要是自己 package 包過的 error value</li>
+</ul>
+<blockquote>
+<p>要透過 defer - recover() 回傳 error 的話</p>
+<p>那個 function 的回傳值要先給他名稱</p>
+<p>如: <code>func Parse(input string) (numbers []int, err error)</code></p>
+</blockquote>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>Parse</span><span class=p>(</span><span class=nx>input</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>numbers</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=nx>r</span> <span class=o>:=</span> <span class=nb>recover</span><span class=p>();</span> <span class=nx>r</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+      <span class=kd>var</span> <span class=nx>ok</span> <span class=kt>bool</span>
+      <span class=nx>err</span><span class=p>,</span> <span class=nx>ok</span> <span class=p>=</span> <span class=nx>r</span><span class=p>.(</span><span class=kt>error</span><span class=p>)</span>
+      <span class=k>if</span> <span class=p>!</span><span class=nx>ok</span> <span class=p>{</span>
+        <span class=nx>err</span> <span class=p>=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;pkg: %v&#34;</span><span class=p>,</span> <span class=nx>r</span><span class=p>)</span>
+      <span class=p>}</span>
+    <span class=p>}()</span>
+
+    <span class=nx>fields</span> <span class=o>:=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>Fields</span><span class=p>(</span><span class=nx>input</span><span class=p>)</span>
+    <span class=nx>numbers</span> <span class=p>=</span> <span class=nf>fields2numbers</span><span class=p>(</span><span class=nx>fields</span><span class=p>)</span>
+    <span class=k>return</span>
+<span class=p>}</span>
+</code></pre></div><p>如果每個 function 都要自己實作 recover() 的話會很亂</p>
+<p>可參考下列方式 透過 closure 的做法在原本的流程以外補上 defer - recover()</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>errorHandler</span><span class=p>(</span><span class=nx>fn</span> <span class=nx>fType1</span><span class=p>)</span> <span class=nx>fType1</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=kd>func</span><span class=p>(</span><span class=nx>a</span> <span class=nx>type1</span><span class=p>,</span> <span class=nx>b</span> <span class=nx>type2</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+      <span class=k>if</span> <span class=nx>e</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nb>recover</span><span class=p>().(</span><span class=kt>error</span><span class=p>);</span> <span class=nx>ok</span> <span class=p>{</span>
+        <span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;run time panic: %v&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+      <span class=p>}</span>
+    <span class=p>}()</span>
+    <span class=nf>fn</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p><code>os.StartProcess()</code> 和 <code>exec.Command()</code> 都可以呼叫 os 執行 command</p>
+</blockquote>
+<p>範例，panic 發生的話重啟程式</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>ultraCrazyFunction</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>prog</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nx>Args</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+    <span class=nx>e</span> <span class=o>:=</span> <span class=nb>recover</span><span class=p>()</span>
+    <span class=k>if</span> <span class=nx>e</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+      <span class=c1>// In case of panic, try to restart the entire application:
+</span><span class=c1></span>      <span class=nx>cmd</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=nx>prog</span><span class=p>)</span>
+
+      <span class=nx>err</span> <span class=o>:=</span> <span class=nx>cmd</span><span class=p>.</span><span class=nf>Run</span><span class=p>()</span>
+      <span class=c1>// If that fails, log the error
+</span><span class=c1></span>      <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+        <span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>())</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span> 
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=k>defer</span> <span class=nf>ultraCrazyFunction</span><span class=p>()</span>
+<span class=p>}</span>
+</code></pre></div><p><code>_test.go</code> 檔案是不會被 compile 的，只有在 <code>go test</code> 的時候才會</p>
+<ul>
+<li><code>func (t *T) Fail()</code>: 測試失敗，但繼續執行</li>
+<li><code>func (t *T) FailNow()</code>: 測試失敗，停止此檔案繼續執行，跳至下個檔案執行</li>
+<li><code>func (t *T) Log(args ...interface{})</code>: text 會被記錄在 error-log</li>
+<li><code>func (t *T) Fatal(args ...interface{})</code>: 功能是 <code>Log()</code> 加上 `FailNow()</li>
+</ul>
+<blockquote>
+<p>測試 benchmark 的話是 <code>BenchmarkFunction</code> 為名稱</p>
+<p>並使用 *testing.B 參數，呼叫 <code>go test –test.bench=.*</code> 執行</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>BenchmarkReverse</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+  <span class=o>...</span>
+<span class=p>}</span>
+</code></pre></div><p><code>go test -v &lt;package name></code> 可以單測指定的 package</p>
+<p><strong>Investigating Performance</strong></p>
+<p>紀錄 go test 的一些數據</p>
+<p>輸出成檔案</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>go <span class=nb>test</span> -cpuprofile cpu.prof -memprofile mem.prof -bench 
+</code></pre></div><p>透過 pprof 紀錄資訊</p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>cpuprofile</span> <span class=p>=</span> <span class=nx>flag</span><span class=p>.</span><span class=nf>String</span><span class=p>(</span><span class=s>&#34;cpuprofile&#34;</span><span class=p>,</span> <span class=s>&#34;&#34;</span><span class=p>,</span> <span class=s>&#34;write cpu profile to file&#34;</span><span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>flag</span><span class=p>.</span><span class=nf>Parse</span><span class=p>()</span>
+  <span class=k>if</span> <span class=o>*</span><span class=nx>cpuprofile</span> <span class=o>!=</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+    <span class=nx>f</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Create</span><span class=p>(</span><span class=o>*</span><span class=nx>cpuprofile</span><span class=p>)</span>
+    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+      <span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+    <span class=p>}</span>
+    <span class=k>defer</span> <span class=nx>f</span><span class=p>.</span><span class=nb>close</span><span class=p>()</span>
+    <span class=nx>pprof</span><span class=p>.</span><span class=nf>StartCPUProfile</span><span class=p>(</span><span class=nx>f</span><span class=p>)</span>
+    <span class=k>defer</span> <span class=nx>pprof</span><span class=p>.</span><span class=nf>StopCPUProfile</span><span class=p>()</span>
+  <span class=p>}</span>
+  <span class=o>...</span>
+<span class=p>}</span>
+</code></pre></div><p>執行程式後 會生成 對應的檔案</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>rogexec -cpuprofile<span class=o>=</span>progexec.prof
+</code></pre></div><p>接著就可以用 go tool 來查看</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>go tool pprof progexec.prof
+</code></pre></div><p>其他類似的 go tool 還有</p>
+<ul>
+<li>top
+<ul>
+<li>顯示 10 個 loading 最重的 function</li>
+</ul>
+</li>
+<li>web or web funcname
+<ul>
+<li>需安裝 <code>graphviz</code> 工具才可以看</li>
+<li>把 profile data 畫成 SVG 圖</li>
+<li>顯示 function 呼叫的流程圖</li>
+</ul>
+</li>
+<li>list funcname or weblist funcname
+<ul>
+<li>可以看出來哪段 code 最吃效能</li>
+<li>如果 <code>runtime.allocgc</code> 很高的話，最好是檢查一下</li>
+</ul>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>memprofile</span> <span class=p>=</span> <span class=nx>flag</span><span class=p>.</span><span class=nf>String</span><span class=p>(</span><span class=s>&#34;memprofile&#34;</span><span class=p>,</span> <span class=s>&#34;&#34;</span><span class=p>,</span> <span class=s>&#34;write memory profile to this file&#34;</span><span class=p>)</span>
+<span class=o>...</span>
+
+<span class=nf>CallToFunctionWhichAllocatesLotsOfMemory</span><span class=p>()</span>
+<span class=k>if</span> <span class=o>*</span><span class=nx>memprofile</span> <span class=o>!=</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+  <span class=nx>f</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Create</span><span class=p>(</span><span class=o>*</span><span class=nx>memprofile</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=nx>pprof</span><span class=p>.</span><span class=nf>WriteHeapProfile</span><span class=p>(</span><span class=nx>f</span><span class=p>)</span>
+  <span class=nx>f</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+  <span class=k>return</span>
+<span class=p>}</span>
+</code></pre></div><p>指令 可以生成上面程式的 profile 檔案</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>progexec -memprofile<span class=o>=</span>progexec.mprof
+</code></pre></div><p>再用 go tool 工具看</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>go tool pprof progexec.mprof
+</code></pre></div><h2 id=goroutines-and-channels>Goroutines and Channels</h2>
+<p>goroutine 執行的時候會使用 segmented stack 動態成長</p>
+<p>stack management 是自動的</p>
+<p>任何數量的 goroutine 都可以被更少數量的 thread 執行</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>go</span> <span class=kd>func</span><span class=p>(){</span>
+<span class=p>}()</span>
+</code></pre></div><p>可以開始跑 function，在相同的 address，各自有自己的 stack</p>
+<p><code>init()</code> 時是可以運行 goroutine 的</p>
+<p>使用 <code>GOMAXPROCS</code> 來提高 concurrent 的效能</p>
+<ul>
+<li>告訴 runtime 有多少個 goroutine 可以平行的執行</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>runtime</span><span class=p>.</span><span class=nf>GOMAXPROCS</span><span class=p>(</span><span class=nx>numCores</span><span class=p>)</span>
+</code></pre></div><p>goroutine 彼此間是獨立的運行單位</p>
+<p>範例，使用 <code>sync.WaitGroup</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>HeavyFunction1</span><span class=p>(</span><span class=nx>wg</span> <span class=o>*</span><span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>defer</span> <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>
+  <span class=c1>// Do a lot of stuff
+</span><span class=c1></span><span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>HeavyFunction2</span><span class=p>(</span><span class=nx>wg</span> <span class=o>*</span><span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>defer</span> <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>
+  <span class=c1>// Do a lot of stuff
+</span><span class=c1></span><span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>wg</span> <span class=o>:=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>)</span>
+  <span class=nx>wg</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>HeavyFunction1</span><span class=p>(</span><span class=nx>wg</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>HeavyFunction2</span><span class=p>(</span><span class=nx>wg</span><span class=p>)</span>
+  <span class=nx>wg</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;All Finished!&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>未初始化的 channel value 是 <code>nil</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>identifier</span> <span class=kd>chan</span> <span class=nx>datatype</span>
+
+<span class=c1>// 用 make 初始化
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>ch1</span> <span class=kd>chan</span> <span class=kt>string</span>
+<span class=nx>ch1</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+<span class=c1>// 或
+</span><span class=c1></span><span class=nx>ch1</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+<span class=c1>// others
+</span><span class=c1>// channel of channels of int
+</span><span class=c1></span><span class=nx>chanOfChans</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+<span class=c1>// channel of functions
+</span><span class=c1></span><span class=nx>funcChan</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>func</span><span class=p>())</span>
+</code></pre></div><p>channel 事實上是一個 typed message queue，是 First In First Out 的結構</p>
+<p>channel 是 reference type，使用 make 來配置記憶體位址</p>
+<p>channel 是 first-class object，可以被存在變數，也可以傳給 function</p>
+<p>甚至是把自己傳給 channel</p>
+<p>channel 用完的話要關閉 <code>close(ch)</code></p>
+<p>傳送資料到 channel，`ch &lt;- int1``</p>
+<p>從 channel 拉資料出來 <code>int2 := &lt;- ch</code></p>
+<p>命名習慣上會用 <code>ch</code> 或 包含 <code>chan</code></p>
+<blockquote>
+<p>The channel <code>send</code> and <code>receive</code> operations are atomic which means they always complete without interruption.</p>
+</blockquote>
+<p>因為可能有時間延遲，不要用 print 的方式來辨識 goroutine 的執行先後</p>
+<p>By default, communication 是同步的，而且是 unbuffered</p>
+<ul>
+<li>即 send 操作要等到 receiver 接收才算完成</li>
+<li>buffered channel 的溝通是 synchronous 的</li>
+</ul>
+<p>deadlock 是指當 unbuffered channel 的 sender 和 receiver 同時等待彼此</p>
+<p>asynchronous channels 用 buffered channel</p>
+<ul>
+<li>除非 buffer 滿了(才會造成 block)，不然 sender 可以一直 send 東西進 channel</li>
+<li>除非 buffer 空了(才會造成 block)，不然 receiver 可以一直從 channel receive 東西</li>
+<li><code>cap()</code> 可以回傳 channel 的 capacity</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>buf</span> <span class=o>:=</span> <span class=mi>100</span>
+<span class=nx>ch1</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>buf</span><span class=p>)</span>
+<span class=c1>// buf 是指這個 channel 可以放多少 element 進去
+</span></code></pre></div><blockquote>
+<p>設計時都先考慮 unbuffered channel，做不到或有問題時再改用 buffered channel</p>
+</blockquote>
+<p><strong>semaphore pattern (旗號模式)</strong></p>
+<p>當 concurrent goroutine 做完事情以後，發訊號進 channel 通知 main goroutine 他做完 (ready) 了</p>
+<ul>
+<li>常見做法是先 block 住 main program，可把 <code>select{}</code> 放在 main 的後段</li>
+</ul>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Empty</span> <span class=kd>interface</span> <span class=p>{}</span>
+<span class=kd>var</span> <span class=nx>empty</span> <span class=nx>Empty</span>
+<span class=o>...</span>
+<span class=nx>data</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>float64</span><span class=p>,</span> <span class=nx>N</span><span class=p>)</span>
+<span class=nx>res</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>float64</span><span class=p>,</span> <span class=nx>N</span><span class=p>)</span>
+<span class=nx>sem</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>Empty</span><span class=p>,</span> <span class=nx>N</span><span class=p>)</span> <span class=c1>// semaphore
+</span><span class=c1></span><span class=o>...</span>
+<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>xi</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>data</span> <span class=p>{</span>
+  <span class=k>go</span> <span class=kd>func</span> <span class=p>(</span><span class=nx>i</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>xi</span> <span class=kt>float64</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>res</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nf>doSomething</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span><span class=nx>xi</span><span class=p>)</span>
+    <span class=nx>sem</span> <span class=o>&lt;-</span> <span class=nx>empty</span>
+  <span class=p>}</span> <span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>xi</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=c1>// wait for goroutines to finish
+</span><span class=c1></span><span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span> <span class=o>&lt;-</span><span class=nx>sem</span> <span class=p>}</span>
+</code></pre></div><p>要注意把 index (參數) 傳進 goroutine 的時候要用 copy</p>
+<p>不然等到 goroutine 執行的時候如果被改掉，值就會不正確</p>
+<p>透過 buffered channel 來做到 mutex</p>
+<ul>
+<li>buffered channel 的 capacity 是我們要 synchronize 的資源數量</li>
+<li>length (當前 buffered channel 的 item 數量) 是當前的資源使用情況</li>
+<li>capacity 扣掉 length 就是 channel 的 free resources 數量</li>
+</ul>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Empty</span> <span class=kd>interface</span> <span class=p>{}</span>
+<span class=kd>type</span> <span class=nx>semaphore</span> <span class=kd>chan</span> <span class=nx>Empty</span>
+
+<span class=nx>sem</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=nx>semaphore</span><span class=p>,</span> <span class=nx>N</span><span class=p>)</span>
+
+<span class=c1>// acquire n resources
+</span><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>semaphore</span><span class=p>)</span> <span class=nf>P</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>e</span> <span class=o>:=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>Empty</span><span class=p>)</span>
+    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+        <span class=nx>s</span> <span class=o>&lt;-</span> <span class=nx>e</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+<span class=c1>// release n resources
+</span><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>semaphore</span><span class=p>)</span> <span class=nf>V</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+        <span class=o>&lt;-</span><span class=nx>s</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=c1>// 實作 mutex
+</span><span class=c1></span><span class=cm>/* mutexes */</span>
+<span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>semaphore</span><span class=p>)</span> <span class=nf>Lock</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>s</span><span class=p>.</span><span class=nf>P</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>semaphore</span><span class=p>)</span> <span class=nf>Unlock</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>s</span><span class=p>.</span><span class=nf>V</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=cm>/* signal-wait */</span>
+<span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>semaphore</span><span class=p>)</span> <span class=nf>Wait</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>s</span><span class=p>.</span><span class=nf>P</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>semaphore</span><span class=p>)</span> <span class=nf>Signal</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>s</span><span class=p>.</span><span class=nf>V</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Channel Factory and Producer-Consumer Pattern</strong></p>
+<p>不傳 channel 進 goroutine</p>
+<p>讓 function 建立 channel 並回傳 (像 factory 來建立)</p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nf>suck</span><span class=p>(</span><span class=nf>pump</span><span class=p>())</span>
+    <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mf>1e9</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>pump</span><span class=p>()</span> <span class=kd>chan</span> <span class=kt>int</span> <span class=p>{</span>
+    <span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+    <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+        <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+        	<span class=nx>ch</span> <span class=o>&lt;-</span> <span class=nx>i</span>
+        <span class=p>}</span>
+    <span class=p>}()</span>
+    <span class=k>return</span> <span class=nx>ch</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>suck</span><span class=p>(</span><span class=nx>ch</span> <span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+        <span class=k>for</span> <span class=nx>v</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>ch</span> <span class=p>{</span>
+            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>v</span><span class=p>)</span>
+        <span class=p>}</span>
+    <span class=p>}()</span>
+<span class=p>}</span>
+</code></pre></div><p>用 for-range 來接收 channel 的資料</p>
+<p>直到 channel close 以前都會一直處於讀取狀態 (沒收到資料的話會 block 住)</p>
+<p>會透過另一個 goroutine 來傳送資料 並在結束時 close channel</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>for</span> <span class=nx>v</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>ch</span> <span class=p>{</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;The value is %v\n&#34;</span><span class=p>,</span><span class=nx>v</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>上面的範例可以整理成 Producer-Consumer pattern</p>
+<ul>
+<li>producer 傳出 channel 給 consumer 接來用</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>for</span> <span class=p>{</span>
+  <span class=nf>Consume</span><span class=p>(</span><span class=nf>Produce</span><span class=p>())</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Channel 的方向性</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>send_only</span> <span class=kd>chan</span><span class=o>&lt;-</span> <span class=kt>int</span> <span class=c1>// data can only be sent (written) to the channel
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>recv_only</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=kt>int</span> <span class=c1>// data can only be received (read) from the channel
+</span></code></pre></div><ul>
+<li><code>&lt;-chan T</code> 是唯讀的 channel，無法被 close，因為 close 是給 sender goroutine 用的通知結束訊號，即不再傳送資料</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>c</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span> <span class=c1>// bidirectional
+</span><span class=c1></span><span class=k>go</span> <span class=nf>source</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span>
+<span class=k>go</span> <span class=nf>sink</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span>
+<span class=kd>func</span> <span class=nf>source</span><span class=p>(</span><span class=nx>ch</span> <span class=kd>chan</span><span class=o>&lt;-</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>for</span> <span class=p>{</span> <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=mi>1</span> <span class=p>}</span> <span class=c1>// sending data to ch channel
+</span><span class=c1></span><span class=p>}</span>
+<span class=kd>func</span> <span class=nf>sink</span><span class=p>(</span><span class=nx>ch</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>for</span> <span class=p>{</span> <span class=o>&lt;-</span><span class=nx>ch</span> <span class=p>}</span> <span class=c1>// receiving data from ch channel
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><p><strong>Channel iterator pattern</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=o>*</span><span class=nx>container</span><span class=p>)</span> <span class=nf>Iter</span> <span class=p>()</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=nx>items</span> <span class=p>{</span>
+  <span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>item</span><span class=p>)</span>
+
+  <span class=k>go</span> <span class=kd>func</span> <span class=p>()</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>c</span><span class=p>.</span><span class=nf>Len</span><span class=p>();</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span> <span class=c1>// or use a for-range loop
+</span><span class=c1></span>      <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=nx>c</span><span class=p>.</span><span class=nx>items</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+    <span class=p>}</span>
+  <span class=p>}</span> <span class=p>()</span>
+  <span class=k>return</span> <span class=nx>ch</span>
+<span class=p>}</span>
+
+<span class=c1>// 透過上述的包裝，變成可以直接用 range 取值
+</span><span class=c1></span><span class=k>for</span> <span class=nx>x</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>container</span><span class=p>.</span><span class=nf>Iter</span><span class=p>()</span> <span class=p>{</span> <span class=o>...</span> <span class=p>}</span>
+</code></pre></div><blockquote>
+<p>缺點: 如果程式異常終止的話，goroutine 不會被 GC 回收</p>
+</blockquote>
+<p><strong>Pipe and filter pattern</strong></p>
+<p>從一個 input channel 接收資料處例後再透過 output channel 送出資料</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>sendChan</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+<span class=nx>receiveChan</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+<span class=k>go</span> <span class=nf>processChannel</span><span class=p>(</span><span class=nx>sendChan</span><span class=p>,</span> <span class=nx>receiveChan</span><span class=p>)</span>
+<span class=kd>func</span> <span class=nf>processChannel</span><span class=p>(</span><span class=nx>in</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>out</span> <span class=kd>chan</span><span class=o>&lt;-</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+ <span class=k>for</span> <span class=nx>inValue</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>in</span> <span class=p>{</span>
+   <span class=nx>result</span><span class=o>:=</span> <span class=o>...</span> <span class=c1>// processing inValue
+</span><span class=c1></span>   <span class=nx>out</span> <span class=o>&lt;-</span> <span class=nx>result</span>
+ <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>通道不總是需要被關閉，必要時才關，像是當 receiver 必須被告知已不需接收資料的時候</p>
+<p>只有 sender 應該關閉通道，永遠不會是 receiver 來關</p>
+<p>若通道已關閉</p>
+<ul>
+<li>傳送資料進去會 panic</li>
+<li>關閉已關閉通道會 panic</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 好的習慣 用 defer 關閉
+</span><span class=c1></span><span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>float64</span><span class=p>)</span>
+<span class=k>defer</span> <span class=nb>close</span><span class=p>(</span><span class=nx>ch</span><span class=p>)</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>v</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>ch</span> <span class=c1>// ok is true if v received a value
+</span><span class=c1></span>
+<span class=c1>// 表示如果對已關閉 channel 拿資料會拿到 zero value, false
+</span><span class=c1></span>
+<span class=c1>// 合併使用
+</span><span class=c1></span><span class=k>if</span> <span class=nx>v</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>ch</span><span class=p>;</span> <span class=nx>ok</span> <span class=p>{</span>
+<span class=o>...</span>
+<span class=p>}</span>
+
+<span class=c1>// 如果是在回圈內的話，可以使用 break 跳出
+</span><span class=c1></span><span class=nx>v</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>ch</span>
+<span class=k>if</span> <span class=p>!</span><span class=nx>ok</span> <span class=p>{</span>
+<span class=k>break</span>
+<span class=p>}</span>
+<span class=c1>// process(v)
+</span></code></pre></div><blockquote>
+<p>接收寫成 for-loop 比較好，因為會自動偵測 channel 是否被關閉</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>for</span> <span class=nx>input</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>ch</span> <span class=p>{</span>
+  <span class=nf>Process</span><span class=p>(</span><span class=nx>input</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>透過 <code>select</code> 搭配 <code>switch</code> 可以做到等待多個 go routine</p>
+<p>稱為 <code>comminications switch</code></p>
+<p><strong>注意: 此種方法不能使用 fallthrough</strong></p>
+<p>select 結束時機點</p>
+<ul>
+<li>碰到 break</li>
+<li>碰到 return</li>
+<li>如果所有 case 都 block，就會一直 block 中</li>
+<li>如果 default 以外的都 block，則執行 default</li>
+<li>如果同時多個 case 可以取值，則隨機取</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>select</span> <span class=p>{</span>
+  <span class=k>case</span> <span class=nx>u</span><span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>ch1</span><span class=p>:</span>
+    <span class=o>...</span>
+  <span class=k>case</span> <span class=nx>v</span><span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>ch2</span><span class=p>:</span>
+    <span class=o>...</span>
+    <span class=o>...</span>
+  <span class=k>default</span><span class=p>:</span> <span class=c1>// no value ready to be received
+</span><span class=c1></span>    <span class=o>...</span>
+<span class=p>}</span>
+</code></pre></div><p>在 select 內使用 send operation 配上 <code>default</code> 的話</p>
+<p>可以確保 send 會是 non-blocking 的</p>
+<p>select 實作了一種 listener pattern，通常用在 infinite loop</p>
+<p>當條件達到時才透過 <code>break</code> 做結束</p>
+<blockquote>
+<p>close 的 channel 可以隨意讀值 (空值)</p>
+</blockquote>
+<p><strong>Nulling idiom</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>iter</span><span class=p>(</span><span class=nx>b</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>c</span> <span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span> 
+  <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+    <span class=nx>c</span> <span class=o>&lt;-</span> <span class=nx>i</span> <span class=c1>// put integers from 0 to n-1 on channel c
+</span><span class=c1></span>  <span class=p>}</span>
+  <span class=nb>close</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span> 
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>n</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>strconv</span><span class=p>.</span><span class=nf>Atoi</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Args</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span> <span class=c1>// line arg. converted to integer
+</span><span class=c1></span>  <span class=nx>a</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+  <span class=nx>b</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>iter</span><span class=p>(</span><span class=nx>n</span><span class=p>,</span> <span class=nx>a</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>iter</span><span class=p>(</span><span class=nx>n</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span>
+  <span class=k>for</span> <span class=nx>a</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=o>||</span> <span class=nx>b</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=k>select</span> <span class=p>{</span>
+      <span class=k>case</span> <span class=nx>x</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>a</span><span class=p>:</span> <span class=c1>// takes int value from channel a
+</span><span class=c1></span>        <span class=k>if</span> <span class=nx>ok</span> <span class=p>{</span>
+     <span class=k>go</span>     <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>x</span><span class=p>)</span>
+        <span class=p>}</span> <span class=k>else</span> <span class=p>{</span> <span class=c1>// if channel a is closed
+</span><span class=c1></span>          <span class=nx>a</span> <span class=p>=</span> <span class=kc>nil</span>
+        <span class=p>}</span>
+      <span class=k>case</span> <span class=nx>y</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>b</span><span class=p>:</span> <span class=c1>// takes int value from channel b
+</span><span class=c1></span>        <span class=k>if</span> <span class=nx>ok</span> <span class=p>{</span>
+          <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>y</span><span class=p>)</span>
+        <span class=p>}</span> <span class=k>else</span> <span class=p>{</span> <span class=c1>// if channel b is closed
+</span><span class=c1></span>          <span class=nx>b</span> <span class=p>=</span> <span class=kc>nil</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Server backend pattern</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// Backend goroutine.
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>backend</span><span class=p>()</span> <span class=p>{</span>
+  <span class=k>for</span> <span class=p>{</span>
+    <span class=k>select</span> <span class=p>{</span>
+      <span class=k>case</span> <span class=nx>cmd</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>ch1</span><span class=p>:</span>
+        <span class=c1>// Handle ...
+</span><span class=c1></span>      <span class=k>case</span> <span class=nx>cmd</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>ch2</span><span class=p>:</span>
+        <span class=o>...</span>
+      <span class=k>case</span> <span class=nx>cmd</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>chStop</span><span class=p>:</span>
+        <span class=c1>// stop server
+</span><span class=c1></span>    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>backend</span><span class=p>()</span> <span class=p>{</span>
+  <span class=k>for</span> <span class=nx>req</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>chRequest</span> <span class=p>{</span>
+    <span class=k>switch</span> <span class=nx>req</span><span class=p>.</span><span class=nf>Subject</span><span class=p>()</span> <span class=p>{</span>
+      <span class=k>case</span> <span class=nx>A1</span><span class=p>:</span> <span class=c1>// Handle case ...
+</span><span class=c1></span>      <span class=k>case</span> <span class=nx>A2</span><span class=p>:</span> <span class=c1>// Handle case ...
+</span><span class=c1></span>      <span class=k>default</span><span class=p>:</span>
+        <span class=c1>// Handle illegal request ...
+</span><span class=c1></span>        <span class=c1>// ...
+</span><span class=c1></span>    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p><code>time.Ticker</code> 會一直傳送時間給 <code>C</code></p>
+<p>呼叫 <code>Stop()</code> 會停止，通常用在 defer</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Ticker</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>C</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=nx>Time</span> <span class=c1>// the channel on which the ticks are delivered.
+</span><span class=c1></span>  <span class=c1>// contains filtered or unexported fields
+</span><span class=c1></span>  <span class=o>...</span>
+<span class=p>}</span>
+
+<span class=c1>// 使用情況
+</span><span class=c1></span><span class=nx>ticker</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>NewTicker</span><span class=p>(</span><span class=nx>updateInterval</span><span class=p>)</span>
+<span class=k>defer</span> <span class=nx>ticker</span><span class=p>.</span><span class=nf>Stop</span><span class=p>()</span><span class=o>...</span>
+<span class=k>select</span> <span class=p>{</span>
+    <span class=k>case</span> <span class=nx>u</span><span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>ch1</span><span class=p>:</span>    <span class=o>...</span>  
+    <span class=k>case</span> <span class=nx>v</span><span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>ch2</span><span class=p>:</span>    <span class=o>...</span>
+    <span class=k>case</span> <span class=o>&lt;-</span> <span class=nx>ticker</span><span class=p>.</span><span class=nx>C</span><span class=p>:</span>   <span class=nf>logState</span><span class=p>(</span><span class=nx>status</span><span class=p>)</span> <span class=c1>// e.g. call some logging function logState
+</span><span class=c1></span>    <span class=k>default</span><span class=p>:</span> <span class=c1>// no value ready to be received    ...
+</span><span class=c1></span><span class=p>}</span>
+
+<span class=c1>// 另一個範例 透過 time.Tick 來做時間限制管理
+</span><span class=c1></span><span class=kn>import</span> <span class=s>&#34;time&#34;</span>
+<span class=nx>rate_per_sec</span> <span class=o>:=</span> <span class=mi>10</span>
+<span class=kd>var</span> <span class=nx>dur</span> <span class=nx>Duration</span> <span class=p>=</span> <span class=mf>1e9</span> <span class=o>/</span> <span class=nx>rate_per_sec</span>
+<span class=nx>chRate</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Tick</span><span class=p>(</span><span class=nx>dur</span><span class=p>)</span> <span class=c1>// a tick every 1/10th of a second
+</span><span class=c1></span><span class=k>for</span> <span class=nx>req</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>requests</span> <span class=p>{</span>
+	 <span class=o>&lt;-</span> <span class=nx>chRate</span> <span class=c1>// rate limit our Service.Method RPC calls
+</span><span class=c1></span>	 <span class=k>go</span> <span class=nx>client</span><span class=p>.</span><span class=nf>Call</span><span class=p>(</span><span class=s>&#34;Service.Method&#34;</span><span class=p>,</span> <span class=nx>req</span><span class=p>,</span> <span class=o>...</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>tick</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Tick</span><span class=p>(</span><span class=mf>1e8</span><span class=p>)</span>
+  <span class=nx>boom</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>After</span><span class=p>(</span><span class=mf>5e8</span><span class=p>)</span>
+  <span class=k>for</span> <span class=p>{</span>
+    <span class=k>select</span> <span class=p>{</span>
+      <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>tick</span><span class=p>:</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;tick.&#34;</span><span class=p>)</span>
+      <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>boom</span><span class=p>:</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;BOOM!&#34;</span><span class=p>)</span>
+        <span class=k>return</span>
+      <span class=k>default</span><span class=p>:</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34; .&#34;</span><span class=p>)</span>
+        <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mf>5e7</span><span class=p>)</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><ul>
+<li><code>Tick()</code> 是固定 period 可以收到一次資料</li>
+<li><code>After()</code> 是會在多久時間後收到唯一一次資料</li>
+</ul>
+<p><strong>Simple Timeout Pattern</strong></p>
+<p>版本 1</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>timeout</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>bool</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mf>1e9</span><span class=p>)</span> <span class=c1>// one second
+</span><span class=c1></span>  <span class=nx>timeout</span> <span class=o>&lt;-</span> <span class=kc>true</span>
+<span class=p>}()</span>
+
+<span class=k>select</span> <span class=p>{</span>
+    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>ch</span><span class=p>:</span>  <span class=c1>// a read from ch has occurred
+</span><span class=c1></span>    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>timeout</span><span class=p>:</span>  <span class=c1>// the read from ch has timed out
+</span><span class=c1></span>       <span class=k>break</span>
+<span class=p>}</span>
+</code></pre></div><p>版本 2</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>error</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=nx>client</span><span class=p>.</span><span class=nf>Call</span><span class=p>(</span><span class=s>&#34;Service.Method&#34;</span><span class=p>,</span> <span class=nx>args</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>reply</span><span class=p>)</span>
+<span class=p>}()</span>
+
+<span class=k>select</span> <span class=p>{</span>
+  <span class=k>case</span> <span class=nx>resp</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>ch</span><span class=p>:</span> <span class=c1>// use resp and reply
+</span><span class=c1></span>  <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>time</span><span class=p>.</span><span class=nf>After</span><span class=p>(</span><span class=nx>timeoutNs</span><span class=p>):</span> <span class=c1>// call timed out
+</span><span class=c1></span>    <span class=k>break</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>buffer size 1 是必要的，用來避免 deadlock 並確保 timeout channel 可被 GC</p>
+</blockquote>
+<p>版本 3 (範例: 只要最快跑完的那筆 query)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>Query</span><span class=p>(</span><span class=nx>conns</span> <span class=p>[]</span><span class=nx>Conn</span><span class=p>,</span> <span class=nx>query</span> <span class=kt>string</span><span class=p>)</span> <span class=nx>Result</span> <span class=p>{</span>
+  <span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>Result</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+  <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>conn</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>conns</span> <span class=p>{</span>
+    <span class=k>go</span> <span class=kd>func</span><span class=p>(</span><span class=nx>c</span> <span class=nx>Conn</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>select</span> <span class=p>{</span>
+        <span class=k>case</span> <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=nx>c</span><span class=p>.</span><span class=nf>DoQuery</span><span class=p>(</span><span class=nx>query</span><span class=p>):</span>
+        <span class=k>default</span><span class=p>:</span>
+      <span class=p>}</span>
+    <span class=p>}(</span><span class=nx>conn</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=o>&lt;-</span> <span class=nx>ch</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Recovering with goroutines</strong></p>
+<p>goroutine 內部自己可以做 defer recover</p>
+<p>這樣掛掉的話不會影響其他 go routine</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>server</span><span class=p>(</span><span class=nx>workChan</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Work</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>for</span> <span class=nx>work</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>workChan</span> <span class=p>{</span>
+    <span class=k>go</span> <span class=nf>safelyDo</span><span class=p>(</span><span class=nx>work</span><span class=p>)</span> <span class=c1>// start the goroutine for that work
+</span><span class=c1></span>  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>safelyDo</span><span class=p>(</span><span class=nx>work</span> <span class=o>*</span><span class=nx>Work</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+   <span class=k>if</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nb>recover</span><span class=p>();</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+     <span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;work failed with %s in %v:&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>,</span> <span class=nx>work</span><span class=p>)</span>
+     <span class=c1>// the failing goroutine is stopped
+</span><span class=c1></span>   <span class=p>}</span>
+ <span class=p>}()</span>
+ <span class=nf>do</span><span class=p>(</span><span class=nx>work</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p><code>recovver()</code> 如果不是放在 defer 的話，就只會回傳 <code>nil</code></p>
+<p><strong>Tasks and Worker Processes</strong></p>
+<p>假設有多個 task 要執行，每個 task 由一個 worker 處理</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Task</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=c1>// some state
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><p>第一種方式: 透過 shared memory 來做 synchronize</p>
+<p>tasks pool 是 shared memory. 為了 sync 工作且避免 race condition，要加上 <code>Mutex</code> lock</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Pool</span> <span class=kd>struct</span> <span class=p>{</span>
+  <span class=nx>Mu</span> <span class=nx>sync</span><span class=p>.</span><span class=nx>Mutex</span>
+  <span class=nx>Tasks</span> <span class=p>[]</span><span class=nx>Task</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>Worker</span><span class=p>(</span><span class=nx>pool</span> <span class=o>*</span><span class=nx>Pool</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=p>{</span>
+        <span class=nx>pool</span><span class=p>.</span><span class=nx>Mu</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+        <span class=c1>// begin critical section:
+</span><span class=c1></span>        <span class=nx>task</span> <span class=o>:=</span> <span class=nx>pool</span><span class=p>.</span><span class=nx>Tasks</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=c1>// take the first task
+</span><span class=c1></span>        <span class=nx>pool</span><span class=p>.</span><span class=nx>Tasks</span> <span class=p>=</span> <span class=nx>pool</span><span class=p>.</span><span class=nx>Tasks</span><span class=p>[</span><span class=mi>1</span><span class=p>:]</span> <span class=c1>// update the pool of tasks
+</span><span class=c1></span>        <span class=c1>// end critical section
+</span><span class=c1></span>        <span class=nx>pool</span><span class=p>.</span><span class=nx>Mu</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+        <span class=nf>process</span><span class=p>(</span><span class=nx>task</span><span class=p>)</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>一個 worker 鎖住 pool，從 pool 拿出第一個 task，再解鎖 pool，執行 task</p>
+<p>lock 確保一次只有一個 worker 可以存取 pool</p>
+<p>task 被指派給唯一一個 process</p>
+<p>工作一多的話會頻繁的 lock - unlock，會降低效能</p>
+<p>第二種方式: 使用 channel</p>
+<p>使用 channels of <code>Tasks</code> 來做 synchronize</p>
+<ul>
+<li>一個 pending channel 接收 requested tasks</li>
+<li>一個 done channel 接收完成的 tasks (結果)</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>pending</span><span class=p>,</span> <span class=nx>done</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Task</span><span class=p>),</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Task</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>sendWork</span><span class=p>(</span><span class=nx>pending</span><span class=p>)</span> <span class=c1>// put tasks to do on the channel
+</span><span class=c1></span>  <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span> <span class=c1>// start N goroutines to do work
+</span><span class=c1></span>    <span class=k>go</span> <span class=nf>Worker</span><span class=p>(</span><span class=nx>pending</span><span class=p>,</span> <span class=nx>done</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=nf>consumeWork</span><span class=p>(</span><span class=nx>done</span><span class=p>)</span> <span class=c1>// continue with the processed tasks
+</span><span class=c1></span><span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>Worker</span><span class=p>(</span><span class=nx>in</span><span class=p>,</span> <span class=nx>out</span> <span class=kd>chan</span> <span class=o>*</span><span class=nx>Task</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=p>{</span>
+        <span class=nx>t</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>in</span>
+        <span class=nf>process</span><span class=p>(</span><span class=nx>t</span><span class=p>)</span>
+        <span class=nx>out</span> <span class=o>&lt;-</span> <span class=nx>t</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>如果 tasks 增加了，就增加 worker 數量</p>
+<p>從 channel 讀取和傳送資料是 atomic 操作</p>
+<p>我們無法預期哪個 task 會被哪個 process 處理</p>
+<p><strong>sync.Mutex vs Channel</strong></p>
+<p>使用 <code>sync.Mutex</code> 當</p>
+<ul>
+<li>cache information 在 shared data structure 的時候</li>
+<li>holding state information (如: 執行中程序的 context 或 status)</li>
+</ul>
+<p>使用 channels 當</p>
+<ul>
+<li>通訊 asynchronous results</li>
+<li>分散 units of work</li>
+<li>傳遞 data 的 ownership</li>
+</ul>
+<blockquote>
+<p>如果發現使用 locking 時的 rule 太複雜，可以考慮使用 channel 來做簡化</p>
+</blockquote>
+<p><strong>實作 Lazy Generator</strong></p>
+<p>generator 是一個會依序回傳下一個值的 function</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nf>generateInteger</span><span class=p>()</span> <span class=p>=&gt;</span> <span class=mi>0</span>
+<span class=nf>generateInteger</span><span class=p>()</span> <span class=p>=&gt;</span> <span class=mi>1</span>
+<span class=nf>generateInteger</span><span class=p>()</span> <span class=p>=&gt;</span> <span class=mi>2</span>
+<span class=o>...</span><span class=p>.</span>
+</code></pre></div><p>也稱作 Lazy Evaluation，表示只有在需要的時候計算，節省資源</p>
+<p>範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>resume</span> <span class=kd>chan</span> <span class=kt>int</span>
+<span class=kd>func</span> <span class=nf>integers</span><span class=p>()</span> <span class=kd>chan</span> <span class=kt>int</span> <span class=p>{</span>
+  <span class=nx>yield</span> <span class=o>:=</span> <span class=nf>make</span> <span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+  <span class=nx>count</span> <span class=o>:=</span> <span class=mi>0</span>
+  <span class=k>go</span> <span class=kd>func</span> <span class=p>()</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=p>{</span>
+      <span class=nx>yield</span> <span class=o>&lt;-</span> <span class=nx>count</span>
+      <span class=nx>count</span><span class=o>++</span>
+    <span class=p>}</span>
+  <span class=p>}</span> <span class=p>()</span>
+  <span class=k>return</span> <span class=nx>yield</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>generateInteger</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=o>&lt;-</span><span class=nx>resume</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>resume</span> <span class=p>=</span> <span class=nf>integers</span><span class=p>()</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nf>generateInteger</span><span class=p>())</span> <span class=c1>//=&gt; 0
+</span><span class=c1></span>  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nf>generateInteger</span><span class=p>())</span> <span class=c1>//=&gt; 1
+</span><span class=c1></span>  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nf>generateInteger</span><span class=p>())</span> <span class=c1>//=&gt; 2
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></div><p>很難的範例 (General Lazy Evaluation)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Any</span> <span class=kd>interface</span><span class=p>{}</span>
+<span class=kd>type</span> <span class=nx>EvalFunc</span> <span class=kd>func</span><span class=p>(</span><span class=nx>Any</span><span class=p>)</span> <span class=p>(</span><span class=nx>Any</span><span class=p>,</span> <span class=nx>Any</span><span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>evenFunc</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>(</span><span class=nx>state</span> <span class=nx>Any</span><span class=p>)</span> <span class=p>(</span><span class=nx>Any</span><span class=p>,</span> <span class=nx>Any</span><span class=p>)</span> <span class=p>{</span>
+        <span class=nx>os</span> <span class=o>:=</span> <span class=nx>state</span><span class=p>.(</span><span class=kt>int</span><span class=p>)</span>
+        <span class=nx>ns</span> <span class=o>:=</span> <span class=nx>os</span> <span class=o>+</span> <span class=mi>2</span>
+        <span class=k>return</span> <span class=nx>os</span><span class=p>,</span> <span class=nx>ns</span>
+    <span class=p>}</span>
+
+    <span class=nx>even</span> <span class=o>:=</span> <span class=nf>BuildLazyIntEvaluator</span><span class=p>(</span><span class=nx>evenFunc</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>10</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%vth even: %v\n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>,</span> <span class=nf>even</span><span class=p>())</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>BuildLazyEvaluator</span><span class=p>(</span><span class=nx>evalFunc</span> <span class=nx>EvalFunc</span><span class=p>,</span> <span class=nx>initState</span> <span class=nx>Any</span><span class=p>)</span> <span class=kd>func</span><span class=p>()</span> <span class=nx>Any</span> <span class=p>{</span>
+    <span class=nx>retValChan</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>Any</span><span class=p>)</span>
+    <span class=nx>loopFunc</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+        <span class=kd>var</span> <span class=nx>actState</span> <span class=nx>Any</span> <span class=p>=</span> <span class=nx>initState</span>
+        <span class=kd>var</span> <span class=nx>retVal</span> <span class=nx>Any</span>
+        <span class=k>for</span> <span class=p>{</span>
+            <span class=nx>retVal</span><span class=p>,</span> <span class=nx>actState</span> <span class=p>=</span> <span class=nf>evalFunc</span><span class=p>(</span><span class=nx>actState</span><span class=p>)</span>
+            <span class=nx>retValChan</span> <span class=o>&lt;-</span> <span class=nx>retVal</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+    <span class=nx>retFunc</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>()</span> <span class=nx>Any</span> <span class=p>{</span>
+        <span class=k>return</span> <span class=o>&lt;-</span><span class=nx>retValChan</span>
+    <span class=p>}</span>
+    <span class=k>go</span> <span class=nf>loopFunc</span><span class=p>()</span>
+    <span class=k>return</span> <span class=nx>retFunc</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>BuildLazyIntEvaluator</span><span class=p>(</span><span class=nx>evalFunc</span> <span class=nx>EvalFunc</span><span class=p>,</span> <span class=nx>initState</span> <span class=nx>Any</span><span class=p>)</span> <span class=kd>func</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span>
+    <span class=nx>ef</span> <span class=o>:=</span> <span class=nf>BuildLazyEvaluator</span><span class=p>(</span><span class=nx>evalFunc</span><span class=p>,</span> <span class=nx>initState</span><span class=p>)</span>
+    <span class=k>return</span> <span class=kd>func</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span>
+        <span class=k>return</span> <span class=nf>ef</span><span class=p>().(</span><span class=kt>int</span><span class=p>)</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>functions are values in Go, and so are closures.</p>
+</blockquote>
+<p><strong>Typical client-server pattern</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Request</span> <span class=kd>struct</span> <span class=p>{</span>
+<span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=kt>int</span>
+    <span class=nx>replyc</span> <span class=kd>chan</span> <span class=kt>int</span> <span class=c1>// reply channel inside the Request
+</span><span class=c1></span><span class=p>}</span>
+
+<span class=kd>type</span> <span class=nx>binOp</span> <span class=kd>func</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>int</span>
+<span class=kd>func</span> <span class=nf>run</span><span class=p>(</span><span class=nx>op</span> <span class=nx>binOp</span><span class=p>,</span> <span class=nx>req</span> <span class=o>*</span><span class=nx>Request</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>req</span><span class=p>.</span><span class=nx>replyc</span> <span class=o>&lt;-</span> <span class=nf>op</span><span class=p>(</span><span class=nx>req</span><span class=p>.</span><span class=nx>a</span><span class=p>,</span> <span class=nx>req</span><span class=p>.</span><span class=nx>b</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>server</span><span class=p>(</span><span class=nx>op</span> <span class=nx>binOp</span><span class=p>,</span> <span class=nx>service</span> <span class=kd>chan</span> <span class=o>*</span><span class=nx>Request</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=p>{</span>
+        <span class=nx>req</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>service</span> <span class=c1>// requests arrive here
+</span><span class=c1></span>        
+        <span class=c1>// start goroutine for request:
+</span><span class=c1></span>        <span class=k>go</span> <span class=nf>run</span><span class=p>(</span><span class=nx>op</span><span class=p>,</span> <span class=nx>req</span><span class=p>)</span> <span class=c1>// don&#39;t wait for op
+</span><span class=c1></span>    <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>startServer</span><span class=p>(</span><span class=nx>op</span> <span class=nx>binOp</span><span class=p>)</span> <span class=kd>chan</span> <span class=o>*</span><span class=nx>Request</span> <span class=p>{</span>
+    <span class=nx>reqChan</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Request</span><span class=p>)</span>
+    <span class=k>go</span> <span class=nf>server</span><span class=p>(</span><span class=nx>op</span><span class=p>,</span> <span class=nx>reqChan</span><span class=p>)</span>
+    <span class=k>return</span> <span class=nx>reqChan</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>adder</span> <span class=o>:=</span> <span class=nf>startServer</span><span class=p>(</span><span class=kd>func</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>int</span> <span class=p>{</span> <span class=k>return</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span> <span class=p>})</span>
+    <span class=kd>const</span> <span class=nx>N</span> <span class=p>=</span> <span class=mi>100</span>
+    <span class=kd>var</span> <span class=nx>reqs</span> <span class=p>[</span><span class=nx>N</span><span class=p>]</span><span class=nx>Request</span>
+    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+        <span class=nx>req</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>reqs</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+        <span class=nx>req</span><span class=p>.</span><span class=nx>a</span> <span class=p>=</span> <span class=nx>i</span>
+        <span class=nx>req</span><span class=p>.</span><span class=nx>b</span> <span class=p>=</span> <span class=nx>i</span> <span class=o>+</span> <span class=nx>N</span>
+        <span class=nx>req</span><span class=p>.</span><span class=nx>replyc</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+        <span class=nx>adder</span> <span class=o>&lt;-</span> <span class=nx>req</span>
+    <span class=p>}</span>
+    <span class=c1>// checks:
+</span><span class=c1></span>    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=nx>N</span> <span class=o>-</span> <span class=mi>1</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&gt;=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span><span class=o>--</span> <span class=p>{</span> <span class=c1>// doesn&#39;t matter what order
+</span><span class=c1></span>        <span class=k>if</span> <span class=o>&lt;-</span><span class=nx>reqs</span><span class=p>[</span><span class=nx>i</span><span class=p>].</span><span class=nx>replyc</span> <span class=o>!=</span> <span class=nx>N</span><span class=o>+</span><span class=mi>2</span><span class=o>*</span><span class=nx>i</span> <span class=p>{</span>
+            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;fail at&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+        <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Request &#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>,</span> <span class=s>&#34; is ok!&#34;</span><span class=p>)</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;done&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Shutting down the server</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>startServer</span><span class=p>(</span><span class=nx>op</span> <span class=nx>binOp</span><span class=p>)</span> <span class=p>(</span><span class=nx>service</span> <span class=kd>chan</span> <span class=o>*</span><span class=nx>Request</span><span class=p>,</span> <span class=nx>quit</span> <span class=kd>chan</span> <span class=kt>bool</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>service</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Request</span><span class=p>)</span>
+  <span class=nx>quit</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>bool</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>server</span><span class=p>(</span><span class=nx>op</span><span class=p>,</span> <span class=nx>service</span><span class=p>,</span> <span class=nx>quit</span><span class=p>)</span>
+  <span class=k>return</span> <span class=nx>service</span><span class=p>,</span> <span class=nx>quit</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>server</span><span class=p>(</span><span class=nx>op</span> <span class=nx>binOp</span><span class=p>,</span> <span class=nx>service</span> <span class=kd>chan</span> <span class=o>*</span><span class=nx>request</span><span class=p>,</span> <span class=nx>quit</span> <span class=kd>chan</span> <span class=kt>bool</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=p>{</span>
+        <span class=k>select</span> <span class=p>{</span>
+        <span class=k>case</span> <span class=nx>req</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>service</span><span class=p>:</span>
+            <span class=k>go</span> <span class=nf>run</span><span class=p>(</span><span class=nx>op</span><span class=p>,</span> <span class=nx>req</span><span class=p>)</span>
+        <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>quit</span><span class=p>:</span>
+            <span class=k>return</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>典型的 sequential pipelining algorithm</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>SerialProcessData</span> <span class=p>(</span><span class=nx>in</span> <span class=o>&lt;-</span> <span class=kd>chan</span> <span class=o>*</span><span class=nx>Data</span><span class=p>,</span> <span class=nx>out</span> <span class=kd>chan</span> <span class=o>&lt;-</span> <span class=o>*</span><span class=nx>Data</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>for</span> <span class=nx>data</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>in</span> <span class=p>{</span>
+    <span class=nx>tmpA</span> <span class=o>:=</span> <span class=nf>PreprocessData</span><span class=p>(</span><span class=nx>data</span><span class=p>)</span>
+    <span class=nx>tmpB</span> <span class=o>:=</span> <span class=nf>ProcessStepA</span><span class=p>(</span><span class=nx>tmpA</span><span class=p>)</span>
+    <span class=nx>tmpC</span> <span class=o>:=</span> <span class=nf>ProcessStepB</span><span class=p>(</span><span class=nx>tmpB</span><span class=p>)</span>
+    <span class=nx>out</span> <span class=o>&lt;-</span> <span class=nf>PostProcessData</span><span class=p>(</span><span class=nx>tmpC</span><span class=p>)</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>改良</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>ParallelProcessData</span> <span class=p>(</span><span class=nx>in</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Data</span><span class=p>,</span> <span class=nx>out</span> <span class=kd>chan</span> <span class=o>&lt;-</span> <span class=o>*</span><span class=nx>Data</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// make channels:
+</span><span class=c1></span>  <span class=nx>preOut</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Data</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
+  <span class=nx>stepAOut</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Data</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
+  <span class=nx>stepBOut</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Data</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
+  <span class=nx>stepCOut</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=o>*</span><span class=nx>Data</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
+  <span class=c1>// start parallel computations:
+</span><span class=c1></span>  <span class=k>go</span> <span class=nf>PreprocessData</span><span class=p>(</span><span class=nx>in</span><span class=p>,</span> <span class=nx>preOut</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>ProcessStepA</span><span class=p>(</span><span class=nx>preOut</span><span class=p>,</span> <span class=nx>stepAOut</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>ProcessStepB</span><span class=p>(</span><span class=nx>stepAOut</span><span class=p>,</span> <span class=nx>stepBOut</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>ProcessStepC</span><span class=p>(</span><span class=nx>stepBOut</span><span class=p>,</span> <span class=nx>stepCOut</span><span class=p>)</span>
+  <span class=k>go</span> <span class=nf>PostProcessData</span><span class=p>(</span><span class=nx>stepCOut</span><span class=p>,</span> <span class=nx>out</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=networking-templating-and-web-applications>Networking, Templating and Web-Applications</h2>
+<p>TCP server 範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Starting the server ...&#34;</span><span class=p>)</span>
+  <span class=c1>// create listener:
+</span><span class=c1></span>  <span class=nx>listener</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>net</span><span class=p>.</span><span class=nf>Listen</span><span class=p>(</span><span class=s>&#34;tcp&#34;</span><span class=p>,</span> <span class=s>&#34;0.0.0.0:3001&#34;</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Error listening&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>())</span>
+    <span class=k>return</span> <span class=c1>// terminate program
+</span><span class=c1></span>  <span class=p>}</span>
+  <span class=c1>// listen and accept connections from clients:
+</span><span class=c1></span>  <span class=k>for</span> <span class=p>{</span>
+    <span class=nx>conn</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>listener</span><span class=p>.</span><span class=nf>Accept</span><span class=p>()</span>
+    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+      <span class=k>return</span> <span class=c1>// terminate program
+</span><span class=c1></span>    <span class=p>}</span>
+    <span class=k>go</span> <span class=nf>doServerStuff</span><span class=p>(</span><span class=nx>conn</span><span class=p>)</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>doServerStuff</span><span class=p>(</span><span class=nx>conn</span> <span class=nx>net</span><span class=p>.</span><span class=nx>Conn</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>for</span> <span class=p>{</span>
+    <span class=nx>buf</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>512</span><span class=p>)</span>
+    <span class=nx>_</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>conn</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>buf</span><span class=p>)</span>
+    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Error reading&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>())</span>
+      <span class=k>return</span> <span class=c1>// terminate program
+</span><span class=c1></span>    <span class=p>}</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Received data: %v&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>buf</span><span class=p>))</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p><code>net.Listener</code> 是 server 的基本函式，用來監聽並接受 request</p>
+<ul>
+<li>上面的範例是 IP-address 0.0.0.0 在 port 3001 透過 TCP-protocol</li>
+</ul>
+<p>使用無窮迴圈搭配 <code>listener.Accept()</code></p>
+<p>client side 的 request 會建立出 <code>net.Conn</code> 的變數</p>
+<p>server 要先啟動，這樣 client 才可以透過 <code>net.Diall()</code> 去建立連接 <code>conn</code> 變數</p>
+<ul>
+<li>Conn 是 interface，用來收發資料，所以 IPv4 / IPv6 / TCP / UDP 都可以共用 interface</li>
+</ul>
+<p>透過 <code>conn.Write()</code> 把資料寫進去做傳輸</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>conn</span><span class=p>,</span> <span class=nx>err</span><span class=o>:=</span> <span class=nx>net</span><span class=p>.</span><span class=nf>Dial</span><span class=p>(</span><span class=s>&#34;tcp&#34;</span><span class=p>,</span> <span class=s>&#34;192.0.32.10:80&#34;</span><span class=p>)</span> <span class=c1>// tcp ipv4
+</span><span class=c1></span><span class=nf>checkConnection</span><span class=p>(</span><span class=nx>conn</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+<span class=nx>conn</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nx>net</span><span class=p>.</span><span class=nf>Dial</span><span class=p>(</span><span class=s>&#34;udp&#34;</span><span class=p>,</span> <span class=s>&#34;192.0.32.10:80&#34;</span><span class=p>)</span> <span class=c1>// udp
+</span><span class=c1></span><span class=nf>checkConnection</span><span class=p>(</span><span class=nx>conn</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+<span class=nx>conn</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nx>net</span><span class=p>.</span><span class=nf>Dial</span><span class=p>(</span><span class=s>&#34;tcp&#34;</span><span class=p>,</span> <span class=s>&#34;[2620:0:2d0:200::10]:80&#34;</span><span class=p>)</span> <span class=c1>// tcp ipv6
+</span><span class=c1></span><span class=nf>checkConnection</span><span class=p>(</span><span class=nx>conn</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</code></pre></div><p>socket 的範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=kd>var</span> <span class=p>(</span>
+    <span class=nx>host</span> <span class=p>=</span> <span class=s>&#34;www.apache.org&#34;</span>
+    <span class=nx>port</span> <span class=p>=</span> <span class=s>&#34;80&#34;</span>
+    <span class=nx>remote</span> <span class=p>=</span> <span class=nx>host</span> <span class=o>+</span> <span class=s>&#34;:&#34;</span> <span class=o>+</span> <span class=nx>port</span>
+    <span class=nx>msg</span> <span class=kt>string</span> <span class=p>=</span> <span class=s>&#34;GET / \n&#34;</span>
+    <span class=nx>data</span> <span class=p>=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>uint8</span><span class=p>,</span> <span class=mi>4096</span><span class=p>)</span>
+    <span class=nx>read</span> <span class=p>=</span> <span class=kc>true</span>
+    <span class=nx>count</span> <span class=p>=</span> <span class=mi>0</span>
+  <span class=p>)</span>
+  <span class=c1>// create the socket
+</span><span class=c1></span>  <span class=nx>con</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>net</span><span class=p>.</span><span class=nf>Dial</span><span class=p>(</span><span class=s>&#34;tcp&#34;</span><span class=p>,</span> <span class=nx>remote</span><span class=p>)</span>
+  <span class=c1>// send our message. an HTTP GET request in this case
+</span><span class=c1></span>  <span class=nx>io</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>con</span><span class=p>,</span> <span class=nx>msg</span><span class=p>)</span>
+  <span class=c1>// read the response from the webserver
+</span><span class=c1></span>  <span class=k>for</span> <span class=nx>read</span> <span class=p>{</span>
+    <span class=nx>count</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nx>con</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>data</span><span class=p>)</span>
+    <span class=nx>read</span> <span class=p>=</span> <span class=p>(</span><span class=nx>err</span> <span class=o>==</span> <span class=kc>nil</span><span class=p>)</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>data</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=nx>count</span><span class=p>]))</span>
+  <span class=p>}</span>
+  <span class=nx>con</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+<span class=p>}</span>
+</code></pre></div><p><code>net.ResolveTCPAddr</code> function 會回傳 <code>*net.TCPListener</code></p>
+<p><code>net.Error</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Error</span> <span class=kd>interface</span> <span class=p>{</span>
+  <span class=nf>Timeout</span><span class=p>()</span> <span class=kt>bool</span> <span class=c1>// Is the error a timeout?
+</span><span class=c1></span>  <span class=nf>Temporary</span><span class=p>()</span> <span class=kt>bool</span> <span class=c1>// Is the error temporary?
+</span><span class=c1></span>  <span class=o>...</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>HTTP 是 higher-level protocol than TCP</p>
+</blockquote>
+<p>web-address 透過 <code>http.URL</code> 表達，其中包含了 <code>Path</code></p>
+<p>client-request 透過 <code>http.Request</code> 表示</p>
+<p>req 如果是 post form 的話，可以用 <code>req.FormValue("val1")</code> 來取得值</p>
+<ul>
+<li>val1 是欄位名稱</li>
+<li>適用於 <a href="https://xxx.xxx?var1=value" target=_blank rel="noopener noreffer">https://xxx.xxx?var1=value</a></li>
+<li>或是先呼叫 <code>req.ParseForm()</code>，再呼叫 <code>req.Form["var1"]</code></li>
+<li><code>Form</code> 其實是 <code>map[string][]string</code></li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>var1</span><span class=p>,</span> <span class=nx>found</span> <span class=o>:=</span> <span class=nx>request</span><span class=p>.</span><span class=nx>Form</span><span class=p>[</span><span class=s>&#34;var1&#34;</span><span class=p>]</span>
+</code></pre></div><p>基本範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>HelloServer</span><span class=p>(</span><span class=nx>w</span> <span class=nx>http</span><span class=p>.</span><span class=nx>ResponseWriter</span><span class=p>,</span> <span class=nx>req</span> <span class=o>*</span><span class=nx>http</span><span class=p>.</span><span class=nx>Request</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Inside HelloServer handler&#34;</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprint</span><span class=p>(</span><span class=nx>w</span><span class=p>,</span> <span class=s>&#34;Hello, &#34;</span> <span class=o>+</span> <span class=nx>req</span><span class=p>.</span><span class=nx>URL</span><span class=p>.</span><span class=nx>Path</span><span class=p>[</span><span class=mi>1</span><span class=p>:])</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>http</span><span class=p>.</span><span class=nf>HandleFunc</span><span class=p>(</span><span class=s>&#34;/&#34;</span><span class=p>,</span><span class=nx>HelloServer</span><span class=p>)</span>
+  <span class=nx>err</span> <span class=o>:=</span> <span class=nx>http</span><span class=p>.</span><span class=nf>ListenAndServe</span><span class=p>(</span><span class=s>&#34;0.0.0.0:3000&#34;</span><span class=p>,</span> <span class=kc>nil</span><span class=p>)</span>
+  <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=s>&#34;ListenAndServe: &#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>())</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>只爬 head 的小爬蟲範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>urls</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span>
+  <span class=s>&#34;http://www.google.com/&#34;</span><span class=p>,</span>
+  <span class=s>&#34;http://golang.org/&#34;</span><span class=p>,</span>
+  <span class=s>&#34;http://blog.golang.org/&#34;</span><span class=p>,</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=c1>// Executes an HTTP HEAD request for all URL&#39;s
+</span><span class=c1></span>  <span class=c1>// and returns the HTTP status string or an error string.
+</span><span class=c1></span>  <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>url</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>urls</span> <span class=p>{</span>
+    <span class=nx>resp</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>http</span><span class=p>.</span><span class=nf>Head</span><span class=p>(</span><span class=nx>url</span><span class=p>)</span>
+    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Error:&#34;</span><span class=p>,</span> <span class=nx>url</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+  <span class=p>}</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>url</span><span class=p>,</span> <span class=s>&#34;: &#34;</span><span class=p>,</span> <span class=nx>resp</span><span class=p>.</span><span class=nx>Status</span><span class=p>)</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>爬網頁的範例</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+  <span class=nx>res</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>http</span><span class=p>.</span><span class=nf>Get</span><span class=p>(</span><span class=s>&#34;http://www.google.com&#34;</span><span class=p>)</span>
+  <span class=nf>CheckError</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+  <span class=nx>data</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>ReadAll</span><span class=p>(</span><span class=nx>res</span><span class=p>.</span><span class=nx>Body</span><span class=p>)</span>
+  <span class=nf>CheckError</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+  <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Got: %q&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>data</span><span class=p>))</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>CheckError</span><span class=p>(</span><span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+  <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>log</span><span class=p>.</span><span class=nf>Fatalf</span><span class=p>(</span><span class=s>&#34;Get: %v&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>其他 <code>http</code> package 有用的 function</p>
+<ul>
+<li><code>http.Redirect(w ResponseWriter, r *Request, url string, code int)</code>
+<ul>
+<li>重新導向</li>
+</ul>
+</li>
+<li><code>http.NotFound(w ResponseWriter, r *Request)</code>
+<ul>
+<li>回應 404 not found error</li>
+</ul>
+</li>
+<li><code>http.Error(w ResponseWriter, error string, code int)</code>
+<ul>
+<li>回應特殊的訊息和 HTTP code</li>
+</ul>
+</li>
+<li>A useful field of a http.Request object req is: req.Method
+<ul>
+<li>取得是 GET 或是 POST</li>
+</ul>
+</li>
+</ul>
+<p>透過 <code>w.Header().Set("Content-Type", "text/html")</code> 可以設定 header</p>
+<p><code>http.DetectContentType([]byte(form))</code> 可以取得 content-type</p>
+<p>透過 middleware 來做到 panic recover</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>logPanics</span><span class=p>(</span><span class=nx>function</span> <span class=nx>HandleFnc</span><span class=p>)</span> <span class=nx>HandleFnc</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=kd>func</span><span class=p>(</span><span class=nx>writer</span> <span class=nx>http</span><span class=p>.</span><span class=nx>ResponseWriter</span><span class=p>,</span> <span class=nx>request</span> <span class=o>*</span><span class=nx>http</span><span class=p>.</span><span class=nx>Request</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+      <span class=k>if</span> <span class=nx>x</span> <span class=o>:=</span> <span class=nb>recover</span><span class=p>();</span> <span class=nx>x</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+        <span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;[%v] caught panic: %v&#34;</span><span class=p>,</span> <span class=nx>request</span><span class=p>.</span><span class=nx>RemoteAddr</span><span class=p>,</span> <span class=nx>x</span><span class=p>)</span>
+      <span class=p>}</span>
+    <span class=p>}()</span>
+  <span class=nf>function</span><span class=p>(</span><span class=nx>writer</span><span class=p>,</span> <span class=nx>request</span><span class=p>)</span>
+ <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=nx>http</span><span class=p>.</span><span class=nf>HandleFunc</span><span class=p>(</span><span class=s>&#34;/test1&#34;</span><span class=p>,</span> <span class=nf>logPanics</span><span class=p>(</span><span class=nx>SimpleServer</span><span class=p>))</span>
+<span class=nx>http</span><span class=p>.</span><span class=nf>HandleFunc</span><span class=p>(</span><span class=s>&#34;/test2&#34;</span><span class=p>,</span> <span class=nf>logPanics</span><span class=p>(</span><span class=nx>FormServer</span><span class=p>))</span>
+</code></pre></div><p>驗證 url 的有效性</p>
+<ul>
+<li><code>var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")</code></li>
+</ul>
+<p><code>template</code> package 的 embedded 寫法</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=p>&lt;</span><span class=nx>h1</span><span class=p>&gt;{{.</span><span class=nx>Title</span> <span class=p>|</span><span class=nx>html</span><span class=p>}}&lt;</span><span class=o>/</span><span class=nx>h1</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nx>p</span><span class=p>&gt;[&lt;</span><span class=nx>a</span> <span class=nx>href</span><span class=p>=</span><span class=s>&#34;/edit/{{.Title |html}}&#34;</span><span class=p>&gt;</span><span class=nx>edit</span><span class=p>&lt;</span><span class=o>/</span><span class=nx>a</span><span class=p>&gt;]&lt;</span><span class=o>/</span><span class=nx>p</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nx>div</span><span class=p>&gt;{{</span><span class=nx>printf</span> <span class=s>&#34;%s&#34;</span> <span class=p>.</span><span class=nx>Body</span> <span class=p>|</span><span class=nx>html</span><span class=p>}}&lt;</span><span class=o>/</span><span class=nx>div</span><span class=p>&gt;</span>
+</code></pre></div><p><code>template.Must(template.ParseFiles("edit.html", "view.html"))</code> 把資料轉換至 <code>*template.Template</code></p>
+<ul>
+<li>為了 efficiency 的原因，做一次就可以了</li>
+</ul>
+<p>建立 page，透過 template 和 struct</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>templates</span><span class=p>.</span><span class=nf>ExecuteTemplate</span><span class=p>(</span><span class=nx>w</span><span class=p>,</span> <span class=nx>tmpl</span><span class=o>+</span><span class=s>&#34;.html&#34;</span><span class=p>,</span> <span class=nx>p</span><span class=p>)</span>
+</code></pre></div><blockquote>
+<p>關於 template 就不多做敘述，需要用到實在另外找資源</p>
+<p>主要都是在 template 檔案上面的語法操作</p>
+<p>關於 rpc 和 smtp 也不多做敘述</p>
+</blockquote>
+<h2 id=regular-mistakes-and-suggestions>Regular Mistakes and Suggestions</h2>
+<ul>
+<li>不要忘記在終止 buffered writing 的時候使用 <code>Flush()</code></li>
+<li>不要用 global variable 或 shared memory，會在 concurrency 的時候 unsafe</li>
+<li>使用 JSON 的時候，注意欄位大小寫 -> 是否 exported</li>
+<li>println 只用在 debug</li>
+</ul>
+<p>Best practices</p>
+<ul>
+<li>正確的初始化 slice of maps</li>
+<li>type assertion 總是使用 <code>comma, ok</code></li>
+<li>使用 factory 來 建立並初始化 types</li>
+<li>在會更改 struct 本身時 method 才用 pointer receiver，不然都用 value receiver</li>
+<li>HTML output 生成時總是用 <code>html/tempate</code></li>
+</ul>
+<p>常見的問題</p>
+<ul>
+<li>字串連接不要用 <code>+</code>，因為字串在 golang 是 immutable，所以會一直重新 reallocate 和 copy memory
+<ul>
+<li>建議使用 <code>bytes.Buffer</code> 來做字串的串接 (特別是當串接數量大於 15 後)</li>
+</ul>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=nx>b</span> <span class=nx>bytes</span><span class=p>.</span><span class=nx>Buffer</span>
+<span class=o>...</span>
+<span class=k>for</span> <span class=nx>condition</span> <span class=p>{</span>
+  <span class=nx>b</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span> <span class=c1>// appends string str to the buffer
+</span><span class=c1></span><span class=p>}</span>
+<span class=k>return</span> <span class=nx>b</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</code></pre></div><ul>
+<li>defer 只有在 return function 的時候會執行，不是在 for loop 結束或其他有限制的 scope
+<ul>
+<li>即不要 loop 內使用 defer</li>
+</ul>
+</li>
+<li>slice 本身已經是 reference，不要再傳他的 reference 到 function 內
+<ul>
+<li>當使用 slice parameter 的時候，不需要再 dereference</li>
+</ul>
+</li>
+<li>interface 已經是 reference type，不要再用他的 reference
+<ul>
+<li>never use a pointer to an interface type; this is already a pointer</li>
+</ul>
+</li>
+<li>傳參數到 function 時，能用 value 就少用 pointer
+<ul>
+<li>傳 value 是放在 stack</li>
+<li>傳 pointer 是放在 heap，會有額外的記憶體配置</li>
+</ul>
+</li>
+</ul>
+<p>用到 defer 的情境</p>
+<ul>
+<li>關閉檔案串流</li>
+<li>解鎖 mutex</li>
+<li>關閉 channel</li>
+<li>recover from panic</li>
+<li>停止 time ticker</li>
+<li>release process</li>
+<li>停止 CPU profiling and flushing the info</li>
+<li>goroutine signaling a waitGroup</li>
+</ul>
+<h2 id=performance-advices>Performance Advices</h2>
+<p>字串內的更改</p>
+<ul>
+<li>因為 string 是 immutable，所以要另外建立新的 string</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>str</span> <span class=o>:=</span> <span class=s>&#34;hello&#34;</span>
+<span class=nx>c</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>rune</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+<span class=nx>c</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=p>=</span> <span class=sc>&#39;c&#39;</span>
+<span class=nx>s2</span> <span class=o>:=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span> <span class=c1>// s2 == &#34;cello&#34;
+</span></code></pre></div><p>取得 substring</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>substr</span> <span class=o>:=</span> <span class=nx>str</span><span class=p>[</span><span class=nx>n</span><span class=p>:</span><span class=nx>m</span><span class=p>]</span>
+</code></pre></div><p>對 string 做 loop</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// gives only the bytes:
+</span><span class=c1></span><span class=k>for</span> <span class=nx>i</span><span class=o>:=</span><span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>str</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+  <span class=o>...</span> <span class=p>=</span> <span class=nx>str</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+<span class=p>}</span>
+<span class=c1>// gives the Unicode characters:
+</span><span class=c1></span><span class=k>for</span> <span class=nx>ix</span><span class=p>,</span> <span class=nx>ch</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>str</span> <span class=p>{</span>
+  <span class=o>...</span>
+<span class=p>}</span>
+</code></pre></div><p>找尋 string 的 number of bytes 和字元</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 取得 number of bytes
+</span><span class=c1></span><span class=nb>len</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+
+<span class=c1>// 取得 number of characters
+</span><span class=c1></span><span class=nx>utf8</span><span class=p>.</span><span class=nf>RuneCountInString</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+<span class=c1>// 或
+</span><span class=c1></span><span class=nb>len</span><span class=p>([]</span><span class=nb>int</span><span class=p>(</span><span class=nx>str</span><span class=p>))</span>
+</code></pre></div><p>字串串接</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 最快的方法
+</span><span class=c1>// with a bytes.Buffer 
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>buffer</span> <span class=nx>bytes</span><span class=p>.</span><span class=nx>Buffer</span>
+<span class=kd>var</span> <span class=nx>s</span> <span class=kt>string</span>
+<span class=nx>buffer</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Print</span><span class=p>(</span><span class=nx>buffer</span><span class=p>.</span><span class=nf>String</span><span class=p>(),</span> <span class=s>&#34;\n&#34;</span><span class=p>)</span>
+
+<span class=c1>// 或
+</span><span class=c1></span><span class=nx>Strings</span><span class=p>.</span><span class=nf>Join</span><span class=p>()</span> <span class=c1>// using Join function
+</span><span class=c1></span><span class=nx>str1</span> <span class=o>+=</span> <span class=nx>str2</span> <span class=c1>// using += operator
+</span></code></pre></div><p>array 和 slice 的操作</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 建立 array
+</span><span class=c1></span><span class=nx>arr1</span> <span class=o>:=</span> <span class=nb>new</span><span class=p>([</span><span class=nx>len</span><span class=p>]</span><span class=kd>type</span><span class=p>)</span>
+<span class=c1>// 建立 slice
+</span><span class=c1></span><span class=nx>slice1</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kd>type</span><span class=p>,</span> <span class=nx>len</span><span class=p>)</span>
+<span class=c1>// 初始化 array
+</span><span class=c1></span><span class=nx>arr1</span> <span class=o>:=</span> <span class=p>[</span><span class=o>...</span><span class=p>]</span><span class=kd>type</span><span class=p>{</span><span class=nx>i1</span><span class=p>,</span> <span class=nx>i2</span><span class=p>,</span> <span class=nx>i3</span><span class=p>,</span> <span class=nx>i4</span><span class=p>,</span> <span class=nx>i5</span><span class=p>}</span>
+<span class=nx>arrKeyValue</span> <span class=o>:=</span> <span class=p>[</span><span class=nx>len</span><span class=p>]</span><span class=kd>type</span><span class=p>{</span><span class=nx>i1</span><span class=p>:</span> <span class=nx>val1</span><span class=p>,</span> <span class=nx>i2</span><span class=p>:</span> <span class=nx>val2</span><span class=p>}</span>
+<span class=c1>// 初始化 slice
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>slice1</span> <span class=p>[]</span><span class=kd>type</span> <span class=p>=</span> <span class=nx>arr1</span><span class=p>[</span><span class=nx>start</span><span class=p>:</span><span class=nx>end</span><span class=p>]</span>
+<span class=c1>// 切掉最後一個元素
+</span><span class=c1></span><span class=nx>line</span> <span class=p>=</span> <span class=nx>line</span><span class=p>[:</span><span class=nb>len</span><span class=p>(</span><span class=nx>line</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>
+<span class=c1>// loop
+</span><span class=c1></span><span class=k>for</span> <span class=nx>i</span><span class=o>:=</span><span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>arr</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+<span class=o>...</span> <span class=p>=</span> <span class=nx>arr</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+<span class=p>}</span>
+
+<span class=k>for</span> <span class=nx>ix</span><span class=p>,</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>arr</span> <span class=p>{</span>
+<span class=o>...</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Structs, Interfaces and Maps</strong></p>
+<p>基本語法</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// Creation
+</span><span class=c1></span><span class=kd>type</span> <span class=nx>struct1</span> <span class=kd>struct</span> <span class=p>{</span>
+<span class=nx>field1</span> <span class=nx>type1</span>
+<span class=nx>field2</span> <span class=nx>type2</span>
+<span class=o>...</span>
+<span class=p>}</span>
+
+<span class=nx>ms</span> <span class=o>:=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>struct1</span><span class=p>)</span>
+
+<span class=c1>// initialization
+</span><span class=c1></span><span class=nx>ms</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>struct1</span><span class=p>{</span><span class=mi>10</span><span class=p>,</span> <span class=mf>15.5</span><span class=p>,</span> <span class=s>&#34;Chris&#34;</span><span class=p>}</span>
+<span class=c1>// or
+</span><span class=c1></span><span class=nx>ms</span> <span class=o>:=</span> <span class=nx>Newstruct1</span><span class=p>{</span><span class=mi>10</span><span class=p>,</span> <span class=mf>15.5</span><span class=p>,</span> <span class=s>&#34;Chris&#34;</span><span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>Newstruct1</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>f</span> <span class=kt>float32</span><span class=p>,</span> <span class=nx>name</span> <span class=kt>string</span><span class=p>)</span> <span class=o>*</span><span class=nx>struct1</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=o>&amp;</span><span class=nx>struct1</span><span class=p>{</span><span class=nx>n</span><span class=p>,</span> <span class=nx>f</span><span class=p>,</span> <span class=nx>name</span><span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// testing if a value implements an inerface
+</span><span class=c1></span><span class=k>if</span> <span class=nx>v</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>v</span><span class=p>.(</span><span class=nx>Stringer</span><span class=p>);</span> <span class=nx>ok</span> <span class=p>{</span> <span class=c1>// test if v implements Stringer
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;implements String(): %s\n&#34;</span><span class=p>,</span> <span class=nx>v</span><span class=p>.</span><span class=nf>String</span><span class=p>());</span>
+<span class=p>}</span>
+
+<span class=c1>// type classifier
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>classifier</span><span class=p>(</span><span class=nx>items</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>x</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>items</span> <span class=p>{</span>
+        <span class=k>switch</span> <span class=nx>x</span><span class=p>.(</span><span class=kd>type</span><span class=p>)</span> <span class=p>{</span>
+            <span class=k>case</span> <span class=kt>bool</span><span class=p>:</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;param #%d is a bool\n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+            <span class=k>case</span> <span class=kt>float64</span><span class=p>:</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;param #%d is a float64\n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+            <span class=k>case</span> <span class=kt>int</span><span class=p>,</span> <span class=kt>int64</span><span class=p>:</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;param #%d is an int\n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+            <span class=k>case</span> <span class=kc>nil</span><span class=p>:</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;param #%d is nil\n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+            <span class=k>case</span> <span class=kt>string</span><span class=p>:</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;param #%d is a string\n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+            
+            <span class=k>default</span><span class=p>:</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;param #%d&#39;s type is unknown\n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// creation
+</span><span class=c1></span><span class=nx>map1</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=nx>keytype</span><span class=p>]</span><span class=nx>valuetype</span><span class=p>)</span>
+
+<span class=c1>// Initialization
+</span><span class=c1></span><span class=nx>map1</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span><span class=s>&#34;one&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span> <span class=s>&#34;two&#34;</span><span class=p>:</span> <span class=mi>2</span><span class=p>}</span>
+
+<span class=c1>// loop
+</span><span class=c1></span><span class=k>for</span> <span class=nx>key</span><span class=p>,</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>map1</span> <span class=p>{</span>
+<span class=o>...</span>
+<span class=p>}</span>
+
+<span class=c1>// testing if a key value exists in a map
+</span><span class=c1></span><span class=nx>val1</span><span class=p>,</span> <span class=nx>isPresent</span> <span class=p>=</span> <span class=nx>map1</span><span class=p>[</span><span class=nx>key1</span><span class=p>]</span>
+
+<span class=c1>// deleting a key in a map
+</span><span class=c1></span><span class=nb>delete</span><span class=p>(</span><span class=nx>map1</span><span class=p>,</span> <span class=nx>key1</span><span class=p>)</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// recovering to stop a panic terminating sequence
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>protect</span><span class=p>(</span><span class=nx>g</span> <span class=kd>func</span><span class=p>())</span> <span class=p>{</span>
+    <span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+        <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;done&#34;</span><span class=p>)</span> <span class=c1>// Println executes normally even if there is a panic
+</span><span class=c1></span>        <span class=k>if</span> <span class=nx>x</span> <span class=o>:=</span> <span class=nb>recover</span><span class=p>();</span> <span class=nx>x</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+            <span class=nx>log</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;run time panic: %v&#34;</span><span class=p>,</span> <span class=nx>x</span><span class=p>)</span>
+        <span class=p>}</span>
+    <span class=p>}()</span>
+    <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;start&#34;</span><span class=p>)</span>
+    <span class=nf>g</span><span class=p>()</span>
+<span class=p>}</span>
+
+<span class=c1>// opening and reading a file
+</span><span class=c1></span><span class=nx>file</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=s>&#34;input.dat&#34;</span><span class=p>)</span>
+<span class=k>if</span> <span class=nx>err</span><span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;An error occurred on opening the inputfile\n&#34;</span> <span class=o>+</span>
+    <span class=s>&#34;Does the file exist?\n&#34;</span> <span class=o>+</span>
+    <span class=s>&#34;Have you got acces to it?\n&#34;</span><span class=p>)</span>
+    <span class=k>return</span>
+<span class=p>}</span>
+<span class=k>defer</span> <span class=nx>file</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+<span class=nx>iReader</span> <span class=o>:=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>file</span><span class=p>)</span>
+<span class=k>for</span> <span class=p>{</span>
+    <span class=nx>str</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>iReader</span><span class=p>.</span><span class=nf>ReadString</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>)</span>
+    <span class=k>if</span> <span class=nx>err</span><span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+        <span class=k>return</span> <span class=c1>// error or EOF
+</span><span class=c1></span>    <span class=p>}</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;The input was: %s&#34;</span><span class=p>,</span> <span class=nx>str</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=c1>// copying a file with a buffer
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>cat</span><span class=p>(</span><span class=nx>f</span> <span class=o>*</span><span class=nx>file</span><span class=p>.</span><span class=nx>File</span><span class=p>)</span> <span class=p>{</span>
+    <span class=kd>const</span> <span class=nx>NBUF</span> <span class=p>=</span> <span class=mi>512</span>
+    <span class=kd>var</span> <span class=nx>buf</span> <span class=p>[</span><span class=nx>NBUF</span><span class=p>]</span><span class=kt>byte</span>
+    <span class=k>for</span> <span class=p>{</span>
+        <span class=k>switch</span> <span class=nx>nr</span><span class=p>,</span> <span class=nx>er</span> <span class=o>:=</span> <span class=nx>f</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>buf</span><span class=p>[:]);</span> <span class=kc>true</span> <span class=p>{</span>
+            <span class=k>case</span> <span class=nx>nr</span> <span class=p>&lt;</span> <span class=mi>0</span><span class=p>:</span>
+                <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stderr</span><span class=p>,</span> <span class=s>&#34;cat: error reading from %s: %s\n&#34;</span><span class=p>,</span> <span class=nx>f</span><span class=p>.</span><span class=nf>String</span><span class=p>(),</span>
+                <span class=nx>er</span><span class=p>.</span><span class=nf>String</span><span class=p>())</span>
+                <span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+            <span class=k>case</span> <span class=nx>nr</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span> <span class=c1>// EOF
+</span><span class=c1></span>                <span class=k>return</span>
+            <span class=k>case</span> <span class=nx>nr</span> <span class=p>&gt;</span> <span class=mi>0</span><span class=p>:</span>
+                <span class=k>if</span> <span class=nx>nw</span><span class=p>,</span> <span class=nx>ew</span> <span class=o>:=</span> <span class=nx>file</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>.</span><span class=nf>Write</span><span class=p>(</span><span class=nx>buf</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=nx>nr</span><span class=p>]);</span> <span class=nx>nw</span> <span class=o>!=</span> <span class=nx>nr</span> <span class=p>{</span>
+                    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stderr</span><span class=p>,</span> <span class=s>&#34;cat: error writing from %s: %s\n&#34;</span><span class=p>,</span> <span class=nx>f</span><span class=p>.</span><span class=nf>String</span><span class=p>(),</span>
+                    <span class=nx>ew</span><span class=p>.</span><span class=nf>String</span><span class=p>())</span>
+                <span class=p>}</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><blockquote>
+<p>The amount of work done inside goroutines has to be much larger than the costs associated with creating goroutines and sending data back and forth between them.</p>
+<p>Using buffered channels for performance: A buffered channel can easily double its throughput depending on the context, and the performance gain can be 10x or more. You can further try to optimize by adjusting the capacity of the channel.</p>
+<p>Limiting the number of items in a channel and packing them in arrays: Channels become a bottleneck if you pass a lot of individual items through them. You can work around this by packing chunks of data into arrays and then unpacking on the other end. This can give a speed gain of a factor 10x.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// creation
+</span><span class=c1></span><span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>type</span><span class=p>,</span> <span class=nx>buf</span><span class=p>)</span>
+
+<span class=c1>// loop
+</span><span class=c1></span><span class=k>for</span> <span class=nx>v</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>ch</span> <span class=p>{</span>
+<span class=c1>// do something with v
+</span><span class=c1></span><span class=p>}</span>
+
+<span class=c1>// testing if a channel is closed
+</span><span class=c1>//read channel until it closes or error-condition
+</span><span class=c1></span><span class=k>for</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=nx>input</span><span class=p>,</span> <span class=nx>open</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>ch</span><span class=p>;</span> <span class=p>!</span><span class=nx>open</span> <span class=p>{</span>
+        <span class=k>break</span>
+    <span class=p>}</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s &#34;</span><span class=p>,</span> <span class=nx>input</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=c1>// Or, use the looping over a channel method where the detection is automatic.
+</span><span class=c1></span>
+<span class=c1>// using a channel to let the main program wait
+</span><span class=c1>// semaphore pattern
+</span><span class=c1></span><span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span> <span class=c1>// Allocate a channel
+</span><span class=c1></span>
+<span class=c1>// Start something in a goroutine; when it completes, signal on the channel
+</span><span class=c1></span><span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+    <span class=c1>// doSomething
+</span><span class=c1></span>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=mi>1</span> <span class=c1>// Send a signal; value does not matter
+</span><span class=c1></span><span class=p>}()</span>
+<span class=nf>doSomethingElseForAWhile</span><span class=p>()</span>
+<span class=o>&lt;-</span><span class=nx>ch</span> <span class=c1>// Wait for goroutine to finish; discard sent value
+</span><span class=c1></span>
+<span class=c1>// channel factory pattern
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>pump</span><span class=p>()</span> <span class=kd>chan</span> <span class=kt>int</span> <span class=p>{</span>
+    <span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+    <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+        <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+            <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=nx>i</span>
+        <span class=p>}</span>
+    <span class=p>}()</span>
+    <span class=k>return</span> <span class=nx>ch</span>
+<span class=p>}</span>
+
+<span class=c1>// stopping a goroutine
+</span><span class=c1></span><span class=nx>runtime</span><span class=p>.</span><span class=nf>Goexit</span><span class=p>()</span>
+
+<span class=c1>// simple timeout pattern
+</span><span class=c1></span><span class=nx>timeout</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>bool</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mf>1e9</span><span class=p>)</span> <span class=c1>// one second
+</span><span class=c1></span>    <span class=nx>timeout</span> <span class=o>&lt;-</span> <span class=kc>true</span>
+<span class=p>}()</span>
+<span class=k>select</span> <span class=p>{</span>
+    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>ch</span><span class=p>:</span>
+    <span class=c1>// a read from ch has occurred
+</span><span class=c1></span>    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>timeout</span><span class=p>:</span>
+    <span class=c1>// the read from ch has timed out
+</span><span class=c1></span><span class=p>}</span>
+
+<span class=c1>// using an in- and out-channel instead of locking
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>Worker</span><span class=p>(</span><span class=nx>in</span><span class=p>,</span> <span class=nx>out</span> <span class=kd>chan</span> <span class=o>*</span><span class=nx>Task</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=p>{</span>
+        <span class=nx>t</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>in</span>
+        <span class=nf>process</span><span class=p>(</span><span class=nx>t</span><span class=p>)</span>
+        <span class=nx>out</span> <span class=o>&lt;-</span> <span class=nx>t</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// templating
+</span><span class=c1>// Make, parse and validate a template
+</span><span class=c1></span><span class=kd>var</span> <span class=nx>strTempl</span> <span class=p>=</span> <span class=nx>template</span><span class=p>.</span><span class=nf>Must</span><span class=p>(</span><span class=nx>template</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=s>&#34;TName&#34;</span><span class=p>).</span><span class=nf>Parse</span><span class=p>(</span><span class=nx>strTemplateHTML</span><span class=p>))</span>
+
+<span class=c1>// Use the html filter to escape HTML special characters, when used in a web context
+</span><span class=c1></span><span class=p>{{</span><span class=nx>html</span> <span class=p>.}}</span> <span class=nx>or</span> <span class=nx>with</span> <span class=nx>a</span> <span class=nx>field</span> <span class=nx>FieldName</span> <span class=p>{{</span> <span class=p>.</span><span class=nx>FieldName</span> <span class=p>|</span><span class=nx>html</span> <span class=p>}}</span>
+
+<span class=c1>// Use template-caching
+</span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// stopping a program in case of error
+</span><span class=c1></span><span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Program stopping with error %v&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+    <span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=c1>// or
+</span><span class=c1></span><span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nb>panic</span><span class=p>(</span><span class=s>&#34;ERROR occurred: &#34;</span> <span class=o>+</span> <span class=nx>err</span><span class=p>.</span><span class=nf>Error</span><span class=p>())</span>
+<span class=p>}</span>
+</code></pre></div><p><strong>Performance best practices and advice</strong></p>
+<ul>
+<li>如果可以的話，使用 <code>[]rune</code> 優於 strings</li>
+<li>使用 slices 優於 arrays</li>
+<li>使用 arrays 或 slices 優於 map</li>
+<li>不需要 index 的時候 loop 使用 <code>for range</code>，會比 loop 每個 element 還快</li>
+<li>如果 array 的元素大部分是 0 或 nil 的話，使用 map 可以減少記憶體用量</li>
+<li>specify initial capacity for maps</li>
+<li>定義 method 的時候，使用 pointer to a type (struct) 作為 receiver</li>
+<li>使用 constants 或 flags 來提取常數</li>
+<li>use caching whenever possible when large amounts of memory are being allocated</li>
+<li>use template caching</li>
+</ul>
+<blockquote>
+<p>sparse: containing many 0 or nil-values</p>
+</blockquote>
+<h2 id=reference>Reference</h2>
+<p><a href=https://www.interviewbit.com/golang-interview-questions/ target=_blank rel="noopener noreffer">Golang Interview Questions</a></p>
+</div>
+<div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>Updated on 2022-03-06</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/programming/etcd/ class=prev rel=prev title=etcd><i class="fas fa-angle-left fa-fw"></i>etcd</a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.2">Hugo</a> | Theme - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer"></a></span></div>
+</div></footer></div>
+<div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title="Back to Top">
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments">
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><div class=assets><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/topbar/topbar.min.js></script><script type=text/javascript src=/lib/pjax/pjax.min.js></script><script type=text/javascript src=/js/theme.min.js></script></div>
+<div class=pjax-assets><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:10},comment:{}}</script></div>
+</body>
+</html>

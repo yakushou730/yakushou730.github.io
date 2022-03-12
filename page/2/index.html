@@ -56,6 +56,17 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/aws/iam/>iam</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-07>2022-02-07</time></span></div><div class=content>設定帳戶密碼失敗 可能是碰到需要 MFA 操作，但是在剛建立使用者的時候還沒有 MFA 的關係
+AWS: Allows MFA-authenticated IAM users to manage their own credentials on the My Security Credentials page
+AWS IAM won&rsquo;t let my users change their passwords
+做法有兩種
+改 policy 的規則，讓變更密碼這件事不需要 MFA (官方說不推薦這做法) 砍掉帳號重新建立一個，然後先不要勾 Require password reset，等他登入後設定完 MFA，這樣之後就可以改密碼了 </div><div class=post-footer>
+<a href=/posts/aws/iam/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/aws/>aws</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/programming/database/mysql/>Mysql</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -161,15 +172,6 @@ Helm 被稱為 k8s 的 package manager
 Helm 讓我們操作 k8s 的元件就像操作 app 一樣，而不是一堆檔案物件
 # 透過 helm 安裝 wordpress helm install wordpress # 修改完 yaml 檔案套用 helm upgrade wordpress # 可倒退版本 helm rollback wordpress # 移除 wordpress helm uninstall wordpress # debug 資訊 helm --debug Helm2 vs Helm3 Helm3 多了</div><div class=post-footer>
 <a href=/posts/k8s/helm/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/k8s/kind/>kind</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-03>2022-01-03</time></span></div><div class=content>kind official page
-kind 可以用來在 local 建立 k8s cluster
-# 安裝 kind brew install kind # 建立 cluster kind create cluster # 查看 clusters kind get clusters # 查看 kind 的 kubeconfig kind get kubeconfig # 切換到 kind cluster kubectl config use-context kind-kind # 查看 cluster 狀態 kubectl cluster-info </div><div class=post-footer>
-<a href=/posts/k8s/kind/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/k8s/>k8s</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>

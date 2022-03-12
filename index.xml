@@ -1,4 +1,9 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 06 Mar 2022 11:39:08 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/index.xml" rel="self" type="application/rss+xml"/><item><title>etcd</title><link>https://blog.yakushou.com/posts/programming/etcd/</link><pubDate>Sun, 06 Mar 2022 11:39:08 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/etcd/</guid><description>install brew install etcd 可在 service list 確認是否正常
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 06 Mar 2022 22:05:26 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/index.xml" rel="self" type="application/rss+xml"/><item><title>fundamental2</title><link>https://blog.yakushou.com/posts/golang/fundamental2/</link><pubDate>Sun, 06 Mar 2022 22:05:26 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/fundamental2/</guid><description><![CDATA[Reading and Writing bufio 用於 buffered input 和 output
+最簡單的 input 方式是使用 fmt 的 Scan 方法
+var firstName, lastName string fmt.Scanln(&amp;firstName, &amp;lastName) Scanln 從 standard input 讀取 text，以空白隔開的輸入，直到掃到 newline
+Scanf, Fscanf, Sscanf 透過 format string 來 parse 參數
+ Scanf 透過 keyboard 輸入 Sscanf 透過其他 string 輸入  透過 bufio 取得輸入字串
+// os.Stdin 滿足 io.Reader inputReader = bufio.NewReader(os.Stdin) fmt.Println(&#34;Please enter some input: &#34;) input, err = inputReader.ReadString(&#39;\n&#39;) // err 是 io.]]></description></item><item><title>etcd</title><link>https://blog.yakushou.com/posts/programming/etcd/</link><pubDate>Sun, 06 Mar 2022 11:39:08 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/etcd/</guid><description>install brew install etcd 可在 service list 確認是否正常
 brew services list # results etcd started yakushou730 ~/Library/LaunchAgents/homebrew.mxcl.etcd.plist 操作 安裝完後系統會有 etcdctl 的指令可以使用
 寫入
 etcdctl put foo bar 讀取
@@ -50,8 +55,4 @@ Producer: 送出 messages (sending) Queue: a large message buffer producer 可�
 以下是用 golang 實作練習
 用到的 package amqp091-go
 Hello World 實作兩個檔案
-send.go (代表 producer 送出 message) receive.</description></item><item><title>iam</title><link>https://blog.yakushou.com/posts/aws/iam/</link><pubDate>Mon, 07 Feb 2022 11:51:44 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/aws/iam/</guid><description>設定帳戶密碼失敗 可能是碰到需要 MFA 操作，但是在剛建立使用者的時候還沒有 MFA 的關係
-AWS: Allows MFA-authenticated IAM users to manage their own credentials on the My Security Credentials page
-AWS IAM won&amp;rsquo;t let my users change their passwords
-做法有兩種
-改 policy 的規則，讓變更密碼這件事不需要 MFA (官方說不推薦這做法) 砍掉帳號重新建立一個，然後先不要勾 Require password reset，等他登入後設定完 MFA，這樣之後就可以改密碼了</description></item></channel></rss>
+send.go (代表 producer 送出 message) receive.</description></item></channel></rss>

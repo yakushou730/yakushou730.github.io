@@ -56,6 +56,18 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/fundamental2/>fundamental2</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-03-06>2022-03-06</time></span></div><div class=content>Reading and Writing bufio 用於 buffered input 和 output
+最簡單的 input 方式是使用 fmt 的 Scan 方法
+var firstName, lastName string fmt.Scanln(&firstName, &lastName) Scanln 從 standard input 讀取 text，以空白隔開的輸入，直到掃到 newline
+Scanf, Fscanf, Sscanf 透過 format string 來 parse 參數
+Scanf 透過 keyboard 輸入 Sscanf 透過其他 string 輸入 透過 bufio 取得輸入字串
+// os.Stdin 滿足 io.Reader inputReader = bufio.NewReader(os.Stdin) fmt.Println("Please enter some input: ") input, err = inputReader.ReadString('\n') // err 是 io.</div><div class=post-footer>
+<a href=/posts/golang/fundamental2/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/programming/etcd/>etcd</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -170,17 +182,6 @@ Hello World 實作兩個檔案
 send.go (代表 producer 送出 message) receive.</div><div class=post-footer>
 <a href=/posts/programming/rabbitmq/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/aws/iam/>iam</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-07>2022-02-07</time></span></div><div class=content>設定帳戶密碼失敗 可能是碰到需要 MFA 操作，但是在剛建立使用者的時候還沒有 MFA 的關係
-AWS: Allows MFA-authenticated IAM users to manage their own credentials on the My Security Credentials page
-AWS IAM won&rsquo;t let my users change their passwords
-做法有兩種
-改 policy 的規則，讓變更密碼這件事不需要 MFA (官方說不推薦這做法) 砍掉帳號重新建立一個，然後先不要勾 Require password reset，等他登入後設定完 MFA，這樣之後就可以改密碼了 </div><div class=post-footer>
-<a href=/posts/aws/iam/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/aws/>aws</a>,&nbsp;<a href=/tags/devops/>devops</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>
