@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/k8s/certified-k8s-administrator/><link rel=prev href=https://blog.yakushou.com/posts/k8s/helm/><link rel=next href=https://blog.yakushou.com/posts/programming/tools/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Certified K8s Administrator","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/"},"genre":"posts","keywords":"programming, k8s","wordcount":1061,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/","datePublished":"2022-01-09T21:07:35+08:00","dateModified":"2022-01-09T21:07:35+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Certified K8s Administrator"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Certified K8s Administrator","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/"},"genre":"posts","keywords":"programming, k8s","wordcount":1137,"url":"https:\/\/blog.yakushou.com\/posts\/k8s\/certified-k8s-administrator\/","datePublished":"2022-01-09T21:07:35+08:00","dateModified":"2022-01-09T21:07:35+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Certified K8s Administrator"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1061 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-09>2022-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1137 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -83,6 +83,7 @@
 <li><a href=#manual-scheduling>Manual Scheduling</a></li>
 <li><a href=#labels-and-selectors>Labels and Selectors</a></li>
 <li><a href=#taints-and-tolerations>Taints and Tolerations</a></li>
+<li><a href=#node-selectors>Node Selectors</a></li>
 </ul>
 </nav></div>
 </div><div class=content id=content><h2 id=core-concepts>Core Concepts</h2>
@@ -440,7 +441,35 @@ kubectl describe node kubemaster <span class=p>|</span> grep Taint
 <span class=c1># 移除 taint [原本的 taint 是 node-role.kubernetes.io/master:NoSchedule]</span>
 <span class=c1># 看起來是最後面加個減號可以拿掉</span>
 kubectl taint nodes controlplane node-role.kubernetes.io/master:NoSchedule-
-</code></pre></div></div>
+</code></pre></div><blockquote>
+<p>create pod 是可以直接指定命名 pod 名稱的</p>
+<p>kubectl run mosquito &ndash;image=nginx &ndash;restart=Never</p>
+<p>查看 pod 的欄位</p>
+<p>kubectl explain pod &ndash;recursive | less</p>
+<p>pod 的 toleration 是要自己加上去的，才可以 tolerate taint</p>
+</blockquote>
+<p>當 node 設定 taint 的時候，pod 要上上去的話就一定要具備 toleration</p>
+<p>移除 node 上的 taint (在最後面放上 <code>-</code>)</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>kubectl taint node master node-role.kubernetes.io/master:NoSchedule-
+</code></pre></div><h2 id=node-selectors>Node Selectors</h2>
+<p>對 node 下標籤</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 格式</span>
+kubectl label nodes &lt;node-name&gt; &lt;label-key&gt;<span class=o>=</span>&lt;label-value&gt;
+<span class=c1># 範例: 在 node-1 這台標上 size=Large 的標籤</span>
+kubectl label nodes node-1 <span class=nv>size</span><span class=o>=</span>Large
+</code></pre></div><p>這樣子 pod 就可以指定要放到對應的 node 上</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Pod</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>myapp-pod</span><span class=w>
+</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>data-processor</span><span class=w>
+</span><span class=w>      </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>data-processor</span><span class=w>
+</span><span class=w>  </span><span class=nt>nodeSelector</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>size</span><span class=p>:</span><span class=w> </span><span class=l>Large</span><span class=w>
+</span></code></pre></div><p>更複雜一點的條件的話，會用 Node Affinity</p>
+</div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>

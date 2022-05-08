@@ -56,6 +56,14 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/dev/local/>Local development setting</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-05-08>2022-05-08</time></span></div><div class=content>整理
+service local k8s mysql 30000 3306 postgresql 30001 5432 redis 30002 6379 本機開發安裝項目 zsh 安裝 powerlevel10k 主題 site golang 先至 golang 官網安裝一版新的 golang (因為要有 golang 才可以 build golang) website install 安裝 GVM 來管理 golang 套件 site GVM 安裝後就可以安裝各種對應版本的 golang intel 是 amd64 M1 (apple silicon) 是 arm64 安裝 Goland website install git 安裝 cz-conventional site 這樣可以用 git cz 來做到統一的 commit npm install -g commitizen cz-conventional-changelog echo '{ "path": "cz-conventional-changelog" }' > ~/.</div><div class=post-footer>
+<a href=/posts/dev/local/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/local/>local</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/fundamental2/>fundamental2</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -167,21 +175,6 @@ strings.Replace(str, old, new string, n int)</div><div class=post-footer>
 mental model 很重要，如果寫了 code 但是再回頭看看不懂，表示需要重構了</div><div class=post-footer>
 <a href=/posts/golang/ardanlabs/ultimate-go-notebook/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/rabbitmq/>rabbitmq</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-08>2022-02-08</time></span></div><div class=content>RabbitMQ
-RabbitMQ = message broker (accepts, stores, and forwards binary blobs of data - messages)
-術語:
-Producer: 送出 messages (sending) Queue: a large message buffer producer 可以送 message 到 queue 裡面 consumer 可以從 queue 把 message 收走 Consumer: 等待接收 messages (receiving) producer, consumer, broker 不需要在相同的 host 上
-要先安裝 rabbitMQ service 安裝連結
-以下是用 golang 實作練習
-用到的 package amqp091-go
-Hello World 實作兩個檔案
-send.go (代表 producer 送出 message) receive.</div><div class=post-footer>
-<a href=/posts/programming/rabbitmq/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>
