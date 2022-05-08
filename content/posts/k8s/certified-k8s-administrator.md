@@ -381,3 +381,50 @@ kubectl describe node kubemaster | grep Taint
 # 看起來是最後面加個減號可以拿掉
 kubectl taint nodes controlplane node-role.kubernetes.io/master:NoSchedule-
 ```
+
+> create pod 是可以直接指定命名 pod 名稱的
+> 
+> kubectl run mosquito --image=nginx --restart=Never
+> 
+> 查看 pod 的欄位
+> 
+> kubectl explain pod --recursive | less
+> 
+> pod 的 toleration 是要自己加上去的，才可以 tolerate taint
+
+當 node 設定 taint 的時候，pod 要上上去的話就一定要具備 toleration
+
+移除 node 上的 taint (在最後面放上 `-`)
+
+```shell
+kubectl taint node master node-role.kubernetes.io/master:NoSchedule-
+```
+
+## Node Selectors
+
+對 node 下標籤
+
+```shell
+# 格式
+kubectl label nodes <node-name> <label-key>=<label-value>
+# 範例: 在 node-1 這台標上 size=Large 的標籤
+kubectl label nodes node-1 size=Large
+```
+
+這樣子 pod 就可以指定要放到對應的 node 上
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+    - name: data-processor
+      image: data-processor
+  nodeSelector:
+    size: Large
+```
+
+更複雜一點的條件的話，會用 Node Affinity
+

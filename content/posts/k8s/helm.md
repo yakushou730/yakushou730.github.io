@@ -98,10 +98,10 @@ helm repo --help
 # 在 Artifact Hub 上搜尋 wordpress
 helm search hub wordpress
 # 在 local repo 搜尋已加入的 wordpress
-helm serach repo wordpress
+helm searach repo wordpress
 ```
 
-`helm reop` 指令是對應 chart repository 的操作
+`helm repo` 指令是對應 chart repository 的操作
 - 包含 add, remove, list...
   - `helm repo list` 列出加入的 repo
   - `helm repo update` 更新加入的 repo 資訊
