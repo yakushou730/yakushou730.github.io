@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/dev/local/><link rel=prev href=https://blog.yakushou.com/posts/golang/fundamental2/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Local development setting","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/dev\/local\/"},"genre":"posts","keywords":"local","wordcount":712,"url":"https:\/\/blog.yakushou.com\/posts\/dev\/local\/","datePublished":"2022-05-08T18:33:11+08:00","dateModified":"2022-05-08T18:33:11+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"local development setting"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Local development setting","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/dev\/local\/"},"genre":"posts","keywords":"local","wordcount":934,"url":"https:\/\/blog.yakushou.com\/posts\/dev\/local\/","datePublished":"2022-05-08T18:33:11+08:00","dateModified":"2022-05-08T18:33:11+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"local development setting"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-05-08>2022-05-08</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-05-08>2022-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;712 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-05-08>2022-05-08</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-05-08>2022-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;934 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -84,6 +84,8 @@
 <th>service</th>
 <th>local</th>
 <th>k8s</th>
+<th>username</th>
+<th>password</th>
 </tr>
 </thead>
 <tbody>
@@ -91,16 +93,29 @@
 <td>mysql</td>
 <td>30000</td>
 <td>3306</td>
+<td>root</td>
+<td>secret</td>
 </tr>
 <tr>
 <td>postgresql</td>
 <td>30001</td>
 <td>5432</td>
+<td>root</td>
+<td>secret</td>
 </tr>
 <tr>
 <td>redis</td>
 <td>30002</td>
 <td>6379</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>30003</td>
+<td>2379, 2380</td>
+<td>root</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -385,6 +400,70 @@ To connect to your database from outside the cluster execute the following comma
 </span><span class=w>        </span><span class=nt>protocol</span><span class=p>:</span><span class=w> </span><span class=l>TCP</span><span class=w>
 </span><span class=w>
 </span></code></pre></div><p>這樣可以透過 localhost:30002 來連接到 k3d 內的 6379</p>
+<ol start=2>
+<li>透過 helm 安裝 etcd
+<ul>
+<li><a href=https://artifacthub.io/packages/helm/bitnami/etcd target=_blank rel="noopener noreffer">site</a></li>
+</ul>
+</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>helm install local-etcd bitnami/etcd
+</code></pre></div><p>Result</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>NAME: local-etcd
+LAST DEPLOYED: Sun May  <span class=m>8</span> 22:35:19 <span class=m>2022</span>
+NAMESPACE: default
+STATUS: deployed
+REVISION: <span class=m>1</span>
+TEST SUITE: None
+NOTES:
+CHART NAME: etcd
+CHART VERSION: 6.13.5
+APP VERSION: 3.5.2
+
+** Please be patient <span class=k>while</span> the chart is being deployed **
+
+etcd can be accessed via port <span class=m>2379</span> on the following DNS name from within your cluster:
+
+    local-etcd.default.svc.cluster.local
+
+To create a pod that you can use as a etcd client run the following command:
+
+    kubectl run local-etcd-client --restart<span class=o>=</span><span class=s1>&#39;Never&#39;</span> --image docker.io/bitnami/etcd:3.5.2-debian-10-r23 --env <span class=nv>ROOT_PASSWORD</span><span class=o>=</span><span class=k>$(</span>kubectl get secret --namespace default local-etcd -o <span class=nv>jsonpath</span><span class=o>=</span><span class=s2>&#34;{.data.etcd-root-password}&#34;</span> <span class=p>|</span> base64 --decode<span class=k>)</span> --env <span class=nv>ETCDCTL_ENDPOINTS</span><span class=o>=</span><span class=s2>&#34;local-etcd.default.svc.cluster.local:2379&#34;</span> --namespace default --command -- sleep infinity
+
+Then, you can set/get a key using the commands below:
+
+    kubectl <span class=nb>exec</span> --namespace default -it local-etcd-client -- bash
+    etcdctl --user root:<span class=nv>$ROOT_PASSWORD</span> put /message Hello
+    etcdctl --user root:<span class=nv>$ROOT_PASSWORD</span> get /message
+
+To connect to your etcd server from outside the cluster execute the following commands:
+
+    kubectl port-forward --namespace default svc/local-etcd 2379:2379 <span class=p>&amp;</span>
+    <span class=nb>echo</span> <span class=s2>&#34;etcd URL: http://127.0.0.1:2379&#34;</span>
+
+ * As rbac is enabled you should add the flag <span class=sb>`</span>--user root:<span class=nv>$ETCD_ROOT_PASSWORD</span><span class=sb>`</span> to the etcdctl commands. Use the <span class=nb>command</span> below to <span class=nb>export</span> the password:
+
+    <span class=nb>export</span> <span class=nv>ETCD_ROOT_PASSWORD</span><span class=o>=</span><span class=k>$(</span>kubectl get secret --namespace default local-etcd -o <span class=nv>jsonpath</span><span class=o>=</span><span class=s2>&#34;{.data.etcd-root-password}&#34;</span> <span class=p>|</span> base64 --decode<span class=k>)</span>
+
+</code></pre></div><p>建立一個 node port 來通 etcd</p>
+<p>local-etcd-svc</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Service</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>local-etcd-svc</span><span class=w>
+</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>   </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>NodePort</span><span class=w>
+</span><span class=w>   </span><span class=nt>selector</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>app.kubernetes.io/name</span><span class=p>:</span><span class=w> </span><span class=l>etcd</span><span class=w>
+</span><span class=w>      </span><span class=nt>app.kubernetes.io/instance</span><span class=p>:</span><span class=w> </span><span class=l>local-etcd</span><span class=w>
+</span><span class=w>      </span><span class=nt>app.kubernetes.io/managed-by</span><span class=p>:</span><span class=w> </span><span class=l>Helm</span><span class=w>
+</span><span class=w>   </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>2379</span><span class=w>
+</span><span class=w>        </span><span class=nt>nodePort</span><span class=p>:</span><span class=w> </span><span class=m>30003</span><span class=w>
+</span><span class=w>        </span><span class=nt>targetPort</span><span class=p>:</span><span class=w> </span><span class=m>2379</span><span class=w>
+</span><span class=w>        </span><span class=nt>protocol</span><span class=p>:</span><span class=w> </span><span class=l>TCP</span><span class=w>
+</span><span class=w>
+</span></code></pre></div><p>這樣可以透過 localhost:30002 來連接到 k3d 內的 2379</p>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
