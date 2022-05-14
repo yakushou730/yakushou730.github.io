@@ -109,6 +109,10 @@ build 的時候 可以強行指定抽換 var
 # -ldflags 表示會發生參數抽換
 # -X 表示鏈結選項 格式 -X [importpath].[name]=[value]
 go build -ldflags "-X main.build=local"
+
+
+# 清除 build 出來的執行檔
+go clean
 ```
 這樣會印出 `starting service local`
 

@@ -56,6 +56,14 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 k3d cluster create local-cluster --registry-create local-registry -p "30000-30200:30000-30200@server:0"
 ```
 
+如果要把 local image 載入到 k3d 的話，指令為
+```shell
+k3d image import -c local-cluster service-amd64:1.0
+```
+
+6. 安裝 kustomiize
+   - [site](https://kubectl.docs.kubernetes.io/installation/kustomize/)
+
 #### 其他服務
 1. 透過 helm 安裝 mysql
    - [site](https://artifacthub.io/packages/helm/bitnami/mysql) 
