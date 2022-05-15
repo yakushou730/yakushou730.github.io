@@ -7,7 +7,7 @@ tags: ["programming","golang"]
 draft: false
 ---
 
-[**Github repo**](https://github.com/yakushou730/ultimate-service-v3)
+[**Github repo**](https://github.com/yakushou730/ardanlabs-ultimate-service-v3)
 
 整理了下，如果整個 cluster 重啟，要跑哪些步驟
 ```shell
@@ -267,6 +267,9 @@ log 用到的 package [go.uber.org/zap](https://github.com/uber-go/zap)
 
 ## HTTP Routing Basis
 建立可以讓 k8s 偵測的 readiness / liveness endpoint
+
+- readiness 指的是 pod 還未接受流量前做的 pod check 
+- liveness 指的是 pod 已經運行且開放 request 流量時的 pod check
 
 ## Web Framework
 設計呼叫流程，包含怎麼套用 middleware

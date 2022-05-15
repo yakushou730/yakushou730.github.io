@@ -31,7 +31,12 @@ draft: false
    - intel 是 amd64
    - M1 (apple silicon) 是 arm64
 4. 安裝 Goland
-   -  [website install](https://www.jetbrains.com/go/)
+   - [website install](https://www.jetbrains.com/go/)
+
+Optional:
+
+1. 安裝 [expvarmon](https://github.com/divan/expvarmon)
+   - 用來看 pprof 的效能
 
 #### git
 1. 安裝 cz-conventional 
