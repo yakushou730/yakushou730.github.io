@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-service-v3/><link rel=prev href=https://blog.yakushou.com/posts/golang/ardanlabs/ultimate-go/><link rel=next href=https://blog.yakushou.com/posts/kodekloud/the-linux-basics-course/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Ultimate Service V3","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/"},"genre":"posts","keywords":"programming, golang","wordcount":585,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/","datePublished":"2022-01-23T21:41:43+08:00","dateModified":"2022-01-23T21:41:43+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Ultimate Service V3"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Ultimate Service V3","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/"},"genre":"posts","keywords":"programming, golang","wordcount":599,"url":"https:\/\/blog.yakushou.com\/posts\/golang\/ardanlabs\/ultimate-service-v3\/","datePublished":"2022-01-23T21:41:43+08:00","dateModified":"2022-01-23T21:41:43+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"Ultimate Service V3"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,7 +61,7 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;585 words&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-01-23>2022-01-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;599 words&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -77,7 +77,7 @@
 <li><a href=#middleware>Middleware</a></li>
 </ul>
 </nav></div>
-</div><div class=content id=content><p><a href=https://github.com/yakushou730/ultimate-service-v3 target=_blank rel="noopener noreffer"><strong>Github repo</strong></a></p>
+</div><div class=content id=content><p><a href=https://github.com/yakushou730/ardanlabs-ultimate-service-v3 target=_blank rel="noopener noreffer"><strong>Github repo</strong></a></p>
 <p>整理了下，如果整個 cluster 重啟，要跑哪些步驟</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 把 cluster shutdown</span>
 make kind-down
@@ -339,6 +339,10 @@ docker system prune
 </blockquote>
 <h2 id=http-routing-basis>HTTP Routing Basis</h2>
 <p>建立可以讓 k8s 偵測的 readiness / liveness endpoint</p>
+<ul>
+<li>readiness 指的是 pod 還未接受流量前做的 pod check</li>
+<li>liveness 指的是 pod 已經運行且開放 request 流量時的 pod check</li>
+</ul>
 <h2 id=web-framework>Web Framework</h2>
 <p>設計呼叫流程，包含怎麼套用 middleware</p>
 <p>呼叫 middleware 就像洋蔥圈的方式，最內層是要呼叫的 function</p>
