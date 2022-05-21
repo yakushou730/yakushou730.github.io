@@ -37,6 +37,8 @@ Optional:
 
 1. 安裝 [expvarmon](https://github.com/divan/expvarmon)
    - 用來看 pprof 的效能
+2. 安裝 [hey](https://github.com/rakyll/hey)
+   - 用來做壓測的工具
 
 #### git
 1. 安裝 cz-conventional 
