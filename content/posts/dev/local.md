@@ -39,6 +39,8 @@ Optional:
    - 用來看 pprof 的效能
 2. 安裝 [hey](https://github.com/rakyll/hey)
    - 用來做壓測的工具
+3. 安裝 [staticcheck](https://staticcheck.io/)
+   - 一種 golang 的 linter 分析工具
 
 #### git
 1. 安裝 cz-conventional 
