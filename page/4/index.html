@@ -56,6 +56,18 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/fundamental1/>fundamental1</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2021-12-27>2021-12-27</time></span></div><div class=content>in memory 程式的用法在記憶體上會切成很多小區塊，每一塊我們稱為 word
+32 bits CPU: 1 word = 32bits = 4 bytes 64 bits CPU: 1 word = 64bits = 8 bytes
+如何在 go get 的時候可以拉到 private repo 概念:
+因為是 private repo 的關係， 所以要讓 go 有權限去拉
+拉的時候是透過 git，所以要設定具有權限的 token 給 git
+在個人的 github settings 建立一個可以拉取 private repo 的 token 把 token 記下以後，在本機操作 git cli 用 copy 下來的 token 取代下列的 GITHUB_TOKEN $ git config --global url."https://${GITHUB_TOKEN}@github.com".insteadOf "https://github.com" Type Assertion vs Type Conversion Type Assertion (斷言)</div><div class=post-footer>
+<a href=/posts/golang/fundamental1/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/k8s/basic-for-beginner/>basic for beginner</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -141,26 +153,6 @@ err := dec.Decode(dst) if err != nil { var syntaxError *json.SyntaxError switch 
 第一個參數是現在拿到的 error 第二個參數是想要比對的特定 error
 比對方式是透過呼叫 Unwrap 逐一拆解來比對是否包含 特定的 error</div><div class=post-footer>
 <a href=/posts/golang/packages/errors/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/packages/json/>json</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2021-11-23>2021-11-23</time></span></div><div class=content>tag 標記用法 範例 json:"name,omitempty"
-這個欄位名稱為 name，如果欄位內容是空值的話，則欄位會被忽略
-範例 json:"-" 不管欄位名稱是什麼，都會忽略不印出
-omitempty 這個欄位 如果是結構的話
-無論是否為空值，一定會產生出欄位，值為空
-例如
-s := struct { Foo struct { Bar string `json:",omitempty"` } `json:",omitempty"` }{} // encoding result {"Foo":{}} 解決辦法是透過指標的方式
-例如
-s := struct { Foo *struct { Bar string `json:",omitempty"` } `json:",omitempty"` }{} // encoding result {} 此外如果欄位型態是 time.Time 的話
-omitempty 不會運作
-escaped json 編碼的時候如果碰到 > &lt; &
-會轉為逃逸字元
-範例
-s := []string{ "&lt;foo>", "bar & baz", } // result ["\u003cfoo\u003e","bar \u0026 baz"] 如果要避免的話，要在 json.</div><div class=post-footer>
-<a href=/posts/golang/packages/json/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
