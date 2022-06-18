@@ -493,3 +493,15 @@ which kubectl
 # result
 /usr/local/bin/kubectl
 ```
+
+## ln
+建立 Symbolic link
+
+```shell
+# 格式 ln -s [目標對象的路徑] [要建立的位置]
+# 例: 建立 ~/my_movices 的 symbolic link 指向 /mnt/my_drive/movies
+ln -s /mnt/my_drive/movies ~/my_movies
+```
+
+
+
