@@ -56,6 +56,27 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/strings/>strings</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-19>2022-02-19</time></span></div><div class=content>HasPrefix 檢驗字串的 prefix
+strings.HasPrefix(s, prefix string) bool
+HasSuffix 檢驗字串的 suffix
+strings.HasSuffix(s, suffix string) bool
+Contains 檢驗字串是否包含 substring
+strings.Contains(s, substr string) bool
+Index 指出第一個符合的 substring 是在哪個位置，沒找到的話回傳 -1
+strings.Index(s, str string) int
+LastIndex 指出最後一個符合的 substring 是在哪個位置，沒找到的話回傳 -1
+strings.LastIndex(s, str string) int
+若是非 ACSII 的話，用 strings.IndexRune(s string, ch int) int
+IndexRune 非 ASCII 找 index 時用的
+strings.IndexRune(s string, ch int) int
+Replace 取代字串，從頭開始 n 次，全部取代的話用 -1
+strings.Replace(str, old, new string, n int)</div><div class=post-footer>
+<a href=/posts/golang/packages/strings/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/ardanlabs/ultimate-go-notebook/>Ultimate Go Notebook</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -155,20 +176,6 @@ func main(){ if err := run(); err != nil { log.Println(err) os.Exit(1) } } func 
 %v -> {false 0 0} %+v -> {flag:false counter:0 pi:0} %#v -> main.</div><div class=post-footer>
 <a href=/posts/golang/ardanlabs/ultimate-syntax/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/programming/tools/>tools</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-10>2022-01-10</time></span></div><div class=content>cloc https://github.com/AlDanial/cloc
-計算 檔案數量 / 行數 等等的工具
-可以使用 docker container 來跑，就不用安裝 binary
-# 最後的 . 是指當前目錄，可以換成對應的目錄 docker run --rm -v $PWD:/tmp aldanial/cloc . commitizen https://github.com/commitizen/cz-cli
-可以簡單產生 commitizen 的 git commit
-https://www.conventionalcommits.org/en/v1.0.0/
-安裝:
-npm install commitizen commitizen init cz-conventional-changelog --save-dev --save-exact </div><div class=post-footer>
-<a href=/posts/programming/tools/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
 <a href=/>1</a>
