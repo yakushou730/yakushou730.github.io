@@ -223,7 +223,7 @@ spec:
 ```
 這樣可以透過 localhost:30001 來連接到 k3d 內的 5432
 
-2. 透過 helm 安裝 redis 
+3. 透過 helm 安裝 redis 
    - [site](https://artifacthub.io/packages/helm/bitnami/redis)
 
 ```shell
@@ -299,16 +299,16 @@ spec:
 ```
 這樣可以透過 localhost:30002 來連接到 k3d 內的 6379
 
-2. 透過 helm 安裝 etcd
+4. 透過 helm 安裝 etcd
    - [site](https://artifacthub.io/packages/helm/bitnami/etcd)
 
 ```shell
-helm install local-etcd bitnami/etcd
+helm install local-etcd bitnami/etcd --set auth.rbac.create=false
 ```
 Result
 ```shell
 NAME: local-etcd
-LAST DEPLOYED: Sun May  8 22:35:19 2022
+LAST DEPLOYED: Sun Oct  9 02:07:38 2022
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
@@ -326,23 +326,18 @@ etcd can be accessed via port 2379 on the following DNS name from within your cl
 
 To create a pod that you can use as a etcd client run the following command:
 
-    kubectl run local-etcd-client --restart='Never' --image docker.io/bitnami/etcd:3.5.2-debian-10-r23 --env ROOT_PASSWORD=$(kubectl get secret --namespace default local-etcd -o jsonpath="{.data.etcd-root-password}" | base64 --decode) --env ETCDCTL_ENDPOINTS="local-etcd.default.svc.cluster.local:2379" --namespace default --command -- sleep infinity
+    kubectl run local-etcd-client --restart='Never' --image docker.io/bitnami/etcd:3.5.2-debian-10-r23 --env ETCDCTL_ENDPOINTS="local-etcd.default.svc.cluster.local:2379" --namespace default --command -- sleep infinity
 
 Then, you can set/get a key using the commands below:
 
     kubectl exec --namespace default -it local-etcd-client -- bash
-    etcdctl --user root:$ROOT_PASSWORD put /message Hello
-    etcdctl --user root:$ROOT_PASSWORD get /message
+    etcdctl  put /message Hello
+    etcdctl  get /message
 
 To connect to your etcd server from outside the cluster execute the following commands:
 
     kubectl port-forward --namespace default svc/local-etcd 2379:2379 &
     echo "etcd URL: http://127.0.0.1:2379"
-
- * As rbac is enabled you should add the flag `--user root:$ETCD_ROOT_PASSWORD` to the etcdctl commands. Use the command below to export the password:
-
-    export ETCD_ROOT_PASSWORD=$(kubectl get secret --namespace default local-etcd -o jsonpath="{.data.etcd-root-password}" | base64 --decode)
-
 ```
 建立一個 node port 來通 etcd
 
@@ -366,4 +361,4 @@ spec:
         protocol: TCP
 
 ```
-這樣可以透過 localhost:30002 來連接到 k3d 內的 2379
+這樣可以透過 localhost:30003 來連接到 k3d 內的 2379
