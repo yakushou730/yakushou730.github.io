@@ -56,6 +56,21 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/strconv/>strconv</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-19>2022-02-19</time></span></div><div class=content>IntSize 回傳 int 的 size 大小
+Itoa int 轉 string
+strconv.Itoa(i int) string
+FormatFloat 把 float 轉成 string
+strconv.FormatFloat(f float64, fmt byte, prec int, bitSize int) string
+Atoi 字串轉 int
+strconv.Atoi(s string) (i int, err error)
+ParseFloat 字串轉 float
+strconv.ParseFloat(s string, bitSize int) (f float64, err error)</div><div class=post-footer>
+<a href=/posts/golang/packages/strconv/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/golang/packages/strings/>strings</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -167,14 +182,6 @@ a repo of code defines the philosophy, policy and guideline go mod init [module 
 # 可執行的程式入口 cmd/violin/css/ cmd/violin/image/ cmd/violin/mp3/ cmd/violin/templates/ cmd/violin/internal/ cmd/violin/main.go # 商業邏輯 internal/platform/ go.mod 起手式 main.go
 func main(){ if err := run(); err != nil { log.Println(err) os.Exit(1) } } func run() { return nil } </div><div class=post-footer>
 <a href=/posts/golang/ardanlabs/refactor-with-bill/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/ardanlabs/ultimate-syntax/>ultimate syntax</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-01-18>2022-01-18</time></span></div><div class=content>Variables 一般來說使用 int 較多，而不是 int32 或 int64 少用 := zero value，碰到 zero value 的話不如直接用 var 宣吿 Strings string 是 2 words 的 data structures 空字串 第一個 word 是 nil 第二個 word 是 0 字串 Hello 第一個 word 是指標，指向 hello 陣列的 h 位址 第二個 word 是長度 5 Struct golang 的三種印出格式
-%v -> {false 0 0} %+v -> {flag:false counter:0 pi:0} %#v -> main.</div><div class=post-footer>
-<a href=/posts/golang/ardanlabs/ultimate-syntax/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/programming/>programming</a>,&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><ul class=pagination><li class=page-item>
 <span class=page-link>
