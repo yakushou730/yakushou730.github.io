@@ -4,7 +4,7 @@ authors: [yakushou730]
 date: 2022-11-01T10:40:55+08:00
 description: "100 mistakes"
 tags: ["golang"]
-draft: false
+draft: true
 ---
 
 ## The 100 mistakes for golang development
