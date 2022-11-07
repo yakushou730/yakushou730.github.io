@@ -56,13 +56,6 @@
 <main class=main>
 <div class=container><div class="page home" posts><div class=home-profile></div>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
-<a href=/posts/golang/books/mistakes-100/>100 mistakes</a>
-</h1><div class=post-meta>
-<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
-</span>&nbsp;<span class=post-publish>published on <time datetime=2022-11-01>2022-11-01</time></span></div><div class=content>The 100 mistakes for golang development 15: Missing code documentation 16: </div><div class=post-footer>
-<a href=/posts/golang/books/mistakes-100/>Read more...</a><div class=post-tags>
-<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
-</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <a href=/posts/programming/yaml/>YAML</a>
 </h1><div class=post-meta>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
@@ -154,6 +147,21 @@ func (t Time) Format(s string) string
 t := time.Now().UTC() fmt.Println(t.Format("02 Jan 2006 15:04"))// e.g: 29 Oct 2019 11:00 Sub 時間相減出來的時間差
 delta := end.Sub(start)</div><div class=post-footer>
 <a href=/posts/golang/packages/time/>Read more...</a><div class=post-tags>
+<i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
+</article><article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<a href=/posts/golang/packages/strconv/>strconv</a>
+</h1><div class=post-meta>
+<span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
+</span>&nbsp;<span class=post-publish>published on <time datetime=2022-02-19>2022-02-19</time></span></div><div class=content>IntSize 回傳 int 的 size 大小
+Itoa int 轉 string
+strconv.Itoa(i int) string
+FormatFloat 把 float 轉成 string
+strconv.FormatFloat(f float64, fmt byte, prec int, bitSize int) string
+Atoi 字串轉 int
+strconv.Atoi(s string) (i int, err error)
+ParseFloat 字串轉 float
+strconv.ParseFloat(s string, bitSize int) (f float64, err error)</div><div class=post-footer>
+<a href=/posts/golang/packages/strconv/>Read more...</a><div class=post-tags>
 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/golang/>golang</a></div></div>
 </article><ul class=pagination><li class="page-item active">
 <span class=page-link>

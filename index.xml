@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 01 Nov 2022 10:40:55 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/index.xml" rel="self" type="application/rss+xml"/><item><title>100 mistakes</title><link>https://blog.yakushou.com/posts/golang/books/mistakes-100/</link><pubDate>Tue, 01 Nov 2022 10:40:55 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/books/mistakes-100/</guid><description>The 100 mistakes for golang development 15: Missing code documentation 16:</description></item><item><title>YAML</title><link>https://blog.yakushou.com/posts/programming/yaml/</link><pubDate>Sat, 18 Jun 2022 13:31:33 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/yaml/</guid><description>配置多行字串 參考
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>YakuShou's NOTEBOOK</title><link>https://blog.yakushou.com/</link><description>YakuShou's NOTEBOOK</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 18 Jun 2022 13:31:33 +0800</lastBuildDate><atom:link href="https://blog.yakushou.com/index.xml" rel="self" type="application/rss+xml"/><item><title>YAML</title><link>https://blog.yakushou.com/posts/programming/yaml/</link><pubDate>Sat, 18 Jun 2022 13:31:33 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/programming/yaml/</guid><description>配置多行字串 參考
 使用 |, |+, |- 配置
 |: 文中自動換行 + 文末新增 1 行空行 |+: 文中自動換行 + 文末新增 2 行空行 |-: 文中自動換行 + 文末不新增行</description></item><item><title>docker</title><link>https://blog.yakushou.com/posts/devops/docker/</link><pubDate>Sat, 11 Jun 2022 23:19:58 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/devops/docker/</guid><description>清除沒用到的物件 WARNING! This will remove:
 all stopped containers all networks not used by at least one container all dangling images all dangling build cache docker system prune</description></item><item><title>Local development setting</title><link>https://blog.yakushou.com/posts/dev/local/</link><pubDate>Sun, 08 May 2022 18:33:11 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/dev/local/</guid><description>整理
@@ -28,4 +28,12 @@ Format 把時間轉成特定格式
 func (t Time) Format(s string) string
 可也以是 time.ANSIC 或 time.RFC822
 t := time.Now().UTC() fmt.Println(t.Format(&#34;02 Jan 2006 15:04&#34;))// e.g: 29 Oct 2019 11:00 Sub 時間相減出來的時間差
-delta := end.Sub(start)]]></description></item></channel></rss>
+delta := end.Sub(start)]]></description></item><item><title>strconv</title><link>https://blog.yakushou.com/posts/golang/packages/strconv/</link><pubDate>Sat, 19 Feb 2022 17:44:34 +0800</pubDate><author><name>yakushou730</name><uri>https://github.com/yakushou730</uri><email>yakushou730@gmail.com</email></author><guid>https://blog.yakushou.com/posts/golang/packages/strconv/</guid><description>IntSize 回傳 int 的 size 大小
+Itoa int 轉 string
+strconv.Itoa(i int) string
+FormatFloat 把 float 轉成 string
+strconv.FormatFloat(f float64, fmt byte, prec int, bitSize int) string
+Atoi 字串轉 int
+strconv.Atoi(s string) (i int, err error)
+ParseFloat 字串轉 float
+strconv.ParseFloat(s string, bitSize int) (f float64, err error)</description></item></channel></rss>
