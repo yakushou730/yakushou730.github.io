@@ -78,6 +78,7 @@ k3d image import -c local-cluster service-amd64:1.0
    - [site](https://artifacthub.io/packages/helm/bitnami/mysql) 
 ```shell
 helm repo add bitnami https://charts.bitnami.com/bitnami
+
 helm install local-mysql \
   --set auth.rootPassword=secret,auth.database=db_dev \
     bitnami/mysql
@@ -155,7 +156,8 @@ spec:
 2. 透過 helm 安裝 postgresql
    - [site](https://artifacthub.io/packages/helm/bitnami/postgresql)
 ```shell
-helm install my-release bitnami/postgresql
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
 helm install local-postgresql \
   --set global.postgresql.auth.username=root,global.postgresql.auth.password=secret,global.postgresql.auth.database=db_dev \
     bitnami/postgresql
