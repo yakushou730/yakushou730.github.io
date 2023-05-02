@@ -364,3 +364,71 @@ spec:
 
 ```
 這樣可以透過 localhost:30003 來連接到 k3d 內的 2379
+
+
+5. 透過 helm 安裝 mongodb
+   - [site](https://artifacthub.io/packages/helm/bitnami/mongodb)
+
+```shell
+helm install local-mongodb \
+  --set auth.rootPassword=secret \
+  bitnami/mongodb
+```
+Result
+```shell
+bitnami/mongodb
+NAME: local-mongodb
+LAST DEPLOYED: Tue May  2 21:13:28 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: mongodb
+CHART VERSION: 11.1.0
+APP VERSION: 4.4.13
+
+** Please be patient while the chart is being deployed **
+
+MongoDB&reg; can be accessed on the following DNS name(s) and ports from within your cluster:
+
+    local-mongodb.default.svc.cluster.local
+
+To get the root password run:
+
+    export MONGODB_ROOT_PASSWORD=$(kubectl get secret --namespace default local-mongodb -o jsonpath="{.data.mongodb-root-password}" | base64 --decode)
+
+To connect to your database, create a MongoDB&reg; client container:
+
+    kubectl run --namespace default local-mongodb-client --rm --tty -i --restart='Never' --env="MONGODB_ROOT_PASSWORD=$MONGODB_ROOT_PASSWORD" --image docker.io/bitnami/mongodb:4.4.13-debian-10-r9 --command -- bash
+
+Then, run the following command:
+    mongo admin --host "local-mongodb" --authenticationDatabase admin -u root -p $MONGODB_ROOT_PASSWORD
+
+To connect to your database from outside the cluster execute the following commands:
+
+    kubectl port-forward --namespace default svc/local-mongodb 27017:27017 &
+    mongo --host 127.0.0.1 --authenticationDatabase admin -p $MONGODB_ROOT_PASSWORD
+```
+建立一個 node port 來通 mongodb
+
+local-etcd-svc
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+   name: local-mongodb-svc
+spec:
+   type: NodePort
+   selector:
+      app.kubernetes.io/name: mongodb
+      app.kubernetes.io/instance: local-mongodb
+      app.kubernetes.io/managed-by: Helm
+   ports:
+      - port: 27017
+        nodePort: 30002
+        targetPort: 27017
+        protocol: TCP
+```
+這樣可以透過 localhost:30002 來連接到 k3d 內的 27017
