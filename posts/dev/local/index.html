@@ -18,7 +18,7 @@
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=canonical href=https://blog.yakushou.com/posts/dev/local/><link rel=prev href=https://blog.yakushou.com/posts/golang/fundamental2/><link rel=next href=https://blog.yakushou.com/posts/devops/docker/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/fontawesome-free/all.min.css>
 <noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload="this.onload=null,this.rel='stylesheet'" href=/lib/animate/animate.min.css>
-<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Local development setting","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/dev\/local\/"},"genre":"posts","keywords":"local","wordcount":916,"url":"https:\/\/blog.yakushou.com\/posts\/dev\/local\/","datePublished":"2022-05-08T18:33:11+08:00","dateModified":"2022-05-08T18:33:11+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"local development setting"}</script></head>
+<noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Local development setting","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.yakushou.com\/posts\/dev\/local\/"},"genre":"posts","keywords":"local","wordcount":1084,"url":"https:\/\/blog.yakushou.com\/posts\/dev\/local\/","datePublished":"2022-05-08T18:33:11+08:00","dateModified":"2022-05-08T18:33:11+08:00","publisher":{"@type":"Organization","name":"Author"},"authors":[{"@type":"Person","name":"yakushou730"}],"description":"local development setting"}</script></head>
 <body header-desktop header-mobile><script type=text/javascript>function setTheme(a){document.body.setAttribute('theme',a)}function saveTheme(a){window.localStorage&&localStorage.setItem('theme',a)}function getMeta(b){const a=document.getElementsByTagName('meta');for(let c=0;c<a.length;c++)if(a[c].getAttribute('name')===b)return a[c];return''}if(window.localStorage&&localStorage.getItem('theme')){let a=localStorage.getItem('theme');a==='light'||a==='dark'||a==='black'?setTheme(a):window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light')}else''==='light'||''==='dark'||''==='black'?(setTheme(''),saveTheme('')):(saveTheme('auto'),window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?setTheme('dark'):setTheme('light'));let metaColors={light:'#f8f8f8',dark:'#252627',black:'#000000'};getMeta('theme-color').content=metaColors[document.body.getAttribute('theme')]</script>
 <div id=back-to-top></div>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
@@ -61,8 +61,8 @@
 <div class=post-meta-line>
 <span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=https://blog.yakushou.com/authors/yakushou730>yakushou730</a></span>
 </span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-05-08>2022-05-08</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-05-08>2022-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;916 words&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-05-08>2022-05-08</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2022-05-08>2022-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1084 words&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -488,6 +488,68 @@ To connect to your etcd server from outside the cluster execute the following co
 </span><span class=w>        </span><span class=nt>protocol</span><span class=p>:</span><span class=w> </span><span class=l>TCP</span><span class=w>
 </span><span class=w>
 </span></code></pre></div><p>這樣可以透過 localhost:30003 來連接到 k3d 內的 2379</p>
+<ol start=5>
+<li>透過 helm 安裝 mongodb
+<ul>
+<li><a href=https://artifacthub.io/packages/helm/bitnami/mongodb target=_blank rel="noopener noreffer">site</a></li>
+</ul>
+</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>helm install local-mongodb <span class=se>\
+</span><span class=se></span>  --set auth.rootPassword<span class=o>=</span>secret <span class=se>\
+</span><span class=se></span>  bitnami/mongodb
+</code></pre></div><p>Result</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>bitnami/mongodb
+NAME: local-mongodb
+LAST DEPLOYED: Tue May  <span class=m>2</span> 21:13:28 <span class=m>2023</span>
+NAMESPACE: default
+STATUS: deployed
+REVISION: <span class=m>1</span>
+TEST SUITE: None
+NOTES:
+CHART NAME: mongodb
+CHART VERSION: 11.1.0
+APP VERSION: 4.4.13
+
+** Please be patient <span class=k>while</span> the chart is being deployed **
+
+MongoDB<span class=p>&amp;</span>reg<span class=p>;</span> can be accessed on the following DNS name<span class=o>(</span>s<span class=o>)</span> and ports from within your cluster:
+
+    local-mongodb.default.svc.cluster.local
+
+To get the root password run:
+
+    <span class=nb>export</span> <span class=nv>MONGODB_ROOT_PASSWORD</span><span class=o>=</span><span class=k>$(</span>kubectl get secret --namespace default local-mongodb -o <span class=nv>jsonpath</span><span class=o>=</span><span class=s2>&#34;{.data.mongodb-root-password}&#34;</span> <span class=p>|</span> base64 --decode<span class=k>)</span>
+
+To connect to your database, create a MongoDB<span class=p>&amp;</span>reg<span class=p>;</span> client container:
+
+    kubectl run --namespace default local-mongodb-client --rm --tty -i --restart<span class=o>=</span><span class=s1>&#39;Never&#39;</span> --env<span class=o>=</span><span class=s2>&#34;MONGODB_ROOT_PASSWORD=</span><span class=nv>$MONGODB_ROOT_PASSWORD</span><span class=s2>&#34;</span> --image docker.io/bitnami/mongodb:4.4.13-debian-10-r9 --command -- bash
+
+Then, run the following command:
+    mongo admin --host <span class=s2>&#34;local-mongodb&#34;</span> --authenticationDatabase admin -u root -p <span class=nv>$MONGODB_ROOT_PASSWORD</span>
+
+To connect to your database from outside the cluster execute the following commands:
+
+    kubectl port-forward --namespace default svc/local-mongodb 27017:27017 <span class=p>&amp;</span>
+    mongo --host 127.0.0.1 --authenticationDatabase admin -p <span class=nv>$MONGODB_ROOT_PASSWORD</span>
+</code></pre></div><p>建立一個 node port 來通 mongodb</p>
+<p>local-etcd-svc</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Service</span><span class=w>
+</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span><span class=w>   </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>local-mongodb-svc</span><span class=w>
+</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>   </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>NodePort</span><span class=w>
+</span><span class=w>   </span><span class=nt>selector</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>app.kubernetes.io/name</span><span class=p>:</span><span class=w> </span><span class=l>mongodb</span><span class=w>
+</span><span class=w>      </span><span class=nt>app.kubernetes.io/instance</span><span class=p>:</span><span class=w> </span><span class=l>local-mongodb</span><span class=w>
+</span><span class=w>      </span><span class=nt>app.kubernetes.io/managed-by</span><span class=p>:</span><span class=w> </span><span class=l>Helm</span><span class=w>
+</span><span class=w>   </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>27017</span><span class=w>
+</span><span class=w>        </span><span class=nt>nodePort</span><span class=p>:</span><span class=w> </span><span class=m>30002</span><span class=w>
+</span><span class=w>        </span><span class=nt>targetPort</span><span class=p>:</span><span class=w> </span><span class=m>27017</span><span class=w>
+</span><span class=w>        </span><span class=nt>protocol</span><span class=p>:</span><span class=w> </span><span class=l>TCP</span><span class=w>
+</span></code></pre></div><p>這樣可以透過 localhost:30002 來連接到 k3d 內的 27017</p>
 </div>
 <div class=post-footer id=post-footer>
 <div class=post-info>
